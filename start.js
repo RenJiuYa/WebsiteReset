@@ -19,8 +19,8 @@
   // ============ 开发/发布开关 ============
   const IS_DEV = true;
 
-  const LOCAL_BASE = 'http://127.0.0.1:5500/网页大修-B站';
-  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.0/网页大修-B站';
+  const LOCAL_BASE = 'http://127.0.0.1:5500/Web-B站';
+  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.0/Web-B站';
   const BASE = IS_DEV ? LOCAL_BASE : REMOTE_BASE;
 
   // ============ 资源清单 ============
