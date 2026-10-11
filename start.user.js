@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          网页大修-总入口
 // @namespace     RenJiuYa
-// @version       1.0.1
+// @version       1.0.2
 // @description   统一管理各网站样式（CSS/JS）的启用与加载
 // @author        RenJiuYa
 //
@@ -18,16 +18,18 @@
 // ==/UserScript==
 
 // ============================================================
-// 总入口说明（只做一件事：按站点把样式加载起来）
-// 1. Web/ 下每个网站一个文件夹，存放该网站的 css / js；本文件是唯一入口。
-// 2. @match 故意写成全站通配（*://*/*）：插件头部的匹配范围在注入前就定死了，
-//    脚本运行时无法动态扩大，所以把"真正生效范围"交给 SITES 里的 hosts 判断。
-//    新增网站：建好站点文件夹 → 在 SITES 里加一条即可，头部不用动。
-// 3. 永久停用某网站：把该站点配置里的 enabled 改成 false。
-// 4. 站点级 start.js 仅作单站调试用，正式使用只装本文件。
-// 5. 改完 CSS 后：暴力猴菜单点「重新加载样式（手动刷新）」立即生效（不做定时轮询，避免组件闪烁）；
+// 总入口说明（本项目唯一入口，直接装在暴力猴里）
+// 1. 本文件在仓库根目录；各网站的样式模块放在 Web/<网站>/ 下。
+// 2. 站点管理（哪些网站、加载哪些文件）在 Web/sites.js，运行时读取：
+//    改完 sites.js 只需刷新页面即生效，不用改本文件、也不用在暴力猴里更新脚本。
+// 3. @match 故意写成全站通配（*://*/*）：插件头部的匹配范围在注入前就定死了，
+//    脚本运行时无法动态扩大，所以"真正生效范围"交给 sites.js 里的 hosts 判断。
+//    新增网站：建好 Web/<网站>/ 文件夹 → 在 sites.js 里加一条即可。
+// 4. 永久停用某网站：把 sites.js 里该站点的 enabled 改成 false。
+// 5. 站点级 start.js 仅作单站调试用，正式使用只装本文件。
+// 6. 改完 CSS 后：暴力猴菜单点「重新加载样式（手动刷新）」立即生效（不做定时轮询，避免组件闪烁）；
 //    发布模式下该操作受 CDN 缓存影响，需要等 jsDelivr 刷新。
-// 6. 运行时临时退出：暴力猴菜单点「临时退出脚本」，样式立刻移除，方便和原网站对比；
+// 7. 运行时临时退出：暴力猴菜单点「临时退出脚本」，样式立刻移除，方便和原网站对比；
 //    该选择会被记住（刷新页面依然生效），直到点「重新启用脚本」。
 //    注意：已执行过的 JS 模块无法撤销，需刷新页面才会失效。
 // ============================================================
@@ -39,40 +41,75 @@
   const IS_DEV = true;
 
   const LOCAL_BASE = 'http://127.0.0.1:5500';                              // 本地 live-server 根目录（=仓库根目录）
-  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.1'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
+  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.2'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
   const BASE = IS_DEV ? LOCAL_BASE : REMOTE_BASE;
 
-  // ============ 站点注册表 ============
-  // 键（key）: 网站名，仅作标识，方便人工识别
-  // enabled  : 是否启用该网站的样式
-  // hosts    : 生效域名（含子域），这才是真正决定"在哪些站生效"的地方
-  // dir      : 站点样式目录（相对 BASE，本地与发布共用同一目录结构）
-  // css / js : 样式与脚本文件（相对站点目录）
-  const SITES = {
-    'B站': {
-      enabled: true,
-      hosts: ['bilibili.com'],
-      dir: 'Web/Bilibili',
-      css: ['通用.css', 'Page-首页.css'],
-      js: ['通用.js', 'Page-首页.js'],
-    },
-  };
+  // ============ 站点管理（外部文件 Web/sites.js，运行时读取） ============
+  // 好处：改站点、改文件清单只需刷新页面，不必修改本文件、也不必在暴力猴里更新脚本
+  const SITES_URL = BASE + '/Web/sites.js';
+  const SITES_CACHE = 'sitesCache'; // 读取失败时的兜底缓存
 
-  // ============ 匹配当前站点 ============
-  function matchSite() {
+  // 当前命中的站点及该站点的样式根地址（由 boot() 赋值）
+  let SITE = null;
+  let SITE_BASE = '';
+
+  // 读取 sites.js 源码：失败时回退上次缓存
+  async function loadSitesSource() {
+    try {
+      const src = await gmFetch(SITES_URL);
+      GM_setValue(SITES_CACHE, src);
+      return src;
+    } catch (err) {
+      const cached = GM_getValue(SITES_CACHE, '');
+      if (cached) {
+        console.warn('[网页大修] 读取站点配置失败，已回退上次缓存: ' + err.message);
+        return cached;
+      }
+      console.error('[网页大修] 读取站点配置失败，本次不加载样式: ' + err.message);
+      return '';
+    }
+  }
+
+  // sites.js 的内容形如：const SITES = { '网站名': { ... } };
+  function parseSites(src) {
+    return new Function(src + '\nreturn SITES;')();
+  }
+
+  // 匹配当前站点（enabled 省略时视为启用）
+  function matchSite(sites) {
     const host = location.hostname;
-    return Object.values(SITES).find(
+    return Object.values(sites).find(
       (site) =>
-        site.enabled &&
+        site.enabled !== false &&
         site.hosts.some((h) => host === h || host.endsWith('.' + h))
     );
   }
 
-  const SITE = matchSite();
-  if (!SITE) return;
+  // 解析站点配置，并加载命中的网站样式
+  async function boot() {
+    const src = await loadSitesSource();
+    if (!src) return;
 
-  // 该站点的样式根地址
-  const SITE_BASE = BASE + '/' + SITE.dir;
+    let sites;
+    try {
+      sites = parseSites(src);
+    } catch (err) {
+      console.error('[网页大修] 站点配置解析失败: ' + err.message);
+      return;
+    }
+
+    SITE = matchSite(sites) || null;
+    if (!SITE) return; // 未登记的网站：什么都不做
+
+    SITE_BASE = BASE + '/' + SITE.dir;
+    // CSS 和 JS 并行加载；JS 模块不重复执行，避免重复绑定事件
+    await Promise.all([loadAllCSS(), loadAllJS()]);
+  }
+
+  // 重新加载样式：已命中站点只重拉 CSS，否则重新走一遍完整流程
+  function reloadStyles() {
+    return SITE ? loadAllCSS() : boot();
+  }
 
   // ============ 工具函数 ============
   // 加时间戳绕过缓存（仅开发模式需要）
@@ -150,7 +187,7 @@
     running = on;
     GM_setValue(SWITCH_KEY, on);
     if (on) {
-      loadAllCSS();
+      reloadStyles();
       console.log('[网页大修] 已启用（样式已重新加载）');
     } else {
       removeAllCSS();
@@ -161,7 +198,7 @@
   // 菜单项固定，每次切换不重复注册
   // 改完 CSS 后点「重新加载样式」即可生效（手动刷新，不做定时轮询，避免组件闪烁）
   GM_registerMenuCommand('重新加载样式（手动刷新）', () => {
-    if (running) loadAllCSS();
+    if (running) reloadStyles();
     else setRunning(true); // 处于临时退出状态时，点它就等于恢复启用并加载
   });
   GM_registerMenuCommand('临时退出脚本（移除样式，便于对比）', () => setRunning(false));
@@ -174,9 +211,5 @@
   }
 
   // ============ 启动 ============
-  (async function main() {
-    // CSS 和 JS 并行加载（改完样式后，用暴力猴菜单里的「重新加载样式」手动刷新）
-    // JS 模块不重新加载，避免重复绑定事件
-    await Promise.all([loadAllCSS(), loadAllJS()]);
-  })();
+  boot();
 })();
