@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          网页大修-总入口
 // @namespace     RenJiuYa
-// @version       1.0.2
+// @version       1.0.3
 // @description   统一管理各网站样式（CSS/JS）的启用与加载
 // @author        RenJiuYa
 //
@@ -41,7 +41,7 @@
   const IS_DEV = true;
 
   const LOCAL_BASE = 'http://127.0.0.1:5500';                              // 本地 live-server 根目录（=仓库根目录）
-  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.2'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
+  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.3'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
   const BASE = IS_DEV ? LOCAL_BASE : REMOTE_BASE;
 
   // ============ 站点管理（外部文件 Web/sites.js，运行时读取） ============
@@ -75,12 +75,13 @@
     return new Function(src + '\nreturn SITES;')();
   }
 
-  // 匹配当前站点（enabled 省略时视为启用）
+  // 匹配当前站点（enabled 省略时视为启用；files 必须是模块名数组）
   function matchSite(sites) {
     const host = location.hostname;
     return Object.values(sites).find(
       (site) =>
         site.enabled !== false &&
+        Array.isArray(site.files) &&
         site.hosts.some((h) => host === h || host.endsWith('.' + h))
     );
   }
@@ -103,7 +104,10 @@
 
     SITE_BASE = BASE + '/' + SITE.dir;
     // CSS 和 JS 并行加载；JS 模块不重复执行，避免重复绑定事件
-    await Promise.all([loadAllCSS(), loadAllJS()]);
+    const [cssCount, jsCount] = await Promise.all([loadAllCSS(), loadAllJS()]);
+    if (cssCount + jsCount === 0) {
+      console.warn('[网页大修] 没有找到任何模块文件，请检查 sites.js 里的 dir 与模块名: ' + SITE_BASE);
+    }
   }
 
   // 重新加载样式：已命中站点只重拉 CSS，否则重新走一遍完整流程
@@ -118,14 +122,20 @@
   }
 
   // 用 Promise 包装 GM_xmlhttpRequest，方便 async/await
+  // reject 出的 Error 上带 status（404 = 文件不存在，用于跳过没有该扩展名的模块）
   function gmFetch(url) {
     return new Promise((resolve, reject) => {
       GM_xmlhttpRequest({
         method: 'GET',
         url: withCacheBust(url),
         onload: (res) => {
-          if (res.status === 200) resolve(res.responseText);
-          else reject(new Error('HTTP ' + res.status + ': ' + url));
+          if (res.status === 200) {
+            resolve(res.responseText);
+            return;
+          }
+          const err = new Error('HTTP ' + res.status + ': ' + url);
+          err.status = res.status;
+          reject(err);
         },
         onerror: () => reject(new Error('网络错误: ' + url)),
       });
@@ -137,42 +147,56 @@
   }
 
   // ============ 加载 CSS ============
+  // sites.js 里只写模块名，这里自动去找同名的 .css（不存在就跳过）；
   // 先把 CSS 全部拉到内存，再就地更新 <style> 的 textContent；
   // 全程不删除任何 style 元素、写入前也没有 await，因此不会出现"短暂无样式"的闪烁。
   async function loadAllCSS() {
+    const files = SITE.files.map((name) => name + '.css');
     const results = await Promise.allSettled(
-      SITE.css.map((file) => gmFetch(SITE_BASE + '/' + file))
+      files.map((file) => gmFetch(SITE_BASE + '/' + file))
     );
 
+    let loaded = 0;
     results.forEach((r, i) => {
-      const file = SITE.css[i];
+      const file = files[i];
       if (r.status === 'rejected') {
-        console.error('[CSS] 加载失败: ' + file, r.reason);
+        // 404 = 这个模块没有 css，属于正常情况，跳过
+        if (!r.reason || r.reason.status !== 404) console.error('[CSS] 加载失败: ' + file, r.reason);
         return;
       }
       let style = document.querySelector('style[data-module-css="' + file + '"]');
       if (!style) {
         style = document.createElement('style');
         style.setAttribute('data-module-css', file);
+        style.textContent = r.value; // 先填内容再插入 → 不会出现空白样式的瞬间
         head().appendChild(style);
+      } else {
+        style.textContent = r.value;
       }
-      style.textContent = r.value;
+      loaded++;
     });
+    return loaded;
   }
 
   // ============ 加载 JS 模块 ============
+  // 同样按模块名去找同名的 .js（不存在就跳过）；按顺序执行，保证模块之间的依赖顺序
   async function loadAllJS() {
-    // 按顺序加载，保证依赖关系（如果模块之间有依赖）
-    for (const file of SITE.js) {
+    let loaded = 0;
+    for (const name of SITE.files) {
+      const file = name + '.js';
       try {
         const code = await gmFetch(SITE_BASE + '/' + file);
         // 用 Function 构造器执行，避免 eval 的一些限制
         // 注意：模块内的代码在全局作用域执行，可直接操作页面
         new Function(code)();
+        loaded++;
       } catch (err) {
+        // 404 = 这个模块没有 js，属于正常情况，跳过
+        if (err.status === 404) continue;
         console.error('[JS] 加载失败: ' + file, err);
       }
     }
+    return loaded;
   }
 
   // ============ 运行时开关（暴力猴菜单） ============
