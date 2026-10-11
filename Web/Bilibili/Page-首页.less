@@ -1,0 +1,71 @@
+/* 
+    Page：首页
+*/
+// 顶Comp-提示
+.adblock-tips {
+  display: none !important;
+}
+
+.bili-feed4 {
+  min-height: 100svh !important;
+  overflow-y: hidden;
+
+  // Fix顶上Bar-导航 | Status-Roll
+  > .header-channel,
+  // Fix右下Bar-功能
+  > .palette-button-outer,
+  // 上Area-导航
+  .bili-header__channel {
+    display: none !important;
+  }
+
+  // Area-视频
+  > .bili-feed4-layout {
+    width: 100% !important;
+    padding: 50px 20px !important;
+
+    .recommended-container_floor-aside {
+      padding: 0 !important;
+      position: relative !important;
+
+      > .container {
+        > :not(.feed-card) {
+          display: none !important;
+        }
+
+        // Item-视频
+        .feed-card {
+          margin-top: 0 !important;
+
+          .bili-watch-later__tip--lab,
+          .bili-video-card__info--icon-text {
+            display: none !important;
+          }
+        }
+      }
+      // Comp-刷新
+      > .feed-roll-btn {
+        top: initial !important;
+        bottom: 0 !important;
+        left: initial !important;
+        right: 0 !important;
+        transform: translate(0, 100%) !important;
+
+        > .roll-btn {
+          width: initial !important;
+          padding: 5px !important;
+          flex-direction: initial !important;
+
+          > svg {
+            width: 20px !important;
+            height: 20px !important;
+            margin: 0 !important;
+          }
+          > span {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

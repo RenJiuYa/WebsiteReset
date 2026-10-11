@@ -1,0 +1,53 @@
+/* 
+    Page：首页
+*/
+.adblock-tips {
+  display: none !important;
+}
+.bili-feed4 {
+  min-height: 100svh !important;
+  overflow-y: hidden;
+}
+.bili-feed4 > .header-channel,
+.bili-feed4 > .palette-button-outer,
+.bili-feed4 .bili-header__channel {
+  display: none !important;
+}
+.bili-feed4 > .bili-feed4-layout {
+  width: 100% !important;
+  padding: 50px 20px !important;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside {
+  padding: 0 !important;
+  position: relative !important;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container > :not(.feed-card) {
+  display: none !important;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card {
+  margin-top: 0 !important;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card .bili-watch-later__tip--lab,
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card .bili-video-card__info--icon-text {
+  display: none !important;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn {
+  top: initial !important;
+  bottom: 0 !important;
+  left: initial !important;
+  right: 0 !important;
+  transform: translate(0, 100%) !important;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn > .roll-btn {
+  width: initial !important;
+  padding: 5px !important;
+  flex-direction: initial !important;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn > .roll-btn > svg {
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0 !important;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn > .roll-btn > span {
+  display: none;
+}

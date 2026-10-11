@@ -1,0 +1,161 @@
+/* 
+    组件：导航栏
+*/
+.bili-header__bar {
+  height: 60px !important;
+  padding: 0 10% !important;
+
+  // 左Item
+  .left-entry__item {
+    // 左Item-无用
+    & > :not(a),
+    &:not(
+      :has(
+        a:is(
+          [href$="www.bilibili.com"],
+          [href$="live.bilibili.com"],
+          [href*="www.bilibili.com/anime"],
+          [href*="www.bilibili.com/match"]
+        )
+      )
+    ) {
+      display: none !important;
+    }
+
+    // 左Item-Logo
+    .big-logo {
+      margin: 0 !important;
+
+      ~ * {
+        display: none !important;
+      }
+    }
+  }
+
+  // 中Comp-搜索
+  .center-search__bar {
+    // Comp-输入
+    .nav-search-input::placeholder {
+      color: transparent !important;
+    }
+
+    // Panel
+    .search-panel {
+      overflow-y: initial !important;
+
+      // Area-历史
+      > .history {
+        &:has(.fold-icon:not(.fold)) .histories-wrap {
+          max-height: 372px !important;
+        }
+        .histories {
+          display: grid !important;
+          grid-template-columns: repeat(3, 1fr) !important;
+        }
+        .history-item {
+          min-width: 0 !important;
+        }
+        .history-text {
+          max-width: initial !important;
+        }
+      }
+
+      // Area-热搜
+      > .trending,
+      .trending-mark {
+        display: none !important;
+      }
+    }
+  }
+
+  // 右Item
+  .right-entry__item {
+    &:not(
+      .header-avatar-wrap,
+      .message-entry,
+      .dynamic-entry,
+      .favorite-entry,
+      .history-entry
+    ) {
+      display: none !important;
+    }
+
+    // Panel-登录
+    .login-panel-popover > :not(.login-btn, .register-tip),
+    // Panel-用户
+    .avatar-panel-popover > .vip-entry-containter {
+      display: none !important;
+    }
+
+    // Panel-动态
+    .dynamic-panel-popover {
+      width: 500px !important;
+
+      // Item-动态
+      .header-dynamic-list-item {
+        padding: 10px !important;
+
+        > .header-dynamic-container {
+          & > * {
+            width: initial !important;
+          }
+          > .header-dynamic__box--left {
+            flex: 1 1 0;
+
+            > .header-dynamic-avatar {
+              width: 100% !important;
+              height: auto !important;
+              aspect-ratio: 1 / 1 !important;
+            }
+          }
+          > .header-dynamic__box--center {
+            flex: 6 1 0;
+            display: grid !important;
+            grid-template-rows: auto 1fr !important;
+            grid-template-columns: 1fr auto !important;
+            grid-template-areas: "up time" "title title" !important;
+
+            > .dynamic-name-line {
+              grid-area: up !important;
+              align-self: center !important;
+
+              > .user-name > a {
+                background: var(--theme-color-10) !important;
+                padding: 2px 5px !important;
+                border-radius: 3px !important;
+
+                &:hover {
+                  color: var(--v_brand_blue) !important;
+                  transition: color 0.3s ease !important;
+                }
+              }
+            }
+            > .dynamic-info-content {
+              max-width: initial !important;
+              grid-area: title !important;
+            }
+            > .publish-time {
+              grid-area: time !important;
+              align-self: center !important;
+            }
+          }
+          > .header-dynamic__box--right {
+            flex: 3 1 0;
+            top: 0 !important;
+            margin: 0 !important;
+
+            .cover {
+              width: initial !important;
+              height: initial !important;
+            }
+          }
+        }
+      }
+
+      // Item-查看全部
+      .wnd_bottom > a {
+        width: initial !important;
+      }
+    }
+  }
+}

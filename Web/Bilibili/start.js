@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          网页大修-B站
 // @namespace     RenJiuYa
-// @version       1.0.0
+// @version       1.0.1
 // @description   略
 // @author        RenJiuYa
 //
@@ -11,6 +11,7 @@
 // @grant         GM_addStyle
 // @grant         GM_xmlhttpRequest
 // @connect       127.0.0.1
+// @connect       cdn.jsdelivr.net
 // ==/UserScript==
 
 (function () {
@@ -19,19 +20,21 @@
   // ============ 开发/发布开关 ============
   const IS_DEV = true;
 
-  const LOCAL_BASE = 'http://127.0.0.1:5500/Web-B站';
-  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.0/Web-B站';
+  const LOCAL_BASE = 'http://127.0.0.1:5500/Web/Bilibili';                              // 本地 live-server 根目录（=仓库根目录）+ 站点目录
+  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.1/Web/Bilibili'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
   const BASE = IS_DEV ? LOCAL_BASE : REMOTE_BASE;
 
   // ============ 资源清单 ============
   // CSS 文件列表（相对 BASE 的路径）
   const CSS_FILES = [
     '/通用.css',
+    '/Page-首页.css',
   ];
 
   // JS 模块列表（相对 BASE 的路径）
   const JS_FILES = [
     '/通用.js',
+    '/Page-首页.js',
   ];
 
   // ============ 工具函数 ============
@@ -67,7 +70,7 @@
         const style = document.createElement('style');
         style.setAttribute('data-module-css', path);
         style.textContent = css;
-        document.head.appendChild(style);
+        (document.head || document.documentElement).appendChild(style);
         return path;
       })
     );
