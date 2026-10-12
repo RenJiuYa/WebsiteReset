@@ -1,0 +1,59 @@
+.search-layout {
+  // Fix右下Bar-功能
+  > .side-buttons-container {
+    .side-buttons > :not(.btn-to-top-wrap) {
+      display: none !important;
+    }
+  }
+
+  // 上Bar-分类
+  .search-header {
+    .search-tabs {
+      ul {
+        justify-content: space-between !important;
+      }
+    }
+  }
+
+  .search-content {
+    // 中Area-推荐
+    // Card-品牌广告？
+    .brand-ad-list .user-actions,
+    // Card-赛程
+    .esport-list .esport-card-options > div.esport-card-options-item btn,
+    // Card-活动
+    .activity-game-list .activity-card-content-footer,
+    // Card-游戏
+    .activity-game-list .main-btn,
+    // Card-用户
+    .user-list .user-actions,
+    // Card-ACG影视
+    .bangumi-pgc-list .media-card-image-follow,
+    .bangumi-pgc-list .media-card-content-footer-btns {
+      display: none !important;
+    }
+
+    // 下Area-结果
+    .video {
+      > .video-list {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        justify-content: space-evenly !important;
+        gap: 5px 0 !important;
+
+        // Card-视频
+        > div:has(> .bili-video-card) {
+          max-width: initial !important;
+        }
+        // Card-AD
+        > div:has(
+            [class^="bili-video-card__info--ad"],
+            [class^="bili-video-card__info--living"],
+            [class^="bili-video-card__info--cheese"]
+          ) {
+          display: none !important;
+        }
+      }
+    }
+  }
+}

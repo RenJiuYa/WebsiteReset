@@ -1,0 +1,120 @@
+.ad-report {
+  display: none !important;
+}
+.usercard-wrap > .card-loaded > .bg {
+  display: none !important;
+}
+.usercard-wrap > .card-loaded > .user-info-wrapper .user-label,
+.usercard-wrap > .card-loaded > .user-info-wrapper .btn-box {
+  display: none !important;
+}
+.video-share-popover .dropdown-top-left {
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+.video-share-popover .dropdown-top-right {
+  display: none !important;
+}
+.video-tool-more-popover > .video-tool-more-dropdown > .video-note-fake,
+.video-tool-more-popover > .video-tool-more-dropdown > .video-use-phone {
+  display: none !important;
+}
+.video-container-v1 > .fixed-sidenav-storage > div:has(.customer-service) {
+  display: none !important;
+}
+.video-container-v1 > .left-container {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.video-container-v1 > .left-container > #viewbox_report {
+  order: -1 !important;
+  height: auto !important;
+  padding-top: 20px !important;
+}
+.video-container-v1 > .left-container > #viewbox_report > .video-info-title .video-title {
+  white-space: pre-wrap !important;
+}
+.video-container-v1 > .left-container > #viewbox_report > .video-info-title .show-more {
+  display: none !important;
+}
+.video-container-v1 > .left-container > #viewbox_report > .video-info-meta .pubdate-ip {
+  margin-right: auto !important;
+}
+.video-container-v1 > .left-container > #playerWrap {
+  order: -2 !important;
+  margin-top: 5px !important;
+}
+.video-container-v1 > .left-container > .video-toolbar-container {
+  margin: 10px 0 !important;
+  padding: 10px !important;
+  border-bottom: none !important;
+  box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef) !important;
+  background-color: var(--graph_bg_regular) !important;
+}
+.video-container-v1 > .left-container > .video-toolbar-container > .video-toolbar-left {
+  flex: 1 !important;
+  justify-content: space-between !important;
+}
+.video-container-v1 > .left-container > .video-toolbar-container > .video-toolbar-left .toolbar-left-item-wrap {
+  margin: 0 !important;
+}
+.video-container-v1 > .left-container > .video-toolbar-container > .video-toolbar-right > .toolbar-right-ai,
+.video-container-v1 > .left-container > .video-toolbar-container > .video-toolbar-right > .toolbar-right-note {
+  display: none !important;
+}
+.video-container-v1 > .left-container > .video-desc-container {
+  margin: 0 !important;
+}
+.video-container-v1 > .left-container > .video-desc-container > .toggle-btn:hover {
+  box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef) !important;
+  background-color: var(--graph_bg_regular) !important;
+  cursor: pointer;
+}
+.video-container-v1 > .left-container > .video-tag-container :has(.tag-icon) + .tag {
+  clear: left !important;
+}
+.video-container-v1 > .left-container > #bgm-entry [class^="_PcDetailInfo"] .btn:has(.number) {
+  pointer-events: none;
+}
+.video-container-v1 > .left-container .video-resource-list {
+  display: none !important;
+}
+.video-container-v1 > .right-container > .right-container-inner {
+  padding-bottom: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.video-container-v1 > .right-container > .right-container-inner > .up-panel-container > .members-info-container .add-follow-btn {
+  display: none !important;
+}
+.video-container-v1 > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .bili-avatar-icon {
+  display: none !important;
+}
+.video-container-v1 > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right .send-msg,
+.video-container-v1 > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right [class*="charge-btn"] {
+  display: none !important;
+}
+.video-container-v1 > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right .follow-btn {
+  pointer-events: none;
+}
+.video-container-v1 > .right-container > .right-container-inner > .video-pod-above-modules {
+  order: -1 !important;
+}
+.video-container-v1 > .right-container > .right-container-inner > .video-pod-above-modules > .video-pod-above-modules__inner > :not(#danmukuBox) {
+  display: none !important;
+}
+.video-container-v1 > .right-container > .right-container-inner > .rcmd-tab > .ad-report {
+  display: none !important;
+}
+.video-container-v1 > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.video-container-v1 > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 > .rec-list {
+  display: none !important;
+}
+.video-container-v1 > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 > .rec-footer {
+  order: -1;
+  margin-bottom: 10px !important;
+  display: block !important;
+}

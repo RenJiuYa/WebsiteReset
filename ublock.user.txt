@@ -1,0 +1,38 @@
+! ============================================================
+! 网页大修 · uBlock Origin 自定义过滤列表
+! Title: RenJiuYa规则
+! Homepage: https://github.com/RenJiuYa/WebsiteReset
+! ------------------------------------------------------------
+! 只放「CSS 实现不了」的规则：文本匹配、按计算样式/属性匹配、向上隐藏等。
+! 纯布局/隐藏能写进 .less 的，继续写在 Web/<网站>/*.less，不要放这里。
+!
+! 写法约定（重要）：
+!   每条规则都必须带域名前缀，例如 bilibili.com##.feed-card:has-text(广告)
+!   —— 不带域名的"通用规则"会被 uBO 丢弃，procedural 规则（:has-text 等）更是必须带域名。
+!   注释一律用 ! 开头（不要用 //）。
+!
+! 订阅方式：
+!   开发期（本地实时，改完不用 push）
+!     http://127.0.0.1:5500/ublock.user.txt
+!   发布期（分享给别人 / 长期用）
+!     https://raw.githubusercontent.com/RenJiuYa/WebsiteReset/main/ublock.user.txt
+!   在 uBO 面板 → 过滤列表 → 自定义 → 勾「Import」→ 粘贴上面任一地址 → 应用更改。
+!   改完规则后，点该列表旁的时钟图标，或面板上的「Update now」，即会重新拉取生效。
+! ============================================================
+
+! ============================================================
+! B站（bilibili.com）
+! ============================================================
+
+!——————————B站：Page-播放
+! 右Area-信息 | Card-推荐
+bilibili.com##.right-container .recommend-list-v1:has(.rec-footer:has-text("展开")) .next-play:style(display: none !important;)
+! 右Area-信息 | Comp-自动连播
+bilibili.com##+js(trusted-click-element, .bpx-player-ctrl-setting-handoff-content .bui-radio-item:nth-of-type(2), 3000)
+
+!——————————B站：Player
+! Fix底Bar | Item-设置-Panel | Comp-自动开播
+bilibili.com##+js(trusted-click-element, .bpx-player-ctrl-setting-autoplay .bui-switch-input[checked], 3000)
+
+
+

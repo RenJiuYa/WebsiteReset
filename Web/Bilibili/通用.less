@@ -1,5 +1,5 @@
 /* 
-    组件：导航栏
+    组件：Bar-导航栏
 */
 .bili-header__bar {
   height: 60px !important;
@@ -157,5 +157,148 @@
         width: initial !important;
       }
     }
+
+    // Panel-历史：Page-直播
+    .history-panel-popover {
+      .header-history-live {
+        .header-history-card__info--name:hover {
+          border-radius: 5px !important;
+          background: var(--theme-color-10) !important;
+          color: var(--v_brand_blue) !important;
+          transition: color 0.3s ease !important;
+        }
+      }
+    }
   }
 }
+
+/* 
+    组件：Player
+*/
+
+.bpx-docker > .bpx-player-container {
+  > .bpx-player-primary-area {
+    // 下Bar-弹幕：通用
+    .bpx-player-sending-bar {
+      // Comp-发送
+      .bpx-player-dm-hint,
+      .bpx-player-dm-btn-send {
+        display: none !important;
+      }
+      // Comp-颜色-Panel
+      .bpx-player-mode-selection-container {
+        // Comp-VIP
+        > .bpx-player-mode-selection-panel > .vip-color,
+        // Area-登录
+        > .bpx-player-mode-selection-mask {
+          display: none !important;
+        }
+      }
+    }
+
+    // Area-画面
+    > .bpx-player-video-area {
+      // Comp-弹幕
+      > .bpx-player-render-dm-wrap {
+        // Comp-投票
+        > :not(.bpx-player-dm-mask-wrap),
+        // Comp-弹幕 | Comp-点赞
+        .bili-danmaku-x-high-icon {
+          display: none !important;
+        }
+      }
+      // Comp-弹幕-Panel | Comp-点赞
+      > .bpx-player-dialog-wrap .bpx-player-dm-tip-like {
+        display: none !important;
+      }
+
+      // Fix顶上Comp
+      > .bpx-player-top-wrap {
+        > :not(.bpx-player-top-left),
+        > .bpx-player-top-left > :not(.bpx-player-top-left-title) {
+          display: none !important;
+        }
+      }
+
+      // Fix右下Box
+      > .bpx-player-toast-wrap {
+        // Box-大会员
+        [class^="PromptBar_subtitleWrap"],
+        [class^="PromptBar_remindActionWrap"], 
+        // Box-充电
+        .bpx-player-charging-toast-left-level,
+        .bpx-player-charging-toast-right {
+          display: none !important;
+        }
+      }
+
+      // Fix底下Bar-功能
+      > .bpx-player-control-wrap {
+        // Item-音质
+        .bpx-player-ctrl-flac,
+        // Item-质量-Panel
+        .bpx-player-ctrl-quality-menu-item:has(
+          .bpx-player-ctrl-quality-badge-bigvip
+        ) {
+          display: none !important;
+        }
+      }
+
+      // Status-结束
+      .bpx-player-ending-wrap > .bpx-player-ending-panel {
+        // 普通视频
+        > .bpx-player-ending {
+          .bpx-player-ending-functions-buttons,
+          .bpx-player-ending-functions-common,
+          .bpx-player-ending-related {
+            display: none !important;
+          }
+        }
+        // 资源
+        > [class^="endpage_wrap"] {
+          [data-testid="end-page-header-follow-btn"],
+          [data-testid="end-page-header-btn-group"],
+          [class^="endpageRecommend_wrap"] {
+            display: none !important;
+          }
+        }
+        // 大会员
+        > [class^="paywallView_container"] {
+          > [class^="paywallView_leftBox"]
+            > :not([data-testid="paywall-title"]),
+          > [class^="paywallView_rightBox"] {
+            display: none !important;
+          }
+        }
+      }
+    }
+  }
+
+  > .bpx-player-context-area {
+    // Area-画面 | Comp-弹幕 | Box-右键
+    .bpx-player-dm > .bpx-player-dm-btn {
+      display: none !important;
+    }
+  }
+}
+
+/* 
+    组件：Footer
+*/
+
+#biliMainFooter {
+  display: none !important;
+}
+
+/* 
+    组件：Box-大会员
+*/
+
+#BilibiliVipDialog {
+  display: none !important;
+}
+
+/* 
+    组件：评论区
+*/
+

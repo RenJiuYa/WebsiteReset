@@ -1,6 +1,3 @@
-/* 
-    Page：首页
-*/
 .adblock-tips {
   display: none !important;
 }
@@ -27,6 +24,7 @@
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card {
   margin-top: 0 !important;
 }
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card:not(:has(.enable-no-interest)),
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card .bili-watch-later__tip--lab,
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card .bili-video-card__info--icon-text {
   display: none !important;

@@ -1,0 +1,212 @@
+/* 
+================通用
+*/
+
+// 上Area-用户信息
+.space-header {
+  // 左Comp-头像
+  .upinfo__main {
+    // Status-直播中
+    > .upinfo-avatar {
+      .living-tips {
+        display: none !important;
+      }
+    }
+    // Comp-VIP
+    > .upinfo-detail {
+      > .upinfo-detail__top {
+        &:has(.vip > :not(.disable)) > .nickname {
+          color: var(--v_brand_pink) !important;
+        }
+        > .vip {
+          display: none !important;
+        }
+      }
+    }
+  }
+  // 右Comp-操作
+  .operations {
+    // Item-关注
+    .space-head-follow {
+      .space-follow-btn.gray {
+        pointer-events: none !important;
+      }
+    }
+  }
+}
+.space-main {
+  // 左Bar-导航（该组件在Firefox没有适配）
+  .side-nav {
+    > .side-nav__item {
+      &.active {
+        background-color: var(--brand_blue);
+
+        > * {
+          color: var(--text_white);
+        }
+      }
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      padding: 14px 16px;
+      margin-top: 8px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+  }
+
+  // 右Area-信息
+  [class$="aside-section"] {
+    // Card-创作
+    .upload-section > :not(.upload-section-jumper),
+    // Card-充电
+    .elec-action,
+    // Card-直播
+    .living-section__follow,
+    // Card-直播 | Status-直播ing
+    .living-section-cover__tag,
+    // Card-预约
+    .vui_button,
+    // Card-游戏
+    &:has(.game-section) {
+      display: none !important;
+    }
+  }
+
+  // Fix右下Bar-功能
+  > .space-float {
+    height: initial !important;
+
+    > .float-button:not([style]) {
+      display: none !important;
+    }
+  }
+}
+
+/* 
+================Page-动态
+*/
+
+// Box-评论表情
+
+.bili-emoji-popover {
+  translate: 0 30px !important;
+
+  > [title] {
+    border-bottom: 2px var(--graph_bg_regular) solid !important;
+  }
+  > img {
+    margin: 10px 0 !important;
+  }
+  > a {
+    display: none !important;
+  }
+}
+
+/* 
+================Page-投稿
+*/
+
+.route_uploadVideo {
+  .video {
+    // Card-视频
+    .video-list {
+      grid-template-columns: repeat(3, 1fr) !important;
+      justify-content: space-between !important;
+    }
+    // Card-视频：充电
+    &:not(:has(.radio-filter__item--active > i))
+      .upload-video-card:has(.charge-tag) {
+      display: none !important;
+    }
+  }
+}
+
+/* 
+================Page-收藏
+*/
+
+.route_favlist {
+  // 左Bar-目录
+  .favlist-aside {
+    .vui_collapse_item {
+      > .vui_collapse_item_header {
+        background-color: var(--graph_bg_thin) !important;
+      }
+      > .vui_collapse_item_content {
+        // Item-其他收藏
+        .fav-sidebar-item[title^="话题"],
+        .fav-sidebar-item[title^="课程"] {
+          display: none !important;
+        }
+      }
+    }
+  }
+  /* 右Area-内容：Page-其他收藏：Page-图文 */
+  .favlist-main {
+    > .opus-fav-list {
+      .container {
+        width: 100% !important;
+        height: auto !important;
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+        justify-content: center !important;
+        justify-items: center !important;
+        gap: 10px !important;
+
+        // Card-图文
+        > .item {
+          width: 100% !important;
+          height: 100% !important;
+          position: initial !important;
+          transform: initial !important;
+
+          > .opus-card {
+            height: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+
+            > :first-child {
+              flex: 1 !important;
+            }
+            > .opus-card--only-text {
+              display: flex !important;
+              flex-direction: column-reverse !important;
+              justify-content: flex-end !important;
+
+              > .opus-card__icons {
+                margin-top: 0px !important;
+                margin-bottom: 5px !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 
+================Page-关注、粉丝
+*/
+
+.space-main {
+  .relation-aside {
+    max-height: initial !important;
+  }
+  .relation-content {
+    // Card-用户
+    .relation-card {
+      .follow-btn__trigger {
+        // Comp-已关注
+        &.gray,
+        // Comp-回关
+        &.be-followed {
+          pointer-events: none !important;
+        }
+      }
+    }
+  }
+}

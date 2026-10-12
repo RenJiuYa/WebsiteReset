@@ -1,0 +1,64 @@
+#pc-cashier-wrapper-wide,
+[class^="moreTool_popupWrap"] > :first-child {
+  display: none !important;
+}
+.plp-layout .plp-r > #pc-cashier-wrapper-normal {
+  display: none !important;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar {
+  margin-top: 16px !important;
+  padding: 0 5px !important;
+  border-radius: 5px !important;
+  box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef) !important;
+  background-color: var(--graph_bg_regular) !important;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar > .toolbar-left {
+  display: flex !important;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar > .toolbar-left > span {
+  margin: auto 5px !important;
+  padding: 0 !important;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar > .toolbar-left > :not([id]) {
+  display: none !important;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar > .toolbar-left > .share [class^="Share_boxTopRight"] {
+  display: none !important;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar > .toolbar-right {
+  line-height: initial !important;
+}
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] {
+  border: none !important;
+}
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] > [class^="mediainfo_mediaRight"] > * {
+  margin-bottom: 5px !important;
+}
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] > [class^="mediainfo_mediaRight"] > [class^="mediainfo_mediaDesc"]:nth-of-type(2) {
+  height: initial !important;
+  overflow: initial !important;
+  white-space: pre-wrap !important;
+  -webkit-box-orient: initial !important;
+}
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] > [class^="mediainfo_mediaRight"] > [class^="mediainfo_bottomBar"] [class^="upinfo_btn_follow_up"],
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] > [class^="mediainfo_mediaRight"] > [class^="mediainfo_bottomBar"] [report-id="click_review_publish"] {
+  display: none !important;
+}
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] > [class^="mediainfo_mediaRight"] > [class^="mediainfo_mediaToolbar"] > :not(#ogv-weslie-media-info-follow) {
+  display: none !important;
+}
+.plp-layout .plp-l > .player-left-components #sponsor_module {
+  min-height: initial !important;
+}
+.plp-layout .plp-l > .player-left-components #sponsor_module > [class^="sponsor_sponsor_mini_rank"] {
+  display: none !important;
+}
+.plp-layout .plp-l > .player-left-components #sponsor_module > [class^="sponsor_sponsor_info"] {
+  margin: 0 auto !important;
+}
+.plp-layout .plp-l > .player-left-components #sponsor_module > [class^="sponsor_sponsor_info"] > [class^="sponsor_btn_show_rank"] {
+  text-align: center !important;
+}
+.plp-layout .plp-l > .player-left-components #sponsor_module > [class^="sponsor_sponsor_info"] > [class^="sponsor_img_wrapper"] {
+  margin: 10px auto !important;
+}

@@ -1,5 +1,5 @@
 /* 
-    组件：导航栏
+    组件：Bar-导航栏
 */
 .bili-header__bar {
   height: 60px !important;
@@ -113,3 +113,75 @@
 .bili-header__bar .right-entry__item .dynamic-panel-popover .wnd_bottom > a {
   width: initial !important;
 }
+.bili-header__bar .right-entry__item .history-panel-popover .header-history-live .header-history-card__info--name:hover {
+  border-radius: 5px !important;
+  background: var(--theme-color-10) !important;
+  color: var(--v_brand_blue) !important;
+  transition: color 0.3s ease !important;
+}
+/* 
+    组件：Player
+*/
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area .bpx-player-sending-bar .bpx-player-dm-hint,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area .bpx-player-sending-bar .bpx-player-dm-btn-send {
+  display: none !important;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area .bpx-player-sending-bar .bpx-player-mode-selection-container > .bpx-player-mode-selection-panel > .vip-color,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area .bpx-player-sending-bar .bpx-player-mode-selection-container > .bpx-player-mode-selection-mask {
+  display: none !important;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-render-dm-wrap > :not(.bpx-player-dm-mask-wrap),
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-render-dm-wrap .bili-danmaku-x-high-icon {
+  display: none !important;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-dialog-wrap .bpx-player-dm-tip-like {
+  display: none !important;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-top-wrap > :not(.bpx-player-top-left),
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-top-wrap > .bpx-player-top-left > :not(.bpx-player-top-left-title) {
+  display: none !important;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-toast-wrap [class^="PromptBar_subtitleWrap"],
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-toast-wrap [class^="PromptBar_remindActionWrap"],
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-toast-wrap .bpx-player-charging-toast-left-level,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-toast-wrap .bpx-player-charging-toast-right {
+  display: none !important;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-control-wrap .bpx-player-ctrl-flac,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-control-wrap .bpx-player-ctrl-quality-menu-item:has(
+          .bpx-player-ctrl-quality-badge-bigvip
+        ) {
+  display: none !important;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > .bpx-player-ending .bpx-player-ending-functions-buttons,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > .bpx-player-ending .bpx-player-ending-functions-common,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > .bpx-player-ending .bpx-player-ending-related {
+  display: none !important;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > [class^="endpage_wrap"] [data-testid="end-page-header-follow-btn"],
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > [class^="endpage_wrap"] [data-testid="end-page-header-btn-group"],
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > [class^="endpage_wrap"] [class^="endpageRecommend_wrap"] {
+  display: none !important;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > [class^="paywallView_container"] > [class^="paywallView_leftBox"] > :not([data-testid="paywall-title"]),
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > [class^="paywallView_container"] > [class^="paywallView_rightBox"] {
+  display: none !important;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-context-area .bpx-player-dm > .bpx-player-dm-btn {
+  display: none !important;
+}
+/* 
+    组件：Footer
+*/
+#biliMainFooter {
+  display: none !important;
+}
+/* 
+    组件：Box-大会员
+*/
+#BilibiliVipDialog {
+  display: none !important;
+}
+/* 
+    组件：评论区
+*/

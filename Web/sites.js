@@ -16,6 +16,6 @@ const SITES = {
     enabled: true,
     hosts: ['bilibili.com'],
     dir: 'Web/Bilibili',
-    files: ['通用', 'Page-首页'],
+    files: ['通用', 'Page-首页', 'Page-个人空间', 'Page-搜索', 'Page-播放', 'Page-播放：资源'],
   },
 };

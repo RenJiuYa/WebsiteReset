@@ -1,0 +1,214 @@
+// Comp-AD
+.ad-report {
+  display: none !important;
+}
+
+// 右Area-信息 | Card-用户-Panel
+.usercard-wrap {
+  > .card-loaded {
+    // Comp-背景
+    > .bg {
+      display: none !important;
+    }
+    > .user-info-wrapper {
+      // Comp-VIP
+      .user-label,
+      // Comp-按钮
+      .btn-box {
+        display: none !important;
+      }
+    }
+  }
+}
+
+// 左Area-综合 | 中Bar-功能 | 左Item-分享-Panel
+.video-share-popover {
+  .dropdown-top-left {
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+  .dropdown-top-right {
+    display: none !important;
+  }
+}
+// 左Area-综合 | 中Bar-功能 | 右Item-更多-Panel
+.video-tool-more-popover {
+  > .video-tool-more-dropdown {
+    > .video-note-fake,
+    > .video-use-phone {
+      display: none !important;
+    }
+  }
+}
+
+.video-container-v1 {
+  // Fix右下Bar-功能
+  > .fixed-sidenav-storage > div:has(.customer-service) {
+    display: none !important;
+  }
+
+  // 左Area-综合
+  > .left-container {
+    display: flex !important;
+    flex-direction: column !important;
+
+    // Area-标题
+    > #viewbox_report {
+      order: -1 !important;
+      height: auto !important;
+      padding-top: 20px !important;
+
+      > .video-info-title {
+        .video-title {
+          white-space: pre-wrap !important;
+        }
+        .show-more {
+          display: none !important;
+        }
+      }
+      > .video-info-meta {
+        .pubdate-ip {
+          margin-right: auto !important;
+        }
+      }
+    }
+    
+    // Area-Player
+    > #playerWrap {
+      order: -2 !important;
+      margin-top: 5px !important;
+    }
+
+    // 中Bar-功能
+    > .video-toolbar-container {
+      margin: 10px 0 !important;
+      padding: 10px !important;
+      border-bottom: none !important;
+      box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef) !important;
+      background-color: var(--graph_bg_regular) !important;
+
+      // 左Item
+      > .video-toolbar-left {
+        flex: 1 !important;
+        justify-content: space-between !important;
+
+        .toolbar-left-item-wrap {
+          margin: 0 !important;
+        }
+      }
+      // 右Item
+      > .video-toolbar-right {
+        > .toolbar-right-ai,
+        > .toolbar-right-note {
+          display: none !important;
+        }
+      }
+    }
+
+    // 中Area-简介
+    > .video-desc-container {
+      margin: 0 !important;
+
+      > .toggle-btn:hover {
+        box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef) !important;
+        background-color: var(--graph_bg_regular) !important;
+        cursor: pointer;
+      }
+    }
+
+    // 中Area-标签
+    > .video-tag-container {
+      :has(.tag-icon) + .tag {
+        clear: left !important;
+      }
+    }
+
+    // 中Area-标签 | Comp-音乐-Panel
+    > #bgm-entry {
+      [class^="_PcDetailInfo"] {
+        // Comp-喜欢
+        .btn:has(.number) {
+          pointer-events: none;
+        }
+      }
+    }
+    
+    // 中Area-活动
+    .video-resource-list {
+      display: none !important;
+    }
+  }
+
+  // 右Area-信息
+  > .right-container {
+    > .right-container-inner {
+      padding-bottom: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+
+      // Area-用户
+      > .up-panel-container {
+        // Card-创作团队（联合投稿）
+        > .members-info-container {
+          .add-follow-btn {
+            display: none !important;
+          }
+        }
+        // Card-用户
+        > .up-info-container {
+          > .up-info--left {
+            // Comp-头像
+            .bili-avatar-icon {
+              display: none !important;
+            }
+          }
+          > .up-info--right {
+            // Comp-私信
+            .send-msg,
+            // Comp-充电
+            [class*="charge-btn"] {
+              display: none !important;
+            }
+            // Comp-关注
+            .follow-btn {
+              pointer-events: none;
+            }
+          }
+        }
+      }
+
+      // Area-弹幕
+      > .video-pod-above-modules {
+        order: -1 !important;
+
+        // Card-AD
+        > .video-pod-above-modules__inner > :not(#danmukuBox) {
+          display: none !important;
+        }
+      }
+
+      // Area-推荐
+      > .rcmd-tab {
+        // Card-AD
+        > .ad-report {
+          display: none !important;
+        }
+
+        // Card-推荐
+        > .recommend-list-v1 {
+          display: flex !important;
+          flex-direction: column !important;
+
+          > .rec-list {
+            display: none !important;
+          }
+          > .rec-footer {
+            order: -1;
+            margin-bottom: 10px !important;
+            display: block !important;
+          }
+        }
+      }
+    }
+  }
+}
