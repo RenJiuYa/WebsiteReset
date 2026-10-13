@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          网页大修-总入口
 // @namespace     RenJiuYa
-// @version       1.0.4
+// @version       1.0.5
 // @description   统一管理各网站样式（CSS/JS）的启用与加载
 // @author        RenJiuYa
 //
@@ -34,6 +34,9 @@
 // 7. 运行时临时退出：暴力猴菜单点「临时退出脚本」，样式立刻移除，方便和原网站对比；
 //    该选择会被记住（刷新页面依然生效），直到点「重新启用脚本」。
 //    注意：已执行过的 JS 模块无法撤销，需刷新页面才会失效。
+// 8. 需要注入 shadow DOM（只支持 open）的样式：在 .less/.css 里用注释标记
+//    /* @shadow(.宿主选择器) */  ...  /* @shadow-end */
+//    多层用嵌套（内层在「外层 shadow root 内部」找宿主），或用语法糖 >> 分隔路径。
 // ============================================================
 
 (function () {
@@ -42,8 +45,12 @@
   // ============ 开发/发布开关 ============
   const IS_DEV = true;
 
+  // 你写的 CSS 是否自动补 !important（省得每条声明都手写）
+  // 注意：@keyframes / @font-face 这类"描述符块"和 CSS 变量（--x）会自动跳过
+  const FORCE_IMPORTANT = true;
+
   const LOCAL_BASE = 'http://127.0.0.1:5500';                              // 本地 live-server 根目录（=仓库根目录）
-  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.4'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
+  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.5'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
   const BASE = IS_DEV ? LOCAL_BASE : REMOTE_BASE;
 
   // ============ 站点管理（外部文件 Web/sites.js，运行时读取） ============
@@ -167,24 +174,49 @@
     );
 
     let loaded = 0;
+    let allOk = true;
+    const shadowDefs = [];
+
     results.forEach((r, i) => {
       const file = files[i];
       if (r.status === 'rejected') {
         // 404 = 这个模块没有 css，属于正常情况，跳过
-        if (!r.reason || r.reason.status !== 404) console.error('[CSS] 加载失败: ' + file, r.reason);
+        if (!r.reason || r.reason.status !== 404) {
+          console.error('[CSS] 加载失败: ' + file, r.reason);
+          allOk = false;
+        }
         return;
       }
+
+      // 自动补 !important → 摘出 /* @shadow(...) */ 块
+      let css = forceImportant(r.value);
+      try {
+        const split = splitShadowBlocks(css);
+        css = split.plain;
+        for (const b of split.blocks) {
+          if (!b.css) continue; // 只有嵌套、自身没有 CSS 的外壳块：跳过（不用生成空样式表）
+          const pathKey = b.path.join(' ' + SHADOW_SEP + ' ');
+          const dup = shadowDefs.filter((x) => x.pathKey === pathKey).length;
+          shadowDefs.push({ key: file + ' | ' + pathKey + '#' + dup, pathKey: pathKey, path: b.path, css: b.css });
+        }
+      } catch (err) {
+        console.error('[shadow] ' + file + ' 的标记解析失败，本次不处理 shadow 块：' + err.message);
+        allOk = false; // 标记可能有误 → 不做"清理已删除的标记块"
+      }
+
       let style = document.querySelector('style[data-module-css="' + file + '"]');
       if (!style) {
         style = document.createElement('style');
         style.setAttribute('data-module-css', file);
-        style.textContent = r.value; // 先填内容再插入 → 不会出现空白样式的瞬间
+        style.textContent = css; // 先填内容再插入 → 不会出现空白样式的瞬间
         head().appendChild(style);
       } else {
-        style.textContent = r.value;
+        style.textContent = css;
       }
       loaded++;
     });
+
+    applyShadowBlocks(shadowDefs, allOk);
     return loaded;
   }
 
@@ -222,12 +254,334 @@
     return loaded;
   }
 
+  // ============ 自动 !important ============
+  // 你写的每条声明都会自动补上 !important（已经写了的不会重复加），所以 .less/.css 里不用再手写。
+  // 只在「样式规则的声明」上加；下面这些情况会跳过（加了反而会让整条声明被浏览器忽略）：
+  //   @keyframes / @-webkit-keyframes     动画关键帧
+  //   @font-face / @property / @counter-style / @font-palette-values 等描述符块
+  //   CSS 变量（--xxx: ...）               交给页面/组件自己消费，不强制
+  const NO_IMPORTANT_AT = [
+    '@keyframes',
+    '@-webkit-keyframes',
+    '@font-face',
+    '@property',
+    '@counter-style',
+    '@font-palette-values',
+    '@viewport',
+    '@page',
+  ];
+
+  function forceImportant(css) {
+    if (!FORCE_IMPORTANT) return css;
+    const n = css.length;
+    let out = '';
+    let buf = '';
+    let i = 0;
+    let quote = '';
+    let paren = 0;
+    const stack = [{ decls: false, skip: false }]; // 顶层：这里不是声明
+
+    // 在当前段落末尾补 !important（段落正文已经逐字符写进 out，这里只补后缀）
+    function closeDecl() {
+      const ctx = stack[stack.length - 1];
+      const seg = buf;
+      buf = '';
+      if (!ctx.decls || ctx.skip) return;
+      if (seg.indexOf(':') === -1) return;
+      if (/^\s*--/.test(seg)) return; // CSS 变量不强制
+      if (/!\s*important\s*$/i.test(seg)) return; // 已经有了，不重复
+      const tail = /[ \t\r\n]+$/.exec(out);
+      if (tail) out = out.slice(0, out.length - tail[0].length);
+      out += ' !important';
+    }
+
+    while (i < n) {
+      const ch = css[i];
+      if (quote) {
+        // 字符串：原样复制（里面的 ; : !important 都不动）
+        out += ch;
+        buf += ch;
+        if (ch === '\\' && i + 1 < n) {
+          out += css[i + 1];
+          buf += css[i + 1];
+          i += 2;
+          continue;
+        }
+        if (ch === quote) quote = '';
+        i++;
+        continue;
+      }
+      if (ch === '"' || ch === "'") {
+        quote = ch;
+        out += ch;
+        buf += ch;
+        i++;
+        continue;
+      }
+      if (ch === '/' && css[i + 1] === '*') {
+        const end = css.indexOf('*/', i + 2);
+        const chunk = end === -1 ? css.slice(i) : css.slice(i, end + 2);
+        out += chunk;
+        buf += chunk;
+        i += chunk.length;
+        continue;
+      }
+      if (ch === '(') { paren++; out += ch; buf += ch; i++; continue; } // url(...)/:not(...) 里的 ; 不算分隔
+      if (ch === ')') { if (paren > 0) paren--; out += ch; buf += ch; i++; continue; }
+
+      if (paren === 0 && ch === '{') {
+        const prelude = buf; // prelude 已经逐字符写进 out 了，这里只判断类型
+        buf = '';
+        out += ch;
+        const parent = stack[stack.length - 1];
+        if (parent.skip) {
+          stack.push({ decls: true, skip: true }); // 描述符块里面继续保持跳过
+        } else if (prelude.trim().charAt(0) === '@') {
+          const head = prelude.trim().toLowerCase().split(/[\s(]/)[0];
+          stack.push(
+            NO_IMPORTANT_AT.indexOf(head) !== -1
+              ? { decls: true, skip: true }
+              : { decls: parent.decls, skip: false } // @media/@supports/@layer…：继承"能不能写声明"
+          );
+        } else {
+          stack.push({ decls: true, skip: false }); // 普通选择器块：里面是声明
+        }
+        i++;
+        continue;
+      }
+      if (paren === 0 && ch === '}') {
+        closeDecl();
+        out += ch;
+        if (stack.length > 1) stack.pop();
+        i++;
+        continue;
+      }
+      if (paren === 0 && ch === ';') {
+        closeDecl();
+        out += ';';
+        i++;
+        continue;
+      }
+      out += ch;
+      buf += ch;
+      i++;
+    }
+    closeDecl();
+    return out;
+  }
+
+  // ============ shadow DOM 注入（CSS 里的注释标记，可选） ============
+  // 写在站点的 .less/.css 里（注释不会被浏览器执行；块里的 CSS 只进 shadow root，不进 document）：
+  //
+  //   /* @shadow(.宿主选择器) */
+  //   .shadow 内部的选择器 { ... }
+  //   /* @shadow-end */
+  //
+  // 多层：用嵌套表示路径（外层在 document 里找宿主，内层在「外层 shadow root 内部」找宿主）
+  //
+  //   /* @shadow(.外层宿主) */
+  //     /* @shadow(.内层宿主) */
+  //     .inner { ... }
+  //     /* @shadow-end */
+  //   /* @shadow-end */
+  //
+  // 语法糖：一层里写多段路径，用 >> 分隔（等价于上面的嵌套）
+  //
+  //   /* @shadow(.外层宿主 >> .内层宿主) */
+  //
+  // 说明：只处理 open 的 shadow root；宿主必须是有标签名/属性的真实元素（#shadow-root 本身选不到）。
+  const SHADOW_COMMENT = /\/\*([\s\S]*?)\*\//g;
+  const SHADOW_START = /^@shadow\s*\(([\s\S]*)\)$/;
+  const SHADOW_END = /^@shadow-end$/;
+  const SHADOW_SEP = '>>';
+  const hasStyleSheet = typeof CSSStyleSheet === 'function';
+
+  const shadowBlocks = []; // [{ key, path, sheet, roots:Set }]
+  const shadowRootObservers = new Set(); // 中间层 root 的观察器（嵌套路径才会用到）
+  const shadowWarned = new Set();
+  let shadowObserver = null; // document 层观察器
+  let shadowTimer = null; // 去抖定时器
+
+  // 从 CSS 全文里切出「普通部分」和「shadow 块」（栈式配对，支持嵌套）
+  function splitShadowBlocks(css) {
+    const plain = [];
+    const blocks = [];
+    const stack = [];
+    let cursor = 0;
+    let m;
+    SHADOW_COMMENT.lastIndex = 0;
+
+    while ((m = SHADOW_COMMENT.exec(css))) {
+      const body = m[1].trim();
+      const isStart = SHADOW_START.test(body);
+      const isEnd = SHADOW_END.test(body);
+      if (!isStart && !isEnd) continue;
+
+      const before = css.slice(cursor, m.index);
+      if (stack.length) stack[stack.length - 1].buf.push(before);
+      else plain.push(before);
+      cursor = SHADOW_COMMENT.lastIndex;
+
+      if (isStart) {
+        const raw = SHADOW_START.exec(body)[1].trim();
+        if (!raw) throw new Error('@shadow() 括号里要写宿主选择器');
+        const parts = raw.split(SHADOW_SEP).map((s) => s.trim()).filter(Boolean);
+        const parent = stack.length ? stack[stack.length - 1].path : [];
+        stack.push({ path: parent.concat(parts), buf: [] });
+      } else {
+        const top = stack.pop();
+        if (!top) throw new Error('多了一个 /* @shadow-end */（没有对应的 /* @shadow(...) */）');
+        blocks.push({ path: top.path, css: top.buf.join('').trim() });
+      }
+    }
+
+    if (stack.length) {
+      throw new Error('有 ' + stack.length + ' 个 /* @shadow(...) */ 没有对应的 /* @shadow-end */');
+    }
+    plain.push(css.slice(cursor));
+    return { plain: plain.join(''), blocks: blocks }; // 不做 trim：没有标记时保证与源文件逐字一致
+  }
+
+  function resolveHosts(scope, sel) {
+    try {
+      return Array.prototype.slice.call(scope.querySelectorAll(sel));
+    } catch (err) {
+      console.error('[shadow] 宿主选择器写法有问题：' + sel);
+      return [];
+    }
+  }
+
+  // 沿路径逐层下钻，返回最后一段选择器命中的宿主元素
+  function findShadowTargets(path) {
+    let scopes = [document];
+    for (let i = 0; i < path.length; i++) {
+      const hosts = [];
+      for (const scope of scopes) {
+        for (const el of resolveHosts(scope, path[i])) hosts.push(el);
+      }
+      if (i === path.length - 1) return hosts;
+      scopes = [];
+      for (const host of hosts) {
+        if (!host.shadowRoot) continue;
+        watchShadowRoot(host.shadowRoot); // 中间层：它内部新出现的宿主也要能被扫到
+        scopes.push(host.shadowRoot);
+      }
+      if (!scopes.length) return [];
+    }
+    return [];
+  }
+
+  // 中间层 root 的观察器（shadow 内部的变动不会冒泡到 document，所以要单独挂）
+  function watchShadowRoot(root) {
+    if (shadowRootObservers.has(root)) return;
+    const mo = new MutationObserver(scheduleShadowScan);
+    mo.observe(root, { childList: true, subtree: true });
+    shadowRootObservers.add(mo);
+  }
+
+  function scheduleShadowScan() {
+    if (shadowTimer) return;
+    shadowTimer = setTimeout(function () {
+      shadowTimer = null;
+      injectShadowBlocks();
+    }, 250);
+  }
+
+  function startShadowObserver() {
+    if (shadowObserver || !shadowBlocks.length) return;
+    shadowObserver = new MutationObserver(scheduleShadowScan);
+    shadowObserver.observe(document.documentElement || document, { childList: true, subtree: true });
+  }
+
+  function injectShadowBlocks() {
+    if (!hasStyleSheet) return;
+    for (const block of shadowBlocks) {
+      const hosts = findShadowTargets(block.path);
+      let sawRoot = false;
+      for (const host of hosts) {
+        const root = host.shadowRoot;
+        if (!root) continue;
+        sawRoot = true;
+        if (root.adoptedStyleSheets.indexOf(block.sheet) !== -1) continue;
+        root.adoptedStyleSheets = root.adoptedStyleSheets.concat(block.sheet);
+        block.roots.add(root);
+      }
+      if (!shadowWarned.has(block.key)) {
+        if (!hosts.length) {
+          shadowWarned.add(block.key);
+          console.warn('[shadow] 没有匹配到宿主，这条标记不生效：' + block.path.join(' ' + SHADOW_SEP + ' '));
+        } else if (!sawRoot) {
+          shadowWarned.add(block.key);
+          console.warn(
+            '[shadow] 匹配到的元素没有 shadowRoot（closed 或选择器选错了层），标记不生效：' +
+              block.path.join(' ' + SHADOW_SEP + ' ')
+          );
+        }
+      }
+    }
+  }
+
+  // 应用（首次加载与「重新加载样式」都会走到这里）
+  // prune = 本次 CSS 全部加载成功时才清理"已经删掉的标记块"
+  function applyShadowBlocks(blocks, prune) {
+    if (!hasStyleSheet) {
+      if (blocks.length && !shadowWarned.has('__nosheet')) {
+        shadowWarned.add('__nosheet');
+        console.warn('[shadow] 当前环境不支持 CSSStyleSheet/adoptedStyleSheets，shadow 注入已跳过');
+      }
+      return;
+    }
+
+    const seen = new Set();
+    for (const b of blocks) {
+      seen.add(b.key);
+      let block = shadowBlocks.find(function (x) { return x.key === b.key; });
+      if (!block) {
+        block = { key: b.key, path: b.path, sheet: new CSSStyleSheet(), roots: new Set() };
+        shadowBlocks.push(block);
+      } else {
+        block.path = b.path;
+      }
+      try {
+        block.sheet.replaceSync(b.css); // 共享 sheet：热重载时所有 root 一起更新，不闪烁
+      } catch (err) {
+        console.error('[shadow] 这段 CSS 无法注入（' + b.key + '）：' + err.message);
+      }
+    }
+
+    if (prune) {
+      for (const block of shadowBlocks) {
+        if (seen.has(block.key)) continue;
+        try { block.sheet.replaceSync(''); } catch (err) { /* 忽略 */ }
+        block.roots.clear();
+      }
+    }
+
+    injectShadowBlocks();
+    startShadowObserver();
+  }
+
+  // 临时退出脚本时：把注入的样式从各 shadow root 上摘掉，并停掉观察器
+  function removeShadowStyles() {
+    if (shadowTimer) { clearTimeout(shadowTimer); shadowTimer = null; }
+    if (shadowObserver) { shadowObserver.disconnect(); shadowObserver = null; }
+    for (const mo of shadowRootObservers) mo.disconnect();
+    shadowRootObservers.clear();
+    for (const block of shadowBlocks) {
+      for (const root of block.roots) {
+        root.adoptedStyleSheets = root.adoptedStyleSheets.filter(function (s) { return s !== block.sheet; });
+      }
+      block.roots.clear();
+    }
+  }
+
   // ============ 运行时开关（暴力猴菜单） ============
   const SWITCH_KEY = 'enabled';
   let running = GM_getValue(SWITCH_KEY, true); // 默认启用
 
   function removeAllCSS() {
     document.querySelectorAll('style[data-module-css]').forEach((el) => el.remove());
+    removeShadowStyles();
   }
 
   function setRunning(on) {

@@ -1,0 +1,80 @@
+/* 
+    Area-动态
+*/
+
+.bili-dyn-list .bili-dyn-item__main {
+  // Area-头像
+  > .bili-dyn-item__avatar {
+    .b-avatar__layers {
+      > :not([data-layer-tag="AVATAR_LAYER"]) {
+        display: none;
+      }
+      > [data-layer-tag="AVATAR_LAYER"] {
+        @avatar-size: 60px;
+        width: @avatar-size;
+        height: @avatar-size;
+      }
+    }
+  }
+  // Area-用户
+  > .bili-dyn-item__header {
+    // Comp-时间
+    .bili-dyn-time:hover {
+      color: var(--v_brand_blue);
+    }
+    // 右上Comp-装扮
+    .bili-dyn-item__ornament {
+      pointer-events: none;
+    }
+    // 右上Comp-操作
+    .bili-dyn-item__more {
+      display: none;
+    }
+  }
+  // Area-文章
+  > .bili-dyn-item__body {
+    > .bili-dyn-content {
+      // Comp-活动标签
+      .bili-dyn-topic {
+        display: inline-flex;
+      }
+      // Area-转发 | Comp-关注
+      > .bili-dyn-content__orig .dyn-orig-author__right {
+        display: none;
+      }
+      // Card-预约
+      [data-module="additional"] {
+        .bili-dyn-card-reserve__action {
+          display: none;
+        }
+      }
+    }
+    // Area-评论预览
+    > .bili-dyn-item__interaction {
+      display: none;
+    }
+  }
+  // 下Bar-功能
+  > .bili-dyn-item__footer > .bili-dyn-item__action {
+    [data-type="forward"],
+    [data-type="like"] {
+      pointer-events: none;
+    }
+  }
+}
+
+/* 
+    Page-动态
+*/
+
+.bili-dyn-home--member {
+  > main {
+    width: 60vw;
+  }
+  // Fix右下Bar-功能
+  .bili-dyn-sidebar {
+    > .bili-dyn-sidebar__btn:not([style]) {
+      display: none;
+    }
+  }
+}

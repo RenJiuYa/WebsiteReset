@@ -1,0 +1,44 @@
+/* 
+    Area-动态
+*/
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__avatar .b-avatar__layers > :not([data-layer-tag="AVATAR_LAYER"]) {
+  display: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__avatar .b-avatar__layers > [data-layer-tag="AVATAR_LAYER"] {
+  width: 60px;
+  height: 60px;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__header .bili-dyn-time:hover {
+  color: var(--v_brand_blue);
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__header .bili-dyn-item__ornament {
+  pointer-events: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__header .bili-dyn-item__more {
+  display: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__body > .bili-dyn-content .bili-dyn-topic {
+  display: inline-flex;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__body > .bili-dyn-content > .bili-dyn-content__orig .dyn-orig-author__right {
+  display: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__body > .bili-dyn-content [data-module="additional"] .bili-dyn-card-reserve__action {
+  display: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__body > .bili-dyn-item__interaction {
+  display: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__footer > .bili-dyn-item__action [data-type="forward"],
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__footer > .bili-dyn-item__action [data-type="like"] {
+  pointer-events: none;
+}
+/* 
+    Page-动态
+*/
+.bili-dyn-home--member > main {
+  width: 60vw;
+}
+.bili-dyn-home--member .bili-dyn-sidebar > .bili-dyn-sidebar__btn:not([style]) {
+  display: none;
+}

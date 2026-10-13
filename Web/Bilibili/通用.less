@@ -2,8 +2,8 @@
     组件：Bar-导航栏
 */
 .bili-header__bar {
-  height: 60px !important;
-  padding: 0 10% !important;
+  height: 60px;
+  padding: 0 10%;
 
   // 左Item
   .left-entry__item {
@@ -19,15 +19,15 @@
         )
       )
     ) {
-      display: none !important;
+      display: none;
     }
 
     // 左Item-Logo
     .big-logo {
-      margin: 0 !important;
+      margin: 0;
 
       ~ * {
-        display: none !important;
+        display: none;
       }
     }
   }
@@ -36,35 +36,7 @@
   .center-search__bar {
     // Comp-输入
     .nav-search-input::placeholder {
-      color: transparent !important;
-    }
-
-    // Panel
-    .search-panel {
-      overflow-y: initial !important;
-
-      // Area-历史
-      > .history {
-        &:has(.fold-icon:not(.fold)) .histories-wrap {
-          max-height: 372px !important;
-        }
-        .histories {
-          display: grid !important;
-          grid-template-columns: repeat(3, 1fr) !important;
-        }
-        .history-item {
-          min-width: 0 !important;
-        }
-        .history-text {
-          max-width: initial !important;
-        }
-      }
-
-      // Area-热搜
-      > .trending,
-      .trending-mark {
-        display: none !important;
-      }
+      color: transparent;
     }
   }
 
@@ -77,76 +49,76 @@
       .favorite-entry,
       .history-entry
     ) {
-      display: none !important;
+      display: none;
     }
 
     // Panel-登录
     .login-panel-popover > :not(.login-btn, .register-tip),
     // Panel-用户
     .avatar-panel-popover > .vip-entry-containter {
-      display: none !important;
+      display: none;
     }
 
     // Panel-动态
     .dynamic-panel-popover {
-      width: 500px !important;
+      width: 500px;
 
       // Item-动态
       .header-dynamic-list-item {
-        padding: 10px !important;
+        padding: 10px;
 
         > .header-dynamic-container {
           & > * {
-            width: initial !important;
+            width: initial;
           }
           > .header-dynamic__box--left {
             flex: 1 1 0;
 
             > .header-dynamic-avatar {
-              width: 100% !important;
-              height: auto !important;
-              aspect-ratio: 1 / 1 !important;
+              width: 100%;
+              height: auto;
+              aspect-ratio: 1 / 1;
             }
           }
           > .header-dynamic__box--center {
             flex: 6 1 0;
-            display: grid !important;
-            grid-template-rows: auto 1fr !important;
-            grid-template-columns: 1fr auto !important;
-            grid-template-areas: "up time" "title title" !important;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            grid-template-columns: 1fr auto;
+            grid-template-areas: "up time" "title title";
 
             > .dynamic-name-line {
-              grid-area: up !important;
-              align-self: center !important;
+              grid-area: up;
+              align-self: center;
 
               > .user-name > a {
-                background: var(--theme-color-10) !important;
-                padding: 2px 5px !important;
-                border-radius: 3px !important;
+                background: var(--theme-color-10);
+                padding: 2px 5px;
+                border-radius: 3px;
 
                 &:hover {
-                  color: var(--v_brand_blue) !important;
-                  transition: color 0.3s ease !important;
+                  color: var(--v_brand_blue);
+                  transition: color 0.3s ease;
                 }
               }
             }
             > .dynamic-info-content {
-              max-width: initial !important;
-              grid-area: title !important;
+              max-width: initial;
+              grid-area: title;
             }
             > .publish-time {
-              grid-area: time !important;
-              align-self: center !important;
+              grid-area: time;
+              align-self: center;
             }
           }
           > .header-dynamic__box--right {
             flex: 3 1 0;
-            top: 0 !important;
-            margin: 0 !important;
+            top: 0;
+            margin: 0;
 
             .cover {
-              width: initial !important;
-              height: initial !important;
+              width: initial;
+              height: initial;
             }
           }
         }
@@ -154,7 +126,7 @@
 
       // Item-查看全部
       .wnd_bottom > a {
-        width: initial !important;
+        width: initial;
       }
     }
 
@@ -162,13 +134,44 @@
     .history-panel-popover {
       .header-history-live {
         .header-history-card__info--name:hover {
-          border-radius: 5px !important;
-          background: var(--theme-color-10) !important;
-          color: var(--v_brand_blue) !important;
-          transition: color 0.3s ease !important;
+          border-radius: 5px;
+          background: var(--theme-color-10);
+          color: var(--v_brand_blue);
+          transition: color 0.3s ease;
         }
       }
     }
+  }
+}
+
+/* 
+    组件：Panel-搜索
+*/
+
+.search-panel {
+  overflow-y: initial;
+
+  // Area-历史
+  > .history {
+    &:has(.fold-icon:not(.fold)) .histories-wrap {
+      max-height: 372px;
+    }
+    .histories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .history-item {
+      min-width: 0;
+    }
+    .history-text {
+      max-width: initial;
+    }
+  }
+
+  // Area-热搜
+  > .trending,
+  .trending-mark {
+    display: none;
   }
 }
 
@@ -183,7 +186,7 @@
       // Comp-发送
       .bpx-player-dm-hint,
       .bpx-player-dm-btn-send {
-        display: none !important;
+        display: none;
       }
       // Comp-颜色-Panel
       .bpx-player-mode-selection-container {
@@ -191,7 +194,7 @@
         > .bpx-player-mode-selection-panel > .vip-color,
         // Area-登录
         > .bpx-player-mode-selection-mask {
-          display: none !important;
+          display: none;
         }
       }
     }
@@ -204,19 +207,19 @@
         > :not(.bpx-player-dm-mask-wrap),
         // Comp-弹幕 | Comp-点赞
         .bili-danmaku-x-high-icon {
-          display: none !important;
+          display: none;
         }
       }
       // Comp-弹幕-Panel | Comp-点赞
       > .bpx-player-dialog-wrap .bpx-player-dm-tip-like {
-        display: none !important;
+        display: none;
       }
 
       // Fix顶上Comp
       > .bpx-player-top-wrap {
         > :not(.bpx-player-top-left),
         > .bpx-player-top-left > :not(.bpx-player-top-left-title) {
-          display: none !important;
+          display: none;
         }
       }
 
@@ -228,7 +231,7 @@
         // Box-充电
         .bpx-player-charging-toast-left-level,
         .bpx-player-charging-toast-right {
-          display: none !important;
+          display: none;
         }
       }
 
@@ -240,7 +243,7 @@
         .bpx-player-ctrl-quality-menu-item:has(
           .bpx-player-ctrl-quality-badge-bigvip
         ) {
-          display: none !important;
+          display: none;
         }
       }
 
@@ -251,7 +254,7 @@
           .bpx-player-ending-functions-buttons,
           .bpx-player-ending-functions-common,
           .bpx-player-ending-related {
-            display: none !important;
+            display: none;
           }
         }
         // 资源
@@ -259,7 +262,7 @@
           [data-testid="end-page-header-follow-btn"],
           [data-testid="end-page-header-btn-group"],
           [class^="endpageRecommend_wrap"] {
-            display: none !important;
+            display: none;
           }
         }
         // 大会员
@@ -267,7 +270,7 @@
           > [class^="paywallView_leftBox"]
             > :not([data-testid="paywall-title"]),
           > [class^="paywallView_rightBox"] {
-            display: none !important;
+            display: none;
           }
         }
       }
@@ -277,7 +280,7 @@
   > .bpx-player-context-area {
     // Area-画面 | Comp-弹幕 | Box-右键
     .bpx-player-dm > .bpx-player-dm-btn {
-      display: none !important;
+      display: none;
     }
   }
 }
@@ -287,7 +290,7 @@
 */
 
 #biliMainFooter {
-  display: none !important;
+  display: none;
 }
 
 /* 
@@ -295,10 +298,298 @@
 */
 
 #BilibiliVipDialog {
-  display: none !important;
+  display: none;
 }
 
 /* 
     组件：评论区
 */
 
+/* @shadow(bili-comments >> bili-comment-thread-renderer) */
+
+/* @shadow(bili-comment-renderer) */
+// 右上Comp-狗牌
+#ornament {
+  pointer-events: none;
+}
+
+/* @shadow(bili-avatar) */
+// Area-头像
+#canvas {
+  @avatar-size: 50px;
+  // Comp-头像框2
+  &:has(> :nth-child(2):last-child) > :nth-child(2) {
+    > .layer:nth-of-type(1) {
+      width: @avatar-size;
+      height: @avatar-size;
+    }
+    > .layer:nth-of-type(2) {
+      display: none;
+    }
+  }
+  // Comp-头像框3
+  &:has(> :nth-child(3):last-child) {
+    > :nth-child(2) > .layer {
+      width: @avatar-size;
+      height: @avatar-size;
+    }
+    > :nth-child(3) {
+      display: none;
+    }
+  }
+  // Comp-头像框4
+  &:has(> :nth-child(4):last-child) {
+    > :nth-child(2) > .layer {
+      width: @avatar-size;
+      height: @avatar-size;
+    }
+    > :nth-child(3) {
+      display: none;
+    }
+  }
+
+  // Comp-角标
+  > .layers > .layer:not(.center) {
+    display: none;
+  }
+}
+/* @shadow-end */
+
+/* @shadow(bili-comment-user-info) */
+#user-level {
+  pointer-events: none;
+}
+/* @shadow-end */
+
+/* @shadow(bili-comment-action-buttons-renderer) */
+// Area-主楼| Bar-功能
+#like {
+  margin-left: auto;
+}
+#more {
+  margin-left: 20px;
+}
+/* @shadow-end */
+
+/* @shadow(bili-rich-text) */
+// Area-文本（架构一致）
+#contents {
+  // Comp-关键词
+  > a[data-type="search"] {
+    display: inline;
+    color: black;
+    pointer-events: none;
+
+    > img[src*="/bfs/reply/"] {
+      display: none;
+    }
+  }
+
+  // Area-AD
+  &:has([data-type="goods"]) {
+    > a {
+      font-size: 0;
+    }
+    > [data-type="goods"] > img {
+      width: 1rem;
+      height: 1rem;
+    }
+    > :not([data-type="goods"]:has(img)) {
+      display: none;
+    }
+  }
+}
+/* @shadow-end */
+
+/* @shadow(bili-comment-vote-renderer) */
+// Area-投票
+#card {
+  width: 90%;
+}
+/* @shadow-end */
+/* @shadow-end */
+
+/* @shadow(bili-comment-replies-renderer) */
+// 下Bar-分页
+#pagination > #pagination-body {
+  margin-right: auto;
+}
+
+/* @shadow(bili-comment-reply-renderer) */
+/* @shadow(bili-comment-action-buttons-renderer) */
+// Area-回复| Bar-功能
+#like {
+  margin-left: auto;
+}
+#more {
+  margin-left: 20px;
+}
+/* @shadow-end */
+
+/* @shadow(bili-rich-text) */
+// Area-文本（架构一致）
+#contents {
+  // Comp-关键词
+  > a[data-type="search"] {
+    display: inline;
+    color: black;
+    pointer-events: none;
+
+    > img[src*="/bfs/reply/"] {
+      display: none;
+    }
+  }
+
+  // Area-AD
+  &:has([data-type="goods"]) {
+    > a {
+      font-size: 0;
+    }
+    > [data-type="goods"] > img {
+      width: 1rem;
+      height: 1rem;
+    }
+    > :not([data-type="goods"]:has(img)) {
+      display: none;
+    }
+  }
+}
+/* @shadow-end */
+/* @shadow-end */
+/* @shadow-end */
+
+/* @shadow-end */
+
+/* @shadow(bili-user-profile) */
+// Box-用户简介：评论（架构一致）
+#view {
+  display: grid;
+  grid-template-areas: "bg bg" "avatar body";
+  grid-template-columns: 100px 1fr;
+
+  > #bg {
+    grid-area: bg;
+    position: initial;
+    display: none;
+  }
+  > #avatar {
+    grid-area: avatar;
+    justify-self: center;
+    position: initial;
+    width: 80%;
+    height: initial;
+    aspect-ratio: 1 / 1;
+    margin: 10px 0;
+
+    > :not(img) {
+      display: none;
+    }
+  }
+  > #body {
+    grid-area: body;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 5px;
+
+    > * {
+      margin: 0;
+      padding: 0;
+    }
+    > #title > #vip {
+      display: none;
+    }
+    // Comp-关注
+    > #action {
+      &:not(:has(.active)),
+      > #chat {
+        display: none;
+      }
+      > .active {
+        pointer-events: none;
+      }
+    }
+  }
+}
+/* @shadow-end */
+// Box-用户简介：普通（架构一致）
+.bili-user-profile .bili-user-profile-view {
+  display: grid;
+  grid-template-areas: "bg bg" "avatar body";
+  grid-template-columns: 100px 1fr;
+
+  > .bili-user-profile-view__background {
+    grid-area: bg;
+    position: initial;
+    display: none;
+  }
+  > .bili-user-profile-view__avatar {
+    grid-area: avatar;
+    justify-self: center;
+    position: initial;
+    width: 80%;
+    height: initial;
+    aspect-ratio: 1 / 1;
+    margin: 10px 0;
+
+    > :not(.b-img) {
+      display: none;
+    }
+  }
+  > .bili-user-profile-view__info {
+    grid-area: body;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 5px;
+
+    > * {
+      margin: 0;
+      padding: 0;
+    }
+    .bili-user-profile-view__info__viplabel {
+      display: none;
+    }
+    // Comp-关注
+    > .bili-user-profile-view__info__footer {
+      &:not(:has(.checked)),
+      > .chat {
+        display: none;
+      }
+      > .checked {
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+/* @shadow(bili-emoji-popover) */
+// Box-评论表情：评论（架构一致）
+#emoji-popover {
+  translate: 0 30px;
+
+  > [title] {
+    border-bottom: 2px var(--graph_bg_regular) solid;
+  }
+  > img {
+    margin: 10px 0;
+  }
+  > a {
+    display: none;
+  }
+}
+/* @shadow-end */
+// Box-评论表情：普通（架构一致）
+.bili-emoji-popover {
+  translate: 0 30px;
+
+  > [title] {
+    border-bottom: 2px var(--graph_bg_regular) solid;
+  }
+  > img {
+    margin: 10px 0;
+  }
+  > a {
+    display: none;
+  }
+}

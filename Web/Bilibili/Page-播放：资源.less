@@ -2,73 +2,73 @@
 #pc-cashier-wrapper-wide,
 // 左Area-综合 | 中Bar-功能 | 右Item-更多-Panel
 [class^="moreTool_popupWrap"] > :first-child {
-  display: none !important;
+  display: none;
 }
 
 .plp-layout {
   // 右Area-推荐
   .plp-r > #pc-cashier-wrapper-normal {
-    display: none !important;
+    display: none;
   }
 
   // 左Area-综合
   .plp-l > .player-left-components {
     // 中Bar-功能
     > .toolbar {
-      margin-top: 16px !important;
-      padding: 0 5px !important;
-      border-radius: 5px !important;
-      box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef) !important;
-      background-color: var(--graph_bg_regular) !important;
+      margin-top: 16px;
+      padding: 0 5px;
+      border-radius: 5px;
+      box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef);
+      background-color: var(--graph_bg_regular);
 
       > .toolbar-left {
-        display: flex !important;
+        display: flex;
 
         > span {
-          margin: auto 5px !important;
-          padding: 0 !important;
+          margin: auto 5px;
+          padding: 0;
         }
         > :not([id]) {
-          display: none !important;
+          display: none;
         }
         // Comp-分享-Panel
         > .share {
           [class^="Share_boxTopRight"] {
-            display: none !important;
+            display: none;
           }
         }
       }
       > .toolbar-right {
-        line-height: initial !important;
+        line-height: initial;
       }
     }
 
     // Area-资源信息
     > [class^="mediainfo_mediaInfoWrap"] {
-      border: none !important;
+      border: none;
 
       > [class^="mediainfo_mediaRight"] {
         > * {
-          margin-bottom: 5px !important;
+          margin-bottom: 5px;
         }
         // Area-发布
         > [class^="mediainfo_mediaDesc"]:nth-of-type(2) {
-          height: initial !important;
-          overflow: initial !important;
-          white-space: pre-wrap !important;
-          -webkit-box-orient: initial !important;
+          height: initial;
+          overflow: initial;
+          white-space: pre-wrap;
+          -webkit-box-orient: initial;
         }
         // Area-评分
         > [class^="mediainfo_bottomBar"] {
           [class^="upinfo_btn_follow_up"],
           [report-id="click_review_publish"] {
-            display: none !important;
+            display: none;
           }
         }
         // Area-关注
         > [class^="mediainfo_mediaToolbar"] {
           > :not(#ogv-weslie-media-info-follow) {
-            display: none !important;
+            display: none;
           }
         }
       }
@@ -76,19 +76,19 @@
 
     // Area-承包
     #sponsor_module {
-      min-height: initial !important;
+      min-height: initial;
 
       > [class^="sponsor_sponsor_mini_rank"] {
-        display: none !important;
+        display: none;
       }
       > [class^="sponsor_sponsor_info"] {
-        margin: 0 auto !important;
+        margin: 0 auto;
 
         > [class^="sponsor_btn_show_rank"] {
-          text-align: center !important;
+          text-align: center;
         }
         > [class^="sponsor_img_wrapper"] {
-          margin: 10px auto !important;
+          margin: 10px auto;
         }
       }
     }

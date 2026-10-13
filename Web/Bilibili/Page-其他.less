@@ -1,0 +1,68 @@
+/* 
+    Page-资源详情
+*/
+.media-detail-wrp {
+  // 上Area-资源信息
+  > .media-info-wrp {
+    // 右上Comp-评分
+    .media-info-star-wrapper {
+      > .media-info-review-times {
+        display: block !important;
+      }
+      > .to-review-btn {
+        display: none;
+      }
+    }
+    // 下Bar-功能
+    .media-info-btns {
+      > :not(.bangumi-btn) {
+        display: none;
+      }
+      .btn-follow {
+        pointer-events: none;
+      }
+    }
+  }
+  // 下Area-内容
+  > .media-tab-wrp {
+    // 上Bar-导航
+    > .media-tab-nav li:not(:nth-of-type(-n + 3)) {
+      display: none;
+    }
+    // 左Card
+    .media-tab-detail-l {
+      display: flex;
+      flex-direction: column;
+
+      // Card-承包
+      > .media-sponsor-wrapper {
+        order: 1;
+
+        > .sponsor-left-area .sponsor-rank-body {
+          display: none;
+        }
+        > .sponsor-right-area {
+          position: initial;
+          margin: 0 auto;
+        }
+      }
+      // Card-推荐
+      > .media-tab-module-wrp:has(.media-tab-module-more) {
+        display: none;
+      }
+    }
+    // 右Area：长短评
+    .media-tab-detail-r:has(.review-feed-wrapper) {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-历史
+*/
+.history-record {
+  .right-side > .feedback {
+    display: none;
+  }
+}

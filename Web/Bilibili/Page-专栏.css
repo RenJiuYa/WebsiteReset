@@ -1,0 +1,22 @@
+.opus-detail .bili-opus-view > .opus-module-topic:hover {
+  box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef);
+  background-color: var(--graph_bg_regular);
+  cursor: pointer;
+}
+.opus-detail .bili-opus-view > .opus-module-bottom {
+  display: none;
+}
+.opus-detail > .right-sidebar-wrap .side-toolbar__box .like,
+.opus-detail > .right-sidebar-wrap .side-toolbar__box .coin,
+.opus-detail > .right-sidebar-wrap .side-toolbar__box .forward {
+  pointer-events: none;
+}
+.opus-detail > .right-sidebar-wrap .side-toolbar__bottom > :not(.backtop) {
+  display: none;
+}
+.opus-detail > .bili-tabs .reaction-item .reaction-item__follow {
+  pointer-events: none;
+}
+.opus-detail > .bili-tabs .reaction-item .reaction-item__follow:has(.bili-follow-button__action.primary) {
+  display: none;
+}

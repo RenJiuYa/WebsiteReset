@@ -1,8 +1,8 @@
 .search-layout > .side-buttons-container .side-buttons > :not(.btn-to-top-wrap) {
-  display: none !important;
+  display: none;
 }
 .search-layout .search-header .search-tabs ul {
-  justify-content: space-between !important;
+  justify-content: space-between;
 }
 .search-layout .search-content .brand-ad-list .user-actions,
 .search-layout .search-content .esport-list .esport-card-options > div.esport-card-options-item btn,
@@ -11,21 +11,21 @@
 .search-layout .search-content .user-list .user-actions,
 .search-layout .search-content .bangumi-pgc-list .media-card-image-follow,
 .search-layout .search-content .bangumi-pgc-list .media-card-content-footer-btns {
-  display: none !important;
+  display: none;
 }
 .search-layout .search-content .video > .video-list {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  justify-content: space-evenly !important;
-  gap: 5px 0 !important;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-evenly;
+  gap: 5px 0;
 }
 .search-layout .search-content .video > .video-list > div:has(> .bili-video-card) {
-  max-width: initial !important;
+  max-width: initial;
 }
 .search-layout .search-content .video > .video-list > div:has(
             [class^="bili-video-card__info--ad"],
             [class^="bili-video-card__info--living"],
             [class^="bili-video-card__info--cheese"]
           ) {
-  display: none !important;
+  display: none;
 }

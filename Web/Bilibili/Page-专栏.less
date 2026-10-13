@@ -1,0 +1,40 @@
+.opus-detail {
+  // Area-文章
+  .bili-opus-view {
+    // Comp-活动标签
+    > .opus-module-topic:hover {
+      box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef);
+      background-color: var(--graph_bg_regular);
+      cursor: pointer;
+    }
+    // 下Bar-转发
+    > .opus-module-bottom {
+      display: none;
+    }
+  }
+  > .right-sidebar-wrap {
+    // Fix右Bar
+    .side-toolbar__box {
+      .like,
+      .coin,
+      .forward {
+        pointer-events: none;
+      }
+    }
+    // Fix右下Bar
+    .side-toolbar__bottom > :not(.backtop) {
+      display: none;
+    }
+  }
+  // Area-赞与转发
+  > .bili-tabs .reaction-item {
+    // Comp-关注
+    .reaction-item__follow {
+      pointer-events: none;
+
+      &:has(.bili-follow-button__action.primary) {
+        display: none;
+      }
+    }
+  }
+}

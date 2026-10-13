@@ -26,7 +26,7 @@
 
 !——————————B站：Page-播放
 ! 右Area-信息 | Card-推荐
-bilibili.com##.right-container .recommend-list-v1:has(.rec-footer:has-text("展开")) .next-play:style(display: none !important;)
+bilibili.com##.right-container .recommend-list-v1:has(.rec-footer:has-text("展开")) .video-page-card-small:style(display: none !important;)
 ! 右Area-信息 | Comp-自动连播
 bilibili.com##+js(trusted-click-element, .bpx-player-ctrl-setting-handoff-content .bui-radio-item:nth-of-type(2), 3000)
 

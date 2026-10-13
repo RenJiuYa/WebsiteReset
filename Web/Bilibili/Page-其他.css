@@ -1,0 +1,44 @@
+/* 
+    Page-资源详情
+*/
+.media-detail-wrp > .media-info-wrp .media-info-star-wrapper > .media-info-review-times {
+  display: block !important;
+}
+.media-detail-wrp > .media-info-wrp .media-info-star-wrapper > .to-review-btn {
+  display: none;
+}
+.media-detail-wrp > .media-info-wrp .media-info-btns > :not(.bangumi-btn) {
+  display: none;
+}
+.media-detail-wrp > .media-info-wrp .media-info-btns .btn-follow {
+  pointer-events: none;
+}
+.media-detail-wrp > .media-tab-wrp > .media-tab-nav li:not(:nth-of-type(-n + 3)) {
+  display: none;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-l {
+  display: flex;
+  flex-direction: column;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-l > .media-sponsor-wrapper {
+  order: 1;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-l > .media-sponsor-wrapper > .sponsor-left-area .sponsor-rank-body {
+  display: none;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-l > .media-sponsor-wrapper > .sponsor-right-area {
+  position: initial;
+  margin: 0 auto;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-l > .media-tab-module-wrp:has(.media-tab-module-more) {
+  display: none;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-r:has(.review-feed-wrapper) {
+  display: none;
+}
+/* 
+    Page-历史
+*/
+.history-record .right-side > .feedback {
+  display: none;
+}

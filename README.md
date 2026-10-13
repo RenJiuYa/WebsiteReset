@@ -69,6 +69,47 @@ bilibili.com##.feed-card:has-text(推广):upward(2)   ← 匹配到内层后隐�
 - 需要脚本行为的（读写 DOM、监听路由、动态插入节点时重建）→ 写 `Web/<网站>/*.js`
 - 两类都做不到的（按文本/计算样式选元素、隐藏某个祖先）→ 才写这里
 
+### 注入到 shadow DOM（只支持 open）
+
+有些组件把内容放在 shadow root 里，普通 CSS 进不去。用注释标记把它交给脚本注入：
+
+```less
+/* 普通 CSS：照旧写在文档层 */
+.bili-header__bar { height: 60px !important; }
+
+/* @shadow(.宿主选择器) */
+.shadow 内部的选择器 { display: none !important; }
+/* @shadow-end */
+```
+
+- **`@shadow(...)` 括号里写的是宿主（shadow host）的选择器**，也就是"包着 `#shadow-root` 的那一层真实元素"（`#shadow-root` 本身没有属性、选不到）。
+- 块里的 CSS **不会进 document**（避免文档层误伤），只注入到匹配宿主的 shadow root。
+- 想确认某个类名是不是宿主：DevTools 里选中 shadow 内的元素，看 `#shadow-root (open)` 上面的那个元素；或 Console 里 `$0.getRootNode().host`。
+
+**多层（嵌套 shadow）**——两种写法等价：
+
+```less
+/* 嵌套写法 */
+/* @shadow(.外层宿主) */
+  /* @shadow(.内层宿主) */     ← 在「外层 shadow root 内部」找宿主
+  .inner { color: red; }
+  /* @shadow-end */
+/* @shadow-end */
+
+/* 语法糖：>> 分隔路径 */
+/* @shadow(.外层宿主 >> .内层宿主) */
+.inner { color: red; }
+/* @shadow-end */
+```
+
+其他行为：
+
+- 匹配到多个宿主 → 每个宿主的 shadow root 各注入一份（共享同一个样式表对象，省内存）
+- 匹配到元素但它没有 `shadowRoot`（closed，或选择器选错了层）→ 控制台给出提示
+- 没匹配到宿主 → 控制台提示"这条标记不生效"
+- 标记的 `@shadow(...)` / `@shadow-end` 数量不匹配 → 报错并指出原因（本次不处理 shadow 块，文档层照旧注入）
+- 「重新加载样式」会**就地更新**已注入的样式（所有 shadow root 一起刷新，不闪烁）；「临时退出脚本」会把注入的样式从 shadow root 上摘掉
+
 ## 三、发布流程
 
 1. 改内容：`Web/<网站>/*.less` 会被插件自动编译成 `.css`（两者都要提交）、`ublock.user.txt`、必要时 `start.user.js`

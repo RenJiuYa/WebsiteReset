@@ -1,50 +1,50 @@
 .adblock-tips {
-  display: none !important;
+  display: none;
 }
 .bili-feed4 {
-  min-height: 100svh !important;
+  min-height: 100svh;
   overflow-y: hidden;
 }
 .bili-feed4 > .header-channel,
 .bili-feed4 > .palette-button-outer,
 .bili-feed4 .bili-header__channel {
-  display: none !important;
+  display: none;
 }
 .bili-feed4 > .bili-feed4-layout {
-  width: 100% !important;
-  padding: 50px 20px !important;
+  width: 100%;
+  padding: 50px 20px;
 }
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside {
-  padding: 0 !important;
-  position: relative !important;
+  padding: 0;
+  position: relative;
 }
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container > :not(.feed-card) {
-  display: none !important;
+  display: none;
 }
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card {
-  margin-top: 0 !important;
+  margin-top: 0;
 }
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card:not(:has(.enable-no-interest)),
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card .bili-watch-later__tip--lab,
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card .bili-video-card__info--icon-text {
-  display: none !important;
+  display: none;
 }
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn {
-  top: initial !important;
-  bottom: 0 !important;
-  left: initial !important;
-  right: 0 !important;
-  transform: translate(0, 100%) !important;
+  top: initial;
+  bottom: 0;
+  left: initial;
+  right: 0;
+  transform: translate(0, 100%);
 }
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn > .roll-btn {
-  width: initial !important;
-  padding: 5px !important;
-  flex-direction: initial !important;
+  width: initial;
+  padding: 5px;
+  flex-direction: initial;
 }
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn > .roll-btn > svg {
-  width: 20px !important;
-  height: 20px !important;
-  margin: 0 !important;
+  width: 20px;
+  height: 20px;
+  margin: 0;
 }
 .bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn > .roll-btn > span {
   display: none;

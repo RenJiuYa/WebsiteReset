@@ -2,7 +2,7 @@
   // Fix右下Bar-功能
   > .side-buttons-container {
     .side-buttons > :not(.btn-to-top-wrap) {
-      display: none !important;
+      display: none;
     }
   }
 
@@ -10,7 +10,7 @@
   .search-header {
     .search-tabs {
       ul {
-        justify-content: space-between !important;
+        justify-content: space-between;
       }
     }
   }
@@ -30,20 +30,20 @@
     // Card-ACG影视
     .bangumi-pgc-list .media-card-image-follow,
     .bangumi-pgc-list .media-card-content-footer-btns {
-      display: none !important;
+      display: none;
     }
 
     // 下Area-结果
     .video {
       > .video-list {
-        display: grid !important;
-        grid-template-columns: repeat(4, 1fr) !important;
-        justify-content: space-evenly !important;
-        gap: 5px 0 !important;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: space-evenly;
+        gap: 5px 0;
 
         // Card-视频
         > div:has(> .bili-video-card) {
-          max-width: initial !important;
+          max-width: initial;
         }
         // Card-AD
         > div:has(
@@ -51,7 +51,7 @@
             [class^="bili-video-card__info--living"],
             [class^="bili-video-card__info--cheese"]
           ) {
-          display: none !important;
+          display: none;
         }
       }
     }
