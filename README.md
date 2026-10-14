@@ -7,13 +7,16 @@
 ```
 start.user.js            总入口（直接装在暴力猴里的文件）
 Web/
-  sites.js               站点管理表（哪些网站、加载哪些文件；运行时读取）
+  sites.js               站点管理表（哪些网站、哪些地址加载哪些入口；运行时读取）
   Bilibili/              一个站点一个文件夹
-    通用.less / 通用.css
-    Page-首页.less / Page-首页.css
-    通用.js 等            需要脚本行为时才写（可为空）
+    _入口.less           入口（主文件）：把本站各模块 @import 在一起
+    _入口.css            唯一的编译产物（站点目录里只有这一个 .css）
+    通用.less            模块（顶部写了 // main: _入口.less，保存它就重新编译入口）
+    Page-首页.less 等     其它模块
+    通用.js              需要脚本行为时才写（可为空；JS 不参与合并）
+    _参数.less           共享参数（只放变量/mixin，用 (reference) 引用；不产出 .css）
 ublock.user.txt          uBlock Origin 规则（CSS 做不到的才写这里）
-utils/                   工具类（由 start.user.js 自动加载，目前为空）
+utils/                   工具类（由 start.user.js 自动加载：click / disableShortcut）
 ```
 
 ## 一、暴力猴脚本（总入口）
@@ -22,10 +25,65 @@ utils/                   工具类（由 start.user.js 自动加载，目前为�
   `http://127.0.0.1:5500/start.user.js` → 暴力猴安装/更新。
 - 改完 CSS：刷新页面，或点暴力猴菜单「重新加载样式（手动刷新）」。
 - 临时和原网站对比：菜单「临时退出脚本」。
-- 加网站：建 `Web/<网站>/` 文件夹 → 在 `Web/sites.js` 里加一条 → 刷新页面。
+- 加网站：建 `Web/<网站>/` 文件夹（含 `_入口.less`）→ 在 `Web/sites.js` 里加一条 → 刷新页面。
 - **发布**：把 `start.user.js` 里的 `IS_DEV` 改成 `false`，提交并打新 tag（`REMOTE_BASE` 的版本号同步改）后，
   `https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@<tag>/start.user.js`
   可直接安装。
+
+### 站点管理表（`Web/sites.js`）
+
+```js
+const SITES = {
+  'B站': {
+    enabled: true,                          // 省略 = 启用；false = 整个网站不加载
+    dir: 'Web/Bilibili',                    // 站点目录（本地与发布共用同一结构）
+    rules: [                                // 命中哪些地址 → 加载哪些入口（按顺序匹配，命中都生效）
+      { match: ['live.bilibili.com'], css: '_入口', js: ['通用', 'Page-直播'] },
+      { match: ['bilibili.com/*'], css: '_入口', js: ['通用'] },
+    ],
+  },
+};
+```
+
+`match` 的写法：
+
+| 写法 | 含义 |
+| --- | --- |
+| `'live.bilibili.com'` | 该域名**及其子域**，任意路径 |
+| `'bilibili.com/'` | 该域名及其子域 + 路径**正好是** `/` |
+| `'bilibili.com/user/*'` | 该域名及其子域 + 路径以 `/user/` 开头（`*` 匹配任意字符，可含 `/`） |
+| `'*.bilibili.com'` | 域名里也可以用 `*` |
+| 省略 / 空数组 | 兜底：该站点任何地址 |
+
+- `css` / `js` 写的是**模块名**（不含扩展名，自动补 `.css` / `.js`），可省略、可写数组（按顺序加载）
+- 多条规则都命中时**全部生效**（后面的覆盖前面的），同名只加载一次
+- 规则里的 `enabled: false` 可以单独停用某一条
+
+### CSS 的编译与合并（LESS）
+
+每个站点**只有一个 CSS 产物** `_入口.css`，由 `_入口.less` 把各模块 `@import` 在一起编译而成：
+
+```less
+// Web/Bilibili/_入口.less
+@import '通用';
+@import 'Page-首页';
+// … 顺序 = 级联顺序（后面的覆盖前面的）
+```
+
+各模块顶部统一写这两行（Easy LESS 的**文件级设置**）：
+
+```less
+// main: _入口.less    ← 保存本文件时，改为编译入口文件（保证唯一产物同步更新）
+// out: false          ← 本文件不单独产出 .css
+```
+
+- 这样**改任何 `.less`（含共享参数文件）都不会出现"某个 `.css` 还是旧值"**
+- 共享参数：建 `_参数.less`（只放变量/mixin，同样写上面两行），在入口顶部用
+  `@import (reference) '_参数';` 引用（`(reference)` 只取变量、不输出它的规则）
+- ⚠️ **只写 LESS 级的 `@import`**（编译期展开）。别用 CSS 级的 `@import`（`@import url("x.css")`）：
+  脚本是把 CSS 内联进 `<style>` 的，相对路径会按页面地址解析 → 404
+- ⚠️ **共享文件里只放变量/mixin**，不要放实际规则或 `/* @shadow */` 标记
+  （它们会被复制进每一个用到它的产物里）
 
 ## 二、uBlock Origin 规则（`ublock.user.txt`）
 

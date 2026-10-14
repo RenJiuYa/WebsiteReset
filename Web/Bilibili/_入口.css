@@ -1,0 +1,1151 @@
+/* ============================================================
+   B站入口（由 _入口.less 合并生成，请勿手改本文件）
+   改样式  改对应模块的 .less 保存即可（Easy LESS 会重新编译 _入口.less 产出本文件）
+   合并顺序  通用 / Page-首页 / Page-个人空间 / Page-搜索 / Page-播放 / Page-播放：资源 / Page-动态 / Page-专栏 / Page-其他 / Page-直播
+   ============================================================ */
+
+/* 
+    组件：Bar-导航栏
+*/
+.bili-header__bar {
+  height: 60px;
+  padding: 0 10%;
+}
+.bili-header__bar .left-entry__item > :not(a),
+.bili-header__bar .left-entry__item:not( :has( a:is(
+          [href$="www.bilibili.com"],
+          [href$="live.bilibili.com"],
+          [href*="www.bilibili.com/anime"],
+          [href*="www.bilibili.com/match"]
+        ))) {
+  display: none;
+}
+.bili-header__bar .left-entry__item .big-logo {
+  margin: 0;
+}
+.bili-header__bar .left-entry__item .big-logo ~ * {
+  display: none;
+}
+.bili-header__bar .center-search__bar .nav-search-input::placeholder {
+  color: transparent;
+}
+.bili-header__bar .right-entry__item:not(
+      .header-avatar-wrap,
+      .message-entry,
+      .dynamic-entry,
+      .favorite-entry,
+      .history-entry
+    ) {
+  display: none;
+}
+.bili-header__bar .right-entry__item .login-panel-popover > :not(.login-btn, .register-tip),
+.bili-header__bar .right-entry__item .avatar-panel-popover > .vip-entry-containter {
+  display: none;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover {
+  width: 500px;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item {
+  padding: 10px;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > * {
+  width: initial;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > .header-dynamic__box--left {
+  flex: 1 1 0;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > .header-dynamic__box--left > .header-dynamic-avatar {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > .header-dynamic__box--center {
+  flex: 6 1 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "up time" "title title";
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > .header-dynamic__box--center > .dynamic-name-line {
+  grid-area: up;
+  align-self: center;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > .header-dynamic__box--center > .dynamic-name-line > .user-name > a {
+  background: var(--v_line_bolder_hover);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > .header-dynamic__box--center > .dynamic-name-line > .user-name > a:hover {
+  color: var(--v_brand_blue);
+  transition: color 0.3s ease;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > .header-dynamic__box--center > .dynamic-info-content {
+  max-width: initial;
+  grid-area: title;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > .header-dynamic__box--center > .publish-time {
+  grid-area: time;
+  align-self: center;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > .header-dynamic__box--right {
+  flex: 3 1 0;
+  top: 0;
+  margin: 0;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .header-dynamic-list-item > .header-dynamic-container > .header-dynamic__box--right .cover {
+  width: initial;
+  height: initial;
+}
+.bili-header__bar .right-entry__item .dynamic-panel-popover .wnd_bottom > a {
+  width: initial;
+}
+.bili-header__bar .right-entry__item .history-panel-popover .header-history-live .header-history-card__info--name:hover {
+  border-radius: 5px;
+  background: var(--theme-color-10);
+  color: var(--v_brand_blue);
+  transition: color 0.3s ease;
+}
+/* 
+    组件：Panel-搜索
+*/
+.search-panel {
+  overflow-y: initial;
+}
+.search-panel > .history:has(.fold-icon:not(.fold)) .histories-wrap {
+  max-height: 372px;
+}
+.search-panel > .history .histories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.search-panel > .history .history-item {
+  min-width: 0;
+}
+.search-panel > .history .history-text {
+  max-width: initial;
+}
+.search-panel > .trending,
+.search-panel .trending-mark {
+  display: none;
+}
+/* 
+    组件：Player
+*/
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area .bpx-player-sending-bar .bpx-player-dm-hint,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area .bpx-player-sending-bar .bpx-player-dm-btn-send {
+  display: none;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area .bpx-player-sending-bar .bpx-player-mode-selection-container > .bpx-player-mode-selection-panel > .vip-color,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area .bpx-player-sending-bar .bpx-player-mode-selection-container > .bpx-player-mode-selection-mask {
+  display: none;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-render-dm-wrap > :not(.bpx-player-dm-mask-wrap),
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-render-dm-wrap .bili-danmaku-x-high-icon {
+  display: none;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-dialog-wrap .bpx-player-dm-tip-like {
+  display: none;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-top-wrap > :not(.bpx-player-top-left),
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-top-wrap > .bpx-player-top-left > :not(.bpx-player-top-left-title) {
+  display: none;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-toast-wrap [class^="PromptBar_subtitleWrap"],
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-toast-wrap [class^="PromptBar_remindActionWrap"],
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-toast-wrap .bpx-player-charging-toast-left-level,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-toast-wrap .bpx-player-charging-toast-right {
+  display: none;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-control-wrap .bpx-player-ctrl-flac,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area > .bpx-player-control-wrap .bpx-player-ctrl-quality-menu-item:has(
+          .bpx-player-ctrl-quality-badge-bigvip
+        ) {
+  display: none;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > .bpx-player-ending .bpx-player-ending-functions-buttons,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > .bpx-player-ending .bpx-player-ending-functions-common,
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > .bpx-player-ending .bpx-player-ending-related {
+  display: none;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > [class^="endpage_wrap"] [data-testid="end-page-header-follow-btn"],
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > [class^="endpage_wrap"] [data-testid="end-page-header-btn-group"],
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > [class^="endpage_wrap"] [class^="endpageRecommend_wrap"] {
+  display: none;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > [class^="paywallView_container"] > [class^="paywallView_leftBox"] > :not([data-testid="paywall-title"]),
+.bpx-docker > .bpx-player-container > .bpx-player-primary-area > .bpx-player-video-area .bpx-player-ending-wrap > .bpx-player-ending-panel > [class^="paywallView_container"] > [class^="paywallView_rightBox"] {
+  display: none;
+}
+.bpx-docker > .bpx-player-container > .bpx-player-context-area .bpx-player-dm > .bpx-player-dm-btn {
+  display: none;
+}
+/* 
+    组件：Footer
+*/
+#biliMainFooter {
+  display: none;
+}
+/* 
+    组件：Box-大会员
+*/
+#BilibiliVipDialog {
+  display: none;
+}
+/* 
+    组件：评论区
+*/
+/* @shadow(bili-comments >> bili-comment-thread-renderer) */
+/* @shadow(bili-comment-renderer) */
+#ornament {
+  pointer-events: none;
+}
+/* @shadow(bili-avatar) */
+#canvas:has( > :nth-child(2):last-child) > :nth-child(2) > .layer:nth-of-type(1) {
+  width: 50px;
+  height: 50px;
+}
+#canvas:has( > :nth-child(2):last-child) > :nth-child(2) > .layer:nth-of-type(2) {
+  display: none;
+}
+#canvas:has( > :nth-child(3):last-child) > :nth-child(2) > .layer {
+  width: 50px;
+  height: 50px;
+}
+#canvas:has( > :nth-child(3):last-child) > :nth-child(3) {
+  display: none;
+}
+#canvas:has( > :nth-child(4):last-child) > :nth-child(2) > .layer {
+  width: 50px;
+  height: 50px;
+}
+#canvas:has( > :nth-child(4):last-child) > :nth-child(3) {
+  display: none;
+}
+#canvas > .layers > .layer:not(.center) {
+  display: none;
+}
+/* @shadow-end */
+/* @shadow(bili-comment-user-info) */
+#user-level {
+  pointer-events: none;
+}
+/* @shadow-end */
+/* @shadow(bili-comment-action-buttons-renderer) */
+#like {
+  margin-left: auto;
+}
+#more {
+  margin-left: 20px;
+}
+/* @shadow-end */
+/* @shadow(bili-rich-text) */
+#contents > a[data-type="search"] {
+  display: inline;
+  color: black;
+  pointer-events: none;
+}
+#contents > a[data-type="search"] > img[src*="/bfs/reply/"] {
+  display: none;
+}
+#contents:has([data-type="goods"]) > a {
+  font-size: 0;
+}
+#contents:has([data-type="goods"]) > [data-type="goods"] > img {
+  width: 1rem;
+  height: 1rem;
+}
+#contents:has([data-type="goods"]) > :not([data-type="goods"]:has(img)) {
+  display: none;
+}
+/* @shadow-end */
+/* @shadow(bili-comment-vote-renderer) */
+#card {
+  width: 90%;
+}
+/* @shadow-end */
+/* @shadow-end */
+/* @shadow(bili-comment-replies-renderer) */
+#pagination > #pagination-body {
+  margin-right: auto;
+}
+/* @shadow(bili-comment-reply-renderer) */
+/* @shadow(bili-comment-action-buttons-renderer) */
+#like {
+  margin-left: auto;
+}
+#more {
+  margin-left: 20px;
+}
+/* @shadow-end */
+/* @shadow(bili-rich-text) */
+#contents > a[data-type="search"] {
+  display: inline;
+  color: black;
+  pointer-events: none;
+}
+#contents > a[data-type="search"] > img[src*="/bfs/reply/"] {
+  display: none;
+}
+#contents:has([data-type="goods"]) > a {
+  font-size: 0;
+}
+#contents:has([data-type="goods"]) > [data-type="goods"] > img {
+  width: 1rem;
+  height: 1rem;
+}
+#contents:has([data-type="goods"]) > :not([data-type="goods"]:has(img)) {
+  display: none;
+}
+/* @shadow-end */
+/* @shadow-end */
+/* @shadow-end */
+/* @shadow-end */
+/* @shadow(bili-user-profile) */
+#view {
+  display: grid;
+  grid-template-areas: "bg bg" "avatar body";
+  grid-template-columns: 100px 1fr;
+}
+#view > #bg {
+  grid-area: bg;
+  position: initial;
+  display: none;
+}
+#view > #avatar {
+  grid-area: avatar;
+  justify-self: center;
+  position: initial;
+  width: 80%;
+  height: initial;
+  aspect-ratio: 1 / 1;
+  margin: 10px 0;
+}
+#view > #avatar > :not(img) {
+  display: none;
+}
+#view > #body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 5px;
+}
+#view > #body > * {
+  margin: 0;
+  padding: 0;
+}
+#view > #body > #title > #vip {
+  display: none;
+}
+#view > #body > #action:not(:has(.active)),
+#view > #body > #action > #chat {
+  display: none;
+}
+#view > #body > #action > .active {
+  pointer-events: none;
+}
+/* @shadow-end */
+.bili-user-profile .bili-user-profile-view {
+  display: grid;
+  grid-template-areas: "bg bg" "avatar body";
+  grid-template-columns: 100px 1fr;
+}
+.bili-user-profile .bili-user-profile-view > .bili-user-profile-view__background {
+  grid-area: bg;
+  position: initial;
+  display: none;
+}
+.bili-user-profile .bili-user-profile-view > .bili-user-profile-view__avatar {
+  grid-area: avatar;
+  justify-self: center;
+  position: initial;
+  width: 80%;
+  height: initial;
+  aspect-ratio: 1 / 1;
+  margin: 10px 0;
+}
+.bili-user-profile .bili-user-profile-view > .bili-user-profile-view__avatar > :not(.b-img) {
+  display: none;
+}
+.bili-user-profile .bili-user-profile-view > .bili-user-profile-view__info {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 5px;
+}
+.bili-user-profile .bili-user-profile-view > .bili-user-profile-view__info > * {
+  margin: 0;
+  padding: 0;
+}
+.bili-user-profile .bili-user-profile-view > .bili-user-profile-view__info .bili-user-profile-view__info__viplabel {
+  display: none;
+}
+.bili-user-profile .bili-user-profile-view > .bili-user-profile-view__info > .bili-user-profile-view__info__footer:not(:has(.checked)),
+.bili-user-profile .bili-user-profile-view > .bili-user-profile-view__info > .bili-user-profile-view__info__footer > .chat {
+  display: none;
+}
+.bili-user-profile .bili-user-profile-view > .bili-user-profile-view__info > .bili-user-profile-view__info__footer > .checked {
+  pointer-events: none;
+}
+/* @shadow(bili-emoji-popover) */
+#emoji-popover {
+  translate: 0 30px;
+}
+#emoji-popover > [title] {
+  border-bottom: 2px var(--graph_bg_regular) solid;
+}
+#emoji-popover > img {
+  margin: 10px 0;
+}
+#emoji-popover > a {
+  display: none;
+}
+/* @shadow-end */
+.bili-emoji-popover {
+  translate: 0 30px;
+}
+.bili-emoji-popover > [title] {
+  border-bottom: 2px var(--graph_bg_regular) solid;
+}
+.bili-emoji-popover > img {
+  margin: 10px 0;
+}
+.bili-emoji-popover > a {
+  display: none;
+}
+
+.adblock-tips {
+  display: none;
+}
+.bili-feed4 {
+  min-height: 100svh;
+  overflow-y: hidden;
+}
+.bili-feed4 > .header-channel,
+.bili-feed4 > .palette-button-outer,
+.bili-feed4 .bili-header__channel {
+  display: none;
+}
+.bili-feed4 > .bili-feed4-layout {
+  width: 100%;
+  padding: 50px 20px;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside {
+  padding: 0;
+  position: relative;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container > :not(.feed-card) {
+  display: none;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card {
+  margin-top: 0;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card:not(:has(.enable-no-interest)),
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card .bili-watch-later__tip--lab,
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .container .feed-card .bili-video-card__info--icon-text {
+  display: none;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn {
+  top: initial;
+  bottom: 0;
+  left: initial;
+  right: 0;
+  transform: translate(0, 100%);
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn > .roll-btn {
+  width: initial;
+  padding: 5px;
+  flex-direction: initial;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn > .roll-btn > svg {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+.bili-feed4 > .bili-feed4-layout .recommended-container_floor-aside > .feed-roll-btn > .roll-btn > span {
+  display: none;
+}
+
+/* 
+================通用
+*/
+.space-header .upinfo__main > .upinfo-avatar .avatar .b-avatar__layers > :not(.center),
+.space-header .upinfo__main > .upinfo-avatar .living-tips {
+  display: none;
+}
+.space-header .upinfo__main > .upinfo-detail > .upinfo-detail__top:has(.vip > :not(.disable)) > .nickname {
+  color: var(--v_brand_pink);
+}
+.space-header .upinfo__main > .upinfo-detail > .upinfo-detail__top > .vip {
+  display: none;
+}
+.space-header .operations .space-head-follow .space-follow-btn.gray {
+  pointer-events: none;
+}
+.space-main .side-nav > .side-nav__item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  padding: 14px 16px;
+  margin-top: 8px;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+.space-main .side-nav > .side-nav__item.active {
+  background-color: var(--brand_blue);
+}
+.space-main .side-nav > .side-nav__item.active > * {
+  color: var(--text_white);
+}
+.space-main [class$="aside-section"] .upload-section > :not(.upload-section-jumper),
+.space-main [class$="aside-section"] .elec-action,
+.space-main [class$="aside-section"] .living-section__follow,
+.space-main [class$="aside-section"] .living-section-cover__tag,
+.space-main [class$="aside-section"] .vui_button,
+.space-main [class$="aside-section"]:has(.game-section) {
+  display: none;
+}
+.space-main > .space-float {
+  height: initial;
+}
+.space-main > .space-float > .float-button:not([style]) {
+  display: none;
+}
+/* 
+================Page-投稿
+*/
+.route_uploadVideo .video .video-list {
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-between;
+}
+.route_uploadVideo .video:not(:has(.radio-filter__item--active > i)) .upload-video-card:has(.charge-tag) {
+  display: none;
+}
+/* 
+================Page-收藏
+*/
+.route_favlist {
+  /* 右Area-内容：Page-其他收藏：Page-图文 */
+}
+.route_favlist .favlist-aside .vui_collapse_item > .vui_collapse_item_header {
+  background-color: var(--graph_bg_thin);
+}
+.route_favlist .favlist-aside .vui_collapse_item > .vui_collapse_item_content .fav-sidebar-item[title^="话题"],
+.route_favlist .favlist-aside .vui_collapse_item > .vui_collapse_item_content .fav-sidebar-item[title^="课程"] {
+  display: none;
+}
+.route_favlist .favlist-main > .opus-fav-list .container {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  justify-content: center;
+  justify-items: center;
+  gap: 10px;
+}
+.route_favlist .favlist-main > .opus-fav-list .container > .item {
+  width: 100%;
+  height: 100%;
+  position: initial;
+  transform: initial;
+}
+.route_favlist .favlist-main > .opus-fav-list .container > .item > .opus-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.route_favlist .favlist-main > .opus-fav-list .container > .item > .opus-card > :first-child {
+  flex: 1;
+}
+.route_favlist .favlist-main > .opus-fav-list .container > .item > .opus-card > .opus-card--only-text {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+.route_favlist .favlist-main > .opus-fav-list .container > .item > .opus-card > .opus-card--only-text > .opus-card__icons {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+/* 
+================Page-关注、粉丝
+*/
+.space-main .relation-aside {
+  max-height: initial;
+}
+.space-main .relation-content .relation-card .follow-btn__trigger.gray,
+.space-main .relation-content .relation-card .follow-btn__trigger.be-followed {
+  pointer-events: none;
+}
+
+.search-layout > .side-buttons-container .side-buttons > :not(.btn-to-top-wrap) {
+  display: none;
+}
+.search-layout .search-header .search-tabs ul {
+  justify-content: space-between;
+}
+.search-layout .search-content .brand-ad-list .user-actions,
+.search-layout .search-content .esport-list .esport-card-options > div.esport-card-options-item btn,
+.search-layout .search-content .activity-game-list .activity-card-content-footer,
+.search-layout .search-content .activity-game-list .main-btn,
+.search-layout .search-content .user-list .user-actions,
+.search-layout .search-content .bangumi-pgc-list .media-card-image-follow,
+.search-layout .search-content .bangumi-pgc-list .media-card-content-footer-btns {
+  display: none;
+}
+.search-layout .search-content .video > .video-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-evenly;
+  gap: 5px 0;
+}
+.search-layout .search-content .video > .video-list > div:has(> .bili-video-card) {
+  max-width: initial;
+}
+.search-layout .search-content .video > .video-list > div:has(
+            [class^="bili-video-card__info--ad"],
+            [class^="bili-video-card__info--living"],
+            [class^="bili-video-card__info--cheese"]
+          ) {
+  display: none;
+}
+
+/* 
+    Page-播放
+*/
+.ad-report {
+  display: none;
+}
+.usercard-wrap > .card-loaded > .bg {
+  display: none;
+}
+.usercard-wrap > .card-loaded > .user-info-wrapper .user-label,
+.usercard-wrap > .card-loaded > .user-info-wrapper .btn-box {
+  display: none;
+}
+.video-share-popover .dropdown-top-left {
+  margin: 0 auto;
+  padding: 0;
+}
+.video-share-popover .dropdown-top-right {
+  display: none;
+}
+.video-tool-more-popover > .video-tool-more-dropdown > .video-note-fake,
+.video-tool-more-popover > .video-tool-more-dropdown > .video-use-phone {
+  display: none;
+}
+#mirror-vdcon > .fixed-sidenav-storage > div:has(.customer-service) {
+  display: none;
+}
+#mirror-vdcon > .left-container,
+#mirror-vdcon .playlist-container--left {
+  display: flex;
+  flex-direction: column;
+}
+#mirror-vdcon > .left-container > #viewbox_report,
+#mirror-vdcon .playlist-container--left > #viewbox_report {
+  order: -1;
+  height: auto;
+  padding-top: 20px;
+}
+#mirror-vdcon > .left-container > #viewbox_report > .video-info-title .video-title,
+#mirror-vdcon .playlist-container--left > #viewbox_report > .video-info-title .video-title {
+  white-space: pre-wrap;
+}
+#mirror-vdcon > .left-container > #viewbox_report > .video-info-title .show-more,
+#mirror-vdcon .playlist-container--left > #viewbox_report > .video-info-title .show-more {
+  display: none;
+}
+#mirror-vdcon > .left-container > #viewbox_report > .video-info-meta .pubdate-ip,
+#mirror-vdcon .playlist-container--left > #viewbox_report > .video-info-meta .pubdate-ip {
+  margin-right: auto;
+}
+#mirror-vdcon > .left-container > #playerWrap,
+#mirror-vdcon .playlist-container--left > #playerWrap {
+  order: -2;
+  margin-top: 5px;
+}
+#mirror-vdcon > .left-container > .video-toolbar-container,
+#mirror-vdcon .playlist-container--left > .video-toolbar-container {
+  margin: 10px 0;
+  padding: 10px;
+  border-bottom: none;
+  box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef);
+  background-color: var(--graph_bg_regular);
+}
+#mirror-vdcon > .left-container > .video-toolbar-container > .video-toolbar-left,
+#mirror-vdcon .playlist-container--left > .video-toolbar-container > .video-toolbar-left {
+  flex: 1;
+  justify-content: space-between;
+}
+#mirror-vdcon > .left-container > .video-toolbar-container > .video-toolbar-left .toolbar-left-item-wrap,
+#mirror-vdcon .playlist-container--left > .video-toolbar-container > .video-toolbar-left .toolbar-left-item-wrap {
+  margin: 0;
+}
+#mirror-vdcon > .left-container > .video-toolbar-container > .video-toolbar-right > .toolbar-right-ai,
+#mirror-vdcon .playlist-container--left > .video-toolbar-container > .video-toolbar-right > .toolbar-right-ai,
+#mirror-vdcon > .left-container > .video-toolbar-container > .video-toolbar-right > .toolbar-right-note,
+#mirror-vdcon .playlist-container--left > .video-toolbar-container > .video-toolbar-right > .toolbar-right-note {
+  display: none;
+}
+#mirror-vdcon > .left-container > .video-desc-container,
+#mirror-vdcon .playlist-container--left > .video-desc-container {
+  margin: 0;
+}
+#mirror-vdcon > .left-container > .video-desc-container > .toggle-btn:hover,
+#mirror-vdcon .playlist-container--left > .video-desc-container > .toggle-btn:hover {
+  box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef);
+  background-color: var(--graph_bg_regular);
+  cursor: pointer;
+}
+#mirror-vdcon > .left-container > .video-tag-container :has(.tag-icon) + .tag,
+#mirror-vdcon .playlist-container--left > .video-tag-container :has(.tag-icon) + .tag {
+  clear: left;
+}
+#mirror-vdcon > .left-container > #bgm-entry [class^="_PcDetailInfo"] .btn:has(.number),
+#mirror-vdcon .playlist-container--left > #bgm-entry [class^="_PcDetailInfo"] .btn:has(.number) {
+  pointer-events: none;
+}
+#mirror-vdcon > .left-container .video-resource-list,
+#mirror-vdcon .playlist-container--left .video-resource-list {
+  display: none;
+}
+#mirror-vdcon > .right-container > .right-container-inner {
+  display: flex;
+  flex-direction: column;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .members-info-container .add-follow-btn {
+  display: none;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .up-avatar {
+  width: 100%;
+  height: 100%;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar {
+  width: 100%;
+  height: 100%;
+  transform: initial;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar > :not(img) {
+  display: none;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right .send-msg,
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right [class*="charge-btn"] {
+  display: none;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right .follow-btn {
+  pointer-events: none;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .video-pod-above-modules {
+  order: -1;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .video-pod-above-modules > .video-pod-above-modules__inner > :not(#danmukuBox) {
+  display: none;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .ad-report {
+  display: none;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 {
+  display: flex;
+  flex-direction: column;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 > .rec-list > :not(.video-page-card-small) {
+  display: none;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 > .rec-footer {
+  order: -1;
+  margin-bottom: 10px;
+  display: block;
+}
+#mirror-vdcon .playlist-container--right {
+  display: flex;
+  flex-direction: column;
+}
+#mirror-vdcon .playlist-container--right > .up-panel-container > .members-info-container .add-follow-btn {
+  display: none;
+}
+#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--left .up-avatar {
+  width: 100%;
+  height: 100%;
+}
+#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar {
+  width: 100%;
+  height: 100%;
+  transform: initial;
+}
+#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar > :not(img) {
+  display: none;
+}
+#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--right .send-msg,
+#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--right [class*="charge-btn"] {
+  display: none;
+}
+#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--right .follow-btn {
+  pointer-events: none;
+}
+#mirror-vdcon .playlist-container--right > #danmukuBox {
+  order: -1;
+}
+#mirror-vdcon .playlist-container--right > .recommend-list-container {
+  display: none;
+}
+
+#pc-cashier-wrapper-wide,
+[class^="moreTool_popupWrap"] > :first-child {
+  display: none;
+}
+.plp-layout .plp-r > #pc-cashier-wrapper-normal {
+  display: none;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar {
+  margin-top: 16px;
+  padding: 0 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef);
+  background-color: var(--graph_bg_regular);
+}
+.plp-layout .plp-l > .player-left-components > .toolbar > .toolbar-left {
+  display: flex;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar > .toolbar-left > span {
+  margin: auto 5px;
+  padding: 0;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar > .toolbar-left > :not([id]) {
+  display: none;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar > .toolbar-left > .share [class^="Share_boxTopRight"] {
+  display: none;
+}
+.plp-layout .plp-l > .player-left-components > .toolbar > .toolbar-right {
+  line-height: initial;
+}
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] {
+  border: none;
+}
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] > [class^="mediainfo_mediaRight"] > * {
+  margin-bottom: 5px;
+}
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] > [class^="mediainfo_mediaRight"] > [class^="mediainfo_mediaDesc"]:nth-of-type(2) {
+  height: initial;
+  overflow: initial;
+  white-space: pre-wrap;
+  -webkit-box-orient: initial;
+}
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] > [class^="mediainfo_mediaRight"] > [class^="mediainfo_bottomBar"] [class^="upinfo_btn_follow_up"],
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] > [class^="mediainfo_mediaRight"] > [class^="mediainfo_bottomBar"] [report-id="click_review_publish"] {
+  display: none;
+}
+.plp-layout .plp-l > .player-left-components > [class^="mediainfo_mediaInfoWrap"] > [class^="mediainfo_mediaRight"] > [class^="mediainfo_mediaToolbar"] > :not(#ogv-weslie-media-info-follow) {
+  display: none;
+}
+.plp-layout .plp-l > .player-left-components #sponsor_module {
+  min-height: initial;
+}
+.plp-layout .plp-l > .player-left-components #sponsor_module > [class^="sponsor_sponsor_mini_rank"] {
+  display: none;
+}
+.plp-layout .plp-l > .player-left-components #sponsor_module > [class^="sponsor_sponsor_info"] {
+  margin: 0 auto;
+}
+.plp-layout .plp-l > .player-left-components #sponsor_module > [class^="sponsor_sponsor_info"] > [class^="sponsor_btn_show_rank"] {
+  text-align: center;
+}
+.plp-layout .plp-l > .player-left-components #sponsor_module > [class^="sponsor_sponsor_info"] > [class^="sponsor_img_wrapper"] {
+  margin: 10px auto;
+}
+
+/* 
+    Area-动态
+*/
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__avatar .b-avatar__layers > :not([data-layer-tag="AVATAR_LAYER"]) {
+  display: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__avatar .b-avatar__layers > [data-layer-tag="AVATAR_LAYER"] {
+  width: 60px;
+  height: 60px;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__header .bili-dyn-time:hover {
+  color: var(--v_brand_blue);
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__header .bili-dyn-item__ornament {
+  pointer-events: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__header .bili-dyn-item__more {
+  display: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__body > .bili-dyn-content .bili-dyn-topic {
+  display: inline-flex;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__body > .bili-dyn-content > .bili-dyn-content__orig .dyn-orig-author__right {
+  display: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__body > .bili-dyn-content [data-module="additional"] .bili-dyn-card-reserve__action {
+  display: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__body > .bili-dyn-item__interaction {
+  display: none;
+}
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__footer > .bili-dyn-item__action [data-type="forward"],
+.bili-dyn-list .bili-dyn-item__main > .bili-dyn-item__footer > .bili-dyn-item__action [data-type="like"] {
+  pointer-events: none;
+}
+/* 
+    Page-动态
+*/
+.bili-dyn-home--member > main {
+  width: 60vw;
+}
+.bili-dyn-home--member .bili-dyn-sidebar > .bili-dyn-sidebar__btn:not([style]) {
+  display: none;
+}
+
+.opus-detail .bili-opus-view > .opus-module-topic:hover {
+  box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef);
+  background-color: var(--graph_bg_regular);
+  cursor: pointer;
+}
+.opus-detail .bili-opus-view > .opus-module-bottom {
+  display: none;
+}
+.opus-detail > .right-sidebar-wrap .side-toolbar__box .like,
+.opus-detail > .right-sidebar-wrap .side-toolbar__box .coin,
+.opus-detail > .right-sidebar-wrap .side-toolbar__box .forward {
+  pointer-events: none;
+}
+.opus-detail > .right-sidebar-wrap .side-toolbar__bottom > :not(.backtop) {
+  display: none;
+}
+.opus-detail > .bili-tabs .reaction-item .reaction-item__follow {
+  pointer-events: none;
+}
+.opus-detail > .bili-tabs .reaction-item .reaction-item__follow:has(.bili-follow-button__action.primary) {
+  display: none;
+}
+
+/* 
+    Page-资源详情
+*/
+.media-detail-wrp > .media-info-wrp .media-info-star-wrapper > .media-info-review-times {
+  display: block !important;
+}
+.media-detail-wrp > .media-info-wrp .media-info-star-wrapper > .to-review-btn {
+  display: none;
+}
+.media-detail-wrp > .media-info-wrp .media-info-btns > :not(.bangumi-btn) {
+  display: none;
+}
+.media-detail-wrp > .media-info-wrp .media-info-btns .btn-follow {
+  pointer-events: none;
+}
+.media-detail-wrp > .media-tab-wrp > .media-tab-nav li:not(:nth-of-type(-n + 3)) {
+  display: none;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-l {
+  display: flex;
+  flex-direction: column;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-l > .media-sponsor-wrapper {
+  order: 1;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-l > .media-sponsor-wrapper > .sponsor-left-area .sponsor-rank-body {
+  display: none;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-l > .media-sponsor-wrapper > .sponsor-right-area {
+  position: initial;
+  margin: 0 auto;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-l > .media-tab-module-wrp:has(.media-tab-module-more) {
+  display: none;
+}
+.media-detail-wrp > .media-tab-wrp .media-tab-detail-r:has(.review-feed-wrapper) {
+  display: none;
+}
+/* 
+    Page-历史
+*/
+.history-record .right-side > .feedback {
+  display: none;
+}
+
+/* 
+    组件：Bar-导航栏
+*/
+#prehold-nav-vm {
+  display: none;
+}
+.link-navbar {
+  box-sizing: border-box;
+  width: 100vw;
+  padding: 0 10%;
+}
+.link-navbar > #main-ctnr div:has(> .entry_logo) ~ *,
+.link-navbar > #main-ctnr div:has(> .entry_logo) > .nav-items-ctnr {
+  display: none;
+}
+.link-navbar > #main-ctnr .nav-titles > :not(:first-of-type) {
+  display: none;
+}
+.link-navbar .search-block {
+  display: none;
+}
+.link-navbar > #right-part .bili-download-panel,
+.link-navbar > #right-part .download-panel-ctnr {
+  width: initial;
+  height: initial;
+  margin: 0;
+  padding: 10px;
+  top: 70px;
+  left: initial;
+  right: initial;
+  background-color: #fff;
+}
+.link-navbar > #right-part .bili-download-panel .download-infos {
+  display: none;
+}
+.link-navbar > #right-part .bili-download-panel .download-more {
+  margin: 0;
+}
+.link-navbar > #right-part .startlive-btn {
+  width: 34px;
+}
+.link-navbar > #right-part .startlive-btn > :not([role="img"]) {
+  display: none;
+}
+.link-navbar > #right-part .startlive-btn > [role="img"] {
+  margin: 0;
+}
+.link-navbar > #right-part .download-panel-ctnr > .lens-transition {
+  display: none;
+}
+.link-navbar > #right-part .download-panel-ctnr > .download-more {
+  padding: 0;
+}
+/* 
+    组件：Footer
+*/
+footer.link-footer {
+  display: none;
+}
+/* 
+    组件：直播Player
+*/
+.player-and-aside-area {
+  /* 左Area */
+  /* 右Area */
+}
+.player-and-aside-area #head-info-vm .normal-row-ctnr > .left-anchor-section .follow-ctnr > .not-yet-follow {
+  display: none;
+}
+.player-and-aside-area #head-info-vm .normal-row-ctnr > .left-anchor-section .follow-ctnr > .followed > .right-part {
+  display: none;
+}
+.player-and-aside-area #head-info-vm .normal-row-ctnr > .right-section {
+  display: none;
+}
+.player-and-aside-area #head-info-vm .normal-row-ctnr > .right-fixed-modules {
+  margin-left: auto;
+}
+.player-and-aside-area #head-info-vm .normal-row-ctnr > .right-fixed-modules .share-action {
+  display: none;
+}
+.player-and-aside-area #fullscreen-container:has(.fullscreen-left-filler) {
+  grid-template-areas: "player panel" "player panel";
+}
+.player-and-aside-area #fullscreen-container:has(.fullscreen-left-filler) > #gift-control-vm {
+  display: none;
+}
+.player-and-aside-area #fullscreen-container > .player-section > #live-player-ctnr #live-player .web-player-icon-roomStatus,
+.player-and-aside-area #fullscreen-container > .player-section > #live-player-ctnr #live-player .web-player-icon-feedback {
+  display: none;
+}
+.player-and-aside-area #fullscreen-container > .player-section > #live-player-ctnr #live-player .web-player-inject-wrap > #businessContainerElement > .research-container,
+.player-and-aside-area #fullscreen-container > .player-section > #live-player-ctnr #live-player .web-player-inject-wrap > #businessContainerElement > :has(.announcement-wrapper) {
+  display: none;
+}
+.player-and-aside-area #fullscreen-container > .player-section > #shop-popover-vm,
+.player-and-aside-area #fullscreen-container > .player-section > #cloud-game {
+  display: none;
+}
+.player-and-aside-area #fullscreen-container > #gift-control-vm [data-upgrade-intro="giftSender"] > .gift-presets-wrap .base-panel,
+.player-and-aside-area #fullscreen-container > #gift-control-vm [data-upgrade-intro="giftSender"] > .right-section .m-guard-ent {
+  display: none;
+}
+.player-and-aside-area > #aside-area-vm > :not(#rank-list-vm, .chat-history-panel, #chat-control-panel-vm) {
+  display: none;
+}
+.player-and-aside-area > #aside-area-vm .fansmedal-popover-wrap {
+  display: none;
+}
+.player-and-aside-area > #aside-area-vm > #rank-list-vm {
+  height: 40px;
+}
+.player-and-aside-area > #aside-area-vm > #rank-list-vm > #rank-list-ctnr-box[style*="height: 96px;"] {
+  height: 40px;
+}
+.player-and-aside-area > #aside-area-vm > #rank-list-vm > #rank-list-ctnr-box .rank-cntr > .btn-box {
+  display: none;
+}
+.player-and-aside-area > #aside-area-vm > .chat-history-panel {
+  padding: 2px;
+}
+.player-and-aside-area > #aside-area-vm > .chat-history-panel > :not(.chat-overlay-layer, #chat-history-list, .danmaku-menu),
+.player-and-aside-area > #aside-area-vm > .chat-history-panel > .chat-overlay-layer > :not(#pay-note-panel-vm) {
+  display: none;
+}
+.player-and-aside-area > #aside-area-vm > .chat-history-panel > #chat-history-list {
+  height: calc(100%);
+}
+.player-and-aside-area > #aside-area-vm > .chat-history-panel > #chat-history-list > #chat-items > .convention-msg {
+  font-size: 0;
+}
+.player-and-aside-area > #aside-area-vm > .chat-history-panel > #chat-history-list > #chat-items > .convention-msg::before {
+  content: "没有更多了";
+  display: block;
+  padding: 2px;
+  border-radius: 5px;
+  line-height: 1;
+  font-size: 0.75rem;
+  color: var(--brand_pink);
+  text-align: center;
+}
+.player-and-aside-area > #aside-area-vm > .chat-history-panel > #chat-history-list > #chat-items > .chat-item {
+  margin: 0;
+  border-image: none;
+}
+.player-and-aside-area > #aside-area-vm > .chat-history-panel > #chat-history-list > #chat-items > .chat-item > .danmaku-item-left > .title-label {
+  display: none;
+}
+.player-and-aside-area > #aside-area-vm > .chat-history-panel > .danmaku-menu {
+  background-color: #fff;
+}
+.player-and-aside-area > #aside-area-vm > .chat-history-panel > .danmaku-menu > .none-select > .at-this-guy,
+.player-and-aside-area > #aside-area-vm > .chat-history-panel > .danmaku-menu > .none-select > .block-this-guy {
+  display: none;
+}
+.player-and-aside-area > #aside-area-vm > #chat-control-panel-vm .send-btn-wrapper {
+  display: none;
+}
+/* 
+    Page-直播：主播
+*/
+.live-room-app #sidebar-vm > .side-bar-cntr {
+  height: initial;
+}
+.live-room-app #sidebar-vm > .side-bar-cntr > [data-upgrade-intro="Follow"] {
+  display: none;
+}
+.live-room-app #sections-vm > .left-container {
+  display: none;
+}
+/* 
+    Page-直播：首页（待定）
+*/
+/* 
+    Page-直播：通用
+*/
+[data-cy="EvaPage"] > [data-cy="EvaRenderer_LayerWrapper"]:has(iframe) {
+  order: -1 !important;
+}

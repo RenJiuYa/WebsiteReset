@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          网页大修-总入口
 // @namespace     RenJiuYa
-// @version       1.0.6
+// @version       1.0.7
 // @description   统一管理各网站样式（CSS/JS）的启用与加载
 // @author        RenJiuYa
 //
@@ -20,11 +20,12 @@
 // ============================================================
 // 总入口说明（本项目唯一入口，直接装在暴力猴里）
 // 1. 本文件在仓库根目录；各网站的样式模块放在 Web/<网站>/ 下。
-// 2. 站点管理（哪些网站、加载哪些文件）在 Web/sites.js，运行时读取：
+// 2. 站点管理（哪些网站、哪些地址加载哪些入口）在 Web/sites.js，运行时读取：
 //    改完 sites.js 只需刷新页面即生效，不用改本文件、也不用在暴力猴里更新脚本。
 // 3. @match 故意写成全站通配（*://*/*）：插件头部的匹配范围在注入前就定死了，
-//    脚本运行时无法动态扩大，所以"真正生效范围"交给 sites.js 里的 hosts 判断。
+//    脚本运行时无法动态扩大，所以"真正生效范围"交给 sites.js 里的 rules（match）判断。
 //    新增网站：建好 Web/<网站>/ 文件夹 → 在 sites.js 里加一条即可。
+//    站点的 CSS 是合并产物：_入口.less 把本站各模块 @import 在一起 → 只产出 _入口.css。
 // 4. 永久停用某网站：把 sites.js 里该站点的 enabled 改成 false。
 // 5. 「CSS 做不到的」规则（文本匹配、按计算样式匹配、向上隐藏等）写在根目录 ublock.user.txt，
 //    用 uBlock Origin 的自定义过滤列表语法，由 uBO 执行，本脚本不参与。
@@ -54,7 +55,7 @@
   const FORCE_IMPORTANT = true;
 
   const LOCAL_BASE = 'http://127.0.0.1:5500';                              // 本地 live-server 根目录（=仓库根目录）
-  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.6'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
+  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.7'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
   const BASE = IS_DEV ? LOCAL_BASE : REMOTE_BASE;
 
   // ============ 站点管理（外部文件 Web/sites.js，运行时读取） ============
@@ -68,9 +69,11 @@
   // 新增工具类：在 utils/ 下建文件 → 把路径加到下面这一行
   const UTILS = ['utils/click.js', 'utils/disableShortcut.js'];
 
-  // 当前命中的站点及该站点的样式根地址（由 boot() 赋值）
+  // 当前命中的站点、该站点的样式根地址、本次要加载的模块（由 boot() 赋值）
   let SITE = null;
   let SITE_BASE = '';
+  let SITE_CSS = []; // 命中规则里收集到的 CSS 入口名
+  let SITE_JS = [];  // 命中规则里收集到的 JS 入口名
 
   // 读取 sites.js 源码：失败时回退上次缓存
   async function loadSitesSource() {
@@ -94,15 +97,77 @@
     return new Function(src + '\nreturn SITES;')();
   }
 
-  // 匹配当前站点（enabled 省略时视为启用；files 必须是模块名数组）
+  // 匹配当前站点：返回 { site, css: [...], js: [...] }（未命中返回 null）
+  // sites.js 里每个站点用 rules 声明"哪些地址加载哪些入口"，
+  // 按声明顺序匹配，命中的规则全部生效（后面的覆盖前面的），同名只收集一次。
   function matchSite(sites) {
-    const host = location.hostname;
-    return Object.values(sites).find(
-      (site) =>
-        site.enabled !== false &&
-        Array.isArray(site.files) &&
-        site.hosts.some((h) => host === h || host.endsWith('.' + h))
-    );
+    const host = location.hostname.toLowerCase();
+    const path = location.pathname;
+
+    for (const site of Object.values(sites)) {
+      if (!site || site.enabled === false) continue;
+      if (!site.dir || !Array.isArray(site.rules)) continue;
+
+      const css = [];
+      const js = [];
+      let hit = false;
+      for (const rule of site.rules) {
+        if (!rule || rule.enabled === false) continue;
+        if (!matchRule(rule.match, host, path)) continue;
+        hit = true;
+        pushNames(css, rule.css);
+        pushNames(js, rule.js);
+      }
+      if (hit) return { site: site, css: css, js: js };
+    }
+    return null;
+  }
+
+  // 收集模块名：允许写一个名字或写数组；去重并保持顺序
+  function pushNames(list, value) {
+    const names = value == null ? [] : Array.isArray(value) ? value : [value];
+    for (const name of names) {
+      if (typeof name !== 'string') continue;
+      const n = name.trim();
+      if (n && list.indexOf(n) === -1) list.push(n);
+    }
+  }
+
+  // 规则是否命中。match 的写法见 Web/sites.js 顶部说明
+  function matchRule(match, host, path) {
+    if (match == null) return true;
+    const list = Array.isArray(match) ? match : [match];
+    if (!list.length) return true;
+    for (const item of list) {
+      if (matchOne(String(item), host, path)) return true;
+    }
+    return false;
+  }
+
+  // 单条模式：'域名' 或 '域名/路径'（也允许只写 /路径，此时不限域名）
+  function matchOne(pattern, host, path) {
+    const s = pattern.trim();
+    if (!s) return true;
+    const cut = s.indexOf('/');
+    const hostPat = (cut === -1 ? s : s.slice(0, cut)).toLowerCase();
+    const pathPat = cut === -1 ? '' : s.slice(cut);
+    if (!hostMatch(hostPat, host)) return false;
+    if (!pathPat) return true; // 只写域名：任意路径
+    return globMatch(pathPat, path);
+  }
+
+  // 域名匹配：不带 * 时按"该域名及其子域"处理；带 * 时按通配
+  function hostMatch(hostPat, host) {
+    if (!hostPat) return true;
+    if (hostPat.indexOf('*') !== -1) return globMatch(hostPat, host);
+    return host === hostPat || host.endsWith('.' + hostPat);
+  }
+
+  // * 通配（匹配任意字符，可含 /）；没有 * 时就是精确相等
+  function globMatch(pattern, text) {
+    if (pattern.indexOf('*') === -1) return pattern === text;
+    const parts = pattern.split('*').map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    return new RegExp('^' + parts.join('[\\s\\S]*') + '$').test(text);
   }
 
   // 解析站点配置，并加载命中的网站样式
@@ -118,15 +183,18 @@
       return;
     }
 
-    SITE = matchSite(sites) || null;
-    if (!SITE) return; // 未登记的网站：什么都不做
+    const matched = matchSite(sites);
+    if (!matched) return; // 未登记的网站（或没有规则命中）：什么都不做
+    SITE = matched.site;
+    SITE_CSS = matched.css;
+    SITE_JS = matched.js;
 
     SITE_BASE = BASE + '/' + SITE.dir;
     // CSS 与工具类并行加载（工具类必须先执行完，站点 JS 里才能直接调用）
     const [cssCount] = await Promise.all([loadAllCSS(), loadUtils()]);
     const jsCount = await loadAllJS();
     if (cssCount + jsCount === 0) {
-      console.warn('[网页大修] 没有找到任何模块文件，请检查 sites.js 里的 dir 与模块名: ' + SITE_BASE);
+      console.warn('[网页大修] 没有找到任何模块文件，请检查 sites.js 里的 dir 与 rules 里的 css/js: ' + SITE_BASE);
     }
   }
 
@@ -171,7 +239,7 @@
   // 先把 CSS 全部拉到内存，再就地更新 <style> 的 textContent；
   // 全程不删除任何 style 元素、写入前也没有 await，因此不会出现"短暂无样式"的闪烁。
   async function loadAllCSS() {
-    const files = SITE.files.map((name) => name + '.css');
+    const files = SITE_CSS.map((name) => name + '.css');
     const results = await Promise.allSettled(
       files.map((file) => gmFetch(SITE_BASE + '/' + file))
     );
@@ -240,7 +308,7 @@
   // 同样按模块名去找同名的 .js（不存在就跳过）；按顺序执行，保证模块之间的依赖顺序
   async function loadAllJS() {
     let loaded = 0;
-    for (const name of SITE.files) {
+    for (const name of SITE_JS) {
       const file = name + '.js';
       try {
         const code = await gmFetch(SITE_BASE + '/' + file);

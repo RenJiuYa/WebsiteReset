@@ -1,3 +1,58 @@
+/* ============================================================
+   贴吧入口（由 _入口.less 合并生成，请勿手改本文件）
+   改样式  改对应模块的 .less 保存即可（Easy LESS 会重新编译 _入口.less 产出本文件）
+   合并顺序  通用 / Page-首页
+   ============================================================ */
+
+/* 
+    组件：Bar-贴吧导航
+*/
+#com_userbar > ul > li:not(.u_username, .u_news, .u_setting, .u_new_pc),
+#com_userbar > ul > .u_username li:not(.u_itieba, .u_favor, .u_pan),
+#com_userbar > ul > .u_setting li:not( :has(
+        [href*="passport.baidu.com"],
+        [href*="/home/profile?"],
+        [href*="tieba.baidu.com/pmc"]
+      ), .u_logout) {
+  display: none;
+}
+/* 
+    组件：Area-搜索
+*/
+.head_inner > .search_top {
+  display: none;
+}
+.head_inner > .search_main_wrap > .search_main {
+  padding: 50px 0;
+}
+.head_inner > .search_main_wrap > .search_main > .suggestion > .suggestion_list > .break_title:first-of-type,
+.head_inner > .search_main_wrap > .search_main > .suggestion > .suggestion_list li:has(.operation_item) {
+  display: none;
+}
+/* 
+    Fix右Bar-分享
+*/
+#spage-tbshare-container {
+  display: none;
+}
+/* 
+    Fix右下Bar-功能
+*/
+.tbui_aside_float_bar {
+  margin: 0;
+  left: initial;
+  right: 2%;
+}
+.tbui_aside_float_bar > :not(.tbui_fbar_post, .tbui_fbar_refresh, .tbui_fbar_top) {
+  display: none;
+}
+/* 
+    Area-Footer
+*/
+.footer {
+  display: none;
+}
+
 .main-sec {
   width: 80vw;
 }
