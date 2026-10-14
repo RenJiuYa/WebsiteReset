@@ -1,0 +1,274 @@
+/* 
+    组件：Bar-导航栏
+*/
+
+// 预加载
+#prehold-nav-vm {
+  display: none;
+}
+.link-navbar {
+  box-sizing: border-box;
+  width: 100vw;
+  padding: 0 10%;
+
+  // 左Item（旧版）
+  > #main-ctnr {
+    div:has(> .entry_logo) {
+      & ~ *,
+      > .nav-items-ctnr {
+        display: none;
+      }
+    }
+  }
+  // 左Item（新版）
+  > #main-ctnr .nav-titles > :not(:first-of-type) {
+    display: none;
+  }
+  // 中Comp-搜索
+  .search-block {
+    display: none;
+  }
+  // 右Item
+  > #right-part {
+    // 右Item-Panel
+    .bili-download-panel,
+    .download-panel-ctnr {
+      width: initial;
+      height: initial;
+      margin: 0;
+      padding: 10px;
+      top: 70px;
+      left: initial;
+      right: initial;
+      background-color: #fff;
+    }
+    // 右Item-下载-Panel
+    .bili-download-panel {
+      .download-infos {
+        display: none;
+      }
+      .download-more {
+        margin: 0;
+      }
+    }
+    // 右Item-开播
+    .startlive-btn {
+      width: 34px;
+
+      & > :not([role="img"]) {
+        display: none;
+      }
+      > [role="img"] {
+        margin: 0;
+      }
+    }
+    // 右Item-开播-Panel
+    .download-panel-ctnr {
+      > .lens-transition {
+        display: none;
+      }
+      > .download-more {
+        padding: 0;
+      }
+    }
+  }
+}
+
+/* 
+    组件：Footer
+*/
+
+footer.link-footer {
+  display: none;
+}
+
+/* 
+    组件：直播Player
+*/
+
+.player-and-aside-area {
+  /* 左Area */
+  // 上Bar-直播信息
+  #head-info-vm .normal-row-ctnr {
+    // 左Area-用户 | Area-关注
+    > .left-anchor-section .follow-ctnr {
+      // Comp-请求关注
+      > .not-yet-follow {
+        display: none;
+      }
+      // Comp-已关注
+      > .followed > .right-part {
+        display: none;
+      }
+    }
+    // 中Comp-活动
+    > .right-section {
+      display: none;
+    }
+    // 右Item-更多-Panel | Item-分享
+    > .right-fixed-modules {
+      margin-left: auto;
+
+      .share-action {
+        display: none;
+      }
+    }
+  }
+  #fullscreen-container {
+    // Status-全屏
+    &:has(.fullscreen-left-filler) {
+      grid-template-areas: "player panel" "player panel";
+      // 下Bar-礼物
+      > #gift-control-vm {
+        display: none;
+      }
+    }
+    // Area-画面
+    > .player-section {
+      > #live-player-ctnr #live-player {
+        // Fix左上Comp-房间号
+        .web-player-icon-roomStatus,
+        // Fix右上Comp-反馈
+        .web-player-icon-feedback {
+          display: none;
+        }
+        // Area-注入
+        .web-player-inject-wrap > #businessContainerElement {
+          // 右下Box-评分
+          > .research-container,
+          // Comp-横幅弹幕
+          > :has(.announcement-wrapper) {
+            display: none;
+          }
+        }
+      }
+      // Card-AD
+      > #shop-popover-vm,
+      > #cloud-game {
+        display: none;
+      }
+    }
+    // 下Bar-礼物
+    > #gift-control-vm {
+      [data-upgrade-intro="giftSender"] {
+        // 中Bar-推荐
+        > .gift-presets-wrap .base-panel,
+        // 右Item-大航海
+        > .right-section .m-guard-ent {
+          display: none;
+        }
+      }
+    }
+  }
+  /* 右Area */
+  > #aside-area-vm {
+    > :not(#rank-list-vm, .chat-history-panel, #chat-control-panel-vm) {
+      display: none;
+    }
+    // Comp-粉丝牌-Panel
+    .fansmedal-popover-wrap {
+      display: none;
+    }
+    // 上Area-榜单
+    > #rank-list-vm {
+      height: 40px;
+      > #rank-list-ctnr-box {
+        &[style*="height: 96px;"] {
+          height: 40px;
+        }
+        // Arae-大航海
+        .rank-cntr > .btn-box {
+          display: none;
+        }
+      }
+    }
+    // 中Area
+    > .chat-history-panel {
+      padding: 2px;
+
+      > :not(.chat-overlay-layer, #chat-history-list, .danmaku-menu),
+      // 上Area-留言
+      > .chat-overlay-layer > :not(#pay-note-panel-vm) {
+        display: none;
+      }
+      // 中Area-弹幕
+      > #chat-history-list {
+        height: calc(100%);
+        > #chat-items {
+          // Area-提醒
+          > .convention-msg {
+            font-size: 0;
+
+            &::before {
+              content: "没有更多了";
+              display: block;
+              padding: 2px;
+              border-radius: 5px;
+              line-height: 1;
+              font-size: 0.75rem;
+              color: var(--brand_pink);
+              text-align: center;
+            }
+          }
+          // Item-弹幕
+          > .chat-item {
+            margin: 0;
+            border-image: none;
+
+            // Comp-装扮
+            > .danmaku-item-left > .title-label {
+              display: none;
+            }
+          }
+        }
+      }
+      // Panel-弹幕
+      > .danmaku-menu {
+        background-color: #fff;
+
+        > .none-select {
+          > .at-this-guy,
+          > .block-this-guy {
+            display: none;
+          }
+        }
+      }
+    }
+    // 下Area-操作 | Comp-发送
+    > #chat-control-panel-vm .send-btn-wrapper {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-直播：主播
+*/
+
+.live-room-app {
+  // Fix右Bar-功能
+  #sidebar-vm > .side-bar-cntr {
+    height: initial;
+
+    > [data-upgrade-intro="Follow"] {
+      display: none;
+    }
+  }
+  // 下Area-动态
+  #sections-vm > .left-container {
+    display: none;
+  }
+}
+
+/* 
+    Page-直播：首页（待定）
+*/
+
+/* 
+    Page-直播：通用
+*/
+
+// Area-播放
+[data-cy="EvaPage"] > [data-cy="EvaRenderer_LayerWrapper"]:has(iframe) {
+  order: -1 !important;
+}
