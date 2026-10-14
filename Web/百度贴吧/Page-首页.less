@@ -1,0 +1,99 @@
+.main-sec {
+  @width: 80vw;
+
+  width: @width;
+
+  > :not(.content-sec) {
+    display: none;
+  }
+  > .content-sec {
+    width: @width;
+    display: flex;
+    gap: 10px;
+
+    // 左Area
+    > .left-sec {
+      // 上Area-用户
+      > #my_tieba_mod {
+        .pre_icon_wrap,
+        .user_score {
+          display: none;
+        }
+      }
+      > .left-cont-wraper {
+        bottom: 0;
+        position: initial;
+        
+        // Area-爱逛的吧
+        > div:has(#addforum) > .onekey_sign_wrap,
+      // Area-游戏
+      > #spage_game_tab_wrapper,
+      // Area-专题
+      > .aggregate_entrance_wrap {
+          display: none;
+        }
+      }
+    }
+
+    > .right-sec {
+      flex-grow: 1;
+      width: initial;
+      margin: 0;
+      display: grid;
+      grid-template-areas: "banner banner" "dynamic hot";
+      grid-template-columns: 3fr 2fr;
+      // grid-template-rows: 1fr auto;
+
+      // 上Area-快捷贴吧
+      > .r-top-sec {
+        grid-area: banner;
+        display: none;
+      }
+      // 中Area-动态
+      > .r-left-sec {
+        grid-area: dynamic;
+        width: initial;
+
+        > #sub_nav_wrap {
+          display: none;
+        }
+        > #new_list {
+          margin: 0;
+
+          .n_right {
+            width: initial;
+          }
+        }
+      }
+      // 右Area-资讯
+      > .r-right-sec {
+        grid-area: hot;
+        width: initial;
+
+        > #right_wrap {
+          width: initial;
+          position: sticky;
+          top: 10px;
+
+          > :not(div:has(.topic_list_box)) {
+            display: none;
+          }
+          .topic_list_box {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 
+    Page-热搜
+*/
+
+
+
+
+
+
+

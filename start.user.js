@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          网页大修-总入口
 // @namespace     RenJiuYa
-// @version       1.0.5
+// @version       1.0.6
 // @description   统一管理各网站样式（CSS/JS）的启用与加载
 // @author        RenJiuYa
 //
@@ -28,7 +28,7 @@
 // 4. 永久停用某网站：把 sites.js 里该站点的 enabled 改成 false。
 // 5. 「CSS 做不到的」规则（文本匹配、按计算样式匹配、向上隐藏等）写在根目录 ublock.user.txt，
 //    用 uBlock Origin 的自定义过滤列表语法，由 uBO 执行，本脚本不参与。
-//    工具类机制保留在 utils/ 下（目前为空）：加文件后把路径写进 UTILS 即会自动加载。
+//    工具类放在 utils/ 下，自动加载（写法见下面 UTILS，用法见第 9 条）。
 // 6. 改完 CSS 后：暴力猴菜单点「重新加载样式（手动刷新）」立即生效（不做定时轮询，避免组件闪烁）；
 //    发布模式下该操作受 CDN 缓存影响，需要等 jsDelivr 刷新。
 // 7. 运行时临时退出：暴力猴菜单点「临时退出脚本」，样式立刻移除，方便和原网站对比；
@@ -37,6 +37,10 @@
 // 8. 需要注入 shadow DOM（只支持 open）的样式：在 .less/.css 里用注释标记
 //    /* @shadow(.宿主选择器) */  ...  /* @shadow-end */
 //    多层用嵌套（内层在「外层 shadow root 内部」找宿主），或用语法糖 >> 分隔路径。
+// 9. 工具类：utils/click.js —— 模拟鼠标点击（不用再靠 uBO 的 ##+js(trusted-click-element…)）
+//    click(选择器, 延迟秒, 次数, 间隔秒)，例如 click('.xxx', 1, 3, 2)
+//    utils/disableShortcut.js —— 让某个快捷键在页面上失效
+//    disableShortcut('Ctrl Alt G')，返回值是恢复函数；默认跳过输入框、Shift 忽略
 // ============================================================
 
 (function () {
@@ -50,7 +54,7 @@
   const FORCE_IMPORTANT = true;
 
   const LOCAL_BASE = 'http://127.0.0.1:5500';                              // 本地 live-server 根目录（=仓库根目录）
-  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.5'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
+  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.0.6'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
   const BASE = IS_DEV ? LOCAL_BASE : REMOTE_BASE;
 
   // ============ 站点管理（外部文件 Web/sites.js，运行时读取） ============
@@ -61,9 +65,8 @@
   // ============ 工具类（utils/ 下的文件，自动加载） ============
   // 这些文件在站点 JS 之前执行，执行完会把函数挂到全局，
   // 所以 Web/ 下的 .js 里可以直接调用，不需要任何声明。
-  // 目前为空：原先的 hasText / toStyle 已改成 ublock.user.txt 里的 uBO 规则实现。
-  // 需要时：在 utils/ 下建文件 → 把路径加到下面这一行
-  const UTILS = [];
+  // 新增工具类：在 utils/ 下建文件 → 把路径加到下面这一行
+  const UTILS = ['utils/click.js', 'utils/disableShortcut.js'];
 
   // 当前命中的站点及该站点的样式根地址（由 boot() 赋值）
   let SITE = null;

@@ -110,7 +110,49 @@ bilibili.com##.feed-card:has-text(推广):upward(2)   ← 匹配到内层后隐�
 - 标记的 `@shadow(...)` / `@shadow-end` 数量不匹配 → 报错并指出原因（本次不处理 shadow 块，文档层照旧注入）
 - 「重新加载样式」会**就地更新**已注入的样式（所有 shadow root 一起刷新，不闪烁）；「临时退出脚本」会把注入的样式从 shadow root 上摘掉
 
-## 三、发布流程
+## 三、工具类（`utils/`）
+
+`utils/` 下的文件由总入口**自动加载**（在站点 JS 之前执行），并把函数挂到全局，所以 `Web/<网站>/*.js` 里可以直接调用，不需要任何声明/引入。
+
+### `click(选择器, 延迟秒 = 0, 次数 = 1, 间隔秒 = 1)`
+
+模拟鼠标点击匹配的元素（匹配到的会**全部**点击）。相当于自己脚本版的 uBO `##+js(trusted-click-element…)`，但**不需要"信任"设置**。
+
+```js
+click('.bpx-player-ctrl-setting-handoff-content .bui-radio-item:nth-of-type(2)'); // 加载完立即点一次
+click('.share-btn', 1.5, 3, 2);      // 加载完等 1.5s，点 3 次，每次间隔 2s
+const cancel = click('.xxx', 0, 5);  // 返回值是取消函数
+cancel();
+```
+
+- **"页面加载完成"** = window 的 `load`（即 `document.readyState === 'complete'`）；已经完成就直接开始算延迟
+- 每次点击前都会**重新查询**一次选择器 → 晚出现的元素也能点到，配合"次数/间隔"可当**重试**用（没匹配到会 `console.warn` 并继续下一次）
+- 点击依次派发 `pointerdown → mousedown → pointerup → mouseup → click`（都带 `composed: true`，能跨 shadow 边界冒泡）
+- 合成事件的 `isTrusted = false`，极少数组件会据此拒绝响应（那种只能靠 uBO 的 scriptlet）
+- 若与页面全局撞名，可用别名 **`simulateClick(...)`**
+
+### `disableShortcut(快捷键, 选项?)`
+
+让页面上某个快捷键**失效**（页面自己绑定的按键，拦不到浏览器/系统级的那些）。
+
+```js
+disableShortcut('G');                        // 让 G 键失效
+disableShortcut('Ctrl Alt G');               // 组合键（顺序/大小写随意，也支持 Ctrl+Alt+G）
+disableShortcut('Space');                    // 支持别名：space / esc / up / down / left / right …
+disableShortcut('G', { inInputs: true });    // 连输入框里也拦（默认跳过输入框）
+
+const restore = disableShortcut('D');        // 返回值是恢复函数
+restore();                                   // 解除拦截
+```
+
+- 实现：在 `window` 上以**捕获阶段**监听 `keydown` + `keyup`，命中就 `stopImmediatePropagation()` + `preventDefault()`
+- 匹配规则：**Ctrl/Alt/Meta 严格**（写了必须按、没写必须没按）、**Shift 忽略**、字母大小写不敏感，并同时比对 `event.key` 与 `event.code`
+- **默认在 `input` / `textarea` / `select` / `[contenteditable]` 上不拦**（否则会毁掉打字）
+- 拦不住的：`Ctrl+W/T/N/L`、`F11` 等浏览器/系统级快捷键；极少数用 `keypress` 或非键盘机制触发的站点
+- 与"临时退出脚本"无关：退出脚本**不会**自动解除拦截，请用返回的 `restore()`
+- 短别名：**`disableKey(...)`**
+
+## 四、发布流程
 
 1. 改内容：`Web/<网站>/*.less` 会被插件自动编译成 `.css`（两者都要提交）、`ublock.user.txt`、必要时 `start.user.js`
 2. 升版本：`start.user.js` 的 `@version` 末位 +1，并把 `REMOTE_BASE` 里的 tag 改成同一个版本号

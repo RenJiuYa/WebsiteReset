@@ -20,7 +20,25 @@ const SITES = {
       '通用',
       'Page-首页', 'Page-个人空间', 'Page-搜索', 'Page-播放', 'Page-播放：资源',
       'Page-动态', 'Page-专栏',
-      'Page-其他'
+      'Page-其他',
+      'Page-直播'
+    ],
+  },
+  'B站：直播': {
+    enabled: true,
+    hosts: ['live.bilibili.com'],
+    dir: 'Web/Bilibili',
+    files: [
+      'Page-直播'
+    ],
+  },
+  '贴吧': {
+    enabled: true,
+    hosts: ['tieba.baidu.com'],
+    dir: 'Web/百度贴吧',
+    files: [
+      '通用',
+      'Page-首页', 'Page-吧页'
     ],
   },
 };
