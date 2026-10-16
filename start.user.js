@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          网页大修-总入口
 // @namespace     RenJiuYa
-// @version       1.1.0
+// @version       1.2.0
 // @description   统一管理各网站样式（CSS/JS）的启用与加载
 // @author        RenJiuYa
 //
@@ -13,6 +13,9 @@
 // @grant         GM_getValue
 // @grant         GM_setValue
 // @grant         GM_registerMenuCommand
+//
+// @inject-into   content
+//
 // @connect       127.0.0.1
 // @connect       cdn.jsdelivr.net
 // ==/UserScript==
@@ -25,7 +28,7 @@
 // 3. @match 故意写成全站通配（*://*/*）：插件头部的匹配范围在注入前就定死了，
 //    脚本运行时无法动态扩大，所以"真正生效范围"交给 sites.js 里的 rules（match）判断。
 //    新增网站：建好 Web/<网站>/ 文件夹 → 在 sites.js 里加一条即可。
-//    站点的 CSS 是合并产物：_入口.less 把本站各模块 @import 在一起 → 只产出 _入口.css。
+//    站点的 CSS 是合并产物：_Entry.less 把本站各模块 @import 在一起 → 只产出 _Entry.css。
 // 4. 永久停用某网站：把 sites.js 里该站点的 enabled 改成 false。
 // 5. 「CSS 做不到的」规则（文本匹配、按计算样式匹配、向上隐藏等）写在根目录 ublock.user.txt，
 //    用 uBlock Origin 的自定义过滤列表语法，由 uBO 执行，本脚本不参与。
@@ -42,25 +45,40 @@
 //    click(选择器, 延迟秒, 次数, 间隔秒)，例如 click('.xxx', 1, 3, 2)
 //    utils/disableShortcut.js —— 让某个快捷键在页面上失效
 //    disableShortcut('Ctrl Alt G')，返回值是恢复函数；默认跳过输入框、Shift 忽略
+// 10. 关于页面 CSP（为什么头部写了 @inject-into content）：
+//    本脚本有两处必须"执行下载来的代码"——utils/ 与站点的 .js 模块（用 Function 构造器）。
+//    如果脚本运行在"页面世界"，页面自己的 CSP（如 X/Twitter 这类严格站点）会禁止
+//    Function()/eval，控制台报 "call to Function() blocked by CSP"，整个脚本就不生效了。
+//    @inject-into content 强制在扩展沙箱里执行，页面 CSP 管不到这些调用。
+//    另外 sites.js 的解析已改成纯数据解析（不依赖 eval），属于双保险：
+//    即使某次仍落在页面世界，样式也照样能加载。
+// 11. 文件来源自动选择（不用再手动切开发/发布）：打开页面先试本地 live-server（127.0.0.1:5500），
+//    连得上就用本地（改完 CSS 刷新即生效），连不上或超时 1.5 秒就自动改用 CDN 上的发布版。
+//    也就是说：本地开着 = 开发，本地关掉 = 发布，代码不用改。
 // ============================================================
 
 (function () {
   'use strict';
 
-  // ============ 开发/发布开关 ============
-  const IS_DEV = true;
-
   // 你写的 CSS 是否自动补 !important（省得每条声明都手写）
   // 注意：@keyframes / @font-face 这类"描述符块"和 CSS 变量（--x）会自动跳过
   const FORCE_IMPORTANT = true;
 
+  // ============ 文件来源：自动选择（不用再手动切开发/发布） ============
+  // 打开页面时先试本地 live-server：
+  //   · 连得上 → 用本地（改完刷新即生效，请求会带 ?t= 绕缓存）
+  //   · 连不上/超时 → 自动改用下面这个 CDN 地址（= 发布版）
+  // 所以：本地开着就是开发，本地关掉就是发布，不需要改代码。
   const LOCAL_BASE = 'http://127.0.0.1:5500';                              // 本地 live-server 根目录（=仓库根目录）
-  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.1.0'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
-  const BASE = IS_DEV ? LOCAL_BASE : REMOTE_BASE;
+  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.2.0'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
+  const LOCAL_TIMEOUT = 1500; // 本地探测超时（毫秒），超过就当作本地不可用
+  const SITES_FILE = '/Web/sites.js'; // 站点管理表的位置（本地与 CDN 同一结构）
+
+  let BASE = REMOTE_BASE; // 由 loadSitesSource() 探测后决定：本地可用 → LOCAL_BASE
+  let USE_LOCAL = false;  // 本次是否在用本地（= 以前的 IS_DEV：加 ?t=、开发期提示）
 
   // ============ 站点管理（外部文件 Web/sites.js，运行时读取） ============
   // 好处：改站点、改文件清单只需刷新页面，不必修改本文件、也不必在暴力猴里更新脚本
-  const SITES_URL = BASE + '/Web/sites.js';
   const SITES_CACHE = 'sitesCache'; // 读取失败时的兜底缓存
 
   // ============ 工具类（utils/ 下的文件，自动加载） ============
@@ -75,26 +93,143 @@
   let SITE_CSS = []; // 命中规则里收集到的 CSS 入口名
   let SITE_JS = [];  // 命中规则里收集到的 JS 入口名
 
-  // 读取 sites.js 源码：失败时回退上次缓存
+  // 取站点配置，同时决定"这次用哪个来源"（每个页面只做一次）：
+  //   本地优先（带超时）→ 失败自动改用 CDN → 都失败才回退上次成功解析过的缓存
+  // 注意：缓存只在"解析成功"之后才写入（见 boot），所以写坏了配置不会把上一份好配置顶掉
   async function loadSitesSource() {
+    // 1) 本地 live-server
     try {
-      const src = await gmFetch(SITES_URL);
-      GM_setValue(SITES_CACHE, src);
-      return src;
+      const text = await gmFetch(LOCAL_BASE + SITES_FILE, { timeout: LOCAL_TIMEOUT, bust: true });
+      BASE = LOCAL_BASE;
+      USE_LOCAL = true;
+      return text;
     } catch (err) {
+      // 常见情况：没开 live-server（连接被拒或超时）→ 静默改用 CDN，不算错误
+      BASE = REMOTE_BASE;
+      USE_LOCAL = false;
+    }
+    // 2) CDN（发布版）
+    try {
+      return await gmFetch(REMOTE_BASE + SITES_FILE);
+    } catch (err) {
+      // 3) 两边都失败 → 回退缓存
       const cached = GM_getValue(SITES_CACHE, '');
       if (cached) {
-        console.warn('[网页大修] 读取站点配置失败，已回退上次缓存: ' + err.message);
+        console.warn('[网页大修] 本地与 CDN 都读取站点配置失败，已回退上次缓存: ' + err.message);
         return cached;
       }
-      console.error('[网页大修] 读取站点配置失败，本次不加载样式: ' + err.message);
+      console.error('[网页大修] 本地与 CDN 都读取站点配置失败，本次不加载样式: ' + err.message);
       return '';
     }
   }
 
   // sites.js 的内容形如：const SITES = { '网站名': { ... } };
+  //
+  // 这里刻意不用 new Function/eval 解析：页面自己的 CSP（如 X/Twitter）会禁止它，
+  // 报 "call to Function() blocked by CSP"，然后整个脚本（CSS+JS）都不加载。
+  // 改成"当纯数据解析"，两种写法都支持：
+  //   1. 严格 JSON（推荐）：键和字符串都用双引号 → 直接 JSON.parse
+  //   2. 现在的 JS 风格：不带引号的键、单引号字符串、整行注释、尾逗号 → 走宽松模式转换后再 JSON.parse
   function parseSites(src) {
-    return new Function(src + '\nreturn SITES;')();
+    // 从 "SITES" 之后找第一个 { ：避免文件头部注释里出现花括号时抓错位置
+    const anchor = src.indexOf('SITES');
+    const start = src.indexOf('{', anchor === -1 ? 0 : anchor);
+    const end = src.lastIndexOf('}');
+    if (start === -1 || end <= start) throw new Error('没找到配置对象 { ... }');
+    const body = src.slice(start, end + 1);
+
+    try {
+      return JSON.parse(body);
+    } catch (strictErr) {
+      try {
+        const sites = JSON.parse(looseToJson(body));
+        // 只在开发模式提示：正式版保持控制台干净（宽松模式本身是支持这种写法的）
+        if (USE_LOCAL) console.warn('[网页大修] 站点配置是 JS 风格（单引号/裸键名），已按宽松模式解析成功；建议以后统一用双引号（标准 JSON 写法）');
+        return sites;
+      } catch (looseErr) {
+        throw new Error(looseErr.message + '（严格模式: ' + strictErr.message + '）');
+      }
+    }
+  }
+
+  // 宽松模式：把"JS 风格的配置"最小化地转成 JSON
+  //  · 逐字符扫描，字符串和注释先单独处理（所以字符串里的 // 和 , 不会被误伤）
+  //  · 单引号字符串 → 双引号；整行/块注释 → 删掉；{ 或 , 后面的裸键名 → 加引号；尾逗号 → 删掉
+  function looseToJson(text) {
+    const fixKeys = (s) =>
+      s.replace(/([{,]\s*)([A-Za-z_$][\w$-]*)\s*:/g, '$1"$2":') // 裸键名 → "键名"
+       .replace(/,(\s*[}\]])/g, '$1');                          // 尾逗号
+    let out = '';
+    let buf = ''; // 字符串之外的部分（只有这部分做上面的转换）
+    const flush = () => {
+      out += fixKeys(buf);
+      buf = '';
+    };
+    let i = 0;
+    while (i < text.length) {
+      const ch = text[i];
+      // 字符串：原样取出，只把单引号统一成双引号
+      if (ch === "'" || ch === '"') {
+        const quote = ch;
+        let j = i + 1;
+        let val = '';
+        while (j < text.length) {
+          const c = text[j];
+          if (c === '\\') {
+            val += c + (text[j + 1] || '');
+            j += 2;
+            continue;
+          }
+          if (c === quote) break;
+          val += c;
+          j++;
+        }
+        if (quote === "'") val = val.replace(/\\'/g, "'").replace(/"/g, '\\"');
+        flush();
+        out += '"' + val + '"';
+        i = j + 1;
+        continue;
+      }
+      // 注释：整行/行尾 // 与 /* */ 都丢掉
+      if (ch === '/' && text[i + 1] === '/') {
+        while (i < text.length && text[i] !== '\n') i++;
+        continue;
+      }
+      if (ch === '/' && text[i + 1] === '*') {
+        const stop = text.indexOf('*/', i + 2);
+        i = stop === -1 ? text.length : stop + 2;
+        continue;
+      }
+      buf += ch;
+      i++;
+    }
+    flush();
+    return out;
+  }
+
+  // 解析配置（失败时给出定位信息；不记录任何"失败状态"，下次刷新会重新尝试）
+  function parseSitesSafe(src, from) {
+    try {
+      const sites = parseSites(src);
+      if (!sites || typeof sites !== 'object') throw new Error('解析结果不是对象');
+      return sites;
+    } catch (err) {
+      console.error('[网页大修] 站点配置解析失败（' + from + '）: ' + err.message);
+      console.error(
+        '[网页大修] 诊断: 页面=' + location.href +
+          ' ; 执行世界=' + (typeof unsafeWindow === 'undefined' ? '页面世界（页面 CSP 会限制 eval）' : '沙箱/隔离世界（正常）') +
+          ' ; 页面 CSP=' + (document.querySelector('meta[http-equiv="Content-Security-Policy"]') ? '有 meta CSP' : '无 meta CSP')
+      );
+      return null;
+    }
+  }
+
+  // 被页面 CSP 拦下 eval 时，给一句能看懂的提示
+  function hintCSP(err) {
+    const msg = String((err && err.message) || err || '');
+    return /blocked by CSP|unsafe-eval/i.test(msg)
+      ? '（被页面 CSP 拦下 Function()/eval：说明本脚本这次跑在页面世界，检查脚本头部的 @inject-into content 是否生效）'
+      : '';
   }
 
   // 匹配当前站点：返回 { site, css: [...], js: [...] }（未命中返回 null）
@@ -175,13 +310,18 @@
     const src = await loadSitesSource();
     if (!src) return;
 
-    let sites;
-    try {
-      sites = parseSites(src);
-    } catch (err) {
-      console.error('[网页大修] 站点配置解析失败: ' + err.message);
-      return;
+    let sites = parseSitesSafe(src, '最新配置');
+    let fromCache = false;
+    if (!sites) {
+      // 兜底：最新配置解析不了时，用上次"解析成功"过的缓存再试一次（配置被改坏的场景）
+      const cached = GM_getValue(SITES_CACHE, '');
+      if (cached && cached !== src) {
+        sites = parseSitesSafe(cached, '缓存配置');
+        fromCache = !!sites;
+      }
     }
+    if (!sites) return;
+    if (!fromCache) GM_setValue(SITES_CACHE, src); // 只缓存能解析成功的配置，失败不会顶掉上一份好的
 
     const matched = matchSite(sites);
     if (!matched) return; // 未登记的网站（或没有规则命中）：什么都不做
@@ -204,18 +344,20 @@
   }
 
   // ============ 工具函数 ============
-  // 加时间戳绕过缓存（仅开发模式需要）
+  // 加时间戳绕过缓存（只在用本地时；CDN 地址必须干净，才能吃到 jsDelivr 的缓存）
   function withCacheBust(url) {
-    return IS_DEV ? url + '?t=' + Date.now() : url;
+    return USE_LOCAL ? url + '?t=' + Date.now() : url;
   }
 
   // 用 Promise 包装 GM_xmlhttpRequest，方便 async/await
   // reject 出的 Error 上带 status（404 = 文件不存在，用于跳过没有该扩展名的模块）
-  function gmFetch(url) {
+  // opts.timeout：毫秒；超时按失败处理（本地探测用）。opts.bust：强制加 ?t=（探测本地用）
+  function gmFetch(url, opts) {
+    const o = opts || {};
     return new Promise((resolve, reject) => {
-      GM_xmlhttpRequest({
+      const req = {
         method: 'GET',
-        url: withCacheBust(url),
+        url: o.bust ? url + '?t=' + Date.now() : withCacheBust(url),
         onload: (res) => {
           if (res.status === 200) {
             resolve(res.responseText);
@@ -226,7 +368,10 @@
           reject(err);
         },
         onerror: () => reject(new Error('网络错误: ' + url)),
-      });
+        ontimeout: () => reject(new Error('超时: ' + url)),
+      };
+      if (o.timeout) req.timeout = o.timeout;
+      GM_xmlhttpRequest(req);
     });
   }
 
@@ -299,7 +444,7 @@
         const code = await gmFetch(BASE + '/' + file);
         new Function(code)();
       } catch (err) {
-        console.error('[工具类] 加载失败: ' + file, err);
+        console.error('[工具类] 加载失败: ' + file + hintCSP(err), err);
       }
     }
   }
@@ -312,14 +457,14 @@
       const file = name + '.js';
       try {
         const code = await gmFetch(SITE_BASE + '/' + file);
-        // 用 Function 构造器执行，避免 eval 的一些限制
+        // 用 Function 构造器执行（在页面世界会被页面 CSP 拦下，所以脚本头部写了 @inject-into content）
         // 注意：模块内的代码在全局作用域执行，可直接操作页面
         new Function(code)();
         loaded++;
       } catch (err) {
         // 404 = 这个模块没有 js，属于正常情况，跳过
         if (err.status === 404) continue;
-        console.error('[JS] 加载失败: ' + file, err);
+        console.error('[JS] 加载失败: ' + file + hintCSP(err), err);
       }
     }
     return loaded;
@@ -465,9 +610,18 @@
   const SHADOW_START = /^@shadow\s*\(([\s\S]*)\)$/;
   const SHADOW_END = /^@shadow-end$/;
   const SHADOW_SEP = '>>';
-  const hasStyleSheet = typeof CSSStyleSheet === 'function';
+  // 沙箱（隔离世界，暴力猴的 @inject-into content）里必须用"页面那个世界"的构造器：
+  // 用沙箱里的 CSSStyleSheet 造出来的对象，交给页面的 shadowRoot.adoptedStyleSheets 会被拒绝，
+  // 表现就是——普通 CSS 正常，但所有 @shadow 块都不生效。这里优先取 unsafeWindow 上的构造器。
+  const PageSheet =
+    typeof unsafeWindow !== 'undefined' && unsafeWindow && typeof unsafeWindow.CSSStyleSheet === 'function'
+      ? unsafeWindow.CSSStyleSheet
+      : typeof CSSStyleSheet === 'function'
+        ? CSSStyleSheet
+        : null;
+  const hasSheetCtor = typeof PageSheet === 'function'; // 能不能用"共享构造样式表"
 
-  const shadowBlocks = []; // [{ key, path, sheet, roots:Set }]
+  const shadowBlocks = []; // [{ key, path, sheet|null, css, roots:Set, styleEls:Map(root → <style>) }]
   const shadowRootObservers = new Set(); // 中间层 root 的观察器（嵌套路径才会用到）
   const shadowWarned = new Set();
   let shadowObserver = null; // document 层观察器
@@ -564,8 +718,42 @@
     shadowObserver.observe(document.documentElement || document, { childList: true, subtree: true });
   }
 
+  // 把一块 CSS 应用到某个 shadow root：
+  //  ① 首选共享的构造样式表（省内存、热重载不闪烁）
+  //  ② 页面拒绝这个表（跨世界等）→ 自动退化成往 root 里塞一个 <style>（只影响这一个 root）
+  // 全程 try/catch：某一块失败不会连累其它块（以前一处异常会让后面所有块都不生效）
+  function applyStyleToRoot(block, root) {
+    if (block.sheet) {
+      try {
+        if (root.adoptedStyleSheets.indexOf(block.sheet) === -1) {
+          root.adoptedStyleSheets = root.adoptedStyleSheets.concat(block.sheet);
+        }
+        block.roots.add(root);
+        return;
+      } catch (err) {
+        // 换一个 root 也救不回来 → 这一块以后都走 <style> 模式，只提示一次
+        block.sheet = null;
+        block.roots.clear();
+        if (!shadowWarned.has('__fallback')) {
+          shadowWarned.add('__fallback');
+          console.warn(
+            '[shadow] 共享样式表被拒绝（常见于沙箱/跨世界环境），已自动改用 <style> 注入 shadow root：' +
+              ((err && err.message) || err)
+          );
+        }
+      }
+    }
+    let el = block.styleEls.get(root);
+    if (!el) {
+      el = document.createElement('style');
+      el.setAttribute('data-shadow-for', block.key);
+      block.styleEls.set(root, el);
+      try { root.appendChild(el); } catch (err) { /* 忽略 */ }
+    }
+    if (el.textContent !== block.css) el.textContent = block.css;
+  }
+
   function injectShadowBlocks() {
-    if (!hasStyleSheet) return;
     for (const block of shadowBlocks) {
       const hosts = findShadowTargets(block.path);
       let sawRoot = false;
@@ -573,9 +761,7 @@
         const root = host.shadowRoot;
         if (!root) continue;
         sawRoot = true;
-        if (root.adoptedStyleSheets.indexOf(block.sheet) !== -1) continue;
-        root.adoptedStyleSheets = root.adoptedStyleSheets.concat(block.sheet);
-        block.roots.add(root);
+        applyStyleToRoot(block, root);
       }
       if (!shadowWarned.has(block.key)) {
         if (!hosts.length) {
@@ -595,12 +781,10 @@
   // 应用（首次加载与「重新加载样式」都会走到这里）
   // prune = 本次 CSS 全部加载成功时才清理"已经删掉的标记块"
   function applyShadowBlocks(blocks, prune) {
-    if (!hasStyleSheet) {
-      if (blocks.length && !shadowWarned.has('__nosheet')) {
-        shadowWarned.add('__nosheet');
-        console.warn('[shadow] 当前环境不支持 CSSStyleSheet/adoptedStyleSheets，shadow 注入已跳过');
-      }
-      return;
+    // 没有构造样式表也能干活：会自动走 <style> 注入（见 applyStyleToRoot）
+    if (!hasSheetCtor && blocks.length && !shadowWarned.has('__nosheet')) {
+      shadowWarned.add('__nosheet');
+      console.warn('[shadow] 当前环境取不到 CSSStyleSheet，shadow 注入改用 <style> 方式');
     }
 
     const seen = new Set();
@@ -608,23 +792,36 @@
       seen.add(b.key);
       let block = shadowBlocks.find(function (x) { return x.key === b.key; });
       if (!block) {
-        block = { key: b.key, path: b.path, sheet: new CSSStyleSheet(), roots: new Set() };
+        let sheet = null;
+        if (hasSheetCtor) {
+          try { sheet = new PageSheet(); } catch (err) { sheet = null; }
+        }
+        block = { key: b.key, path: b.path, sheet: sheet, css: b.css, roots: new Set(), styleEls: new Map() };
         shadowBlocks.push(block);
       } else {
         block.path = b.path;
+        block.css = b.css;
       }
-      try {
-        block.sheet.replaceSync(b.css); // 共享 sheet：热重载时所有 root 一起更新，不闪烁
-      } catch (err) {
-        console.error('[shadow] 这段 CSS 无法注入（' + b.key + '）：' + err.message);
+      if (block.sheet) {
+        try {
+          block.sheet.replaceSync(b.css); // 共享 sheet：热重载时所有 root 一起更新，不闪烁
+        } catch (err) {
+          block.sheet = null; // 这个表不可用 → 之后统一走 <style> 模式
+        }
+      }
+      if (!block.sheet) {
+        // <style> 模式：就地更新每个 root 里的元素（不删除重建 → 不闪烁）
+        block.styleEls.forEach(function (el) { el.textContent = b.css; });
       }
     }
 
     if (prune) {
       for (const block of shadowBlocks) {
         if (seen.has(block.key)) continue;
-        try { block.sheet.replaceSync(''); } catch (err) { /* 忽略 */ }
+        try { if (block.sheet) block.sheet.replaceSync(''); } catch (err) { /* 忽略 */ }
         block.roots.clear();
+        block.styleEls.forEach(function (el) { if (el.remove) el.remove(); });
+        block.styleEls.clear();
       }
     }
 
@@ -639,10 +836,16 @@
     for (const mo of shadowRootObservers) mo.disconnect();
     shadowRootObservers.clear();
     for (const block of shadowBlocks) {
-      for (const root of block.roots) {
-        root.adoptedStyleSheets = root.adoptedStyleSheets.filter(function (s) { return s !== block.sheet; });
+      if (block.sheet) {
+        for (const root of block.roots) {
+          try {
+            root.adoptedStyleSheets = root.adoptedStyleSheets.filter(function (s) { return s !== block.sheet; });
+          } catch (err) { /* 忽略 */ }
+        }
       }
       block.roots.clear();
+      block.styleEls.forEach(function (el) { if (el.remove) el.remove(); });
+      block.styleEls.clear();
     }
   }
 

@@ -42,15 +42,15 @@ article {
 }
 // Card-帖子 | 右上Item-更多-Panel
 [data-testid="Dropdown"] {
+  // Submit 订阅
   // Follow 关注账户
   // Mute 静音
-  // Block 封锁
   // 嵌入推文
   // 请求提供社区笔记
   [role="menuitem"]:has(
+    path[d^="M12 4c-1.1"],
     path[d^="M10 4c-1.105"],
     path[d^="M16 22h"],
-    path[d^="M12 3.75c"],
     path[d^="M15.24 4.31l"],
     path[d^="M22 2.63v17"]
   ) {
@@ -105,6 +105,29 @@ header nav {
   > .r-184en5c {
     display: none;
   }
+}
+
+/* 
+    通用：中Area | Card-用户
+*/
+[data-testid="UserCell"] {
+  .r-1cwvpvk:has([data-testid$="follow"]) {
+    pointer-events: none;
+  }
+  &:has([data-testid$="unfollow"]) {
+    background-color: #020;
+  }
+  &:has([data-testid$="unblock"]) {
+    background-color: #200;
+  }
+}
+
+/* 
+    Page-帖子详情
+*/
+// 中Area | Area-回复
+article + [data-testid="inline_reply_offscreen"] {
+  display: none;
 }
 
 /* 
@@ -174,9 +197,9 @@ header nav {
 }
 
 /* 
-    Page-帖子详情
+    Page-列表
 */
-// 中Area | Area-回复
-article + [data-testid="inline_reply_offscreen"] {
+[data-testid="cellInnerDiv"]:has([data-testid="listCell"]):has(.r-1cwvpvk),
+[data-testid="cellInnerDiv"]:has([href="/i/lists/suggested"]) {
   display: none;
 }

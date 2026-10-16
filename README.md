@@ -9,12 +9,14 @@ start.user.js            总入口（直接装在暴力猴里的文件）
 Web/
   sites.js               站点管理表（哪些网站、哪些地址加载哪些入口；运行时读取）
   Bilibili/              一个站点一个文件夹
-    _入口.less           入口（主文件）：把本站各模块 @import 在一起
-    _入口.css            唯一的编译产物（站点目录里只有这一个 .css）
-    通用.less            模块（顶部写了 // main: _入口.less，保存它就重新编译入口）
+    _Entry.less          入口（主文件）：把本站各模块 @import 在一起
+    _Entry.css           编译产物（只有入口才产出 .css）
+    _Entry.js            JS 入口（需要脚本行为时才写；JS 同样按"每站一入口"组织）
+    _Entry-直播.less     分页面入口示例：直播页"追加"的那一份（另有同名 .css / .js）
+    通用.less            模块（顶部写了 // main: _Entry.less，保存它就重新编译入口）
     Page-首页.less 等     其它模块
-    通用.js              需要脚本行为时才写（可为空；JS 不参与合并）
-    _参数.less           共享参数（只放变量/mixin，用 (reference) 引用；不产出 .css）
+    _param.less          共享参数 / CSS 变量（只放变量/mixin，不产出 .css）
+  _媒体/                 按站点命名放单文件入口的站点（如 X推特.less / .css / .js）
 ublock.user.txt          uBlock Origin 规则（CSS 做不到的才写这里）
 utils/                   工具类（由 start.user.js 自动加载：click / disableShortcut）
 ```
@@ -25,10 +27,22 @@ utils/                   工具类（由 start.user.js 自动加载：click / di
   `http://127.0.0.1:5500/start.user.js` → 暴力猴安装/更新。
 - 改完 CSS：刷新页面，或点暴力猴菜单「重新加载样式（手动刷新）」。
 - 临时和原网站对比：菜单「临时退出脚本」。
-- 加网站：建 `Web/<网站>/` 文件夹（含 `_入口.less`）→ 在 `Web/sites.js` 里加一条 → 刷新页面。
-- **发布**：把 `start.user.js` 里的 `IS_DEV` 改成 `false`，提交并打新 tag（`REMOTE_BASE` 的版本号同步改）后，
+- 加网站：建 `Web/<网站>/` 文件夹（含入口 `_Entry.less`）→ 在 `Web/sites.js` 里加一条 → 刷新页面。
+- **来源自动选择**（不用手动切开发/发布）：打开页面先试本地 `127.0.0.1:5500`，连得上就用本地
+  （改完 CSS 刷新即生效），连不上/超时 1.5 秒就自动改用 CDN 上的发布版 —— 本地开着 = 开发，本地关掉 = 发布。
+- **发布**：改 `start.user.js` 里 `REMOTE_BASE` 的 tag 版本号 → 提交 → 打新 tag，之后
   `https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@<tag>/start.user.js`
-  可直接安装。
+  可直接安装（关掉 live-server 时，已安装的脚本会自动走这个地址）。
+
+### 运行环境（为什么脚本头部写了 `@inject-into content`）
+
+- 本脚本有两处必须**执行下载来的代码**：`utils/*.js` 与 `Web/<网站>/*.js`（用 `Function` 构造器）。
+- 如果脚本运行在**页面世界**，页面自己的 CSP 会拦下它（X/Twitter 这类站点很典型），控制台报
+  `call to Function() blocked by CSP` → 整个脚本不生效（表现为"过一会儿或重启浏览器才恢复"）。
+- 所以头部写了 `@inject-into content`，强制在扩展沙箱里执行，页面 CSP 就管不到这些调用。
+- `Web/sites.js` 的解析也改成了**纯数据解析**（`JSON.parse`，不再用 `eval`）→ 双保险：
+  即使某次仍落在页面世界，样式也照样能加载。
+- 真遇到同类报错时，控制台会额外打印三项诊断：`页面 / 执行世界 / 页面 CSP`。
 
 ### 站点管理表（`Web/sites.js`）
 
@@ -38,12 +52,20 @@ const SITES = {
     enabled: true,                          // 省略 = 启用；false = 整个网站不加载
     dir: 'Web/Bilibili',                    // 站点目录（本地与发布共用同一结构）
     rules: [                                // 命中哪些地址 → 加载哪些入口（按顺序匹配，命中都生效）
-      { match: ['live.bilibili.com'], css: '_入口', js: ['通用', 'Page-直播'] },
-      { match: ['bilibili.com/*'], css: '_入口', js: ['通用'] },
+      { match: ['bilibili.com'], css: '_Entry', js: ['_Entry'] },
+      { match: ['live.bilibili.com'], css: '_Entry-直播', js: ['_Entry-直播'] },  // 直播页多加载这一份
     ],
+  },
+  '百度贴吧': {
+    enabled: true,
+    dir: 'Web/百度贴吧',
+    rules: [{ match: ['tieba.baidu.com'], css: '_Entry' }],
   },
 };
 ```
+
+> 配置按**纯数据**解析（严格 JSON 优先，兼容现在的 JS 风格写法）；
+> 字符串里有 `,`、`//`、`{}` 之类的字符都没问题，字符串统一用双引号写最稳。
 
 `match` 的写法：
 
@@ -61,25 +83,31 @@ const SITES = {
 
 ### CSS 的编译与合并（LESS）
 
-每个站点**只有一个 CSS 产物** `_入口.css`，由 `_入口.less` 把各模块 `@import` 在一起编译而成：
+每个站点由**入口文件**把各模块 `@import` 在一起，编译成一个 `.css`（站点目录里**只有不带 `// out: false` 的 `.less` 会产出 `.css`**）：
 
 ```less
-// Web/Bilibili/_入口.less
+// Web/Bilibili/_Entry.less          主站入口
 @import '通用';
 @import 'Page-首页';
 // … 顺序 = 级联顺序（后面的覆盖前面的）
+
+// Web/Bilibili/_Entry-直播.less      直播页「追加」的入口（只引直播相关模块）
+@import 'Page-直播';
 ```
 
 各模块顶部统一写这两行（Easy LESS 的**文件级设置**）：
 
 ```less
-// main: _入口.less    ← 保存本文件时，改为编译入口文件（保证唯一产物同步更新）
+// main: _Entry.less   ← 保存本文件时，改为编译入口文件（保证入口产物同步更新）
 // out: false          ← 本文件不单独产出 .css
 ```
 
 - 这样**改任何 `.less`（含共享参数文件）都不会出现"某个 `.css` 还是旧值"**
-- 共享参数：建 `_参数.less`（只放变量/mixin，同样写上面两行），在入口顶部用
-  `@import (reference) '_参数';` 引用（`(reference)` 只取变量、不输出它的规则）
+- 一个站点可以有**多个入口**（如 B站：主站 `_Entry` + 直播页 `_Entry-直播`），
+  由 `sites.js` 的 `rules` 决定"哪些地址加载哪些入口"
+- 共享参数：建 `_param.less`（只放变量/mixin，同样写上面两行），在入口里 `@import '_param';`
+  - 想让它里面的 `:root { --变量 }` **一起输出**进产物（贴吧就是这么用的）→ 直接 `@import`
+  - 只想取变量、不输出它的规则 → 写 `@import (reference) '_param';`
 - ⚠️ **只写 LESS 级的 `@import`**（编译期展开）。别用 CSS 级的 `@import`（`@import url("x.css")`）：
   脚本是把 CSS 内联进 `<style>` 的，相对路径会按页面地址解析 → 404
 - ⚠️ **共享文件里只放变量/mixin**，不要放实际规则或 `/* @shadow */` 标记
@@ -212,8 +240,8 @@ restore();                                   // 解除拦截
 
 ## 四、发布流程
 
-1. 改内容：`Web/<网站>/*.less` 会被插件自动编译成 `.css`（两者都要提交）、`ublock.user.txt`、必要时 `start.user.js`
-2. 升版本：`start.user.js` 的 `@version` 末位 +1，并把 `REMOTE_BASE` 里的 tag 改成同一个版本号
+1. 改内容：`Web/<网站>/*.less` 会被插件自动编译成入口 `.css`（两者都要提交）、`ublock.user.txt`、必要时 `start.user.js`
+2. 升版本：`start.user.js` 的 `@version`（小改动 +末位，结构/行为变化 +中间位），并把 `REMOTE_BASE` 里的 tag 改成同一个版本号
 3. 提交 → `git push origin main`
 4. 打 tag → `git push origin <tag>`（**注意别用 `git push --tags`**）
 5. 验证 CDN：

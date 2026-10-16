@@ -278,6 +278,7 @@
 }
 #content .forum_content > #content_wrap .j_thread_list .threadlist_detail > .threadlist_text > .threadlist_abs {
   width: initial;
+  color: #999;
   text-overflow: initial;
   white-space: initial;
   display: -webkit-box;
@@ -345,6 +346,15 @@
   width: 100%;
   padding: 0 20px;
   left: 0;
+  background: #fff;
+  border: 1px solid #bbbdbf;
+}
+.l_container > .content > #pb_content > .left_section > #j_core_title_wrap > .core_title {
+  background: initial;
+  border: initial;
+}
+.l_container > .content > #pb_content > .left_section > #j_p_postlist > .l_post {
+  box-sizing: border-box;
 }
 .l_post {
   width: 100%;
@@ -363,7 +373,7 @@
 }
 .l_post > .d_post_content_main {
   flex: 1 1 auto;
-  padding: 10px 20px;
+  padding: 20px 20px 10px 20px;
 }
 .l_post > .d_post_content_main > :not(.p_content, .core_reply) {
   display: none;
@@ -375,7 +385,16 @@
   display: none;
 }
 .l_post > .d_post_content_main > .p_content > cc .d_post_content {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+}
+.l_post > .d_post_content_main > .p_content > cc .d_post_content > .BDE_Image {
+  width: auto;
+  max-height: 80vh;
+  vertical-align: top;
+}
+.l_post > .d_post_content_main > .p_content > cc .d_post_content > .BDE_Smiley {
+  width: 1.25em;
+  height: auto;
 }
 .l_post > .d_post_content_main > .core_reply {
   margin: 0;
