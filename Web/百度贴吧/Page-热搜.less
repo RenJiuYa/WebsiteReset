@@ -1,9 +1,54 @@
+// main: _Entry.less
+// out: false
+
 /* 
     Page-热搜
 */
 
-.topic-wrapper{
-  width: 80vw;
+.topic-wrapper {
+  width: var(--tieba_width);
+
+  > .topic-body {
+    display: flex;
+
+    > .main {
+      flex-grow: 1;
+      width: 100%;
+
+      // Area-空白
+      > .post-chandelier-stunt {
+        display: none;
+      }
+
+      // Area-发帖
+      > #post-chandelier {
+        box-sizing: border-box;
+        width: 100%;
+        position: relative;
+        pointer-events: none;
+      }
+      // Card-帖子
+      .thread-item {
+        display: flex;
+
+        &:has(.topic-tag) {
+          display: none;
+        }
+        > .center {
+          flex-grow: 1;
+          width: initial;
+
+          > .content {
+            white-space: initial;
+          }
+        }
+        > .right {
+          flex-shrink: 0;
+        }
+      }
+    }
+    > .right-aside:has(.aside-block-top) {
+      display: none;
+    }
+  }
 }
-
-

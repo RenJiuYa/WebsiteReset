@@ -1,0 +1,118 @@
+/* 
+    组件：Box-用户简介
+*/
+[data-testid="HoverCard"] .r-nsbfu8 .r-1wtj0ep button {
+  pointer-events: none;
+}
+[data-testid="HoverCard"] .r-nsbfu8 .r-1wzrnnt {
+  display: none;
+}
+/* 
+    组件：Card-帖子
+*/
+article {
+  cursor: initial;
+}
+article [data-testid="User-Name"] [data-testid="icon-verified"],
+article [data-testid="User-Name"] [data-testid="icon-verified"] ~ [role="link"] {
+  display: none;
+}
+article [data-testid="User-Name"] .r-1wvb978 {
+  pointer-events: none;
+}
+article [role="group"] > :has(
+      [data-testid="reply"],
+      [data-testid="retweet"],
+      [data-testid="like"],
+      [aria-haspopup="menu"]
+    ) {
+  pointer-events: none;
+}
+[data-testid="Dropdown"] [role="menuitem"]:has(
+    path[d^="M10 4c-1.105"],
+    path[d^="M16 22h"],
+    path[d^="M12 3.75c"],
+    path[d^="M15.24 4.31l"],
+    path[d^="M22 2.63v17"]
+  ) {
+  display: none;
+}
+/* 
+    通用：左Area
+*/
+header nav > a:not(
+      [href="/home"],
+      [href="/explore"],
+      [href="/i/chat"],
+      [href="/i/grok"],
+      [href="/i/history"],
+      [data-testid="AppTabBar_Profile_Link"]
+    ) {
+  display: none;
+}
+[data-testid="Dropdown"] > .r-1mnxbyr > :not(:has([href$="/lists"], [href$="/settings"])) {
+  display: none;
+}
+/* 
+    通用：右Area
+*/
+[data-testid="sidebarColumn"] .r-vacyoi > :has(
+    [href="/i/premium_sign_up"],
+    [role="navigation"]
+  ),
+[data-testid="sidebarColumn"] .r-vacyoi [data-testid="UserCell"] .r-1cwvpvk {
+  display: none;
+}
+/* 
+    通用：中Area
+*/
+[data-testid="primaryColumn"] > [aria-label] > .r-184en5c {
+  display: none;
+}
+/* 
+    Page-用户
+*/
+[data-testid="primaryColumn"] .r-1g40b8q .r-f8sm7e {
+  cursor: initial;
+}
+[data-testid="primaryColumn"] .r-1g40b8q .r-f8sm7e [data-testid$="follow"] {
+  display: none;
+}
+[data-testid="primaryColumn"] .r-1ifxtd0 [data-testid="UserName"] > :not(:first-child),
+[data-testid="primaryColumn"] .r-1ifxtd0 [data-testid="UserName"] .r-1awozwy.r-xoduu5 > :has([data-testid="icon-verified"]) {
+  display: none;
+}
+[data-testid="primaryColumn"] .r-1ifxtd0 [data-testid^="UserAvatar-Container"] + div > :not([data-testid="userActions"], [data-testid="placementTracking"]) {
+  display: none;
+}
+[data-testid="primaryColumn"] .r-1ifxtd0 [data-testid^="UserAvatar-Container"] + div > [data-testid="placementTracking"]:has(
+        [aria-label^="Submit"],
+        [aria-label^="订阅"],
+        [aria-label^="訂閱"]
+      ) {
+  visibility: hidden;
+}
+[data-testid="primaryColumn"] .r-1ifxtd0 [data-testid="UserProfileHeader_Items"] {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5em;
+}
+[data-testid="primaryColumn"] .r-1ifxtd0 ~ * {
+  display: none;
+}
+[data-testid="Dropdown"] [role="menuitem"]:has(
+    path[d^="M13.5 8.5c0"],
+    path[d^="M3 4.5C3"],
+    path[d^="M18.36 5.64c"]
+  ) {
+  display: none;
+}
+[data-testid="primaryColumn"] nav [data-testid="ScrollSnap-List"] > :has([href$="/subs"]) {
+  display: none;
+}
+/* 
+    Page-帖子详情
+*/
+article + [data-testid="inline_reply_offscreen"] {
+  display: none;
+}

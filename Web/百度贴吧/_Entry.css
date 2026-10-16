@@ -1,0 +1,451 @@
+:root {
+  --tieba_width: 80vw;
+  --tieba_border_ba: #e4e6eb;
+}
+/* Box-光标选定 */
+#selectsearch-icon {
+  display: none;
+}
+/* Box-用户简介 */
+#user_visit_card {
+  height: initial;
+}
+#user_visit_card > .ui_card_content {
+  overflow: initial;
+}
+#user_visit_card > .ui_card_content > #card_headinfo_wrap {
+  display: none;
+}
+#user_visit_card > .ui_card_content .card_userinfo_middle > :not(.card_userinfo_title, .card_userinfo_num),
+#user_visit_card > .ui_card_content .card_userinfo_middle > .card_userinfo_title > :not(.userinfo_username) {
+  display: none;
+}
+/* 
+    组件：Bar-贴吧导航
+*/
+#com_userbar > ul > li:not(.u_username, .u_news, .u_setting, .u_new_pc),
+#com_userbar > ul > .u_username li:not(.u_itieba, .u_favor, .u_pan),
+#com_userbar > ul > .u_setting li:not( :has(
+        [href*="passport.baidu.com"],
+        [href*="/home/profile?"],
+        [href*="tieba.baidu.com/pmc"]
+      ), .u_logout) {
+  display: none;
+}
+/* 
+    组件：Area-搜索
+*/
+.head_inner > .search_top {
+  display: none;
+}
+.head_inner > .search_main_wrap > .search_main {
+  padding: 50px 0;
+}
+.head_inner > .search_main_wrap > .search_main.search_main_fixed {
+  visibility: hidden;
+}
+.head_inner > .search_main_wrap > .search_main > .suggestion > .suggestion_list > .break_title:first-of-type,
+.head_inner > .search_main_wrap > .search_main > .suggestion > .suggestion_list li:has(.operation_item) {
+  display: none;
+}
+/* 
+    Fix右Bar-分享
+*/
+#spage-tbshare-container {
+  display: none;
+}
+/* 
+    Fix右下Bar-功能
+*/
+.tbui_aside_float_bar {
+  margin: 0;
+  left: initial;
+  right: 2%;
+}
+.tbui_aside_float_bar > :not(.tbui_fbar_post, .tbui_fbar_refresh, .tbui_fbar_top) {
+  display: none;
+}
+/* 
+    Area-Footer
+*/
+.footer {
+  display: none;
+}
+/* 
+    Page-404
+*/
+.page404 > #main-wraper > :not(.message-info),
+.page404 > #main-wraper > .message-info > .right-info-download > :not(#errorText),
+.page404 > #main-wraper .tbsy-tag {
+  display: none;
+}
+/* 
+    Page-图片详情
+*/
+.af_container > .af_left > .af_head > :not(.af_head_left, .af_head_right) {
+  display: none;
+}
+.af_container > .af_left > .af_head > .af_head_right {
+  width: initial;
+}
+.af_container > .af_left > .af_original .af_cross_tip > * {
+  display: none;
+}
+.af_container > .af_right > :not(.af_right_fold, .af_reply_container),
+.af_container > .af_right > .af_reply_container > :not(.af_thread_head) {
+  display: none;
+}
+/* 
+    Page-用户
+*/
+.ihome_body > .right_aside > .ihome_aside_section > :not(h1) {
+  display: none;
+}
+.main-sec {
+  width: var(--tieba_width);
+}
+.main-sec > :not(.content-sec) {
+  display: none;
+}
+.main-sec > .content-sec {
+  width: var(--tieba_width);
+  display: flex;
+  gap: 10px;
+}
+.main-sec > .content-sec > .left-sec > #my_tieba_mod .pre_icon_wrap,
+.main-sec > .content-sec > .left-sec > #my_tieba_mod .user_score {
+  display: none;
+}
+.main-sec > .content-sec > .left-sec > .left-cont-wraper {
+  bottom: 0;
+  position: initial;
+}
+.main-sec > .content-sec > .left-sec > .left-cont-wraper > div:has(#addforum) > .onekey_sign_wrap,
+.main-sec > .content-sec > .left-sec > .left-cont-wraper > #spage_game_tab_wrapper,
+.main-sec > .content-sec > .left-sec > .left-cont-wraper > .aggregate_entrance_wrap {
+  display: none;
+}
+.main-sec > .content-sec > .right-sec {
+  flex-grow: 1;
+  width: initial;
+  margin: 0;
+  display: grid;
+  grid-template-areas: "banner banner" "dynamic hot";
+  grid-template-columns: 3fr 2fr;
+}
+.main-sec > .content-sec > .right-sec > .r-top-sec {
+  grid-area: banner;
+  display: none;
+}
+.main-sec > .content-sec > .right-sec > .r-left-sec {
+  grid-area: dynamic;
+  width: initial;
+}
+.main-sec > .content-sec > .right-sec > .r-left-sec > #sub_nav_wrap {
+  display: none;
+}
+.main-sec > .content-sec > .right-sec > .r-left-sec > #new_list {
+  margin: 0;
+}
+.main-sec > .content-sec > .right-sec > .r-left-sec > #new_list .n_right {
+  width: initial;
+}
+.main-sec > .content-sec > .right-sec > .r-right-sec {
+  grid-area: hot;
+  width: initial;
+}
+.main-sec > .content-sec > .right-sec > .r-right-sec > #right_wrap {
+  width: initial;
+  position: sticky;
+  top: 10px;
+}
+.main-sec > .content-sec > .right-sec > .r-right-sec > #right_wrap > :not(div:has(.topic_list_box)) {
+  display: none;
+}
+.main-sec > .content-sec > .right-sec > .r-right-sec > #right_wrap .topic_list_box {
+  margin: 0;
+}
+/* 
+    Page-热搜
+*/
+/* 
+    组件：上Area-贴吧信息
+*/
+.head_main > .head_content,
+.l_container > .content {
+  width: var(--tieba_width);
+}
+.head_main > .head_content > .card_banner > :not(#forum-card-banner),
+.l_container > .content > .card_banner > :not(#forum-card-banner) {
+  display: none;
+}
+.head_main > .head_content > .card_top_wrap .sign_tip_container > .j_succ_info,
+.l_container > .content > .card_top_wrap .sign_tip_container > .j_succ_info {
+  width: initial;
+}
+.head_main > .head_content > .card_top_wrap .sign_tip_container > .j_succ_info > .sign_tip_bdwrap > .sign_tip_main > .sign_succ_calendar > :not(.sign_succ_calendar_title, .sign_succ_table),
+.l_container > .content > .card_top_wrap .sign_tip_container > .j_succ_info > .sign_tip_bdwrap > .sign_tip_main > .sign_succ_calendar > :not(.sign_succ_calendar_title, .sign_succ_table),
+.head_main > .head_content > .card_top_wrap .sign_tip_container > .j_succ_info > .sign_tip_bdwrap > .sign_tip_aside,
+.l_container > .content > .card_top_wrap .sign_tip_container > .j_succ_info > .sign_tip_bdwrap > .sign_tip_aside {
+  display: none;
+}
+.head_main > .head_content > .card_top_wrap .sign_tip_container > .j_succ_info .ui_card_wrap,
+.l_container > .content > .card_top_wrap .sign_tip_container > .j_succ_info .ui_card_wrap {
+  display: none;
+}
+.head_main > .head_content #tb_nav > .nav_list,
+.l_container > .content #tb_nav > .nav_list {
+  width: initial;
+}
+.head_main > .head_content #tb_nav > .nav_list > li:not( :has([stats-data$="st_value=tabmain"], [stats-data$="st_value=tabgood"])),
+.l_container > .content #tb_nav > .nav_list > li:not( :has([stats-data$="st_value=tabmain"], [stats-data$="st_value=tabgood"])) {
+  display: none;
+}
+/* 
+    组件：Area-发帖
+*/
+#tb_rich_poster_container {
+  box-sizing: border-box;
+  width: var(--tieba_width);
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+#tb_rich_poster_container #tb_rich_poster {
+  margin: 0;
+}
+#tb_rich_poster_container #tb_rich_poster > .poster_head {
+  margin: 10px 0;
+}
+#tb_rich_poster_container #tb_rich_poster > .poster_body > .ueditor_container > .old_style_wrapper {
+  box-sizing: border-box;
+  width: 100%;
+}
+#tb_rich_poster_container #tb_rich_poster > .poster_body > .ueditor_container > .old_style_wrapper > .edui-container {
+  width: 100%;
+}
+#tb_rich_poster_container #tb_rich_poster > .poster_body > .ueditor_container > .old_style_wrapper > .edui-container > .tb_poster_placeholder {
+  display: none;
+}
+#tb_rich_poster_container #tb_rich_poster > .poster_body > .ueditor_container > .old_style_wrapper > .edui-container > .edui-toolbar > .edui-btn-toolbar > .edui-btn-paypost,
+#tb_rich_poster_container #tb_rich_poster > .poster_body > .ueditor_container > .old_style_wrapper > .edui-container > .edui-toolbar > .edui-btn-toolbar > .edui-btn-medal,
+#tb_rich_poster_container #tb_rich_poster > .poster_body > .ueditor_container > .old_style_wrapper > .edui-container > .edui-toolbar > .edui-btn-toolbar > .edui-btn-scrawl,
+#tb_rich_poster_container #tb_rich_poster > .poster_body > .ueditor_container > .old_style_wrapper > .edui-container > .edui-toolbar > .edui-btn-toolbar > .edui-btn-quick-reply {
+  display: none;
+}
+#tb_rich_poster_container #tb_rich_poster > .poster_body > .ueditor_container > .old_style_wrapper > .edui-container > .edui-editor-body #ueditor_replace {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px;
+}
+#tb_rich_poster_container #tb_rich_poster > .poster_body > .poster_share > :not(label) {
+  display: none;
+}
+#tb_rich_poster_container #tb_rich_poster > .poster_body > .editor_bottom_panel {
+  margin: 0;
+  padding: 0;
+}
+#content {
+  width: var(--tieba_width);
+}
+#content .forum_content {
+  display: flex;
+  background: none;
+}
+#content .forum_content > #content_wrap {
+  flex: 1 1 auto;
+  width: initial;
+}
+#content .forum_content > #content_wrap .interview #interview-share-wrapper,
+#content .forum_content > #content_wrap .interview .pReply,
+#content .forum_content > #content_wrap .interview #listEditorCnt {
+  display: none;
+}
+#content .forum_content > #content_wrap .j_thread_list .threadlist_lz > .threadlist_title {
+  font-size: 1.5em;
+}
+#content .forum_content > #content_wrap .j_thread_list .threadlist_lz > .threadlist_author > .tb_icon_author > :not(.icon_author, .frs-author-name-wrap),
+#content .forum_content > #content_wrap .j_thread_list .threadlist_lz > .threadlist_author > .tb_icon_author > .frs-author-name-wrap > :not(.frs-author-name) {
+  display: none;
+}
+#content .forum_content > #content_wrap .j_thread_list .threadlist_detail {
+  display: flex;
+  font-size: 1.2em;
+}
+#content .forum_content > #content_wrap .j_thread_list .threadlist_detail > .threadlist_text {
+  flex: 1 1 auto;
+  width: initial;
+  padding-right: 50px;
+}
+#content .forum_content > #content_wrap .j_thread_list .threadlist_detail > .threadlist_text > .threadlist_abs {
+  width: initial;
+  text-overflow: initial;
+  white-space: initial;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+#content .forum_content > #content_wrap .j_thread_list .threadlist_detail > .threadlist_author {
+  flex-shrink: 0;
+}
+#content .forum_content > #aside {
+  flex-shrink: 0;
+  border-left: 1px solid var(--tieba_border_ba);
+}
+#content .forum_content > #aside div:has(> .app_download_box) > :has(> .celebrity),
+#content .forum_content > #aside div:has(> .app_download_box) > .app_download_box {
+  display: none;
+}
+#content .forum_content > #aside div:has(> .app_download_box) #user_info .pre_icon_wrap,
+#content .forum_content > #aside div:has(> .app_download_box) #user_info .user_score {
+  display: none;
+}
+#content + .foot {
+  width: var(--tieba_width);
+}
+#content + .foot .frs_content_footer_pagelet {
+  width: var(--tieba_width);
+}
+[id="pagelet_frs-base/pagelet/fixed_yy_bullet"] {
+  display: none;
+}
+.l_container {
+  width: var(--tieba_width);
+}
+.l_container > .content > * {
+  width: var(--tieba_width);
+}
+.l_container > .content .p_thread {
+  width: var(--tieba_width);
+}
+.l_container > .content .p_thread > .l_thread_info {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0 10px;
+}
+.l_container > .content .p_thread > .l_thread_info > .l_posts_num {
+  display: flex;
+  width: 100%;
+}
+.l_container > .content .p_thread > .l_thread_info > .l_posts_num > .l_pager {
+  margin-right: auto;
+}
+.l_container > .content .p_thread #tofrs_up {
+  display: none;
+}
+.l_container > .content > #pb_content > .right_section {
+  display: none;
+}
+.l_container > .content > #pb_content > .left_section {
+  width: 100%;
+}
+.l_container > .content > #pb_content > .left_section > #j_core_title_wrap {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 20px;
+  left: 0;
+}
+.l_post {
+  width: 100%;
+  display: flex;
+}
+.l_post > .d_author {
+  flex-shrink: 0;
+}
+.l_post > .d_author > .p_author {
+  position: sticky;
+  top: 70px;
+}
+.l_post > .d_author > .p_author > :not(.icon, .d_name, .l_badge),
+.l_post > .d_author > .p_author > .d_name > :not(.p_author_name) {
+  display: none;
+}
+.l_post > .d_post_content_main {
+  flex: 1 1 auto;
+  padding: 10px 20px;
+}
+.l_post > .d_post_content_main > :not(.p_content, .core_reply) {
+  display: none;
+}
+.l_post > .d_post_content_main > .p_content {
+  padding: 0;
+}
+.l_post > .d_post_content_main > .p_content > :not(cc) {
+  display: none;
+}
+.l_post > .d_post_content_main > .p_content > cc .d_post_content {
+  font-size: 1.5rem;
+}
+.l_post > .d_post_content_main > .core_reply {
+  margin: 0;
+}
+.l_post > .d_post_content_main > .core_reply .user-hide-post-down {
+  display: none;
+}
+.l_post > .d_post_content_main > .core_reply > .core_reply_tail > :not(.post-tail-wrap) {
+  display: none;
+}
+.l_post > .d_post_content_main > .core_reply > .core_reply_tail .post-tail-wrap {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+.l_post > .d_post_content_main > .core_reply > .core_reply_tail .post-tail-wrap > * {
+  margin: 0;
+}
+.l_post > .d_post_content_main > .core_reply > .core_reply_tail .post-tail-wrap > .question-image,
+.l_post > .d_post_content_main > .core_reply > .core_reply_tail .post-tail-wrap > .j_jb_ele,
+.l_post > .d_post_content_main > .core_reply > .core_reply_tail .post-tail-wrap > .tail-info:has(a) {
+  display: none;
+}
+.l_post > .d_post_content_main > .core_reply > .core_reply_tail .post-tail-wrap > .tail-info:not(:has(a)) {
+  order: -1;
+}
+.l_post > .d_post_content_main > .core_reply > .core_reply_tail .post-tail-wrap > .p_reply {
+  margin-left: auto;
+}
+.l_post > .d_post_content_main > .core_reply > .j_lzl_container {
+  width: initial;
+}
+/* 
+    Page-热搜
+*/
+.topic-wrapper {
+  width: var(--tieba_width);
+}
+.topic-wrapper > .topic-body {
+  display: flex;
+}
+.topic-wrapper > .topic-body > .main {
+  flex-grow: 1;
+  width: 100%;
+}
+.topic-wrapper > .topic-body > .main > .post-chandelier-stunt {
+  display: none;
+}
+.topic-wrapper > .topic-body > .main > #post-chandelier {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  pointer-events: none;
+}
+.topic-wrapper > .topic-body > .main .thread-item {
+  display: flex;
+}
+.topic-wrapper > .topic-body > .main .thread-item:has(.topic-tag) {
+  display: none;
+}
+.topic-wrapper > .topic-body > .main .thread-item > .center {
+  flex-grow: 1;
+  width: initial;
+}
+.topic-wrapper > .topic-body > .main .thread-item > .center > .content {
+  white-space: initial;
+}
+.topic-wrapper > .topic-body > .main .thread-item > .right {
+  flex-shrink: 0;
+}
+.topic-wrapper > .topic-body > .right-aside:has(.aside-block-top) {
+  display: none;
+}

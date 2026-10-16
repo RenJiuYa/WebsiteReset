@@ -1,0 +1,170 @@
+// main: _Entry.less
+// out: false
+
+/* 
+    组件：Box-用户简介
+*/
+
+[data-testid="HoverCard"] .r-nsbfu8 {
+  .r-1wtj0ep button {
+    pointer-events: none;
+  }
+  .r-1wzrnnt {
+    display: none;
+  }
+}
+
+// 左Area | Item
+header nav {
+  > a:not(
+      [href="/home"],
+      [href="/explore"],
+      [href="/i/chat"],
+      [href="/i/grok"],
+      [href="/i/history"],
+      [data-testid="AppTabBar_Profile_Link"]
+    ) {
+    display: none;
+  }
+}
+// 左Area | Item-更多-Panel
+[role="menu"].r-1xcajam [data-testid="Dropdown"] > .r-1mnxbyr {
+  > :not(:has([href$="/lists"], [href$="/settings"])) {
+    display: none;
+  }
+}
+
+// 右Area
+[data-testid="sidebarColumn"] .r-vacyoi {
+  > :has([href="/i/premium_sign_up"]),
+  > :has([href^="/i/connect_people"]),
+  > :has([role="navigation"]) {
+    display: none;
+  }
+}
+
+// 中Area
+[data-testid="primaryColumn"] > [aria-label] {
+  // Area-发帖
+  > .r-184en5c {
+    display: none;
+  }
+}
+
+// Card-帖子
+article {
+  cursor: initial;
+
+  // 左上Comp-昵称
+  [data-testid="User-Name"] {
+    // Comp-VIP
+    [data-testid="icon-verified"],
+    [data-testid="icon-verified"] ~ [role="link"] {
+      display: none;
+    }
+    // Comp-ID
+    .r-1wvb978 {
+      pointer-events: none;
+    }
+  }
+  // 下Bar-功能
+  [role="group"]
+    > :has(
+      [data-testid="reply"],
+      [data-testid="retweet"],
+      [data-testid="like"],
+      [aria-haspopup="menu"]
+    ) {
+    pointer-events: none;
+  }
+}
+// Card-帖子 | 右上Item-更多-Panel
+// 未关注的人的帖子:has(path[d^="M12 13.6c1.64"])
+[role="menu"] [data-testid="Dropdown"] {
+  // Follow 关注账户
+  // Mute 静音
+  // Block 封锁
+  // 嵌入推文
+  // 请求提供社区笔记
+  [role="menuitem"]:has(
+    path[d^="M10 4c-1.105"],
+    path[d^="M16 22h"],
+    path[d^="M12 3.75c"],
+    path[d^="M15.24 4.31l"],
+    path[d^="M22 2.63v17"]
+  ) {
+    display: none;
+  }
+}
+
+/* Page-用户 */
+
+// 中Area | 顶Bar
+[data-testid="primaryColumn"] .r-1g40b8q .r-f8sm7e {
+  cursor: initial;
+  
+  [data-testid$="follow"] {
+    display: none;
+  }
+}
+// 中Area | 上Area-用户信息
+[data-testid="primaryColumn"] .r-1ifxtd0 {
+  // 左上Comp-昵称
+  [data-testid="UserName"] {
+    > :not(:first-child),
+    // Comp-VIP
+    .r-1awozwy.r-xoduu5 > :has([data-testid="icon-verified"]) {
+      display: none;
+    }
+  }
+  // 右上Comp-功能
+  [data-testid^="UserAvatar-Container"] + div {
+    > :not([data-testid="userActions"], [data-testid="placementTracking"]) {
+      display: none;
+    }
+    > [data-testid="placementTracking"]:has(
+        [aria-label^="Submit"],
+        [aria-label^="订阅"],
+        [aria-label^="訂閱"]
+      ) {
+      visibility: hidden;
+    }
+  }
+  // 中Area-账号信息
+  [data-testid="UserProfileHeader_Items"] {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5em;
+  }
+  // 下Card-AD
+  & ~ * {
+    display: none;
+  }
+}
+// 中Area | 上Area-用户信息 | Comp-操作-Panel
+[role="menu"] [data-testid="Dropdown"] {
+  // 关于此账户
+  // 查看列表
+  // 复制个人资料链接
+  [role="menuitem"]:has(
+    path[d^="M13.5 8.5c0"],
+    path[d^="M3 4.5C3"],
+    path[d^="M18.36 5.64c"]
+  ) {
+    display: none;
+  }
+}
+// 中Area | 中Bar-导航
+[data-testid="primaryColumn"] nav [data-testid="ScrollSnap-List"] {
+  // Item-订阅
+  > :has([href$="/subs"]) {
+    display: none;
+  }
+}
+
+/* Page-帖子详情 */
+
+// 中Area-回帖
+article + [data-testid="inline_reply_offscreen"] {
+  display: none;
+}

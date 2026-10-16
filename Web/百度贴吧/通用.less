@@ -1,6 +1,31 @@
-// main: _入口.less
+// main: _Entry.less
 // out: false
-// 上面两行是 Easy LESS 的文件级设置（保存本文件时改为编译入口文件；本文件不单独产出 .css，全站只有 _入口.css 一个产物）
+
+/* Box-光标选定 */
+#selectsearch-icon {
+  display: none;
+}
+
+/* Box-用户简介 */
+#user_visit_card {
+  height: initial;
+
+  > .ui_card_content {
+    overflow: initial;
+
+    // Area-背景
+    > #card_headinfo_wrap {
+      display: none;
+    }
+    // Area-信息
+    .card_userinfo_middle {
+      > :not(.card_userinfo_title, .card_userinfo_num),
+      > .card_userinfo_title > :not(.userinfo_username) {
+        display: none;
+      }
+    }
+  }
+}
 
 /* 
     组件：Bar-贴吧导航
@@ -35,6 +60,9 @@
   > .search_main_wrap > .search_main {
     padding: 50px 0;
 
+    &.search_main_fixed {
+      visibility: hidden;
+    }
     // Panel-搜索
     > .suggestion > .suggestion_list {
       > .break_title:first-of-type,
@@ -73,4 +101,55 @@
 
 .footer {
   display: none;
+}
+
+/* 
+    Page-404
+*/
+
+.page404 {
+  > #main-wraper {
+    > :not(.message-info),
+    > .message-info > .right-info-download > :not(#errorText),
+    .tbsy-tag {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-图片详情
+*/
+
+.af_container {
+  > .af_left {
+    > .af_head {
+      > :not(.af_head_left, .af_head_right) {
+        display: none;
+      }
+      > .af_head_right {
+        width: initial;
+      }
+    }
+    > .af_original .af_cross_tip > * {
+      display: none;
+    }
+  }
+  > .af_right {
+    > :not(.af_right_fold, .af_reply_container),
+    > .af_reply_container > :not(.af_thread_head) {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-用户
+*/
+
+.ihome_body {
+  // 右Area
+  > .right_aside > .ihome_aside_section > :not(h1) {
+    display: none;
+  }
 }

@@ -1,5 +1,198 @@
-// main: _入口.less
+// main: _Entry.less
 // out: false
-// 上面两行是 Easy LESS 的文件级设置（保存本文件时改为编译入口文件；本文件不单独产出 .css，全站只有 _入口.css 一个产物）
 
- 
+/* 
+    组件：上Area-贴吧信息
+*/
+
+// Page-吧页
+.head_main > .head_content,
+// Page-帖子
+.l_container > .content {
+  width: var(--tieba_width);
+
+  // Area-海报
+  > .card_banner > :not(#forum-card-banner) {
+    display: none;
+  }
+  // Comp-签到-Panel
+  > .card_top_wrap .sign_tip_container > .j_succ_info {
+    width: initial;
+
+    > .sign_tip_bdwrap {
+      > .sign_tip_main
+        > .sign_succ_calendar
+        > :not(.sign_succ_calendar_title, .sign_succ_table),
+      > .sign_tip_aside {
+        display: none;
+      }
+    }
+    // Box-一键签到
+    .ui_card_wrap {
+      display: none;
+    }
+  }
+  // 下Bar-导航
+  #tb_nav > .nav_list {
+    width: initial;
+
+    > li:not(
+        :has([stats-data$="st_value=tabmain"], [stats-data$="st_value=tabgood"])
+      ) {
+      display: none;
+    }
+  }
+}
+
+/* 
+    组件：Area-发帖
+*/
+
+#tb_rich_poster_container {
+  box-sizing: border-box;
+  width: var(--tieba_width);
+  margin: 0 auto;
+  padding: 10px 20px;
+
+  #tb_rich_poster {
+    margin: 0;
+
+    > .poster_head {
+      margin: 10px 0;
+    }
+    > .poster_body {
+      // Area-输入
+      > .ueditor_container > .old_style_wrapper {
+        box-sizing: border-box;
+        width: 100%;
+
+        > .edui-container {
+          width: 100%;
+
+          > .tb_poster_placeholder {
+            display: none;
+          }
+          > .edui-toolbar > .edui-btn-toolbar {
+            > .edui-btn-paypost,
+            > .edui-btn-medal,
+            > .edui-btn-scrawl,
+            > .edui-btn-quick-reply {
+              display: none;
+            }
+          }
+          > .edui-editor-body #ueditor_replace {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0 10px;
+          }
+        }
+      }
+      // Bar-分享
+      > .poster_share > :not(label) {
+        display: none;
+      }
+      // Bar-发表
+      > .editor_bottom_panel {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
+
+// 中Area
+#content {
+  width: var(--tieba_width);
+
+  .forum_content {
+    display: flex;
+    background: none;
+
+    // 左Area
+    > #content_wrap {
+      flex: 1 1 auto;
+      width: initial;
+
+      // Area-讨论
+      .interview {
+        // Comp-分享
+        #interview-share-wrapper,
+        // Comp-回复
+        .pReply,
+        // Comp-输入
+        #listEditorCnt {
+          display: none;
+        }
+      }
+      // Card-帖子
+      .j_thread_list {
+        .threadlist_lz {
+          > .threadlist_title {
+            font-size: 1.5em;
+          }
+          > .threadlist_author > .tb_icon_author {
+            > :not(.icon_author, .frs-author-name-wrap),
+            > .frs-author-name-wrap > :not(.frs-author-name) {
+              display: none;
+            }
+          }
+        }
+        .threadlist_detail {
+          display: flex;
+          font-size: 1.2em;
+
+          > .threadlist_text {
+            flex: 1 1 auto;
+            width: initial;
+            padding-right: 50px;
+
+            > .threadlist_abs {
+              width: initial;
+              text-overflow: initial;
+              white-space: initial;
+
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+            }
+          }
+          > .threadlist_author {
+            flex-shrink: 0;
+          }
+        }
+      }
+    }
+    // 右Area
+    > #aside {
+      flex-shrink: 0;
+      border-left: 1px solid var(--tieba_border_ba);
+
+      div:has(> .app_download_box) {
+        // Card
+        > :has(> .celebrity),
+        > .app_download_box {
+          display: none;
+        }
+        // Card-我的贴吧
+        #user_info {
+          .pre_icon_wrap,
+          .user_score {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+// 下Area-发帖
+#content + .foot {
+  width: var(--tieba_width);
+  .frs_content_footer_pagelet {
+    width: var(--tieba_width);
+  }
+}
+
+// Fix下Box-AD
+[id="pagelet_frs-base/pagelet/fixed_yy_bullet"] {
+  display: none;
+}

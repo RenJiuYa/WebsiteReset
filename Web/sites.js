@@ -27,17 +27,25 @@ const SITES = {
     enabled: true,
     dir: 'Web/Bilibili',
     rules: [
-      // 直播站：CSS 入口相同，另外要跑直播页的脚本
-      { match: ['live.bilibili.com'], css: '_入口', js: ['通用', 'Page-直播'] },
-      // 其它 B 站页面（含各子域）
-      { match: ['bilibili.com/*'], css: '_入口', js: ['通用'] },
+      // 主体
+      { match: ['bilibili.com'], css: '_Entry', js: ['_Entry'] },
+      // 直播
+      { match: ['live.bilibili.com'], css: '_Entry-直播', js: ['_Entry-直播'] },
     ],
   },
-  '贴吧': {
+  '百度贴吧': {
     enabled: true,
     dir: 'Web/百度贴吧',
     rules: [
-      { match: ['tieba.baidu.com'], css: '_入口' },
+      { match: ['tieba.baidu.com'], css: '_Entry' },
+    ],
+  },
+  /* ———————————————— 媒体 ———————————————— */
+  'X推特': {
+    enabled: true,
+    dir: 'Web/_媒体',
+    rules: [
+      { match: ['x.com'], css: 'X推特', js: ['X推特'] },
     ],
   },
 };

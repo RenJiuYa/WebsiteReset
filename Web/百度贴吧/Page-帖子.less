@@ -1,0 +1,133 @@
+// main: _Entry.less
+// out: false
+
+.l_container {
+  width: var(--tieba_width);
+
+  > .content {
+    > * {
+      width: var(--tieba_width);
+    }
+    // Bar-分页
+    .p_thread {
+      width: var(--tieba_width);
+      
+      > .l_thread_info {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0 10px;
+
+        > .l_posts_num {
+          display: flex;
+          width: 100%;
+
+          > .l_pager {
+            margin-right: auto;
+          }
+        }
+      }
+      #tofrs_up {
+        display: none;
+      }
+    }
+
+    > #pb_content {
+      > .right_section {
+        display: none;
+      }
+      > .left_section {
+        width: 100%;
+
+        // Bar-标题
+        > #j_core_title_wrap {
+          box-sizing: border-box;
+          width: 100%;
+          padding: 0 20px;
+          left: 0;
+        }
+      }
+    }
+  }
+}
+
+// Card-楼层
+.l_post {
+  width: 100%;
+  display: flex;
+
+  // 左Area-用户
+  > .d_author {
+    flex-shrink: 0;
+
+    > .p_author {
+      position: sticky;
+      top: 70px;
+
+      > :not(.icon, .d_name, .l_badge),
+      > .d_name > :not(.p_author_name) {
+        display: none;
+      }
+    }
+  }
+  // 右Area-文章
+  > .d_post_content_main {
+    flex: 1 1 auto;
+    padding: 10px 20px;
+
+    > :not(.p_content, .core_reply) {
+      display: none;
+    }
+    // Area-文章
+    > .p_content {
+      padding: 0;
+
+      > :not(cc) {
+        display: none;
+      }
+      > cc .d_post_content {
+        font-size: 1.5rem;
+      }
+    }
+    > .core_reply {
+      margin: 0;
+
+      // Box-屏蔽用户
+      .user-hide-post-down {
+        display: none;
+      }
+      // Bar-楼层信息
+      > .core_reply_tail {
+        > :not(.post-tail-wrap) {
+          display: none;
+        }
+        .post-tail-wrap {
+          width: 100%;
+          display: flex;
+          gap: 20px;
+
+          > * {
+            margin: 0;
+          }
+          > .question-image,
+          > .j_jb_ele,
+          > .tail-info:has(a) {
+            display: none;
+          }
+          > .tail-info:not(:has(a)) {
+            order: -1;
+          }
+          // Comp-回复
+          > .p_reply {
+            margin-left: auto;
+          }
+        }
+      }
+      // Area-回复
+      > .j_lzl_container {
+        width: initial;
+      }
+    }
+  }
+}
