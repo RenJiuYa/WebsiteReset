@@ -49,11 +49,37 @@ const SITES = {
     ],
   },
   /* ———————————————— Media 媒体 ———————————————— */
+  'Google': {
+    enabled: true,
+    dir: 'Web/Google',
+    rules: [
+      { match: ['www.google.com'], css: 'Google 搜索' },
+      { match: ['www.google.com.*'], css: 'Google 搜索' },
+      { match: ['translate.google.com'], css: 'Google 翻译' },
+    ],
+  },
   'X推特': {
     enabled: true,
     dir: 'Web/_Web',
     rules: [
       { match: ['x.com'], css: 'X推特' },
+    ],
+  },
+  '百度': {
+    enabled: true,
+    dir: 'Web/百度',
+    rules: [
+      { match: ['www.baidu.com'], css: '百度搜索' },
+      { match: ['pan.baidu.com'], css: '百度网盘' },
+      { match: ['map.baidu.com'], css: '百度地图' },
+      { match: ['baike.baidu.com'], css: '百度百科' },
+    ],
+  },
+  '新浪微博': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['weibo.com'], css: '新浪微博' },
     ],
   },
 };

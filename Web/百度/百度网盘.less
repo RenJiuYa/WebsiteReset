@@ -1,0 +1,207 @@
+/* 
+    Page-首页
+*/
+
+// 全屏Box-充值
+wora-pc-dialog {
+  display: none;
+}
+// 全屏Box-操作
+.u-dialog {
+  > .u-dialog__body {
+    // 下载
+    .nd-download__fail-download-href,
+    .nd-download__install-tip {
+      display: none;
+    }
+  }
+  > .u-dialog__footer {
+    padding: 20px 0;
+
+    .nd-guide-svip-bar {
+      display: none;
+    }
+  }
+}
+
+// Item-功能
+.nd-file-list-toolbar__group-more-ref,
+.wp-s-agile-tool-bar__h-action-button,
+.wp-s-agile-tool-bar__v-action-button,
+.nd-common-float-menu__item {
+  &:not(
+    :has(
+      > .u-icon-add-folder,
+      > .u-icon-download,
+      > .u-icon-share,
+      > .u-icon-delete,
+      > .u-icon-rename,
+      > .u-icon-move,
+      > .u-icon-more,
+      > .u-icon-remove-file,
+      > .u-icon-history,
+      > .u-icon-group,
+      > .u-icon-ocr
+    )
+  ) {
+    // 新建文件夹
+    // 下载
+    // 分享
+    // 删除
+    // 重命名
+    // 移动
+    // 更多
+    // 导出文件目录
+    // 查看历史版本
+    // 共享/取消共享
+    // 文字识别
+    display: none;
+  }
+}
+
+// 顶Bar
+.wp-s-header-wrapper .wp-s-header__right {
+  > :not(.nd-uploader-list, .nd-user-info, .nd-more-vertical) {
+    display: none;
+  }
+  > .nd-user-info .wp-s-header-user__body {
+    > img {
+      margin: 0;
+    }
+    > .wp-s-header-user__body-vip-cont {
+      display: none;
+    }
+  }
+}
+// 顶Bar | Item-用户-Panel
+.wp-s-header-user__body-userinfo > .wp-s-header-user__drop {
+  > :not(.wp-s-header-user__drop-info, .wp-s-header-user__drop-nav-list) {
+    display: none;
+  }
+  > .wp-s-header-user__drop-info {
+    > :not(.wp-s-header-user__drop-info-body),
+    > .wp-s-header-user__drop-info-body
+      > :not(.wp-s-header-user__body-username) {
+      display: none;
+    }
+  }
+}
+// 顶Bar | Item-更多-Panel
+.wp-s-header-user__moreVertical-popover > .moreVerticalContent {
+  > :not(:has(.u-icon-restore, .u-icon-download-bold)) {
+    display: none;
+  }
+}
+
+// Area：布局
+.nd-main-layout__wrapper {
+  display: flex;
+
+  > .nd-aside-wp-block {
+    flex-shrink: 0;
+
+    > :not(.wp-s-aside-nav) {
+      display: none;
+    }
+  }
+  > .nd-main-layout__body {
+    flex-grow: 1;
+    width: initial;
+  }
+}
+// 左Area
+.wp-s-aside-nav > .wp-s-aside-nav__main {
+  display: none;
+}
+// 右Area
+.nd-main-layout__body {
+  // 上Bar-功能
+  .wp-s-core-pan__header .wp-s-agile-tool-bar__header {
+    > :not(.wp-s-agile-tool-bar__h-group, .is-more) {
+      display: none;
+    }
+  }
+  // 上Bar-功能：Page-图片
+  .module-timeline-tabs > :not(.nd-common-tabs) {
+    display: none;
+  }
+
+  // 上Bar-功能：Page-回收站
+  .nd-recycle-main > .nd-recycle-main__tip > .text > span {
+    display: none;
+  }
+}
+
+/* 
+    Page-分享链接密码
+*/
+.init-new-content {
+  form .verify-property > :not(.verify-user, .author-desc) {
+    display: none;
+  }
+}
+
+/* 
+    Page-分享链接
+*/
+// 顶Bar
+.yun-header {
+  padding: 0 10%;
+
+  > .header-info {
+    > :not(.app-user-info) {
+      display: none;
+    }
+  }
+}
+// 顶Bar | Item-用户-Panel
+.app-user-desc {
+  > .JS-desc-info [node-type="app-user-level"] {
+    display: none;
+  }
+  > .desc-box {
+    > :not(.desc-link),
+    > .desc-link > :has([href^="/disk/main#/certification"]) {
+      display: none;
+    }
+  }
+}
+//左Area
+#bd-main {
+  > :not(.bd-left) {
+    display: none;
+  }
+  > .bd-left {
+    margin: 0;
+
+    > .module-share-header {
+      // 左上Bar
+      .share-header-info .wp-vip-badge {
+        pointer-events: none;
+      }
+      .share-header-info .wp-base-button,
+      // 右上Bar
+      .share-header-actions > .client-popover-anchor {
+        display: none;
+      }
+    }
+    // Item-文件
+    > .share-list .JS-list-view-item {
+      .share-list-item-actions
+        > :not(:has([href="#wp-icon-download"], [href="#wp-icon-save-disk"])) {
+        display: none;
+      }
+    }
+    > .module-share-bottom-bar .btn-img-tips {
+      display: none;
+    }
+  }
+}
+// 右上Bar | Item-冬月-Panel
+.subscribe-guide-bubble {
+  display: none;
+}
+// 底Bar-Footer
+.module-share-footer {
+  display: none;
+}

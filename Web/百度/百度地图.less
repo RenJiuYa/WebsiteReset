@@ -1,0 +1,45 @@
+// 右上Bar
+#app-right-top {
+  > #message-center,
+  > #tool-container .trafficLeadDownloadCard {
+    display: none;
+  }
+}
+
+// 左上Area-搜索-Panel
+#ui3-suggest-wrap {
+  > :not(#ui3-suggest-scroll) {
+    display: none;
+  }
+}
+
+// 左上Area-功能-Panel
+#left-panel > .cardlist {
+  // Panel-路线
+  > :has(.route-search-banner) {
+    display: none;
+  }
+  // Panel-搜索结果
+  .poi-wrapper-box {
+    > :not(.poi-wrapper),
+    > .poi-wrapper > .poi-ads {
+      display: none;
+    }
+  }
+  // Panel-地点
+  > :not(.card) {
+    display: none;
+  }
+  // Panel-地点 | 中Bar-功能
+  .generalInfo-function-buttons > :not(:nth-child(-n + 3)) {
+    display: none;
+  }
+}
+
+// Area-地图
+#MapHolder {
+  // 底Bar
+  > .BMap_cpyCtrl {
+    display: none;
+  }
+}

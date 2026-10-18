@@ -11,7 +11,16 @@
 .l_container > .content {
   width: var(--tieba_width);
 
-  // Area-海报
+  // Area-广告
+  > #plat_recom_carousel {
+    width: 100%;
+    pointer-events: none;
+
+    > .tbui_slideshow_list {
+      width: 100%;
+    }
+  }
+  // Area-海报 | Comp-礼物
   > .card_banner > :not(#forum-card-banner) {
     display: none;
   }
@@ -126,6 +135,7 @@
       }
       // Card-帖子
       .j_thread_list {
+        // Area-标题
         .threadlist_lz {
           > .threadlist_title {
             font-size: 1.5em;
@@ -137,6 +147,7 @@
             }
           }
         }
+        // Area-内容
         .threadlist_detail {
           display: flex;
           font-size: 1.2em;
@@ -146,6 +157,7 @@
             width: initial;
             padding-right: 50px;
 
+            // Area-文字
             > .threadlist_abs {
               width: initial;
               color: #999;
@@ -159,6 +171,29 @@
           }
           > .threadlist_author {
             flex-shrink: 0;
+          }
+        }
+        // Area-图片：放大
+        > .media_box {
+          box-sizing: border-box;
+          width: initial;
+          margin: 10px;
+
+          > .media_disp {
+            width: initial;
+            margin: 0 auto;
+
+            img {
+              max-height: 80vh;
+              margin: 0 auto;
+            }
+          }
+          > .enter_pb_wrapper {
+            margin: 0;
+            top: initial;
+            bottom: 5px;
+            left: initial;
+            right: 5px;
           }
         }
       }

@@ -2,11 +2,42 @@
   --tieba_width: 80vw;
   --tieba_border_ba: #e4e6eb;
 }
-/* Box-光标选定 */
+/* 
+    通用
+*/
+.pc-main-page-layout > .top-bar-wrapper .menu-list > :not(.menu-item) {
+  display: none;
+}
+.pc-main-page-layout .container {
+  max-width: initial;
+  padding: 0;
+}
+.pc-main-page-layout .container .center-content {
+  max-width: initial;
+  margin: 0;
+  padding: 20px;
+}
+.pc-main-page-layout .copy-right-wrapper {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+.pc-main-page-layout .left-nav-wrapper .list-container-wrapper:has([href^="https://wan.baidu.com"]) {
+  display: none;
+}
+/* 
+    Page-帖子
+*/
+.pc-main-page-layout .right-area-wrapper .card-container-wrapper {
+  display: none;
+}
+/* 
+    通用
+*/
 #selectsearch-icon {
   display: none;
 }
-/* Box-用户简介 */
 #user_visit_card {
   height: initial;
 }
@@ -20,9 +51,17 @@
 #user_visit_card > .ui_card_content .card_userinfo_middle > .card_userinfo_title > :not(.userinfo_username) {
   display: none;
 }
-/* 
-    组件：Bar-贴吧导航
-*/
+#spage-tbshare-container {
+  display: none;
+}
+.tbui_aside_float_bar {
+  margin: 0;
+  left: initial;
+  right: 2%;
+}
+.tbui_aside_float_bar > :not(.tbui_fbar_post, .tbui_fbar_refresh, .tbui_fbar_top) {
+  display: none;
+}
 #com_userbar > ul > li:not(.u_username, .u_news, .u_setting, .u_new_pc),
 #com_userbar > ul > .u_username li:not(.u_itieba, .u_favor, .u_pan),
 #com_userbar > ul > .u_setting li:not( :has(
@@ -32,9 +71,6 @@
       ), .u_logout) {
   display: none;
 }
-/* 
-    组件：Area-搜索
-*/
 .head_inner > .search_top {
   display: none;
 }
@@ -48,26 +84,6 @@
 .head_inner > .search_main_wrap > .search_main > .suggestion > .suggestion_list li:has(.operation_item) {
   display: none;
 }
-/* 
-    Fix右Bar-分享
-*/
-#spage-tbshare-container {
-  display: none;
-}
-/* 
-    Fix右下Bar-功能
-*/
-.tbui_aside_float_bar {
-  margin: 0;
-  left: initial;
-  right: 2%;
-}
-.tbui_aside_float_bar > :not(.tbui_fbar_post, .tbui_fbar_refresh, .tbui_fbar_top) {
-  display: none;
-}
-/* 
-    Area-Footer
-*/
 .footer {
   display: none;
 }
@@ -133,6 +149,22 @@
   grid-template-areas: "banner banner" "dynamic hot";
   grid-template-columns: 3fr 2fr;
 }
+.main-sec > .content-sec > .right-sec > .r-left-sec .n_right {
+  position: relative;
+}
+.main-sec > .content-sec > .right-sec > .r-left-sec .n_right .media_box {
+  box-sizing: border-box;
+  width: 100%;
+}
+.main-sec > .content-sec > .right-sec > .r-left-sec .n_right .media_box > .media_bigpic_wrap > img {
+  width: initial;
+  max-height: 80vh;
+}
+.main-sec > .content-sec > .right-sec > .r-left-sec .n_right .enter_pb_btn {
+  margin: 0;
+  right: 0;
+  bottom: -5px;
+}
 .main-sec > .content-sec > .right-sec > .r-top-sec {
   grid-area: banner;
   display: none;
@@ -174,6 +206,15 @@
 .head_main > .head_content,
 .l_container > .content {
   width: var(--tieba_width);
+}
+.head_main > .head_content > #plat_recom_carousel,
+.l_container > .content > #plat_recom_carousel {
+  width: 100%;
+  pointer-events: none;
+}
+.head_main > .head_content > #plat_recom_carousel > .tbui_slideshow_list,
+.l_container > .content > #plat_recom_carousel > .tbui_slideshow_list {
+  width: 100%;
 }
 .head_main > .head_content > .card_banner > :not(#forum-card-banner),
 .l_container > .content > .card_banner > :not(#forum-card-banner) {
@@ -288,6 +329,26 @@
 #content .forum_content > #content_wrap .j_thread_list .threadlist_detail > .threadlist_author {
   flex-shrink: 0;
 }
+#content .forum_content > #content_wrap .j_thread_list > .media_box {
+  box-sizing: border-box;
+  width: initial;
+  margin: 10px;
+}
+#content .forum_content > #content_wrap .j_thread_list > .media_box > .media_disp {
+  width: initial;
+  margin: 0 auto;
+}
+#content .forum_content > #content_wrap .j_thread_list > .media_box > .media_disp img {
+  max-height: 80vh;
+  margin: 0 auto;
+}
+#content .forum_content > #content_wrap .j_thread_list > .media_box > .enter_pb_wrapper {
+  margin: 0;
+  top: initial;
+  bottom: 5px;
+  left: initial;
+  right: 5px;
+}
 #content .forum_content > #aside {
   flex-shrink: 0;
   border-left: 1px solid var(--tieba_border_ba);
@@ -395,6 +456,7 @@
 .l_post > .d_post_content_main > .p_content > cc .d_post_content > .BDE_Smiley {
   width: 1.25em;
   height: auto;
+  vertical-align: top;
 }
 .l_post > .d_post_content_main > .core_reply {
   margin: 0;

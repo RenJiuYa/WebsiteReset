@@ -1,0 +1,161 @@
+/* 
+    Page-首页
+*/
+wora-pc-dialog {
+  display: none;
+}
+.u-dialog > .u-dialog__body .nd-download__fail-download-href,
+.u-dialog > .u-dialog__body .nd-download__install-tip {
+  display: none;
+}
+.u-dialog > .u-dialog__footer {
+  padding: 20px 0;
+}
+.u-dialog > .u-dialog__footer .nd-guide-svip-bar {
+  display: none;
+}
+.nd-file-list-toolbar__group-more-ref:not( :has(
+      > .u-icon-add-folder,
+      > .u-icon-download,
+      > .u-icon-share,
+      > .u-icon-delete,
+      > .u-icon-rename,
+      > .u-icon-move,
+      > .u-icon-more,
+      > .u-icon-remove-file,
+      > .u-icon-history,
+      > .u-icon-group,
+      > .u-icon-ocr
+    )),
+.wp-s-agile-tool-bar__h-action-button:not( :has(
+      > .u-icon-add-folder,
+      > .u-icon-download,
+      > .u-icon-share,
+      > .u-icon-delete,
+      > .u-icon-rename,
+      > .u-icon-move,
+      > .u-icon-more,
+      > .u-icon-remove-file,
+      > .u-icon-history,
+      > .u-icon-group,
+      > .u-icon-ocr
+    )),
+.wp-s-agile-tool-bar__v-action-button:not( :has(
+      > .u-icon-add-folder,
+      > .u-icon-download,
+      > .u-icon-share,
+      > .u-icon-delete,
+      > .u-icon-rename,
+      > .u-icon-move,
+      > .u-icon-more,
+      > .u-icon-remove-file,
+      > .u-icon-history,
+      > .u-icon-group,
+      > .u-icon-ocr
+    )),
+.nd-common-float-menu__item:not( :has(
+      > .u-icon-add-folder,
+      > .u-icon-download,
+      > .u-icon-share,
+      > .u-icon-delete,
+      > .u-icon-rename,
+      > .u-icon-move,
+      > .u-icon-more,
+      > .u-icon-remove-file,
+      > .u-icon-history,
+      > .u-icon-group,
+      > .u-icon-ocr
+    )) {
+  display: none;
+}
+.wp-s-header-wrapper .wp-s-header__right > :not(.nd-uploader-list, .nd-user-info, .nd-more-vertical) {
+  display: none;
+}
+.wp-s-header-wrapper .wp-s-header__right > .nd-user-info .wp-s-header-user__body > img {
+  margin: 0;
+}
+.wp-s-header-wrapper .wp-s-header__right > .nd-user-info .wp-s-header-user__body > .wp-s-header-user__body-vip-cont {
+  display: none;
+}
+.wp-s-header-user__body-userinfo > .wp-s-header-user__drop > :not(.wp-s-header-user__drop-info, .wp-s-header-user__drop-nav-list) {
+  display: none;
+}
+.wp-s-header-user__body-userinfo > .wp-s-header-user__drop > .wp-s-header-user__drop-info > :not(.wp-s-header-user__drop-info-body),
+.wp-s-header-user__body-userinfo > .wp-s-header-user__drop > .wp-s-header-user__drop-info > .wp-s-header-user__drop-info-body > :not(.wp-s-header-user__body-username) {
+  display: none;
+}
+.wp-s-header-user__moreVertical-popover > .moreVerticalContent > :not(:has(.u-icon-restore, .u-icon-download-bold)) {
+  display: none;
+}
+.nd-main-layout__wrapper {
+  display: flex;
+}
+.nd-main-layout__wrapper > .nd-aside-wp-block {
+  flex-shrink: 0;
+}
+.nd-main-layout__wrapper > .nd-aside-wp-block > :not(.wp-s-aside-nav) {
+  display: none;
+}
+.nd-main-layout__wrapper > .nd-main-layout__body {
+  flex-grow: 1;
+  width: initial;
+}
+.wp-s-aside-nav > .wp-s-aside-nav__main {
+  display: none;
+}
+.nd-main-layout__body .wp-s-core-pan__header .wp-s-agile-tool-bar__header > :not(.wp-s-agile-tool-bar__h-group, .is-more) {
+  display: none;
+}
+.nd-main-layout__body .module-timeline-tabs > :not(.nd-common-tabs) {
+  display: none;
+}
+.nd-main-layout__body .nd-recycle-main > .nd-recycle-main__tip > .text > span {
+  display: none;
+}
+/* 
+    Page-分享链接密码
+*/
+.init-new-content form .verify-property > :not(.verify-user, .author-desc) {
+  display: none;
+}
+/* 
+    Page-分享链接
+*/
+.yun-header {
+  padding: 0 10%;
+}
+.yun-header > .header-info > :not(.app-user-info) {
+  display: none;
+}
+.app-user-desc > .JS-desc-info [node-type="app-user-level"] {
+  display: none;
+}
+.app-user-desc > .desc-box > :not(.desc-link),
+.app-user-desc > .desc-box > .desc-link > :has([href^="/disk/main#/certification"]) {
+  display: none;
+}
+#bd-main > :not(.bd-left) {
+  display: none;
+}
+#bd-main > .bd-left {
+  margin: 0;
+}
+#bd-main > .bd-left > .module-share-header .share-header-info .wp-vip-badge {
+  pointer-events: none;
+}
+#bd-main > .bd-left > .module-share-header .share-header-info .wp-base-button,
+#bd-main > .bd-left > .module-share-header .share-header-actions > .client-popover-anchor {
+  display: none;
+}
+#bd-main > .bd-left > .share-list .JS-list-view-item .share-list-item-actions > :not(:has([href="#wp-icon-download"], [href="#wp-icon-save-disk"])) {
+  display: none;
+}
+#bd-main > .bd-left > .module-share-bottom-bar .btn-img-tips {
+  display: none;
+}
+.subscribe-guide-bubble {
+  display: none;
+}
+.module-share-footer {
+  display: none;
+}

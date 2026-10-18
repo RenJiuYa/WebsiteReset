@@ -1,0 +1,28 @@
+/* 
+    Page-首页
+*/
+.s-skin-hasbg {
+  > #s_wrap,
+  > #bottom_layer {
+    display: none;
+  }
+  // 顶Bar
+  > .s_top_container > .s-top-bar {
+    > :not(.s-top-right) {
+      display: none;
+    }
+    > .s-top-right {
+      margin: 0 50px 0 auto;
+      padding: 0;
+    }
+  }
+  // 中Area
+  > #head_wrapper {
+    .chat-input-anchor {
+      > :not(#chat-input-main),
+      > #chat-input-main .chat-input-tool {
+        display: none;
+      }
+    }
+  }
+}

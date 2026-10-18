@@ -1,0 +1,23 @@
+#app-right-top > #message-center,
+#app-right-top > #tool-container .trafficLeadDownloadCard {
+  display: none;
+}
+#ui3-suggest-wrap > :not(#ui3-suggest-scroll) {
+  display: none;
+}
+#left-panel > .cardlist > :has(.route-search-banner) {
+  display: none;
+}
+#left-panel > .cardlist .poi-wrapper-box > :not(.poi-wrapper),
+#left-panel > .cardlist .poi-wrapper-box > .poi-wrapper > .poi-ads {
+  display: none;
+}
+#left-panel > .cardlist > :not(.card) {
+  display: none;
+}
+#left-panel > .cardlist .generalInfo-function-buttons > :not(:nth-child(-n + 3)) {
+  display: none;
+}
+#MapHolder > .BMap_cpyCtrl {
+  display: none;
+}

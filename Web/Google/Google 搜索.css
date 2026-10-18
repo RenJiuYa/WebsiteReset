@@ -1,0 +1,46 @@
+/* 
+    Page-搜索结果：Page-全部
+*/
+[data-st-cnt="fb"] [role="list"] > [data-hveid]:nth-last-of-type(-n + 5) {
+  display: none;
+}
+#rcnt {
+  grid-template-columns: minmax(5%, 1fr) repeat(20, 1fr) minmax(5%, 1fr);
+  column-gap: 0;
+}
+#rcnt > #center_col {
+  grid-column: 2 / -2;
+}
+#rcnt:has(> #rhs) > #center_col {
+  grid-column: 2 / span 14;
+}
+#rcnt:has(> #rhs) > #rhs {
+  grid-column: span 5 / -2;
+}
+#rhs > #jOAHU .C7GK8b,
+#rhs > #jOAHU > :has(.pCnXsf) {
+  display: none;
+}
+#center_col #rso > .ULSxyf:has(.fm06If) .yp1CPe,
+#center_col #rso > .ULSxyf:has(.fm06If) .YfftMc {
+  display: none;
+}
+#center_col #rso > .ULSxyf:has(.cUnQKe) {
+  display: none;
+}
+#center_col > #botstuff > [data-hveid] > :not([role="navigation"]) {
+  display: none;
+}
+#sfooter .SLPe5b > .kEjm2c {
+  display: none;
+}
+/* 
+    Page-搜索结果：Page-图片
+*/
+#cnt > .rfiSsc {
+  display: none;
+}
+#sZmt3b .cLqwWc > [jsname="xYQ4wd"],
+#sZmt3b .cLqwWc #iQXLdc {
+  display: none;
+}

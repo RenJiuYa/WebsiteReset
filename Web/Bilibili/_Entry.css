@@ -186,7 +186,13 @@
 /* 
     组件：评论区
 */
-/* @shadow(bili-comments >> bili-comment-thread-renderer) */
+/* @shadow(bili-comments) */
+/* @shadow(bili-comments-header-renderer >> bili-comments-vote-card) */
+#card > #duel {
+  pointer-events: none;
+}
+/* @shadow-end */
+/* @shadow(bili-comment-thread-renderer) */
 /* @shadow(bili-comment-renderer) */
 #ornament {
   pointer-events: none;
@@ -288,6 +294,7 @@
 #contents:has([data-type="goods"]) > :not([data-type="goods"]:has(img)) {
   display: none;
 }
+/* @shadow-end */
 /* @shadow-end */
 /* @shadow-end */
 /* @shadow-end */
@@ -703,6 +710,13 @@
 #mirror-vdcon > .right-container > .right-container-inner {
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container {
+  position: sticky;
+  top: 60px;
+  background-color: #FFF;
+  z-index: 1;
 }
 #mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .members-info-container .add-follow-btn {
   display: none;
@@ -717,6 +731,9 @@
   transform: initial;
 }
 #mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar > :not(img) {
+  display: none;
+}
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .live-mask {
   display: none;
 }
 #mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right .send-msg,

@@ -28,11 +28,13 @@ utils/                   工具类（由 start.user.js 自动加载：click / di
 - 改完 CSS：刷新页面，或点暴力猴菜单「重新加载样式（手动刷新）」。
 - 临时和原网站对比：菜单「临时退出脚本」。
 - 加网站：建 `Web/<网站>/` 文件夹（含入口 `_Entry.less`）→ 在 `Web/sites.js` 里加一条 → 刷新页面。
-- **来源自动选择**（不用手动切开发/发布）：打开页面先试本地 `127.0.0.1:5500`，连得上就用本地
-  （改完 CSS 刷新即生效），连不上/超时 1.5 秒就自动改用 CDN 上的发布版 —— 本地开着 = 开发，本地关掉 = 发布。
+- **开发/发布切换**：改 `start.user.js` 顶部的开关 `const IS_DEV = true;`
+  - `true` = 开发：CSS/JS 都从本地 live-server（`127.0.0.1:5500`）取，改完 CSS 刷新即生效
+  - `false` = 发布：都从 CDN 上的生产版本取
+  （`Web/sites.js` 只放站点信息：有哪些网站、各地址加载哪些入口）
 - **发布**：改 `start.user.js` 里 `REMOTE_BASE` 的 tag 版本号 → 提交 → 打新 tag，之后
   `https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@<tag>/start.user.js`
-  可直接安装（关掉 live-server 时，已安装的脚本会自动走这个地址）。
+  可直接安装。
 
 ### 运行环境（为什么脚本头部写了 `@inject-into content`）
 

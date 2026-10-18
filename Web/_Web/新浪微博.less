@@ -1,0 +1,335 @@
+/* 
+    通用
+*/
+
+// Box-用户简介
+.popcard {
+  // 上Area
+  [class^="_box1_"] {
+    pointer-events: none;
+  }
+  // 下Bar-功能
+  [class*="_buttons_"] {
+    > :not(.woo-pop-wrap) {
+      display: none;
+    }
+    .woo-button-primary {
+      pointer-events: none;
+    }
+  }
+}
+
+// Card-帖子
+article {
+  // 上Area
+  header {
+    // Comp-头像
+    .woo-avatar-hover > :not(img),
+    // Comp-昵称
+    [class*="_nick_"] > :not([usercard]),
+    // Comp-关注
+    .woo-button-primary {
+      display: none;
+    }
+    // Comp-帖子信息
+    [class*="_info_"] {
+      // [class^="_time_"] + div {
+      //   justify-content: flex-end;
+      // }
+      div:has(> [class*="_source_"]) {
+        justify-content: flex-end;
+      }
+      [class*="_source_"] {
+        margin-left: auto;
+      }
+    }
+  }
+  // Comp-更多-Panel
+  [class*="_more_"] .woo-pop-wrap-main {
+    // Panel-未关注
+    &:has(> :nth-child(9):last-child) > [role="button"]:nth-child(2),
+    // Panel-已关注：通用
+    &:has(> :nth-child(10):last-child) > [role="button"]:nth-child(2),
+    &:has(> :nth-child(10):last-child) > [role="button"]:nth-last-child(-n+2),
+    // Panel-已关注：用户主页
+    &:has(> :nth-child(7):last-child) > [role="button"]:nth-child(3),
+    // Item-分享-Panel
+    .woo-pop-main:has(> [class^="_qrcode_"]) {
+      display: none;
+    }
+  }
+  .wbpro-feed-content {
+    // Area-文字
+    > .wbpro-feed-ogText {
+      font-size: 1.1rem;
+      line-height: 1.5em;
+
+      // Comp-特殊标签
+      a:has(img) {
+        display: block;
+        width: fit-content;
+      }
+    }
+    // Area-投票 | Item
+    > [class*="_row_"] [class*="_itemHover_"] {
+      pointer-events: none;
+    }
+  }
+  // Area-赞赏|助威
+  > [data-v-app] {
+    display: none;
+  }
+  // 下Bar-功能
+  > footer {
+    //Item-转发、点赞
+    [class*="_cursor_"]:has(.woo-font--retweet, .woo-like-iconWrap) {
+      pointer-events: none;
+    }
+    // Item-分享
+    [class^="_share_"] > .woo-pop-wrap {
+      display: none;
+    }
+  }
+}
+
+// Item-评论
+.wbpro-list {
+  // Comp-头像
+  .woo-avatar-main > :not(img),
+  .text {
+    // Comp-昵称 | Comp-认证
+    > .woo-icon-wrap,
+    > [class^="IconFans_cursor_"]:has(.woo-icon-wrap) {
+      display: none;
+    }
+  }
+  // Bar-功能 | Item-屏蔽、转发、点赞
+  .opt > :has(.woo-font--screen, .woo-font--retweet, .woo-like-main) {
+    pointer-events: none;
+  }
+}
+
+// Box-视频 | 右Area
+.wbpro-scrollbar:has(> article) {
+  // 中Bar-导航
+  [class^="_tab_"] [title="相关视频"],
+  // 下Area-推荐
+  > :has(.woo-switch-main) {
+    display: none;
+  }
+  // 底Area-回复
+  & + [class*="_composer_box_"] {
+    display: none;
+  }
+}
+
+// 顶Bar-导航
+[role="navigation"] {
+  // 中Item
+  .woo-tab-nav {
+    > [href="/hot"],
+    > [href="/tv"], 
+    // Comp-红点
+    .woo-badge-bubble {
+      display: none;
+    }
+  }
+  // 右Item
+  .woo-pop-wrap-main {
+    > div[class] {
+      display: none;
+    }
+    // 右Item-设置-Panel
+    .woo-pop-wrap-main
+      > :has(
+        [href^="//verified.weibo.com"],
+        [href^="//vip.weibo.com"],
+        [href^="//kefu.weibo.com"]
+      ) {
+      // 认证
+      // 会员
+      // 帮助中心
+      display: none;
+    }
+  }
+}
+
+// Area-布局
+[class*="_content_"]:has(> [class^="_side_"]) {
+  width: 80vw;
+  max-width: initial;
+
+  > div:has(> main) {
+    flex-grow: 1;
+
+    main > [class^="_full_"] {
+      flex-grow: 1;
+    }
+  }
+}
+
+// 右Area
+#__sidebar > .rightSide {
+  .wbpro-side {
+    // Item | Comp-按钮
+    .wbpro-side-hover .right {
+      display: none;
+    }
+  }
+  // 底Area-Footer
+  > .wbpro-side-copy {
+    display: none;
+  }
+}
+
+/* 
+    Page-帖子详情
+*/
+// 下Area-评论 | 上Area-回复
+.woo-divider-main + div > :has(.wbpro-form) {
+  display: none;
+}
+
+/* 
+    Page-首页
+*/
+[class*="_publishCard_"] {
+  [class*="_timer_"]:has(> .woo-picture-main) {
+    display: none;
+  }
+}
+
+/* 
+    Page-用户
+*/
+// 上Area-用户
+.woo-panel-main:has(> .wbpro-pos) {
+  // 上Area-背景
+  > .wbpro-pos > .woo-picture-main > :not(img) {
+    display: none;
+  }
+  // 右上Item-更多
+  .woo-pop-wrap:has(.woo-font--ellipsis) {
+    .woo-pop-main:has(> [class^="_qrcode_"]) {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-超话
+*/
+// Area-布局
+[class*="_content_"]:has(> [class^="_main_"]) {
+  > [class^="_main_"] {
+    flex-grow: 1;
+  }
+  > [class^="_side_"] {
+    display: none;
+  }
+}
+
+/* 
+    Page-视频
+*/
+[class^="Frame_main2_"] {
+  // Player
+  #playInfo {
+    > #playVideo {
+      padding: 0;
+    }
+
+    // Player | 下Bar
+    [class^="PlayInfo_videoinfo_"] {
+      display: none;
+    }
+  }
+  // Area-视频信息
+  [class^="Detail_wrap_"] {
+    // 上Bar-功能
+    [class*="Detail_tith4_"] > .star-f16 ~ * {
+      pointer-events: none;
+    }
+    // Comp-关注
+    [class^="User_right_"] {
+      display: none;
+    }
+  }
+  // 下Area-评论 | 上Area-回复
+  [class^="Tit_wrap_"] + div {
+    > :not([class*="PlayInfo_comment_"]) {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-搜索
+*/
+.m-main {
+  width: 80vw;
+
+  // 左Bar-导航
+  .m-main-nav {
+    flex-shrink: 0;
+
+    li:has([href^="/aisearch"]) {
+      display: none;
+    }
+  }
+  #pl_feed_main {
+    // 中Area
+    > #pl_feedlist_index {
+      width: initial;
+
+      // Card-AI
+      > div:has(> [action-type="feed_list_item"]) {
+        > [class^="zhisou_"] {
+          display: none;
+        }
+      }
+    }
+    // 右Area
+    .main-side > #pl_right_side {
+      // Card | Item-按钮
+      .card-wrap .woo-button-main,
+      // Card-Footer
+      > #pl_right_msg {
+        display: none;
+      }
+    }
+  }
+}
+// Card
+[action-type="feed_list_item"] > .card {
+  // 上Area
+  > .card-feed > .content {
+    > .from {
+      display: flex;
+
+      > a:first-of-type {
+        margin-right: auto;
+        margin-bottom: initial;
+      }
+      > a:last-of-type {
+        pointer-events: none;
+      }
+    }
+  }
+  // 中Bar-功能
+  > .card-act
+    li:has([action-type="feed_list_forward"], [action-type="feed_list_like"]) {
+    pointer-events: none;
+  }
+  // 下Area-评论
+  > [node-type="feed_list_repeat"] > .card-together {
+    // 上Area-回复
+    > [node-type="commentList"],
+    // Item-回复
+    .card-review {
+      > .content > .txt > .user_vip_icon_container {
+        display: none;
+      }
+    }
+  }
+}

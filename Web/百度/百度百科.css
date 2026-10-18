@@ -1,0 +1,64 @@
+/* 
+    Page-条目详情
+*/
+.J-knowledge-editor-toolbar {
+  display: none;
+}
+[class^="index-module_pageHeader"] > :not([class^="index-module_topbar"], .lemmaSearchBarWrapper) {
+  display: none;
+}
+[class^="index-module_pageHeader"] > [class^="index-module_topbar"] > :not([class^="index-module_userBarBox"]) {
+  display: none;
+}
+[class^="index-module_pageHeader"] > [class^="index-module_topbar"] > [class^="index-module_userBarBox"] > .user-bar > :not(.user, .message, .setting) {
+  display: none;
+}
+#J-lemma-main-wrapper > :not(:nth-child(-n + 2)) {
+  display: none;
+}
+#J-lemma-main-wrapper [class^="contentBox"] {
+  display: flex;
+  min-width: 80vw;
+  gap: 20px;
+  padding: 30px;
+}
+#J-lemma-main-wrapper > :first-child [class^="largeFeatureWrap"] [class^="posterBg"] > :not([class^="posterTop"]),
+#J-lemma-main-wrapper > :first-child [class^="largeFeatureWrap"] [class^="posterBg"] .J-lemma-title ~ * {
+  display: none;
+}
+#J-lemma-main-wrapper > :first-child [class^="secondContent"] > :not([class^="contentTop"]),
+#J-lemma-main-wrapper > :first-child [class^="secondContent"] > [class^="contentTop"] [class^="btnList"] {
+  display: none;
+}
+#J-lemma-main-wrapper #side {
+  padding: 0;
+}
+#J-lemma-main-wrapper #side > :not([class^="abstractAlbum"], [class^="lemmaStatistics"]),
+#J-lemma-main-wrapper #side > [class^="lemmaStatistics"] > #J-contributor-list {
+  display: none;
+}
+#J-lemma-main-wrapper {
+  padding-bottom: 50px;
+}
+#J-lemma-main-wrapper [class^="mainContent"] {
+  flex-grow: 1;
+  padding: 0;
+}
+#J-lemma-main-wrapper [class^="mainContent"] [type="defaultTab"] > [class^="topToolsWrap"],
+#J-lemma-main-wrapper [class^="mainContent"] [type="defaultTab"] > [class^="posterFlag"],
+#J-lemma-main-wrapper [class^="mainContent"] [type="defaultTab"] > #J-lemma-video-list,
+#J-lemma-main-wrapper [class^="mainContent"] [type="defaultTab"] > #J-bottom-tashuo,
+#J-lemma-main-wrapper [class^="mainContent"] [type="defaultTab"] > #J-personal-auth,
+#J-lemma-main-wrapper [class^="mainContent"] [type="defaultTab"] > [class^="feedback-wrap"] {
+  display: none;
+}
+#J-lemma-main-wrapper [class^="mainContent"] [type="defaultTab"] > .normal [class^="btnList"] {
+  display: none;
+}
+#J-lemma-main-wrapper [class^="mainContent"] [type="defaultTab"] > .J-lemma-content > [data-tag="header"] > :not(h2, [class^="titleLine"]),
+#J-lemma-main-wrapper [class^="mainContent"] [type="defaultTab"] > .J-lemma-content > [data-tag="paragraph"] > [data-module-type="video"] {
+  display: none;
+}
+div:has(> .page-footer-content) {
+  display: none;
+}

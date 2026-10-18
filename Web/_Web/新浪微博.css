@@ -1,0 +1,184 @@
+/* 
+    通用
+*/
+.popcard [class^="_box1_"] {
+  pointer-events: none;
+}
+.popcard [class*="_buttons_"] > :not(.woo-pop-wrap) {
+  display: none;
+}
+.popcard [class*="_buttons_"] .woo-button-primary {
+  pointer-events: none;
+}
+article header .woo-avatar-hover > :not(img),
+article header [class*="_nick_"] > :not([usercard]),
+article header .woo-button-primary {
+  display: none;
+}
+article header [class*="_info_"] div:has(> [class*="_source_"]) {
+  justify-content: flex-end;
+}
+article header [class*="_info_"] [class*="_source_"] {
+  margin-left: auto;
+}
+article [class*="_more_"] .woo-pop-wrap-main:has( > :nth-child(9):last-child) > [role="button"]:nth-child(2),
+article [class*="_more_"] .woo-pop-wrap-main:has( > :nth-child(10):last-child) > [role="button"]:nth-child(2),
+article [class*="_more_"] .woo-pop-wrap-main:has( > :nth-child(10):last-child) > [role="button"]:nth-last-child(-n+2),
+article [class*="_more_"] .woo-pop-wrap-main:has( > :nth-child(7):last-child) > [role="button"]:nth-child(3),
+article [class*="_more_"] .woo-pop-wrap-main .woo-pop-main:has(> [class^="_qrcode_"]) {
+  display: none;
+}
+article .wbpro-feed-content > .wbpro-feed-ogText {
+  font-size: 1.1rem;
+  line-height: 1.5em;
+}
+article .wbpro-feed-content > .wbpro-feed-ogText a:has(img) {
+  display: block;
+  width: fit-content;
+}
+article .wbpro-feed-content > [class*="_row_"] [class*="_itemHover_"] {
+  pointer-events: none;
+}
+article > [data-v-app] {
+  display: none;
+}
+article > footer [class*="_cursor_"]:has(.woo-font--retweet, .woo-like-iconWrap) {
+  pointer-events: none;
+}
+article > footer [class^="_share_"] > .woo-pop-wrap {
+  display: none;
+}
+.wbpro-list .woo-avatar-main > :not(img) > .woo-icon-wrap,
+.wbpro-list .text > .woo-icon-wrap,
+.wbpro-list .woo-avatar-main > :not(img) > [class^="IconFans_cursor_"]:has(.woo-icon-wrap),
+.wbpro-list .text > [class^="IconFans_cursor_"]:has(.woo-icon-wrap) {
+  display: none;
+}
+.wbpro-list .opt > :has(.woo-font--screen, .woo-font--retweet, .woo-like-main) {
+  pointer-events: none;
+}
+.wbpro-scrollbar:has(> article) [class^="_tab_"] [title="相关视频"],
+.wbpro-scrollbar:has(> article) > :has(.woo-switch-main) {
+  display: none;
+}
+.wbpro-scrollbar:has(> article) + [class*="_composer_box_"] {
+  display: none;
+}
+[role="navigation"] .woo-tab-nav > [href="/hot"],
+[role="navigation"] .woo-tab-nav > [href="/tv"],
+[role="navigation"] .woo-tab-nav .woo-badge-bubble {
+  display: none;
+}
+[role="navigation"] .woo-pop-wrap-main > div[class] {
+  display: none;
+}
+[role="navigation"] .woo-pop-wrap-main .woo-pop-wrap-main > :has(
+        [href^="//verified.weibo.com"],
+        [href^="//vip.weibo.com"],
+        [href^="//kefu.weibo.com"]
+      ) {
+  display: none;
+}
+[class*="_content_"]:has(> [class^="_side_"]) {
+  width: 80vw;
+  max-width: initial;
+}
+[class*="_content_"]:has(> [class^="_side_"]) > div:has(> main) {
+  flex-grow: 1;
+}
+[class*="_content_"]:has(> [class^="_side_"]) > div:has(> main) main > [class^="_full_"] {
+  flex-grow: 1;
+}
+#__sidebar > .rightSide .wbpro-side .wbpro-side-hover .right {
+  display: none;
+}
+#__sidebar > .rightSide > .wbpro-side-copy {
+  display: none;
+}
+/* 
+    Page-帖子详情
+*/
+.woo-divider-main + div > :has(.wbpro-form) {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+[class*="_publishCard_"] [class*="_timer_"]:has(> .woo-picture-main) {
+  display: none;
+}
+/* 
+    Page-用户
+*/
+.woo-panel-main:has(> .wbpro-pos) > .wbpro-pos > .woo-picture-main > :not(img) {
+  display: none;
+}
+.woo-panel-main:has(> .wbpro-pos) .woo-pop-wrap:has(.woo-font--ellipsis) .woo-pop-main:has(> [class^="_qrcode_"]) {
+  display: none;
+}
+/* 
+    Page-超话
+*/
+[class*="_content_"]:has(> [class^="_main_"]) > [class^="_main_"] {
+  flex-grow: 1;
+}
+[class*="_content_"]:has(> [class^="_main_"]) > [class^="_side_"] {
+  display: none;
+}
+/* 
+    Page-视频
+*/
+[class^="Frame_main2_"] #playInfo > #playVideo {
+  padding: 0;
+}
+[class^="Frame_main2_"] #playInfo [class^="PlayInfo_videoinfo_"] {
+  display: none;
+}
+[class^="Frame_main2_"] [class^="Detail_wrap_"] [class*="Detail_tith4_"] > .star-f16 ~ * {
+  pointer-events: none;
+}
+[class^="Frame_main2_"] [class^="Detail_wrap_"] [class^="User_right_"] {
+  display: none;
+}
+[class^="Frame_main2_"] [class^="Tit_wrap_"] + div > :not([class*="PlayInfo_comment_"]) {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+.m-main {
+  width: 80vw;
+}
+.m-main .m-main-nav {
+  flex-shrink: 0;
+}
+.m-main .m-main-nav li:has([href^="/aisearch"]) {
+  display: none;
+}
+.m-main #pl_feed_main > #pl_feedlist_index {
+  width: initial;
+}
+.m-main #pl_feed_main > #pl_feedlist_index > div:has(> [action-type="feed_list_item"]) > [class^="zhisou_"] {
+  display: none;
+}
+.m-main #pl_feed_main .main-side > #pl_right_side .card-wrap .woo-button-main,
+.m-main #pl_feed_main .main-side > #pl_right_side > #pl_right_msg {
+  display: none;
+}
+[action-type="feed_list_item"] > .card > .card-feed > .content > .from {
+  display: flex;
+}
+[action-type="feed_list_item"] > .card > .card-feed > .content > .from > a:first-of-type {
+  margin-right: auto;
+  margin-bottom: initial;
+}
+[action-type="feed_list_item"] > .card > .card-feed > .content > .from > a:last-of-type {
+  pointer-events: none;
+}
+[action-type="feed_list_item"] > .card > .card-act li:has([action-type="feed_list_forward"], [action-type="feed_list_like"]) {
+  pointer-events: none;
+}
+[action-type="feed_list_item"] > .card > [node-type="feed_list_repeat"] > .card-together > [node-type="commentList"] > .content > .txt > .user_vip_icon_container,
+[action-type="feed_list_item"] > .card > [node-type="feed_list_repeat"] > .card-together .card-review > .content > .txt > .user_vip_icon_container {
+  display: none;
+}

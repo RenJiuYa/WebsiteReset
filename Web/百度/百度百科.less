@@ -1,0 +1,115 @@
+/* 
+    Page-条目详情
+*/
+
+// 全屏Comp-光标选定框
+.J-knowledge-editor-toolbar {
+  display: none;
+}
+
+// 顶Area-搜索
+[class^="index-module_pageHeader"] {
+  > :not([class^="index-module_topbar"], .lemmaSearchBarWrapper) {
+    display: none;
+  }
+  // 顶Bar
+  > [class^="index-module_topbar"] {
+    > :not([class^="index-module_userBarBox"]) {
+      display: none;
+    }
+    > [class^="index-module_userBarBox"] > .user-bar {
+      > :not(.user, .message, .setting) {
+        display: none;
+      }
+    }
+  }
+}
+
+// Area-布局
+#J-lemma-main-wrapper {
+  > :not(:nth-child(-n + 2)) {
+    display: none;
+  }
+  [class^="contentBox"] {
+    display: flex;
+    min-width: 80vw;
+    gap: 20px;
+    padding: 30px;
+  }
+}
+
+#J-lemma-main-wrapper > :first-child {
+  // 上Area-词条：特色
+  [class^="largeFeatureWrap"] [class^="posterBg"] {
+    > :not([class^="posterTop"]),
+    .J-lemma-title ~ * {
+      display: none;
+    }
+  }
+  // 上Area-词条：普通
+  [class^="secondContent"] {
+    > :not([class^="contentTop"]),
+    // 上Bar-功能
+    > [class^="contentTop"] [class^="btnList"] {
+      display: none;
+    }
+  }
+}
+
+// 右Area
+#J-lemma-main-wrapper {
+  #side {
+    padding: 0;
+
+    > :not([class^="abstractAlbum"], [class^="lemmaStatistics"]),
+    > [class^="lemmaStatistics"] > #J-contributor-list {
+      display: none;
+    }
+  }
+}
+
+// 左Area
+#J-lemma-main-wrapper {
+  padding-bottom: 50px;
+
+  [class^="mainContent"] {
+    flex-grow: 1;
+    padding: 0;
+
+    [type="defaultTab"] {
+      // 顶Bar-分享
+      > [class^="topToolsWrap"],
+      // Comp-词条类型
+      > [class^="posterFlag"],
+      // Area-视频
+      > #J-lemma-video-list,
+      // Area-TA说
+      > #J-bottom-tashuo,
+      // Bar-本人编辑
+      > #J-personal-auth,
+      // Bar-词条评价
+      > [class^="feedback-wrap"] {
+        display: none;
+      }
+
+      // Area-词条
+      > .normal [class^="btnList"] {
+        display: none;
+      }
+      // Area-内容
+      > .J-lemma-content {
+        // Bar-大标题 | Comp-播报
+        > [data-tag="header"] > :not(h2, [class^="titleLine"]),
+        // Area-视频
+        > [data-tag="paragraph"] > [data-module-type="video"] {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// 底Area-Footer
+div:has(> .page-footer-content) {
+  display: none;
+}

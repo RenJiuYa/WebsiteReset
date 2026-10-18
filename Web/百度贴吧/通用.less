@@ -1,12 +1,16 @@
 // main: _Entry.less
 // out: false
 
-/* Box-光标选定 */
+/* 
+    通用
+*/
+
+// Box-光标选定
 #selectsearch-icon {
   display: none;
 }
 
-/* Box-用户简介 */
+// Box-用户简介
 #user_visit_card {
   height: initial;
 
@@ -27,10 +31,23 @@
   }
 }
 
-/* 
-    组件：Bar-贴吧导航
-*/
+// Fix右Bar-分享
+#spage-tbshare-container {
+  display: none;
+}
 
+// Fix右下Bar-功能
+.tbui_aside_float_bar {
+  margin: 0;
+  left: initial;
+  right: 2%;
+
+  > :not(.tbui_fbar_post, .tbui_fbar_refresh, .tbui_fbar_top) {
+    display: none;
+  }
+}
+
+// 左上Bar-贴吧导航
 #com_userbar > ul {
   > li:not(.u_username, .u_news, .u_setting, .u_new_pc),
   // Item-用户
@@ -49,10 +66,7 @@
   }
 }
 
-/* 
-    组件：Area-搜索
-*/
-
+// 上Area-搜索
 .head_inner {
   > .search_top {
     display: none;
@@ -73,32 +87,7 @@
   }
 }
 
-/* 
-    Fix右Bar-分享
-*/
-
-#spage-tbshare-container {
-  display: none;
-}
-
-/* 
-    Fix右下Bar-功能
-*/
-
-.tbui_aside_float_bar {
-  margin: 0;
-  left: initial;
-  right: 2%;
-
-  > :not(.tbui_fbar_post, .tbui_fbar_refresh, .tbui_fbar_top) {
-    display: none;
-  }
-}
-
-/* 
-    Area-Footer
-*/
-
+// Area-Footer
 .footer {
   display: none;
 }

@@ -1,0 +1,51 @@
+// main: _Entry.less
+// out: false
+
+/* 
+    通用
+*/
+
+// 顶Bar
+.pc-main-page-layout > .top-bar-wrapper {
+  // 右Item
+  .menu-list > :not(.menu-item) {
+    display: none;
+  }
+}
+// 中Area
+.pc-main-page-layout .container {
+  max-width: initial;
+  padding: 0;
+
+  .center-content {
+    max-width: initial;
+    margin: 0;
+    padding: 20px;
+  }
+}
+// 右Area | Area-Footer
+.pc-main-page-layout .copy-right-wrapper {
+  display: none;
+}
+
+/* 
+    Page-首页
+*/
+
+// 左Area
+.pc-main-page-layout .left-nav-wrapper {
+  // Area-游戏
+  .list-container-wrapper:has([href^="https://wan.baidu.com"]) {
+    display: none;
+  }
+}
+
+/* 
+    Page-帖子
+*/
+// 右Area
+.pc-main-page-layout .right-area-wrapper {
+  .card-container-wrapper {
+    display: none;
+  }
+}

@@ -152,12 +152,17 @@
   // 右Area-信息
   > .right-container {
     > .right-container-inner {
-      // padding-bottom: 0;
       display: flex;
       flex-direction: column;
+      height: 100%;
 
       // Area-用户
       > .up-panel-container {
+        position: sticky;
+        top: 60px;
+        background-color: #FFF;
+        z-index: 1;
+
         // Card-创作团队（联合投稿）
         > .members-info-container {
           .add-follow-btn {
@@ -182,6 +187,10 @@
                 }
               }
             }
+            // Comp-直播
+            .live-mask{
+            display: none;
+          }
           }
           > .up-info--right {
             // Comp-私信

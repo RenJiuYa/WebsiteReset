@@ -1,0 +1,101 @@
+/* 
+    Page-搜索结果：Page-全部
+*/
+
+// 顶Area-搜索
+[data-st-cnt="fb"] {
+  // 下Bar-导航
+  [role="list"] > [data-hveid]:nth-last-of-type(-n + 5) {
+    display: none;
+  }
+}
+
+// Aree-内容
+#rcnt {
+  @Google-padding: 5%;
+  grid-template-columns: minmax(@Google-padding, 1fr) repeat(20, 1fr) minmax(
+      @Google-padding,
+      1fr
+    );
+  column-gap: 0;
+
+  // 无：左Area
+  > #center_col {
+    grid-column: 2 / -2;
+  }
+  // 有：左Area
+  &:has(> #rhs) {
+    > #center_col {
+      grid-column: 2 / span 14;
+    }
+    > #rhs {
+      grid-column: span 5 / -2;
+    }
+  }
+}
+
+// 右Area
+#rhs > #jOAHU {
+  // 下Comp-反馈
+  .C7GK8b,
+  // Area-推荐搜索
+  > :has(.pCnXsf) {
+    display: none;
+  }
+}
+
+// 左Area
+#center_col {
+  #rso {
+    > .ULSxyf {
+      // 上Area-大字  信息（搜农历新年）
+      &:has(.fm06If) {
+        // Area-推荐搜索
+        .yp1CPe,
+        // Comp-反馈
+        .YfftMc {
+          display: none;
+        }
+      }
+      // Card-相关问题
+      &:has(.cUnQKe) {
+        display: none;
+      }
+    }
+  }
+  // 下Area-分页
+  > #botstuff > [data-hveid] {
+    > :not([role="navigation"]) {
+      display: none;
+    }
+  }
+}
+
+// 底Area-Footer
+#sfooter .SLPe5b {
+  // Bar-反馈
+  > .kEjm2c {
+    display: none;
+  }
+}
+
+/* 
+    Page-搜索结果：Page-图片
+*/
+
+#cnt {
+  // 上Bar-关键词
+  > .rfiSsc {
+    display: none;
+  }
+}
+
+// 右Panel
+#sZmt3b .cLqwWc {
+  // 下Area-推荐
+  > [jsname="xYQ4wd"],
+  // 下Area-关键词
+  #iQXLdc {
+    display: none;
+  }
+}

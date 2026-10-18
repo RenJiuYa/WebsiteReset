@@ -27,7 +27,7 @@
       > .left-cont-wraper {
         bottom: 0;
         position: initial;
-        
+
         // Area-爱逛的吧
         > div:has(#addforum) > .onekey_sign_wrap,
       // Area-游戏
@@ -47,6 +47,25 @@
       grid-template-areas: "banner banner" "dynamic hot";
       grid-template-columns: 3fr 2fr;
       // grid-template-rows: 1fr auto;
+
+      > .r-left-sec .n_right {
+        position: relative;
+
+        .media_box {
+          box-sizing: border-box;
+          width: 100%;
+
+          > .media_bigpic_wrap > img {
+            width: initial;
+            max-height: 80vh;
+          }
+        }
+        .enter_pb_btn {
+          margin: 0;
+          right: 0;
+          bottom: -5px;
+        }
+      }
 
       // 上Area-快捷贴吧
       > .r-top-sec {
@@ -94,10 +113,3 @@
 /* 
     Page-热搜
 */
-
-
-
-
-
-
-
