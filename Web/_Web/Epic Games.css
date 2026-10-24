@@ -1,0 +1,27 @@
+/* 
+    通用
+*/
+/* @shadow(egs-navigation) */
+#mobile-drawer > .main-nav,
+#mobile-drawer > .main-cta {
+  display: none;
+}
+/* @shadow-end */
+egs-footer {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+#main-focus > div:has(> [data-section-id]) > :not([data-section-id="free-games"]) {
+  display: none;
+}
+/* 
+    Page-游戏
+*/
+[aria-describedby="launcher-onboard-install-prompt-body"] div:has(> [data-polymorphic-component]) {
+  display: none;
+}
+[aria-describedby="launcher-onboard-install-prompt-body"] div:has(> [data-polymorphic-component]) + div {
+  display: none;
+}

@@ -1,0 +1,200 @@
+/* 
+    通用
+*/
+
+// 全屏Box-登录
+.mrc-modal {
+  ._2t0Z3pyt > :not(.c_qBu3OE) {
+    display: none;
+  }
+}
+
+// Fix底Bar-播放
+#g_player {
+  // 右Bar-功能
+  > .oper > .icn-share {
+    display: none;
+  }
+  > .ctrl {
+    > .icn-audioquality {
+      display: none;
+    }
+  }
+}
+
+// 顶Bar-导航
+#g-topbar {
+  // 中Item
+  .m-nav {
+    > :not(:nth-child(-n + 3)),
+    // Comp-红点
+    .dot {
+      display: none;
+    }
+  }
+  // Comp-搜索-Panel
+  #g_search .rap > :has(.u-icn-29) {
+    display: none;
+  }
+  // 右Item-用户
+  .m-tophead {
+    // Comp-红点
+    > .head .m-topmsg {
+      display: none;
+    }
+    // Panel
+    > .m-tlist {
+      li:has([data-action="vipCenter"]) {
+        display: none;
+      }
+    }
+  }
+}
+
+// Area-歌曲
+#song-list-pre-cache {
+  // Item-歌曲
+  tr {
+    // Bar-功能
+    .opt > :not(.icn-add, .icn-fav) {
+      display: none;
+    }
+  }
+}
+
+// Area-评论
+#comment-box .m-cmmt {
+  // Area-输入
+  .iptarea {
+    display: none;
+  }
+  // Item-评论
+  .itm .rp {
+    > :not(.time) {
+      pointer-events: none;
+    }
+  }
+}
+
+/* 
+    Page-首页
+*/
+// 上Area-横幅
+#index-banner {
+  display: none;
+}
+#discover-module {
+  // 左Area
+  > .g-mn1 .g-wrap3 > :not(.n-new, .n-bill),
+  // 右Area
+  .g-sd1 > :not(.n-singer) {
+    display: none;
+  }
+}
+// 底Area-Footer
+.g-ft {
+  display: none;
+}
+
+/* 
+    Page-歌手、专辑、歌曲
+*/
+.g-bd4 {
+  background: initial;
+
+  // 右Area
+  > :not(.g-mn4) {
+    display: none;
+  }
+  // 左Area
+  > .g-mn4 > .g-mn4c {
+    margin: 0;
+
+    > .g-wrap6 {
+      // 中Area-音乐列表
+      > .n-songtb {
+        > .u-title > .out {
+          display: none;
+        }
+      }
+      /* Page-专辑、歌曲 */
+      // 上Area-专辑信息
+      > .m-info,
+      // 上Area-歌曲信息
+      > .m-lycifo {
+        // 上Comp-标题
+        .vip-album,
+        .vip-song {
+          > i {
+            display: none;
+          }
+          > .tit {
+            margin: 0;
+          }
+        }
+        /* Page-专辑 */
+        // 左Area-专辑
+        .cvrwrap > .out {
+          display: none;
+        }
+        // 下Bar-功能
+        #content-operation {
+          > .u-vip-btn-group,
+          > .u-btni-share,
+          > .u-btn-vip-download {
+            display: none;
+          }
+        }
+      }
+      /* Page-歌手 */
+      // 上Area-海报
+      > .n-artist {
+        > .btm {
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          > #artist-alias {
+            max-width: initial;
+          }
+        }
+        > img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+        > .mask {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* 
+    Page-搜索
+*/
+  .g-bd {
+    // 上Bar
+    .m-tabs-srch {
+      > li:not(
+          :has(
+            > :is(
+              [data-type="1"],
+              [data-type="100"],
+              [data-type="10"],
+              [data-type="1014"],
+              [data-type="1002"]
+            )
+          )
+        ) {
+        display: none;
+      }
+    }
+    // 中Area-结果：单曲
+    .srchsongst {
+      .opt > :not(.icn-add, .icn-fav) {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+.app-loaded {
+  overflow: initial;
+}
+// 全屏Box-AD
+// dialog.pc-announcement-dialog-native {
+//   .pc-announcement-dialog-flex-container {
+//     > :not(.pc-announcement-dialog-content) {
+//       display: none;
+//     }
+//     > .pc-announcement-dialog-content {
+//       > :not(.pc-announcement-dialog-body-container) {
+//         display: none;
+//       }
+//       > .pc-announcement-dialog-body-container > :not(button) {
+//         display: none;
+//       }
+//     }
+//   }
+// }
+
+// 顶Bar-导航
+header .nav-list {
+  > :not(:has(> [href="/categories"])) {
+    display: none;
+  }
+}
+
+// 底Bar-Footer
+footer {
+  display: none;
+}
+
+/* 
+  Page-首页
+*/
+// 上Area-公告
+.logged-in-home-container {
+  > :not(.content-area, .home-rec-wrap) {
+    display: none;
+  }
+  .hero-row {
+    > :not(.announcements-section) {
+      display: none;
+    }
+    .ann-home > :not(.ann-home__header) {
+      display: none;
+    }
+  }
+}
+
+/* 
+  Page-漫画详情
+*/
+.comic-detail-container {
+  // 上Area-简介
+  > .comic-hero-section {
+    box-shadow: initial;
+
+    .tags-row {
+      display: none;
+    }
+    .actions-row {
+      margin: 0;
+      padding: 0;
+    }
+  }
+  // 中Area-详细
+  > .comic-details-container {
+    > :not(.comic-detail-tabs, .tab-content) {
+      display: none;
+    }
+    > .tab-content > .unified-info-card {
+      display: flex;
+      flex-direction: column-reverse;
+      box-shadow: initial;
+
+      > .section-divider {
+        display: none;
+      }
+      > .info-tab-stats-area {
+        order: 1;
+        padding: 10px 0;
+      }
+      > .description-section {
+        padding: 0;
+      }
+    }
+  }
+}
+
+/* 
+  Page-漫画阅读
+*/
+.vw-reader {
+  // Area-图片
+  [data-testid="virtuoso-item-list"] > :not(:has(> .vw-image-item)),
+  // 底Area
+  .chapter-navigation > .chapter-navigation__ad {
+    display: none;
+  }
+}
+
+/* 
+  Page-搜索结果
+*/
+.search-page .comic-grid {
+  > :not(.comic-card) {
+    display: none;
+  }
+}

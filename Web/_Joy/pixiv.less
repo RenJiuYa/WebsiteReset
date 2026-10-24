@@ -1,0 +1,150 @@
+/* 
+    通用
+*/
+
+// Area-布局
+div:has(> .__top_side_menu_body) {
+  // Comp-AD
+  > .sc-62a9fca4-2 {
+    display: none;
+  }
+  // Area
+  > .__top_side_menu_body {
+    // 底Area-Footer
+    > footer {
+      display: none;
+    }
+  }
+}
+
+// Card-用户简介
+.sc-cd4af666-0 {
+  div:has(> [data-click-label="follow"]) {
+    pointer-events: none;
+  }
+}
+
+// 顶Bar-导航
+.sc-62a9fca4-0 {
+  // Item-AD
+  div:has(> iframe) {
+    display: none;
+  }
+}
+
+// 左Area-导航
+.__top_side_menu_root {
+  // 下Area-Footer
+  .list-none + div {
+    display: none;
+  }
+}
+
+/*
+    Page-首页
+*/
+// 上Area
+[data-ga4-label="page_root"] > .bg-background1 {
+  // Card-AD
+  > div:has([href^="https://premium.pixiv.net/"]) {
+    display: none;
+  }
+  // Card-推荐作品
+  section.sc-854bb586-0 {
+    ul {
+      grid-template-rows: repeat(3, auto);
+
+      // Comp-AD
+      > .row-start-1 {
+        display: none;
+      }
+    }
+  }
+}
+
+// 下Area
+[data-ga4-label="page_root"] > .bg-background2 {
+  // 右Area | Item-关注
+  .ease-in-out [data-click-label="follow"] {
+    display: none;
+  }
+}
+
+/*
+    Page-用户
+*/
+.__top_side_menu_body {
+  .sc-5e01ed9b-0 {
+    padding: 0;
+
+    // Comp-AD
+    > [style] {
+      display: none;
+    }
+  }
+}
+
+/*
+    Page-漫画阅读
+*/
+.__top_side_menu_body {
+  .sc-8d5ac044-1 {
+    // 上Area-阅读
+    [data-ga4-label="page_root"] {
+      // 左Area
+      > main {
+        // 中Bar-功能 | Item-喜欢-Panel
+        .sc-7e4ee3ac-0 section > :not(:nth-child(-n + 2)) {
+          display: none;
+        }
+        // 下Area-用户 | Comp-关注
+        .sc-7d1a8035-0 [data-click-label="follow"] {
+          pointer-events: none;
+        }
+        // 下Area-评论 | Area-输入
+        .sc-7d1a8035-0 [class^="CommentInput_container__"] {
+          display: none;
+        }
+      }
+      // 右Area
+      > aside {
+        // Card-用户 | Comp-关注
+        > .sc-52c1395d-3 > :has([data-click-label="follow"]) {
+          pointer-events: none;
+        }
+        // Card-AD
+        > :has(iframe) {
+          display: none;
+        }
+      }
+    }
+    // Comp-AD
+    > .sc-cf271d86-0 {
+      display: none;
+    }
+  }
+}
+
+/*
+    Page-搜索
+*/
+.__top_side_menu_body {
+  // 上Area-分类
+  [data-ga4-label="menu"] {
+    // 下Bar-排序
+    div:has(> [data-ga4-label="order_filter_chip"]) {
+      // Item-会员
+      .sc-b78ce63b-0 > div > :has(.sc-5ab2ff4d-0),
+      // Comp-AD
+      > iframe {
+        display: none;
+      }
+    }
+  }
+  // 中Area-结果
+  div:has(> [data-ga4-label="works_content"]) {
+    > :not([data-ga4-label], nav) {
+      display: none;
+    }
+  }
+}

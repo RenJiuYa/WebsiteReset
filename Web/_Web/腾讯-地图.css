@@ -1,0 +1,43 @@
+#Header {
+  height: initial;
+}
+#Header > #s_bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-width: 69px;
+  height: initial;
+  float: left;
+}
+#Header > #s_bar > :not([ch$=".bzdt"], #Other) {
+  display: none;
+}
+#Header > #s_bar > #Other {
+  position: initial;
+}
+#Header > #s_bar > #Other > #menusAndLogin > :not(:first-child) {
+  display: none;
+}
+#Header > #Search {
+  width: auto;
+  height: initial;
+  margin-top: 0;
+  position: initial;
+}
+#Header > #Search > #Logo {
+  display: none;
+}
+#Header > #Search > #TabContainer {
+  margin: 0;
+  position: initial;
+}
+#Header > #Search > #TabContainer > #SearchForms {
+  margin: 0;
+}
+#TextViewPanel {
+  display: none;
+}
+#Map > :not(.context-menu) div:has(> [href^="https://map.qq.com/?center="]),
+#Map > :not(.context-menu) [onresize="return;"] {
+  display: none;
+}

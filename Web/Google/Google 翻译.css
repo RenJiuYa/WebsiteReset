@@ -1,9 +1,7 @@
 [jsname="tD3Ohc"] {
   display: none;
 }
-.ccvoYb > .AxqVh c-wiz .YJGJsb > :not(:has([data-tooltip-id="ucc-2"])) {
-  display: none;
-}
+.ccvoYb > .AxqVh c-wiz .YJGJsb > :not(:has(> [data-tooltip-id="ucc-2"])),
 .ccvoYb > .HWmS8 {
   display: none;
 }

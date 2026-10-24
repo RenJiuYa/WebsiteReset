@@ -1,0 +1,263 @@
+body {
+  padding: 0;
+}
+.modal-backdrop {
+  display: none;
+}
+#billboard-modal > .modal-dialog > :not(.modal-content) {
+  display: none;
+}
+#billboard-modal > .modal-dialog > .modal-content > :not(.modal-footer) {
+  display: none;
+}
+#billboard-modal > .modal-dialog > .modal-content > .modal-footer > :not(.btn-group),
+#billboard-modal > .modal-dialog > .modal-content > .modal-footer > .btn-group > :not(#chk_cover) {
+  display: none;
+}
+#guide-modal {
+  display: none;
+}
+#login-modal .modal-content {
+  padding: 10px;
+}
+#sponsorsImg {
+  display: none;
+}
+[class^="float-right-"],
+.web-right-float-button {
+  display: none;
+}
+[data-group]:has( > :is(.group-notice, [onclick="closeAd(this)"])),
+.col-md-3:has(iframe) {
+  display: none;
+}
+.list-col {
+  margin: 5px 0;
+}
+.list-col > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px 5px 10px;
+}
+.list-col > div > .video-title {
+  height: 3em;
+  margin: 0;
+  line-height: 1.5em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  /* 两行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+.list-col > div > .title-truncate.hidden-xs {
+  height: 1em;
+  line-height: 1em;
+}
+.list-col > div > .tags {
+  margin: 0;
+  padding: 0;
+  overflow-x: initial;
+  white-space: initial;
+}
+.list-col > div > .tags > a {
+  display: inline-block;
+}
+.top-nav {
+  display: none;
+}
+#Comic_Top_Nav {
+  height: initial;
+  min-height: initial;
+  margin: 0;
+  padding: 0;
+  position: sticky;
+}
+#Comic_Top_Nav::before,
+#Comic_Top_Nav::after {
+  display: none;
+}
+#Comic_Top_Nav .d-flex {
+  display: grid;
+  grid-template-areas: "left top" "left right";
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr auto;
+}
+#Comic_Top_Nav .d-flex > .navbar-left {
+  grid-area: left;
+}
+#Comic_Top_Nav .d-flex > .navbar-left > :not( #adulta, #hmovies, :has([href="/theme/"], [href="/#"], [href="/forum/"])) {
+  display: none;
+}
+#Comic_Top_Nav .d-flex > .navbar-right {
+  grid-area: right;
+  display: flex;
+  margin: 0;
+}
+#Comic_Top_Nav .d-flex > .navbar-right > :has(> [href="/bonus"]) {
+  display: none;
+}
+#Comic_Top_Nav .d-flex > .visible-lg {
+  grid-area: top;
+  margin-top: 5px;
+  position: initial;
+}
+#Comic_Top_Nav .d-flex .menu-circle {
+  display: none;
+}
+.footer-pad,
+.footer-container {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+.div-bf-pv {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+.row:has(.list-group) {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.row:has(.list-group) > .col-md-3 {
+  width: 100%;
+  padding: 0;
+}
+.row:has(.list-group) > .col-md-3 > .list-group {
+  display: flex;
+}
+.row:has(.list-group) > .col-md-3 > .list-group > a {
+  flex-grow: 1;
+  border-radius: 0;
+  text-align: center;
+}
+.row:has(.list-group) > .col-xs-12 {
+  width: 100%;
+  padding: 0;
+}
+/* 
+    Page-漫画详情
+*/
+.row:has(> #album_id) {
+  margin: 10px 0 0;
+  padding: 0;
+}
+.row:has(> #album_id) > .col-md-12 {
+  padding: 0;
+}
+.row:has(> #album_id) > .col-md-12 #book-name ~ * {
+  display: none;
+}
+[itemscope].panel #album_photo_cover .owl-item {
+  height: auto;
+}
+[itemscope].panel .intro-toolbar {
+  justify-content: flex-start;
+}
+[itemscope].panel .intro-toolbar > :has(#jmComicVideo) {
+  display: none;
+}
+[itemscope].panel .tag-block > h2 {
+  margin: 0;
+}
+[itemscope].panel .tag-block > label {
+  display: none;
+}
+[itemscope].panel .tag-block > .btn-team > [href] {
+  display: none;
+}
+[itemscope].panel .read-block > [id^="love_likes_"],
+[itemscope].panel .read-block > [data-target="#jmComicMbVideo"] {
+  display: none;
+}
+[itemscope].panel [data-group] {
+  display: none;
+}
+.nav-tabs > li:has(#related_comics_a) {
+  display: none;
+}
+#related_comics {
+  display: none;
+}
+/* 
+    Page-漫画阅读
+*/
+.menu-bolock > .menu-bolock-ul > :not( :has(
+      > [href^="/album_download"],
+      > [href="#login-modal"],
+      > [href="?read_mode=read-by-page"],
+      > [href^="/album/"],
+      > #gotop,
+      > #pageselect
+    )) {
+  display: none;
+}
+#is_hanman + .row .panel > :not(.panel-heading, .panel-body) {
+  display: none;
+}
+#is_hanman + .row .panel > .panel-body > .thumb-overlay-albums > :not([id]) {
+  display: none;
+}
+#is_hanman + .row .panel > .panel-body > .thumb-overlay-albums canvas {
+  max-height: 120vw;
+}
+/* 
+    Page-用户
+*/
+.panel:has(.header-info-personal) {
+  margin: 10px 0;
+}
+.panel:has(.header-info-personal) > .panel-body {
+  display: grid;
+  grid-template-areas: "user info" "user like";
+  grid-template-columns: auto 1fr;
+}
+.panel:has(.header-info-personal) > .panel-body > .header-info-personal {
+  grid-area: user;
+  margin: 0 50px 0 0;
+}
+.panel:has(.header-info-personal) > .panel-body > .header-info-profile {
+  grid-area: info;
+  display: flex;
+  gap: 30px;
+}
+.panel:has(.header-info-personal) > .panel-body > .header-info-profile > :not(.header-info-title, .header-profile-rows) {
+  display: none;
+}
+.panel:has(.header-info-personal) > .panel-body > .header-info-profile > .header-profile-rows {
+  flex-grow: 1;
+  justify-content: flex-start;
+  gap: 50px;
+  margin: 0;
+}
+.panel:has(.header-info-personal) > .panel-body > .header-info-profile > .header-profile-rows > .header-profile-row {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 5px;
+  margin: 0;
+}
+.panel:has(.header-info-personal) > .panel-body > .header-info-profile > .header-profile-rows > .header-profile-row:empty {
+  display: none;
+}
+.panel:has(.header-info-personal) > .panel-body > .header-info-profile > .header-profile-rows > .header-profile-row > .header-profile-row-value {
+  color: aqua;
+}
+.panel:has(.header-info-personal) > .panel-body > :last-child {
+  grid-area: like;
+}
+.panel:has(.header-info-personal) > .panel-body > .visible-lg-block {
+  display: none;
+}
+.header-menu-block > .header-menu {
+  scrollbar-width: none;
+}
+.header-menu-block > .header-menu > [href$="/bonus"],
+.header-menu-block > .header-menu > [href="/logout"] {
+  display: none;
+}

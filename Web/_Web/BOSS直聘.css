@@ -1,0 +1,91 @@
+/* 
+    通用
+*/
+.boss-login-sign-wrap > .side-slogan-box {
+  display: none;
+}
+.boss-login-sign-wrap > .boss-sign-form {
+  width: initial;
+  float: initial;
+}
+.zp-side-entry > :not(.back-top) {
+  display: none;
+}
+#header > .inner > .nav li:not( :has(
+        > [ka="header-home"],
+        > [ka="header-jobs"],
+        [ka="header_brand"],
+        [ka="nav-school-new"]
+      )) {
+  display: none;
+}
+#header > .inner .header-nav-dot,
+#header > .inner > .user-nav .nav-resume-tools {
+  display: none;
+}
+#footer {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+.column-search-panel.fixed {
+  visibility: hidden;
+}
+.column-search-panel > .inner > :not(.search-box),
+.column-search-panel > .inner > .search-box {
+  padding: 20px 0;
+}
+.column-search-panel > .inner > :not(.search-box) > :not(.search-form),
+.column-search-panel > .inner > .search-box > :not(.search-form) {
+  display: none;
+}
+/* 
+    Page-登录
+*/
+.page-sign > .login-entry-page > .side-slide-box {
+  display: none;
+}
+.page-sign > .login-entry-page > .login-register-content {
+  width: initial;
+  float: initial;
+}
+.page-sign > .login-entry-page > .login-register-content > .publicity-info {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+.job-recommend-result .job-list-container > :not(.rec-job-list) {
+  display: none;
+}
+.job-recommend-result .job-detail-container > .job-detail-guide-cont {
+  display: none;
+}
+.job-recommend-result .job-detail-container > .job-detail-box > .job-detail-body > .job-detail-operate,
+.job-recommend-result .job-detail-container > .job-detail-box > .job-detail-body > .job-boss-info > .job-search-scan {
+  display: none;
+}
+.job-recommend-result .job-detail-container > .c-job-tools,
+.job-recommend-result .job-detail-container > .c-hot-link,
+.job-recommend-result .job-detail-container > .c-breadcrumb {
+  display: none;
+}
+/* 
+    Page-公司：Page-公司简介
+*/
+.job-box > .inner > .job-detail > :not(.company-info-box) {
+  display: none;
+}
+.job-box > .inner > .company-sider > .sign-wrap {
+  display: none;
+}
+/* 
+    Page-公司：Page-招聘职位
+*/
+.company-position-box > :not(.company-position-job) {
+  display: none;
+}
+.company-position-box > .company-position-job > .position-job-container > :not(.position-job-list) {
+  display: none;
+}

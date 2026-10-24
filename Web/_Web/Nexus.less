@@ -1,0 +1,189 @@
+/* 
+    通用
+*/
+// 顶Bar-导航
+header [data-e2eid="desktop-header"] {
+  // 左Item
+  [data-headlessui-state]:not(:nth-of-type(-n + 2)) {
+    display: none;
+  }
+  // 右Item
+  > .gap-x-1 {
+    > :first-child {
+      display: none;
+    }
+  }
+}
+// 顶Bar-导航 | Item-用户-Panel
+[id^="headlessui-menu-items-"] {
+  > :first-child > .hidden,
+  > :not(
+    [href^="https://www.nexusmods.com/profile/"],
+    [href$="tab=mods"],
+    [href$="/trackingcentre"],
+    [href$="tab=download+history"],
+    [href$="https://users.nexusmods.com"],
+    [href$="/preferences"],
+    [href$="/sign_out"]
+  ) {
+    display: none;
+  }
+}
+
+// 上Bar-AD
+.bg-premium-weak,
+free-trial-banner {
+  display: none;
+}
+
+#mainContent {
+  > :not(.relative, .modpage) {
+    display: none;
+  }
+  > .relative > .next-container {
+    // Card-制作Mod
+    > .border-stroke-subdued {
+      display: none;
+    }
+    > .space-y-16 {
+      // Card-社区新闻
+      > .bg-linear-to-r,
+      // Card-会员
+      > section:has(.border-premium-moderate),
+      // Card-藏品
+      > section[aria-labelledby="popular-collections-header"],
+      // Card-视频
+      > section[aria-labelledby="media-header"],
+      // Card-新闻
+      > section[aria-labelledby="news-header"],
+      // Card-成就
+      > .border-creator-moderate {
+        display: none;
+      }
+    }
+  }
+}
+
+// 底Area-Footer
+footer {
+  display: none;
+}
+
+/* 
+    Page-搜索模组
+*/
+// 左Area-分类
+.next-container-fluid #filters-panel {
+  > .border-creator-subdued {
+    display: none;
+  }
+}
+
+/* 
+    Page-模组
+*/
+// 顶Bar-导航
+.new-head {
+  // Bar
+  > .rj-header-wrap {
+    // Comp
+    > .skip-to-content,
+    // 左Item
+    > .nav-alignment button:not([data-title="Games"], [data-title="Mods"]),
+    // 右Item
+    > .rj-user-nav > upload-modal-button {
+      display: none;
+    }
+  }
+  // Item-用户-Panel
+  > .rj-profile-tray > .rj-profile-tray-content {
+    > .user-profile-menu-section-top > a,
+    > .user-profile-menu-section:not(
+        :has(
+          > :is(
+            [data-nav-label="my_profile"],
+            [data-nav-label="my_mods"],
+            [data-nav-label="tracking_centre"],
+            [data-nav-label="download_history"],
+            [data-nav-label="account_settings"],
+            [data-nav-label="account_settings"],
+            form,
+
+          )
+        )
+      ) {
+      display: none;
+    }
+  }
+}
+// Area
+.modpage {
+  // 上Area-功能 | 右Item
+  #pagetitle > .modactions > :not(:has([data-do-track])),
+  // 上Area-标签
+  .side-tags {
+    display: none;
+  }
+  // 中Bar-导航
+  .modtabs {
+    display: flex;
+    justify-content: flex-end;
+
+    > * {
+      @tab-border: 1px solid var(--stroke-neutral-translucent-weak);
+      border-left: @tab-border;
+      border-right: @tab-border;
+    }
+    #mod-page-tab-description,
+    #mod-page-tab-files,
+    #mod-page-tab-posts {
+      order: -1;
+    }
+    #mod-page-tab-images {
+      margin-left: auto;
+    }
+  }
+  // 下Area
+  .tabcontent {
+    /* Page-Description */
+    > .tab-description {
+      > .actions {
+        display: none;
+      }
+      // 包含此模组的合集
+      .accordion > dt[data-collections-accordion-header] {
+        display: none;
+      }
+    }
+    /* Page-Files */
+    // Card-AD
+    > #freeTrialBanner {
+      display: none;
+    }
+  }
+}
+/* @shadow(mod-download-modal) */
+// Card-文件 | Item-下载客户端
+.nxm-button-primary {
+  display: none;
+}
+/* @shadow-end */
+
+/* @shadow(#next-shadow-root) */
+// 全屏Box-下载
+.nxm-modal-content .space-y-4 {
+  > .bg-surface-mid > :not(.scrollbar) {
+    display: none;
+  }
+}
+/* @shadow-end */
+
+/* Page-HistoryFiles */
+/* @shadow(file-version-history) */
+.prose-lexical + .flex-col {
+  // Item-下载客户端
+  > .nxm-button-primary {
+    display: none;
+  }
+}
+/* @shadow-end */

@@ -23,6 +23,69 @@
       > #chat-input-main .chat-input-tool {
         display: none;
       }
+      #chat-textarea::placeholder {
+        font-size: 0;
+      }
     }
   }
+}
+
+/* 
+    Page-搜索
+*/
+// 全屏Box-光标选定框
+.selected-search-box {
+  display: none;
+}
+
+// Fix右下Bar
+[tpl="app/qrcode"] {
+  display: none;
+}
+
+// Area-布局
+#container {
+  margin-left: 5%;
+
+  > :not(#content_left) {
+    display: none;
+  }
+  > #content_left {
+    width: auto;
+    max-width: 80vw;
+    float: initial;
+
+    > * {
+      width: 100%;
+    }
+    // Card
+    > :not(:is(
+      /* Card-百科 */
+      .c-group-wrapper,
+      [tpl="sg_kg_entity_san"],
+      [tpl="bk_polysemy"],
+      /* Card-贴吧 */
+      [tpl^="tieba_"],
+      /* Card-普通 */
+      [tpl="www_index"]
+    )) {
+      display: none;
+    }
+    // Card-推荐
+    > .result:has(> .pc-aftclk-upgrade) {
+      display: none;
+    }
+    // Card-普通
+    > .result {
+      // 上Bar-标题
+      .cosc-title ~ * {
+        display: none;
+      }
+    }
+  }
+}
+
+// 底Bar-Footer
+[tpl="app/footer"] {
+  display: none;
 }

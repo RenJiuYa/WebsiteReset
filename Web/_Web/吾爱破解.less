@@ -1,0 +1,89 @@
+/* 
+    通用
+*/
+
+// Fix右下Bar-功能
+#jz52top > :not(:has(> #goTopBtn)) {
+  display: none;
+}
+
+// 上Area-导航
+#hd > .wp {
+  // Bar-搜索
+  > #nv_ph #nv {
+    position: initial;
+  }
+  // Bar-搜索
+  > #scbar .scbar_hot_td {
+    display: none;
+  }
+}
+
+// 底Area-公告
+.res-footer-note {
+  display: none;
+}
+
+/* 
+    Page-帖子
+*/
+#postlist {
+  // 顶Bar-标题
+  > [cellspacing] {
+    border-bottom: 5px solid #2d78c8;
+
+    // Comp-广告
+    &.ad {
+      display: none;
+    }
+  }
+  // Card-帖子
+  > [id] {
+    @Card-border: 1px solid #2d78c8;
+    border-top: @Card-border;
+    border-bottom: @Card-border;
+
+    > table > tbody {
+      > :not(:first-child, :nth-child(4)) {
+        display: none;
+      }
+      // Area-帖子
+      > tr:first-child {
+        // 左Area
+        > .pls > .pls {
+          > .md_ctrl,
+          > ul:has(.addflw) {
+            display: none;
+          }
+        }
+        // 右Area
+        > .plc {
+          // 上Bar
+          > .pi {
+            // Comp-电梯
+            > #fj > label {
+              pointer-events: none;
+            }
+            // Comp-推荐
+            > strong {
+              display: none;
+            }
+          }
+          // 中Area
+          > .pct {
+            // 上Comp-公告
+            > .vw50_kfc_pt,
+            // Area-文章 | Area-评分
+            > .pcb > .rate .ratl_l {
+              display: none;
+            }
+          }
+        }
+      }
+      // Bar-回复
+      > tr:has(.hin) > .pls {
+        display: none;
+      }
+    }
+  }
+}

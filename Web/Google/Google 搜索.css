@@ -1,7 +1,7 @@
 /* 
     Page-搜索结果：Page-全部
 */
-[data-st-cnt="fb"] [role="list"] > [data-hveid]:nth-last-of-type(-n + 5) {
+[data-st-cnt="fb"] [role="list"] > [data-hveid]:not(:nth-of-type(-n + 3)) {
   display: none;
 }
 #rcnt {
@@ -17,21 +17,15 @@
 #rcnt:has(> #rhs) > #rhs {
   grid-column: span 5 / -2;
 }
-#rhs > #jOAHU .C7GK8b,
-#rhs > #jOAHU > :has(.pCnXsf) {
+#rhs > #jOAHU > :has(> .pCnXsf),
+#rhs > #jOAHU .C7GK8b {
   display: none;
 }
-#center_col #rso > .ULSxyf:has(.fm06If) .yp1CPe,
-#center_col #rso > .ULSxyf:has(.fm06If) .YfftMc {
-  display: none;
-}
-#center_col #rso > .ULSxyf:has(.cUnQKe) {
+#center_col #rso > .ULSxyf:has(block-component) .kp-header ~ *,
+#center_col #rso > .ULSxyf:has(block-component) .YfftMc {
   display: none;
 }
 #center_col > #botstuff > [data-hveid] > :not([role="navigation"]) {
-  display: none;
-}
-#sfooter .SLPe5b > .kEjm2c {
   display: none;
 }
 /* 

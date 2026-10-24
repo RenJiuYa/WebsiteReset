@@ -1,0 +1,64 @@
+/* 
+    通用
+*/
+
+// 顶Bar | 右Item
+header > .pull-right {
+  > #fullscreen,
+  > #register {
+    display: none;
+  }
+}
+
+// 左Area-导航
+aside nav {
+  li:has([href$="/donation"]) {
+    display: none;
+  }
+}
+
+// Comp-AD
+#content > :has(iframe) {
+  display: none;
+}
+
+/* 
+    Page-漫画橱窗
+*/
+// Comp-公告
+#content > :has(.alert) {
+  display: none;
+}
+
+/* 
+    Page-漫画详情
+*/
+// 上Area-漫画信息
+.row:has(> .col-md-5 > .product-image) {
+  display: flex;
+  margin: 0;
+
+  > .col-md-5 {
+    flex: 1 0 auto;
+    width: initial;
+
+    > .product-image img {
+      min-height: 60vh;
+      max-height: 80vh;
+    }
+  }
+  > .col-md-7 {
+    flex: 4 1 auto;
+    width: initial;
+  }
+}
+
+.product-image img {
+  // max-height: initial;
+}
+// 下Area-预览
+#more-information1 {
+  img {
+    max-height: 100vh;
+  }
+}

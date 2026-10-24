@@ -16,3 +16,50 @@
 .s-skin-hasbg > #head_wrapper .chat-input-anchor > #chat-input-main .chat-input-tool {
   display: none;
 }
+.s-skin-hasbg > #head_wrapper .chat-input-anchor #chat-textarea::placeholder {
+  font-size: 0;
+}
+/* 
+    Page-搜索
+*/
+.selected-search-box {
+  display: none;
+}
+[tpl="app/qrcode"] {
+  display: none;
+}
+#container {
+  margin-left: 5%;
+}
+#container > :not(#content_left) {
+  display: none;
+}
+#container > #content_left {
+  width: auto;
+  max-width: 80vw;
+  float: initial;
+}
+#container > #content_left > * {
+  width: 100%;
+}
+#container > #content_left > :not(:is(
+      /* Card-百科 */
+      .c-group-wrapper,
+      [tpl="sg_kg_entity_san"],
+      [tpl="bk_polysemy"],
+      /* Card-贴吧 */
+      [tpl^="tieba_"],
+      /* Card-普通 */
+      [tpl="www_index"]
+    )) {
+  display: none;
+}
+#container > #content_left > .result:has(> .pc-aftclk-upgrade) {
+  display: none;
+}
+#container > #content_left > .result .cosc-title ~ * {
+  display: none;
+}
+[tpl="app/footer"] {
+  display: none;
+}

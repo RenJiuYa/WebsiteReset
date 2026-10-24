@@ -1,0 +1,60 @@
+/* 
+    通用
+*/
+#home_open_fl_wrap {
+  display: none;
+}
+#rightSideBar > :not(.toTop) {
+  display: none;
+}
+body > :not([id], [class]) {
+  display: none;
+}
+#commonTopbar .bar_right > :not(#commonTopbar_login, #commonTopbar_my58menu) {
+  display: none;
+}
+.footer {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+#headerWrap > #homeWrap > :not(#header) {
+  display: none;
+}
+#headerWrap > #homeWrap form > #searchbar > #hotwords {
+  display: none;
+}
+/* 
+    Page-搜索租房
+*/
+.wx-xcx-qrcode {
+  display: none;
+}
+#header-wrap .search-section > .hotKey {
+  display: none;
+}
+#nav-container > .tab-wrap > :not(:nth-of-type(-n + 2)) {
+  display: none;
+}
+.main-wrap > .filter-wrap .map_fang {
+  display: none;
+}
+/* 
+    Page-房子
+*/
+#header-wrap .top-publish-news {
+  display: none;
+}
+.house-basic-info .house-fraud-tip {
+  display: none;
+}
+.main-detail-info .report-text,
+.main-detail-info .guess-your-service,
+.main-detail-info #see-again-house ~ * {
+  display: none;
+}
+.other-series-recommend,
+#commonFooter {
+  display: none;
+}

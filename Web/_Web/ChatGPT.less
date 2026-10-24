@@ -1,0 +1,58 @@
+/* 
+    通用
+*/
+
+// 全屏Box-光标选定框
+.contents:has(.pointer-events-none > [role="presentation"]) {
+  display: none;
+}
+
+// Comp-搜索
+form[data-chatgpt-composer] {
+  min-width: 50vw;
+  
+  [data-composer-layout="single-line"] {
+    // Comp-语音
+    div:has(> [aria-label="开始语音"]) {
+      display: none;
+    }
+  }
+}
+
+// 左Area
+aside nav + div {
+  // 底Area-AD
+  .contents {
+    display: none;
+  }
+}
+
+// 顶右Bar
+header {
+  > [data-testid="app-shell-header-context-menu-surface"] {
+    > [data-app-shell-header-obstacle] > :not(:last-child) {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-会话
+*/
+// 右Arae
+[data-thread-user-message-navigation-content]{
+  width: 100%;
+  max-width: initial;
+  padding: 0 5%;
+}
+// 右Arae | 下Area-搜索
+[data-pip-obstacle="thread-footer"] {
+  width: 100%;
+  max-width: initial;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+// 右Arae | 下Area-搜索 | 上Bar-提示
+[data-mcp-app-portal-target] + div:not(.pointer-events-none) {
+  display: none;
+}

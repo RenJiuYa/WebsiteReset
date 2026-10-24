@@ -216,6 +216,18 @@
 .l_container > .content > #plat_recom_carousel > .tbui_slideshow_list {
   width: 100%;
 }
+.head_main > .head_content > div:has(> .head_ad_pop) > .head_ad_pop,
+.l_container > .content > div:has(> .head_ad_pop) > .head_ad_pop {
+  display: none;
+}
+.head_main > .head_content > div:has(> .head_ad_pop) > .official_head > .head_banner,
+.l_container > .content > div:has(> .head_ad_pop) > .official_head > .head_banner {
+  display: none;
+}
+.head_main > .head_content > div:has(> .head_ad_pop) > .official_head > .head_card,
+.l_container > .content > div:has(> .head_ad_pop) > .official_head > .head_card {
+  margin-top: 70px;
+}
 .head_main > .head_content > .card_banner > :not(#forum-card-banner),
 .l_container > .content > .card_banner > :not(#forum-card-banner) {
   display: none;
@@ -332,7 +344,7 @@
 #content .forum_content > #content_wrap .j_thread_list > .media_box {
   box-sizing: border-box;
   width: initial;
-  margin: 10px;
+  margin: 20px;
 }
 #content .forum_content > #content_wrap .j_thread_list > .media_box > .media_disp {
   width: initial;
@@ -488,6 +500,9 @@
 }
 .l_post > .d_post_content_main > .core_reply > .j_lzl_container {
   width: initial;
+}
+.l_post > .d_post_content_main > .core_reply > .j_lzl_container .lzl_cnt > .pre_icon_wrap {
+  display: none;
 }
 /* 
     Page-热搜

@@ -51,7 +51,7 @@
 
 #mirror-vdcon {
   // Fix右下Bar-功能
-  > .fixed-sidenav-storage > div:has(.customer-service) {
+  > .fixed-sidenav-storage > :not(.mini-player-window, .back-to-top-wrap) {
     display: none;
   }
 
@@ -128,7 +128,7 @@
 
     // 中Area-标签
     > .video-tag-container {
-      :has(.tag-icon) + .tag {
+      .tag:has(.tag-icon) + .tag {
         clear: left;
       }
     }
@@ -136,8 +136,8 @@
     // 中Area-标签 | Comp-音乐-Panel
     > #bgm-entry {
       [class^="_PcDetailInfo"] {
-        // Comp-喜欢
-        .btn:has(.number) {
+        // Bar-功能
+        .musicInfoBtns > :not(.mv) {
           pointer-events: none;
         }
       }
@@ -158,10 +158,13 @@
 
       // Area-用户
       > .up-panel-container {
+        margin-bottom: 20px;
+        padding: 0 10px;
         position: sticky;
         top: 60px;
-        background-color: #FFF;
-        z-index: 1;
+        background-color: #fff;
+        box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef);
+        z-index: 10;
 
         // Card-创作团队（联合投稿）
         > .members-info-container {
@@ -188,9 +191,9 @@
               }
             }
             // Comp-直播
-            .live-mask{
-            display: none;
-          }
+            .live-mask {
+              display: none;
+            }
           }
           > .up-info--right {
             // Comp-私信

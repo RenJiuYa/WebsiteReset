@@ -10,6 +10,9 @@
 .popcard [class*="_buttons_"] .woo-button-primary {
   pointer-events: none;
 }
+article:has(i[title="负反馈"]) {
+  display: none;
+}
 article header .woo-avatar-hover > :not(img),
 article header [class*="_nick_"] > :not([usercard]),
 article header .woo-button-primary {
@@ -37,6 +40,12 @@ article .wbpro-feed-content > .wbpro-feed-ogText a:has(img) {
   width: fit-content;
 }
 article .wbpro-feed-content > [class*="_row_"] [class*="_itemHover_"] {
+  pointer-events: none;
+}
+article .retweet > .wbpro-feed-reText [usercard] ~ * {
+  display: none;
+}
+article .retweet > [class*="_retweetBar_"] .woo-box-item-inlineBlock:not(:has(.woo-font--comment)) {
   pointer-events: none;
 }
 article > [data-v-app] {
@@ -174,6 +183,9 @@ article > footer [class^="_share_"] > .woo-pop-wrap {
 }
 [action-type="feed_list_item"] > .card > .card-feed > .content > .from > a:last-of-type {
   pointer-events: none;
+}
+[action-type="feed_list_item"] > .card > .card-feed > .content > [node-type="feed_list_media_disp"] > .media > .more-pic {
+  display: none;
 }
 [action-type="feed_list_item"] > .card > .card-act li:has([action-type="feed_list_forward"], [action-type="feed_list_like"]) {
   pointer-events: none;

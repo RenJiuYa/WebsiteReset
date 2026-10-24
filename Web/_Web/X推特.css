@@ -1,5 +1,5 @@
 /* 
-    组件：Box-用户简介
+    通用
 */
 [data-testid="HoverCard"] .r-nsbfu8 .r-1wtj0ep button {
   pointer-events: none;
@@ -7,9 +7,6 @@
 [data-testid="HoverCard"] .r-nsbfu8 .r-1wzrnnt {
   display: none;
 }
-/* 
-    组件：Card-帖子
-*/
 article {
   cursor: initial;
 }
@@ -37,9 +34,9 @@ article [role="group"] > :has(
   ) {
   display: none;
 }
-/* 
-    通用：左Area
-*/
+[data-testid="cellInnerDiv"]:has(article .r-1cmwbt1 > .r-16dba41) {
+  display: none;
+}
 header nav > a:not(
       [href="/home"],
       [href="/explore"],
@@ -53,9 +50,6 @@ header nav > a:not(
 [data-testid="Dropdown"] > .r-1mnxbyr > :not(:has([href$="/lists"], [href$="/settings"])) {
   display: none;
 }
-/* 
-    通用：右Area
-*/
 [data-testid="sidebarColumn"] .r-vacyoi > :has(
     [href="/i/premium_sign_up"],
     [role="navigation"]
@@ -63,15 +57,9 @@ header nav > a:not(
 [data-testid="sidebarColumn"] .r-vacyoi [data-testid="UserCell"] .r-1cwvpvk {
   display: none;
 }
-/* 
-    通用：中Area
-*/
 [data-testid="primaryColumn"] > [aria-label] > .r-184en5c {
   display: none;
 }
-/* 
-    通用：中Area | Card-用户
-*/
 [data-testid="UserCell"] .r-1cwvpvk:has([data-testid$="follow"]) {
   pointer-events: none;
 }

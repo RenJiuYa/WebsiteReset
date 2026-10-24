@@ -1,0 +1,40 @@
+/* 
+    通用
+*/
+body {
+  overflow-x: hidden;
+}
+.absolute.-left-2,
+.absolute.-right-2 {
+  display: none;
+}
+.opgg-widget-container {
+  display: none;
+}
+[data-worlds-entry],
+section[data-worlds-viewer] {
+  display: none;
+}
+#opgg-kit-gnb [class^="ServiceMenu-module_service-menu__"],
+#opgg-kit-gnb [class^="DesktopGNB-module_icon-list__"] > div {
+  display: none;
+}
+.md\:max-w-width-limit:has(form) {
+  padding: 10px 0;
+}
+.md\:max-w-width-limit:has(form) > .hidden,
+.md\:max-w-width-limit:has(form) > div > :not(:first-child),
+.md\:max-w-width-limit:has(form) form ~ * {
+  display: none;
+}
+nav[data-worlds-navigation] [href="/zh-cn"],
+nav[data-worlds-navigation] div:has( > :is([href="/zh-cn/lol/worlds"], [href="/zh-cn/lol/leaderboards/tier"])),
+nav[data-worlds-navigation] > .hidden {
+  display: none;
+}
+[data-opgg-beer-takeover] {
+  padding-bottom: 20px;
+}
+footer {
+  display: none;
+}

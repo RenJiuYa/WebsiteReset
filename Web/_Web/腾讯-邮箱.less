@@ -1,0 +1,43 @@
+/* 
+    通用
+*/
+// 顶Bar
+.frame-header {
+  // Comp-AD
+  > .xmail-cmp-vip-float-bubble {
+    display: none;
+  }
+}
+// 顶Bar | Comp-用户-Panel
+.xmail-ui-popup-wrap .cmp-account-panel {
+  // Area-用户
+  > .cmp-account-panel-user .cmp-vip-icon-click,
+  // Comp-AD
+  > .xmail-cmp-vip-embed-bubble,
+  // Bar-Footer
+  > .cmp-account-panel-footer > :first-child {
+    display: none;
+  }
+}
+
+/* 
+    Page-设置
+*/
+// 左Area
+.frame-sidebar-setting-menus {
+  // Comp-AD
+  .frame-sidebar-menu:has(.cmp-vip-icon) {
+    display: none;
+  }
+}
+// 右Area
+.mail-setting-page {
+  // Comp-AD
+  > .xmail-cmp-vip-streamer,
+  // Card-存储
+  .mail-setting-storage .mail-setting-vip-bar,
+  // Card-主体
+  .mail-setting-themes > :nth-child(-n+3) {
+    display: none;
+  }
+}

@@ -1,0 +1,15 @@
+/* 
+    通用
+*/
+nav [data-testid="not_login_about_us"] {
+  display: none;
+}
+main [data-header-host] [data-header-frame-region="right"] > :not([data-testid="to_login_button"]) {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+main #experiment-guidance-suggestions {
+  display: none;
+}

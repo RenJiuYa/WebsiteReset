@@ -1,0 +1,156 @@
+/* 
+    通用
+*/
+
+// 全屏Box-登录
+.boss-login-sign-wrap {
+  > .side-slogan-box {
+    display: none;
+  }
+  > .boss-sign-form {
+    width: initial;
+    float: initial;
+  }
+}
+
+// Fix右下Bar
+.zp-side-entry > :not(.back-top) {
+  display: none;
+}
+
+// 顶Bar
+#header > .inner {
+  // 左Item
+  > .nav {
+    li:not(
+      :has(
+        > [ka="header-home"],
+        > [ka="header-jobs"],
+        [ka="header_brand"],
+        [ka="nav-school-new"]
+      )
+    ) {
+      display: none;
+    }
+  }
+  // 左Item | Comp-圆点
+  .header-nav-dot,
+  // 右Item
+  > .user-nav .nav-resume-tools {
+    display: none;
+  }
+}
+
+// 底Area-Footer
+#footer {
+  display: none;
+}
+
+/* 
+    Page-首页
+*/
+// 上Area-搜索
+.column-search-panel {
+  &.fixed {
+    visibility: hidden;
+  }
+  > .inner {
+    > :not(.search-box),
+    > .search-box {
+      padding: 20px 0;
+
+      > :not(.search-form) {
+        display: none;
+      }
+    }
+  }
+}
+
+/* 
+    Page-登录
+*/
+.page-sign {
+  > .login-entry-page {
+    > .side-slide-box {
+      display: none;
+    }
+    > .login-register-content {
+      width: initial;
+      float: initial;
+
+      > .publicity-info {
+        display: none;
+      }
+    }
+  }
+}
+
+/* 
+    Page-搜索
+*/
+.job-recommend-result {
+  // 左Area
+  .job-list-container {
+    > :not(.rec-job-list) {
+      display: none;
+    }
+  }
+  // 右Area
+  .job-detail-container {
+    // 上Card-AD
+    > .job-detail-guide-cont {
+      display: none;
+    }
+    // 中Area-信息
+    > .job-detail-box > .job-detail-body {
+      // 右上Bar-功能
+      > .job-detail-operate,
+      // Area-招聘者
+      > .job-boss-info > .job-search-scan {
+        display: none;
+      }
+    }
+    // 下Card-AD
+    > .c-job-tools,
+    > .c-hot-link,
+    > .c-breadcrumb {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-公司：Page-公司简介
+*/
+.job-box > .inner {
+  // 左Area
+  > .job-detail {
+    > :not(.company-info-box) {
+      display: none;
+    }
+  }
+  // 右Area
+  > .company-sider {
+    // Card-注册
+    > .sign-wrap {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-公司：Page-招聘职位
+*/
+// Area
+.company-position-box {
+  > :not(.company-position-job) {
+    display: none;
+  }
+  // 中Area
+  > .company-position-job {
+    // 右Area
+    > .position-job-container > :not(.position-job-list) {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,179 @@
+/* 
+    通用
+*/
+
+body {
+  min-height: 100vh;
+}
+
+// 全屏Box-遮罩
+.J_MIDDLEWARE_FRAME_WIDGET {
+  display: none;
+}
+
+// 全屏Box-AD
+#J_TBPC_POP_home {
+  display: none;
+}
+
+// Fix右Bar-功能
+#J_Toolkit .tb-toolkit-list {
+  > :not(
+    [data-label="联系客服"],
+    [data-label="消息"],
+    [data-label="购物车"],
+    [data-label="回顶部"]
+  ) {
+    display: none;
+  }
+}
+
+// 顶Bar-导航
+#J_SiteNav > #J_SiteNavBd {
+  // 左Item
+  > #J_SiteNavBdL {
+    > :not(.site-nav-switch, #J_SiteNavLogin) {
+      display: none;
+    }
+    > #J_SiteNavLogin .site-nav-sign > :not(.h) {
+      display: none;
+    }
+  }
+  // 右Item
+  > #J_SiteNavBdR {
+    > :not(#J_SiteNavBought, #J_SiteNavMytaobao, #J_MiniCart, #J_SiteNavFavor) {
+      display: none;
+    }
+  }
+}
+
+// Comp-搜索
+#J_Search {
+  // Comp-输入
+  > form > [data-sg-type="placeholder"],
+    // Bar-热搜
+    > [data-sg-type="hotWord"],
+    // Panel-搜索 | Area-热搜
+    > .search-suggest-popup .search-suggest-menu-content {
+    display: none;
+  }
+}
+
+// 底Area-网站介绍
+[data-spm="seoinject"],
+// 底Area-Footer
+#J_SiteFooter {
+  display: none;
+}
+
+/* 
+    Page-首页
+*/
+// 顶Comp-AD
+[data-name="superbanner"] {
+  display: none;
+}
+
+// 上Area-搜索
+.search-decorations .top-wrap {
+  > :not(.tbh-logo, .tbh-search) {
+    display: none;
+  }
+}
+
+// 中Area
+.screen-outer {
+  // 上Bar
+  > .tbpc-row [role="navigation"] {
+    // Item-直播、企业
+    > :has([href$="https://tbzb.taobao.com"], [href^="https://b.taobao.com"]) {
+      display: none;
+    }
+  }
+  // 中Area
+  > .main > .J_Core {
+    .business-entry-col:has(> .business-entry-live-card) {
+      display: none;
+    }
+  }
+  // 左Area-用户
+  > .main > .col-right {
+    [data-spm="user"] > :not(.user, .user-mytao) {
+      display: none;
+    }
+  }
+}
+
+// 下Area-瀑布流
+.layer:has(> .tbh-hotsale) {
+  display: none;
+}
+
+/* 
+    Page-搜索
+*/
+.search-content-leftWrap {
+  // 上Comp-AI
+  > [class^="topNavContainer--"] > :not([class^="wrap--"]) {
+    display: none;
+  }
+  // 上Bar-导航
+  > [class^="tabWrapAll--"] [data-spm="tabbar"] {
+    > :not(:nth-child(-n + 4)) {
+      display: none;
+    }
+  }
+  // 中Area-结果
+  #content_items_wrapper {
+    > .tbpc-col:has(#pcSearchInvestigationCard_root_container) {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-商品
+*/
+// 左Area
+#left-content-area {
+  // 上Bar-用户
+  > [class^="shopHeader--"] [class^="shopIconWrap--"] {
+    pointer-events: none;
+
+    > :not(img) {
+      display: none;
+    }
+  }
+  // 上Area-AI
+  > [class^="wrap--"] {
+    display: none;
+  }
+  // 中Bar-导航
+  [class^="TitleTabs--"] {
+    width: initial;
+
+    [class^="tabTitleList--"] {
+      > :not(:nth-child(-n + 3)) {
+        display: none;
+      }
+    }
+  }
+  // Area
+  [class^="tabDetailWrap--"] {
+    > :not(:nth-child(-n + 3)) {
+      display: none;
+    }
+  }
+}
+// 下Area-推荐
+#tabFullColumnEle {
+  display: none;
+}
+
+/* 
+    Page-购物车
+*/
+// 下Area-推荐
+.trade-root-container .trade-infinite-empty-container {
+  display: none;
+}

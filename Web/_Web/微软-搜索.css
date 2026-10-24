@@ -1,0 +1,60 @@
+/* 
+    通用
+*/
+.hp_body {
+  height: initial;
+}
+.hp_body > header {
+  padding: 0 5%;
+}
+.hp_body > header > #headCont > nav li:not(#images, #translate, #local) {
+  display: none;
+}
+.hp_body > header > #id_container #id_h > :not(#id_l, #id_sc, #id_hbfo) {
+  display: none;
+}
+.hp_body > header #id_hbfo > #HBContent {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.hp_body > header #id_hbfo > #HBContent > #hb_feedback,
+.hp_body > header #id_hbfo > #HBContent > div:has(> .expanded) {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+#hp_app {
+  height: initial;
+}
+#hp_app > .hp_body .hp_cont > :not(.sbox_cn) {
+  display: none;
+}
+#hp_app > .hp_body .hp_cont > .sbox_cn > #sb_form > :not(#sb_form_c, #sw_as),
+#hp_app > .hp_body .hp_cont > .sbox_cn > #sb_form > #sw_as #sa_pn_block {
+  display: none;
+}
+#hp_app > .hp_body .hpl:has(> .nomvs) {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+.id_tooltip_container > :not(#id_l, #id_d) {
+  display: none;
+}
+#b_content {
+  padding: 40px var(--lgutter) 0;
+}
+#b_content > aside {
+  display: none;
+}
+#b_content > main > #b_results {
+  width: 100%;
+}
+#b_content > main > #b_results > :not(.b_algo, .b_imgansacf, .b_pag) {
+  display: none;
+}
+footer {
+  display: none;
+}

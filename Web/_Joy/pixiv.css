@@ -1,0 +1,73 @@
+/* 
+    通用
+*/
+div:has(> .__top_side_menu_body) > .sc-62a9fca4-2 {
+  display: none;
+}
+div:has(> .__top_side_menu_body) > .__top_side_menu_body > footer {
+  display: none;
+}
+.sc-cd4af666-0 div:has(> [data-click-label="follow"]) {
+  pointer-events: none;
+}
+.sc-62a9fca4-0 div:has(> iframe) {
+  display: none;
+}
+.__top_side_menu_root .list-none + div {
+  display: none;
+}
+/*
+    Page-首页
+*/
+[data-ga4-label="page_root"] > .bg-background1 > div:has([href^="https://premium.pixiv.net/"]) {
+  display: none;
+}
+[data-ga4-label="page_root"] > .bg-background1 section.sc-854bb586-0 ul {
+  grid-template-rows: repeat(3, auto);
+}
+[data-ga4-label="page_root"] > .bg-background1 section.sc-854bb586-0 ul > .row-start-1 {
+  display: none;
+}
+[data-ga4-label="page_root"] > .bg-background2 .ease-in-out [data-click-label="follow"] {
+  display: none;
+}
+/*
+    Page-用户
+*/
+.__top_side_menu_body .sc-5e01ed9b-0 {
+  padding: 0;
+}
+.__top_side_menu_body .sc-5e01ed9b-0 > [style] {
+  display: none;
+}
+/*
+    Page-漫画阅读
+*/
+.__top_side_menu_body .sc-8d5ac044-1 [data-ga4-label="page_root"] > main .sc-7e4ee3ac-0 section > :not(:nth-child(-n + 2)) {
+  display: none;
+}
+.__top_side_menu_body .sc-8d5ac044-1 [data-ga4-label="page_root"] > main .sc-7d1a8035-0 [data-click-label="follow"] {
+  pointer-events: none;
+}
+.__top_side_menu_body .sc-8d5ac044-1 [data-ga4-label="page_root"] > main .sc-7d1a8035-0 [class^="CommentInput_container__"] {
+  display: none;
+}
+.__top_side_menu_body .sc-8d5ac044-1 [data-ga4-label="page_root"] > aside > .sc-52c1395d-3 > :has([data-click-label="follow"]) {
+  pointer-events: none;
+}
+.__top_side_menu_body .sc-8d5ac044-1 [data-ga4-label="page_root"] > aside > :has(iframe) {
+  display: none;
+}
+.__top_side_menu_body .sc-8d5ac044-1 > .sc-cf271d86-0 {
+  display: none;
+}
+/*
+    Page-搜索
+*/
+.__top_side_menu_body [data-ga4-label="menu"] div:has(> [data-ga4-label="order_filter_chip"]) .sc-b78ce63b-0 > div > :has(.sc-5ab2ff4d-0),
+.__top_side_menu_body [data-ga4-label="menu"] div:has(> [data-ga4-label="order_filter_chip"]) > iframe {
+  display: none;
+}
+.__top_side_menu_body div:has(> [data-ga4-label="works_content"]) > :not([data-ga4-label], nav) {
+  display: none;
+}

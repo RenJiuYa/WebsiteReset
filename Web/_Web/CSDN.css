@@ -1,0 +1,128 @@
+/* 
+    通用
+*/
+.passport-main {
+  height: initial;
+  padding: 0;
+}
+.passport-main > .welcome_tips {
+  display: none;
+}
+.passport-main > .login-box > .login-box-title {
+  display: none;
+}
+.passport-main > .login-box > .login-box-top > :not(.login-box-tabs) {
+  display: none;
+}
+.passport-main > .login-box > .login-box-top > .login-box-tabs > .login-box-tabs-items > :first-child,
+.passport-main > .login-box > .login-box-top > .login-box-tabs > .login-box-tabs-items > :last-child {
+  display: none;
+}
+.passport-main > .login-box > .login-box-bottom #thirdLogin > :not(.login-third-passwd) {
+  display: none;
+}
+.csdn-cert-container {
+  display: none;
+}
+.csdn-side-toolbar > :not([data-type="gotop"]) {
+  display: none;
+}
+#csdn-toolbar .toolbar-container > :not(.toolbar-container-right) {
+  display: none;
+}
+#csdn-toolbar .toolbar-container > .toolbar-container-right {
+  margin: 0 auto;
+}
+#csdn-toolbar .toolbar-container > .toolbar-container-right > .toolbar-btns > :not(.toolbar-btn-login, .toolbar-btn-msg, .toolbar-btn-write),
+#csdn-toolbar .toolbar-container > .toolbar-container-right > .toolbar-btns .toolbar-msg-count {
+  display: none;
+}
+#csdn-toolbar .toolbar-container > .toolbar-container-right > .toolbar-btns > .toolbar-btn-login > #csdn-toolbar-profile-nologin {
+  display: none;
+}
+#csdn-toolbar .toolbar-container > .toolbar-container-right > .toolbar-btns > .toolbar-btn-login > #csdn-toolbar-profile-new #vip-end-time-box,
+#csdn-toolbar .toolbar-container > .toolbar-container-right > .toolbar-btns > .toolbar-btn-login > #csdn-toolbar-profile-new > .profile-imag-box {
+  display: none;
+}
+#csdn-toolbar .toolbar-container > .toolbar-container-right > .toolbar-btns > .toolbar-btn-login > #csdn-toolbar-profile-new .csdn-border-bottom-new > li:not( :has( > :is(
+                  [href^="https://blog.csdn.net/"],
+                  [href$="/profile"],
+                  [href^="https://mp.csdn.net?"],
+                  [href$="/history"]
+                )), .csdn-profile-logout) {
+  display: none;
+}
+#csdn-toolbar .toolbar-container > .toolbar-container-right > .toolbar-btns > .toolbar-btn-msg .toolbar-subMenu > :not(
+            [data-type="chat"],
+            [data-type="comment"],
+            [data-type="attention"],
+            [data-type="like"],
+            [href$="/setting"]
+          ) {
+  display: none;
+}
+#copyright-box:has(> #csdn-copyright-footer) {
+  display: none;
+}
+/* 
+    Page-用户
+*/
+.user-profile-body .user-profile-aside > .user-spm-list {
+  display: none;
+}
+/* 
+    Page-文章
+*/
+#articleSearchTip {
+  display: none;
+}
+#csdn-blog-sidebar {
+  display: none;
+}
+@layer mainBox {
+  #mainBox > :not(main, .article-aside-container) {
+    display: none;
+  }
+  #mainBox > main {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 90vw;
+  }
+}
+#simple-sticky-userbar .simple-sticky-userbar__actions {
+  display: none;
+}
+.article-aside-container > .sidebar > #sidebar-like {
+  pointer-events: none;
+}
+.article-aside-container > .sidebar > #tool-share,
+.article-aside-container > .sidebar > #sidebar-more {
+  display: none;
+}
+.blog-content-box > #article-header-box .simple-meta-row > #metaSlot {
+  display: none;
+}
+.blog-content-box > #article-header-box .simple-author-row > #simple-article-follow-btn,
+.blog-content-box > #article-header-box .simple-author-row > .simple-author-main > .simple-moyan-member-wrap {
+  display: none;
+}
+.blog-content-box > #simple-blue-card-top {
+  display: none;
+}
+@layer article {
+  article .words-blog,
+  article .new-words-blog {
+    cursor: text;
+    color: initial;
+    margin: 0;
+    padding: 0;
+    background: initial;
+  }
+  article .words-blog > i,
+  article .new-words-blog > i {
+    display: none;
+  }
+}
+.simple-article-bottom > :not(.simple-article-meta) {
+  display: none;
+}

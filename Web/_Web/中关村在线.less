@@ -1,0 +1,280 @@
+/* 
+    通用
+*/
+
+// 顶Bar-导航
+.global-sitenav {
+  display: none;
+}
+
+// 底Bar-Footer
+#zolGlobalFooter {
+  display: none;
+}
+
+/* 
+    Page-搜索
+*/
+// Fix左下Box-调查
+#questionnaire {
+  display: none;
+}
+// 上Area-搜索
+#top_nav {
+  // 上Area-搜索
+  > #search-form-wrapper {
+    padding: 20px 15%;
+
+    // 上Bar
+    > .search-box {
+      > .search-tab-box > .search-tab {
+        display: none;
+      }
+    }
+    // 下Bar
+    > .search-link {
+      display: none;
+    }
+  }
+  // 下Bar-分类
+  > .search-sub-nav {
+    display: none;
+  }
+}
+
+// 中Area-结果
+.list-box {
+  > .list-item {
+    box-sizing: content-box;
+    margin: 0;
+    padding: 15px 5px;
+
+    // 左Area-图片
+    > .pic-box > .follow-compare {
+      > span {
+        display: none;
+      }
+    }
+    // 中Area-参数
+    > .pro-intro {
+      // 下Bar-评分
+      > .special {
+        > .grade {
+          pointer-events: none;
+        }
+        > .links {
+          display: none;
+        }
+      }
+    }
+    // 右Area-报价
+    > .price-box > :not(.price, .date) {
+      display: none;
+    }
+  }
+}
+
+// 下Area-推荐
+#serHunt,
+.hot-section,
+.related-search,
+#bomSerForm {
+  display: none;
+}
+
+/* 
+    Page-商品
+*/
+// Fix右下Bar-功能
+#feedBackWidget > :not(#backTop) {
+  display: none;
+}
+
+// 上Area-搜索
+.header > .header__links,
+.common-nav {
+  display: none;
+}
+
+// 上Bar-导航
+#_j_tag_nav > .nav__list {
+  > li:not(:nth-of-type(-n + 5)) {
+    display: none;
+  }
+}
+// 上Bar-导航 | Status-滚动
+#_j_FixedBox,
+// 上Bar-AD
+.recent-news {
+  display: none;
+}
+
+// 中Area-商品简介
+.product-section {
+  // 左Area
+  > .product-pics {
+    // Comp-ship
+    > .big-pic > :not(a),
+    > .small-pic li:has(.video-play) {
+      display: none;
+    }
+  }
+  // 右Area
+  > .product-price-box {
+    > :not(.price__reference, .versions-model, .product__parameters) {
+      display: none;
+    }
+    // Comp-报价
+    > .price__reference > .price_lab {
+      pointer-events: none;
+
+      > .price_lab_btn {
+        display: none;
+      }
+    }
+  }
+}
+
+// 下Area
+.wrapper {
+  // 右Area
+  > .side {
+    display: none;
+  }
+  // 左Area
+  > .content {
+    width: 100%;
+  }
+  // 底Area-返回
+  .back_home {
+    display: none;
+  }
+  /* Page-综述 */
+  // 左Area
+  > .content:has(> .comments-section) {
+    > :not(.clearfix, .comments-section) {
+      display: none;
+    }
+    // Card-商品简介
+    > .clearfix {
+      // 左Area-图片
+      > .product-pics {
+        // Comp-视频
+        > .big-pic > .video-btn,
+        > .small-pic li:has(.video-play) {
+          display: none;
+        }
+      }
+      // 右Area-参数
+      > .product-detail > :not(.price__reference, .product__buttons) {
+        display: none;
+      }
+    }
+    // Card-评论
+    > .comments-section > .section-header > .section-header-button {
+      display: none;
+    }
+  }
+  /* Page-配置 */
+  // 左Area
+  > .section:has(> .mod_series_param) {
+    // 上Bar-参数
+    > .mod_series_param > .tools {
+      // Comp-红点
+      .hico {
+        display: none;
+      }
+    }
+  }
+  /* Page-参数 */
+  // 左Area
+  > .content:has(> .section > .detailed-parameters) {
+    > :not(.section:has(> .detailed-parameters)) {
+      display: none;
+    }
+    > .section > .detailed-parameters {
+      // 左Item
+      th {
+        > :not(:first-child) {
+          display: none;
+        }
+      }
+      // 右Item
+      td {
+        cursor: initial;
+
+        > :not(span) {
+          display: none;
+        }
+        > span {
+          > .text-hui ~ *,
+          // Comp-跳转
+          > [rel="nofollow"] {
+            display: none;
+          }
+        }
+      }
+      // Comp-链接
+      th,
+      td {
+        a {
+          color: initial;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+  // 左Area：Page-点评
+  > .content:has(> .comments-list) {
+    .comments-item {
+      display: flex;
+
+      > .comment-list-content {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* 
+    Page-对比
+*/
+// 上Bar-导航
+#navigation,
+// 上Bar-面包屑
+.breadcrumb + .feedback {
+  display: none;
+}
+// Area-内容
+.wrapper:has(> .commpare-box) {
+  // 上Bar-标题
+  > .title > a {
+    display: none;
+  }
+  > .commpare-box {
+    margin: 10px auto;
+
+    tbody > tr {
+      &:has(> [colspan="5"]) {
+        display: none;
+      }
+      > th,
+      > td {
+        a {
+          color: initial;
+          text-decoration: initial;
+          pointer-events: none;
+        }
+      }
+      // Cell
+      > td > .param-content {
+        > span ~ *,
+        > .icon,
+        > .description,
+        > div {
+          display: none;
+        }
+      }
+    }
+  }
+}

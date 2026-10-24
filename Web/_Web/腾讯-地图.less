@@ -1,0 +1,61 @@
+// 顶Area
+#Header {
+  // display: flex;
+  height: initial;
+
+  // 上Bar
+  > #s_bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-width: 69px;
+    height: initial;
+    float: left;
+
+    > :not([ch$=".bzdt"], #Other) {
+      display: none;
+    }
+    > #Other {
+      position: initial;
+
+      > #menusAndLogin > :not(:first-child) {
+        display: none;
+      }
+    }
+  }
+
+  // 下Bar
+  > #Search {
+    width: auto;
+    height: initial;
+    margin-top: 0;
+    position: initial;
+
+    // 左Comp-Logo
+    > #Logo {
+      display: none;
+    }
+    // 右Area-搜索
+    > #TabContainer {
+      margin: 0;
+      position: initial;
+
+      > #SearchForms {
+        margin: 0;
+      }
+    }
+  }
+}
+
+// 左Area
+#TextViewPanel {
+  display: none;
+}
+// 右Area
+#Map > :not(.context-menu) {
+  // 左下Comp-Logo
+  div:has(> [href^="https://map.qq.com/?center="]),
+  [onresize="return;"] {
+    display: none;
+  }
+}

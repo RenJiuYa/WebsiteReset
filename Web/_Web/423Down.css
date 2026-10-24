@@ -1,0 +1,24 @@
+/* 
+    通用
+*/
+html > :not(body) {
+  display: none;
+}
+html > body > :not(.header, .wrapper) {
+  display: none;
+}
+.header .quick-menu .menu > :not(.user-status-item) {
+  display: none;
+}
+.excerpt > li:has(.sticky-post) {
+  display: none;
+}
+/* 
+    Page-软件
+*/
+.content > .adsbygoogle {
+  display: none;
+}
+.content .post-related {
+  background-color: cadetblue;
+}

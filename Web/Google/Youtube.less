@@ -1,0 +1,25 @@
+/* 
+    通用
+*/
+// 左Bar-导航
+tp-yt-app-drawer {
+  // Card
+  ytd-guide-section-renderer:has([href="/premium"]),
+  // Item
+  ytd-guide-entry-renderer:has(
+    > :is([href="/gaming"], [href="/playables"], [href="/channel_memberships"])
+  ),
+  // Area-Footer
+  #footer {
+    display: none;
+  }
+}
+
+/* 
+    Page-通用
+*/
+#page-manager {
+  ytd-rich-section-renderer:has([href="/playables"]) {
+    display: none;
+  }
+}

@@ -1,0 +1,64 @@
+/* 
+    通用
+*/
+
+body {
+  overflow-x: hidden;
+}
+
+// Fix两边Box-AD
+.absolute.-left-2,
+.absolute.-right-2 {
+  display: none;
+}
+
+// Fix右Panel-AI
+.opgg-widget-container {
+  display: none;
+}
+
+// Fix右下Box-视频
+[data-worlds-entry],
+section[data-worlds-viewer] {
+  display: none;
+}
+
+// 顶Bar-功能
+#opgg-kit-gnb {
+  // 中Item
+  [class^="ServiceMenu-module_service-menu__"],
+  // 右Item
+  [class^="DesktopGNB-module_icon-list__"] > div {
+    display: none;
+  }
+}
+// 顶Bar-搜索
+.md\:max-w-width-limit:has(form) {
+  padding: 10px 0;
+
+  > .hidden,
+  > div > :not(:first-child),
+  form ~ * {
+    display: none;
+  }
+}
+// 顶Bar-导航
+nav[data-worlds-navigation] {
+  // 左Item
+  [href="/zh-cn"],
+  div:has(> :is([href="/zh-cn/lol/worlds"], [href="/zh-cn/lol/leaderboards/tier"])),
+  // 右Item
+  > .hidden {
+    display: none;
+  }
+}
+
+// 中Area
+[data-opgg-beer-takeover] {
+  padding-bottom: 20px;
+}
+
+// 底Area-Footer
+footer {
+  display: none;
+}

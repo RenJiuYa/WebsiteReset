@@ -1,0 +1,43 @@
+/* 
+    通用
+*/
+
+// Fix上Box-通知
+.n-message-container {
+  display: none;
+}
+
+// Fix右下Bar
+#moe-global-toolbar {
+  display: none;
+}
+
+// 顶Bar
+header {
+  // 左Item
+  .links-area > :not(.site-logo-area, .nav-links-group) {
+    display: none;
+  }
+  // 右Item
+  .user-area > :not(#moe-user-dropdown) {
+    display: none;
+  }
+}
+
+// 底Area-Footer
+footer {
+  display: none;
+}
+
+/* 
+    Page-词条
+*/
+article {
+  // 上Area-词条
+  #moe-article-header-container {
+    // 上Bar
+    > #moe-article-header-top .left-block .open-in-app-chat {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,344 @@
+/* 
+    通用
+*/
+@ehentai-width: 80vw;
+
+// 顶Bar-导航
+#nb.nosel {
+  > :has([href="https://upld.e-hentai.org/manage"]) {
+    display: none;
+  }
+}
+
+// Comp-AD
+body {
+  iframe[src^="//adserver.juicyads.com"] {
+    display: none;
+  }
+}
+
+// Card：Thumbnail
+// .gl1t {
+//   min-height: 60vh;
+//   max-height: 80vh;
+//   padding: 10px 20px;
+//   gap: 10px;
+
+//   &::after{
+//     display: none;
+//   }
+
+//   // Area-标题
+//  a > .gl4t,
+//  > .gl4t {
+//     flex-shrink: 0;
+//     min-height: 3em;
+//     max-height: 4.5em;
+//     margin: 0;
+//     justify-content: space-between;
+//     font-size: 1.25rem;
+//     line-height: 1.5em;
+//     text-align: left;
+
+//     > :has(.glink) {
+//       flex-grow: 1;
+//       min-width: initial;
+//       max-width: initial;
+//     }
+//     > :has(label) {
+//       margin: 0;
+//     }
+//   }
+
+//   // Area-图片
+//   > .gl3t {
+//     order: 1;
+//     flex-grow: 1;
+//     width: 100%;
+//     height: initial;
+//     margin: 0 auto;
+//     border: initial;
+//     border-radius: initial;
+
+//     > a {
+//       // display: block;
+//       // width: 100%;
+//       // height: 100%;
+
+//       > img {
+//         display: block;
+//         width: 100%;
+//         height: initial;
+//         max-height: 100%;
+//         top: 0;
+//         object-fit: contain;
+//         object-position: center top;
+//       }
+//     }
+//   }
+
+//   // Area-标签
+//   > .gl6t {
+//     order: 2;
+//     display: grid;
+//     grid-template-columns: repeat(3, 1fr);
+//     gap: 2.5px;
+//     margin-top: auto;
+//     padding: 0;
+
+//     > .gt {
+//       margin: initial;
+//       border: initial;
+
+//       &::before {
+//         content: "";
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         width: 100%;
+//         height: 100%;
+//         background-color: rgba(255, 255, 255, 0.4);
+//       }
+//     }
+//   }
+
+//   // Area-分类
+//   .gl5t {
+//     height: initial;
+//     margin: initial;
+//     gap: 10px;
+
+//     > div {
+//       flex-grow: 1;
+//       min-width: initial;
+//       max-width: initial;
+//       display: flex;
+//       // justify-content: center;
+//       gap: 5px;
+//       padding: 0;
+
+//       > div {
+//         position: initial;
+//       }
+//     }
+//   }
+// }
+
+.gl1t {
+  display: grid;
+  grid-template-areas: "title title" "img info" "img tag";
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 1fr minmax(0, max-content);
+  min-height: initial;
+  max-height: 80vh;
+  gap: 10px;
+  padding: 5px 10px;
+
+  // Area-标题
+  > a:has(> .gl4t),
+  .gl4t {
+    grid-area: title;
+    display: flex;
+    width: 100%;
+    min-height: 3em;
+    max-height: 4.5em;
+    margin: 0;
+    justify-content: space-between;
+    font-size: 1.25rem;
+    line-height: 1.5em;
+    text-align: left;
+
+    > :has(.glink) {
+      min-width: initial;
+      max-width: initial;
+    }
+    > :has(label) {
+      margin: 0;
+    }
+  }
+
+  // Area-图片
+  > .gl3t {
+    grid-area: img;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: initial;
+    margin: 0 auto;
+    border: initial;
+    border-radius: initial;
+
+    > a > img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      object-fit: contain;
+      object-position: center top;
+    }
+  }
+
+  // Area-标签
+  > .gl6t {
+    grid-area: tag;
+    flex-direction: column;
+    justify-content: start;
+    align-items: initial;
+    padding: 0;
+    gap: 2px;
+
+    > .gt {
+      margin: initial;
+      border: initial;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+    }
+  }
+
+  // Area-分类
+  > .gl5t {
+    grid-area: info;
+    height: initial;
+    margin: initial;
+    flex-direction: column;
+    gap: 5px;
+
+    > div {
+      // flex-grow: 1;
+      min-width: initial;
+      max-width: initial;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 0;
+
+      > div {
+        position: initial;
+      }
+    }
+  }
+}
+
+/* 
+    Page-漫画详情
+*/
+
+/* 
+    Page-MyHome：Page-MyTags
+*/
+#usertag_form #usertag_0 {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #5c0d12;
+}
+
+/* 
+    Page-漫画详情
+*/
+// 上Area-漫画信息
+.gm:has(> #gleft) {
+  display: grid;
+  grid-template-areas: "pic title" "pic info";
+  grid-template-columns: auto 1fr;
+  max-width: @ehentai-width;
+  overflow: hidden;
+
+  > :not(#gleft, #gd2, #gmid) {
+    display: none;
+  }
+  // 左Area-图片
+  > #gleft {
+    grid-area: pic;
+    width: initial;
+    position: initial;
+  }
+  // 上Area-标题
+  > #gd2 {
+    grid-area: title;
+    width: initial;
+  }
+  // 下Area-信息
+  > #gmid {
+    grid-area: info;
+    display: flex;
+    width: initial;
+
+    > :not([id^="gd"]) {
+      display: none;
+    }
+    > * {
+      margin: 0;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    // Area-标签
+    > #gd4 {
+      flex: 1 1 auto;
+
+      > #taglist {
+        table {
+          box-sizing: border-box;
+          width: 100%;
+
+          .tc + td {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(100px, 1fr));
+            width: 100%;
+
+            a {
+              display: inline-block;
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 中Area-预览
+#gdt {
+  box-sizing: border-box;
+  max-width: @ehentai-width;
+
+  [title]:hover {
+    transform: scale(2.25);
+    transition: transform 0.1s ease;
+    position: relative;
+    z-index: 99;
+  }
+}
+
+// 下Area-评论 | Item
+#cdiv > .c1 {
+  display: flex;
+  flex-direction: column;
+
+  > :not(.c2, .c6) {
+    display: none;
+  }
+  // 上Bar-用户
+  > .c2 {
+    > :not(.c3),
+    > .c3 > [href*="forums.e-hentai.org"] {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-漫画阅读
+*/
+#i3 img {
+  max-height: 120vh;
+  width: auto;
+}

@@ -1,0 +1,32 @@
+/* 
+    通用
+*/
+
+// 左Area
+nav {
+  // 底Area：未登录
+  [data-testid="not_login_about_us"] {
+    display: none;
+  }
+}
+
+// 右Area
+main {
+  // 顶Bar
+  [data-header-host] {
+    // 右Item
+    [data-header-frame-region="right"] > :not([data-testid="to_login_button"]) {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-首页
+*/
+main {
+  // 中Area-推荐
+  #experiment-guidance-suggestions {
+    display: none;
+  }
+}

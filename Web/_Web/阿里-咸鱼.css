@@ -1,0 +1,16 @@
+/* 
+    通用
+*/
+body {
+  width: 100%;
+  overflow-y: initial;
+}
+#ice-container > :not(#header, #content) {
+  display: none;
+}
+#ice-container #header form > :not(input, button) {
+  display: none;
+}
+#ice-container > #content [data-spm="sidebar"] > div > div > :not( [href^="https://www.goofish.com/publish?"], [href^="https://www.goofish.com/im?"], [href="javascript:void(0);"]) {
+  display: none;
+}

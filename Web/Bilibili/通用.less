@@ -2,27 +2,25 @@
 // out: false
 // 上面两行是 Easy LESS 的文件级设置（保存本文件时改为编译入口文件；本文件不单独产出 .css，全站只有 _入口.css 一个产物）
 
-/* 
-    组件：Bar-导航栏
-*/
+// 顶Bar-导航
 .bili-header__bar {
   height: 60px;
   padding: 0 10%;
 
   // 左Item
   .left-entry__item {
-    // 左Item-无用
-    & > :not(a),
     &:not(
       :has(
-        a:is(
-          [href$="www.bilibili.com"],
-          [href$="live.bilibili.com"],
-          [href*="www.bilibili.com/anime"],
-          [href*="www.bilibili.com/match"]
+        > a:is(
+          [href="//www.bilibili.com"],
+          [href="//www.bilibili.com/anime/"],
+          [href="//live.bilibili.com"],
+          [href="//www.bilibili.com/match/home/"]
         )
       )
-    ) {
+    ),
+    // 左Item-Panel
+    & > :not(a) {
       display: none;
     }
 
@@ -62,7 +60,6 @@
     .avatar-panel-popover > .vip-entry-containter {
       display: none;
     }
-
     // Panel-动态
     .dynamic-panel-popover {
       width: 500px;
@@ -145,28 +142,27 @@
     }
   }
 }
-
-/* 
-    组件：Panel-搜索
-*/
-
+// 顶Bar-导航 | 中Comp-搜索-Panel
 .search-panel {
   overflow-y: initial;
 
   // Area-历史
   > .history {
-    &:has(.fold-icon:not(.fold)) .histories-wrap {
+    // Status-收起
+    &:not(:has(> .history-fold-wrap > .fold)) > .histories-wrap {
       max-height: 372px;
     }
     .histories {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-    }
-    .history-item {
-      min-width: 0;
-    }
-    .history-text {
-      max-width: initial;
+
+      > .history-item {
+        min-width: 0;
+        
+        > .history-text {
+          max-width: initial;
+        }
+      }
     }
   }
 
@@ -177,10 +173,7 @@
   }
 }
 
-/* 
-    组件：Player
-*/
-
+// Player
 .bpx-docker > .bpx-player-container {
   > .bpx-player-primary-area {
     // 下Bar-弹幕：通用
@@ -242,10 +235,25 @@
         // Item-音质
         .bpx-player-ctrl-flac,
         // Item-质量-Panel
-        .bpx-player-ctrl-quality-menu-item:has(
-          .bpx-player-ctrl-quality-badge-bigvip
-        ) {
-          display: none;
+        .bpx-player-ctrl-quality-menu {
+          cursor: initial;
+
+          // Item-试看
+          > .bpx-player-ctrl-quality-menu-feedback {
+            height: initial;
+
+            > .bpx-player-ctrl-quality-menu-feedback-desc {
+              display: none;
+            }
+          }
+          // Item-大会员
+          > .bpx-player-ctrl-quality-menu-item {
+            cursor: pointer;
+
+            &:has(.bpx-player-ctrl-quality-badge-bigvip) {
+              display: none;
+            }
+          }
         }
       }
 
@@ -287,321 +295,12 @@
   }
 }
 
-/* 
-    组件：Footer
-*/
-
+// Area-Footer
 #biliMainFooter {
   display: none;
 }
 
-/* 
-    组件：Box-大会员
-*/
-
+// Box-大会员
 #BilibiliVipDialog {
   display: none;
-}
-
-/* 
-    组件：评论区
-*/
-
-/* @shadow(bili-comments) */
-
-/* @shadow(bili-comments-header-renderer >> bili-comments-vote-card) */
-// Card-投票
-#card > #duel{
-  pointer-events: none;
-}
-/* @shadow-end */
-
-/* @shadow(bili-comment-thread-renderer) */
-/* @shadow(bili-comment-renderer) */
-// 右上Comp-狗牌
-#ornament {
-  pointer-events: none;
-}
-
-/* @shadow(bili-avatar) */
-// Area-头像
-#canvas {
-  @avatar-size: 50px;
-  // Comp-头像框2
-  &:has(> :nth-child(2):last-child) > :nth-child(2) {
-    > .layer:nth-of-type(1) {
-      width: @avatar-size;
-      height: @avatar-size;
-    }
-    > .layer:nth-of-type(2) {
-      display: none;
-    }
-  }
-  // Comp-头像框3
-  &:has(> :nth-child(3):last-child) {
-    > :nth-child(2) > .layer {
-      width: @avatar-size;
-      height: @avatar-size;
-    }
-    > :nth-child(3) {
-      display: none;
-    }
-  }
-  // Comp-头像框4
-  &:has(> :nth-child(4):last-child) {
-    > :nth-child(2) > .layer {
-      width: @avatar-size;
-      height: @avatar-size;
-    }
-    > :nth-child(3) {
-      display: none;
-    }
-  }
-
-  // Comp-角标
-  > .layers > .layer:not(.center) {
-    display: none;
-  }
-}
-/* @shadow-end */
-
-/* @shadow(bili-comment-user-info) */
-#user-level {
-  pointer-events: none;
-}
-/* @shadow-end */
-
-/* @shadow(bili-comment-action-buttons-renderer) */
-// Area-主楼| Bar-功能
-#like {
-  margin-left: auto;
-}
-#more {
-  margin-left: 20px;
-}
-/* @shadow-end */
-
-/* @shadow(bili-rich-text) */
-// Area-文本（架构一致）
-#contents {
-  // Comp-关键词
-  > a[data-type="search"] {
-    display: inline;
-    color: black;
-    pointer-events: none;
-
-    > img[src*="/bfs/reply/"] {
-      display: none;
-    }
-  }
-
-  // Area-AD
-  &:has([data-type="goods"]) {
-    > a {
-      font-size: 0;
-    }
-    > [data-type="goods"] > img {
-      width: 1rem;
-      height: 1rem;
-    }
-    > :not([data-type="goods"]:has(img)) {
-      display: none;
-    }
-  }
-}
-/* @shadow-end */
-
-/* @shadow(bili-comment-vote-renderer) */
-// Area-投票
-#card {
-  width: 90%;
-}
-/* @shadow-end */
-/* @shadow-end */
-
-/* @shadow(bili-comment-replies-renderer) */
-// 下Bar-分页
-#pagination > #pagination-body {
-  margin-right: auto;
-}
-
-/* @shadow(bili-comment-reply-renderer) */
-
-/* @shadow(bili-comment-action-buttons-renderer) */
-// Area-回复| Bar-功能
-#like {
-  margin-left: auto;
-}
-#more {
-  margin-left: 20px;
-}
-/* @shadow-end */
-
-/* @shadow(bili-rich-text) */
-// Area-文本（架构一致）
-#contents {
-  // Comp-关键词
-  > a[data-type="search"] {
-    display: inline;
-    color: black;
-    pointer-events: none;
-
-    > img[src*="/bfs/reply/"] {
-      display: none;
-    }
-  }
-
-  // Area-AD
-  &:has([data-type="goods"]) {
-    > a {
-      font-size: 0;
-    }
-    > [data-type="goods"] > img {
-      width: 1rem;
-      height: 1rem;
-    }
-    > :not([data-type="goods"]:has(img)) {
-      display: none;
-    }
-  }
-}
-/* @shadow-end */
-/* @shadow-end */
-/* @shadow-end */
-
-/* @shadow-end */
-/* @shadow-end */
-
-/* @shadow(bili-user-profile) */
-// Box-用户简介：评论（架构一致）
-#view {
-  display: grid;
-  grid-template-areas: "bg bg" "avatar body";
-  grid-template-columns: 100px 1fr;
-
-  > #bg {
-    grid-area: bg;
-    position: initial;
-    display: none;
-  }
-  > #avatar {
-    grid-area: avatar;
-    justify-self: center;
-    position: initial;
-    width: 80%;
-    height: initial;
-    aspect-ratio: 1 / 1;
-    margin: 10px 0;
-
-    > :not(img) {
-      display: none;
-    }
-  }
-  > #body {
-    grid-area: body;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 5px;
-
-    > * {
-      margin: 0;
-      padding: 0;
-    }
-    > #title > #vip {
-      display: none;
-    }
-    // Comp-关注
-    > #action {
-      &:not(:has(.active)),
-      > #chat {
-        display: none;
-      }
-      > .active {
-        pointer-events: none;
-      }
-    }
-  }
-}
-/* @shadow-end */
-// Box-用户简介：普通（架构一致）
-.bili-user-profile .bili-user-profile-view {
-  display: grid;
-  grid-template-areas: "bg bg" "avatar body";
-  grid-template-columns: 100px 1fr;
-
-  > .bili-user-profile-view__background {
-    grid-area: bg;
-    position: initial;
-    display: none;
-  }
-  > .bili-user-profile-view__avatar {
-    grid-area: avatar;
-    justify-self: center;
-    position: initial;
-    width: 80%;
-    height: initial;
-    aspect-ratio: 1 / 1;
-    margin: 10px 0;
-
-    > :not(.b-img) {
-      display: none;
-    }
-  }
-  > .bili-user-profile-view__info {
-    grid-area: body;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 5px;
-
-    > * {
-      margin: 0;
-      padding: 0;
-    }
-    .bili-user-profile-view__info__viplabel {
-      display: none;
-    }
-    // Comp-关注
-    > .bili-user-profile-view__info__footer {
-      &:not(:has(.checked)),
-      > .chat {
-        display: none;
-      }
-      > .checked {
-        pointer-events: none;
-      }
-    }
-  }
-}
-
-/* @shadow(bili-emoji-popover) */
-// Box-评论表情：评论（架构一致）
-#emoji-popover {
-  translate: 0 30px;
-
-  > [title] {
-    border-bottom: 2px var(--graph_bg_regular) solid;
-  }
-  > img {
-    margin: 10px 0;
-  }
-  > a {
-    display: none;
-  }
-}
-/* @shadow-end */
-// Box-评论表情：普通（架构一致）
-.bili-emoji-popover {
-  translate: 0 30px;
-
-  > [title] {
-    border-bottom: 2px var(--graph_bg_regular) solid;
-  }
-  > img {
-    margin: 10px 0;
-  }
-  > a {
-    display: none;
-  }
 }

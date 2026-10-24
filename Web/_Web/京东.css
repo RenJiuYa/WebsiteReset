@@ -1,0 +1,99 @@
+/* 
+    通用
+*/
+#login-sdk-root div:has(> #content-wrap) > :not(#content-wrap) {
+  display: none;
+}
+.umc-equity,
+.pc-component-pcc-promotional-popup {
+  display: none;
+}
+.jdmcc_elevator .elevator_list > :not(#Cart, #Me),
+.jdmcc_elevator .elevator_list .cart-count {
+  display: none;
+}
+#guide-login-bar-2025 {
+  display: none;
+}
+.jdmcc-topbar > .jdmcc-topbar-wrapper > .fl > :not(.login, #ttbar-login-2024) {
+  display: none;
+}
+.jdmcc-topbar > .jdmcc-topbar-wrapper > .fr > :not(:has(> #my-cart, [href^="//order.jd.com"]), #ttbar-myjd-2024) {
+  display: none;
+}
+.jd_pc_search_bar_react_search_main > .jd_pc_search_bar_react_search_box > :not(
+      span,
+      input,
+      .jd_pc_search_bar_react_image_search_wrap,
+      .jd_pc_search_bar_react_search_btn_wrap
+    ) {
+  display: none;
+}
+.jd_pc_search_bar_react_search_main > #hotword {
+  display: none;
+}
+#J_footer,
+#footer-2024 {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+.header-enjoyTop > .w > :not(#logo, #search) {
+  display: none;
+}
+.header-enjoyTop > .w > #search > :not(.search-m) {
+  display: none;
+}
+.fs > :not(.jd_container, .middle-floor-wrapper) {
+  display: none;
+}
+#J_app:has(> #J_feeds) {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+#main_search_conter #search-condition [class^="_top-bar-left-tab_"] > :not(:nth-child(-n + 3)),
+#main_search_conter .plugin_goodsContainer > :not([data-point-id]) {
+  display: none;
+}
+[class^="_infiniteScroll_center_"]:has( > div > :is(#advertisingCenter, #youlikeCenter)) {
+  display: none;
+}
+/* 
+    Page-商品
+*/
+.page-content-right .page-right-content .page-right-lachine {
+  display: none;
+}
+.page-content-left .left-tabs-nav > :not([class^="_scoped_"]) {
+  display: none;
+}
+.page-content-left .left-tabs-nav > [class^="_scoped_"] > #SHBZ-tab-column,
+.page-content-left .left-tabs-nav > [class^="_scoped_"] > #TJ-tab-column {
+  display: none;
+}
+.page-content-left .left-tabs-content > :not(:nth-child(-n + 4)),
+.page-content-left .left-tabs-content > .everyone-reviews > :not(.evaluation-qq) {
+  display: none;
+}
+.page-end {
+  display: none;
+}
+/* 
+    Page-购物车
+*/
+[class^="_cart_center_"] > [class^="_infiniteScroll_center_"] > div > [data-vendorid] [class^="_good-match-detail_"],
+[class^="_cart_center_"] > [class^="_infiniteScroll_center_"] > div > [data-vendorid] [class^="_matchAIGoods_"] {
+  display: none;
+}
+[class^="_cart_center_"] > [class^="_cart-recommend_"] {
+  display: none;
+}
+/* 
+    Page-店铺
+*/
+.jTdCode {
+  display: none;
+}

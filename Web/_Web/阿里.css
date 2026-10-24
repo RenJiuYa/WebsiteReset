@@ -1,0 +1,101 @@
+/* 
+    通用
+*/
+body {
+  min-height: 100vh;
+}
+.J_MIDDLEWARE_FRAME_WIDGET {
+  display: none;
+}
+#J_TBPC_POP_home {
+  display: none;
+}
+#J_Toolkit .tb-toolkit-list > :not(
+    [data-label="联系客服"],
+    [data-label="消息"],
+    [data-label="购物车"],
+    [data-label="回顶部"]
+  ) {
+  display: none;
+}
+#J_SiteNav > #J_SiteNavBd > #J_SiteNavBdL > :not(.site-nav-switch, #J_SiteNavLogin) {
+  display: none;
+}
+#J_SiteNav > #J_SiteNavBd > #J_SiteNavBdL > #J_SiteNavLogin .site-nav-sign > :not(.h) {
+  display: none;
+}
+#J_SiteNav > #J_SiteNavBd > #J_SiteNavBdR > :not(#J_SiteNavBought, #J_SiteNavMytaobao, #J_MiniCart, #J_SiteNavFavor) {
+  display: none;
+}
+#J_Search > form > [data-sg-type="placeholder"],
+#J_Search > [data-sg-type="hotWord"],
+#J_Search > .search-suggest-popup .search-suggest-menu-content {
+  display: none;
+}
+[data-spm="seoinject"],
+#J_SiteFooter {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+[data-name="superbanner"] {
+  display: none;
+}
+.search-decorations .top-wrap > :not(.tbh-logo, .tbh-search) {
+  display: none;
+}
+.screen-outer > .tbpc-row [role="navigation"] > :has([href$="https://tbzb.taobao.com"], [href^="https://b.taobao.com"]) {
+  display: none;
+}
+.screen-outer > .main > .J_Core .business-entry-col:has(> .business-entry-live-card) {
+  display: none;
+}
+.screen-outer > .main > .col-right [data-spm="user"] > :not(.user, .user-mytao) {
+  display: none;
+}
+.layer:has(> .tbh-hotsale) {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+.search-content-leftWrap > [class^="topNavContainer--"] > :not([class^="wrap--"]) {
+  display: none;
+}
+.search-content-leftWrap > [class^="tabWrapAll--"] [data-spm="tabbar"] > :not(:nth-child(-n + 4)) {
+  display: none;
+}
+.search-content-leftWrap #content_items_wrapper > .tbpc-col:has(#pcSearchInvestigationCard_root_container) {
+  display: none;
+}
+/* 
+    Page-商品
+*/
+#left-content-area > [class^="shopHeader--"] [class^="shopIconWrap--"] {
+  pointer-events: none;
+}
+#left-content-area > [class^="shopHeader--"] [class^="shopIconWrap--"] > :not(img) {
+  display: none;
+}
+#left-content-area > [class^="wrap--"] {
+  display: none;
+}
+#left-content-area [class^="TitleTabs--"] {
+  width: initial;
+}
+#left-content-area [class^="TitleTabs--"] [class^="tabTitleList--"] > :not(:nth-child(-n + 3)) {
+  display: none;
+}
+#left-content-area [class^="tabDetailWrap--"] > :not(:nth-child(-n + 3)) {
+  display: none;
+}
+#tabFullColumnEle {
+  display: none;
+}
+/* 
+    Page-购物车
+*/
+.trade-root-container .trade-infinite-empty-container {
+  display: none;
+}

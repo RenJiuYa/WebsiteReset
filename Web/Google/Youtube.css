@@ -1,0 +1,14 @@
+/* 
+    通用
+*/
+tp-yt-app-drawer ytd-guide-section-renderer:has([href="/premium"]),
+tp-yt-app-drawer ytd-guide-entry-renderer:has( > :is([href="/gaming"], [href="/playables"], [href="/channel_memberships"])),
+tp-yt-app-drawer #footer {
+  display: none;
+}
+/* 
+    Page-通用
+*/
+#page-manager ytd-rich-section-renderer:has([href="/playables"]) {
+  display: none;
+}

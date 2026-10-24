@@ -1,0 +1,44 @@
+/* 
+    通用
+*/
+
+// Area-布局
+html {
+  > :not(body) {
+    display: none;
+  }
+  > body {
+    > :not(.header, .wrapper) {
+      display: none;
+    }
+  }
+}
+
+// 顶Bar-导航
+.header .quick-menu {
+  .menu > :not(.user-status-item) {
+    display: none;
+  }
+}
+
+// 右Area-列表
+.excerpt {
+  // Item-AD
+  > li:has(.sticky-post) {
+    display: none;
+  }
+}
+
+/* 
+    Page-软件
+*/
+// Comp-AD
+.content {
+  // Area-推荐
+  > .adsbygoogle {
+    display: none;
+  }
+  .post-related{
+    background-color: cadetblue;
+  }
+}

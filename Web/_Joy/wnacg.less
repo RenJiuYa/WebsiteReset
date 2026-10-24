@@ -1,0 +1,122 @@
+/* 
+    通用
+*/
+
+// 顶Bar-导航
+#header #album_tabs {
+  > li:has([href^="https://www.luluai.site/"]) {
+    display: none;
+  }
+}
+
+// Area-橱窗
+#bodywrap.cc {
+  max-width: 80vw;
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+
+    > li {
+      width: initial;
+      height: initial;
+      // padding: 0;
+
+      // Area-图片
+      > .pic_box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: initial;
+        margin: 0 auto;
+
+        > a > img {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          height: initial;
+          max-height: 100%;
+          object-fit: contain;
+          object-position: center top;
+        }
+      }
+      // 下Area-预览图信息
+      > .info {
+        > :not(.title, .info_col) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+/* 
+    Page-首页
+*/
+// Bar-导航标题
+.title_sort {
+  > :not(.title_h2, .r) {
+    display: none;
+  }
+}
+
+/* 
+    Page-漫画详情
+*/
+// 上Bar-面包屑导航
+#bread > :not(.png) {
+  display: none;
+}
+
+// 上Area-漫画信息
+#bodywrap.userwrap {
+  // 中Area-信息
+  .uwconn > .addtags {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+
+    // Comp-添加
+    > [class="btnNarrow"] {
+      display: none;
+    }
+  }
+  // 右Area-用户
+  .uwuinfo > a[class] {
+    display: none;
+  }
+}
+
+/* 
+    Page-漫画阅读
+*/
+// 中Area-阅读
+#photo_body {
+  > :not(#imgarea) {
+    display: none;
+  }
+  > #imgarea {
+    > a {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+
+      > img {
+        max-height: 120vh;
+      }
+    }
+  }
+}
+
+// 中Bar-页码
+#bodywrap:has(> [rel="prerender"]),
+// 下Bar-吐槽
+.tocaowrap {
+  display: none;
+}
+
+// 下Bar-翻页
+.newpagewrap {
+  width: 70%;
+  margin: 0 auto;
+}

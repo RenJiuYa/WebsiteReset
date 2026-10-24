@@ -1,0 +1,42 @@
+/* 
+    通用
+*/
+// 顶Bar
+/* @shadow(egs-navigation) */
+#mobile-drawer {
+  > .main-nav,
+  > .main-cta {
+    display: none;
+  }
+}
+/* @shadow-end */
+
+// 底Area-Footer
+egs-footer {
+  display: none;
+}
+
+/* 
+    Page-首页
+*/
+// Area
+#main-focus > div:has(> [data-section-id]) {
+  > :not([data-section-id="free-games"]) {
+    display: none;
+  }
+}
+
+/* 
+    Page-游戏
+*/
+// 全屏Box-游戏购买最后一步
+[aria-describedby="launcher-onboard-install-prompt-body"] {
+  // 中Comp
+  div:has(> [data-polymorphic-component]) {
+    display: none;
+
+    & + div {
+      display: none;
+    }
+  }
+}

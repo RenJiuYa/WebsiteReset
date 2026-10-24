@@ -1,0 +1,92 @@
+/* 
+    通用
+*/
+
+.hp_body {
+  height: initial;
+
+  > header {
+    padding: 0 5%;
+
+    // 左Item
+    > #headCont > nav {
+      li:not(#images, #translate, #local) {
+        display: none;
+      }
+    }
+    // 右Item
+    > #id_container #id_h {
+      > :not(#id_l, #id_sc, #id_hbfo) {
+        display: none;
+      }
+    }
+    // 右Item-设置-Panel
+    #id_hbfo > #HBContent {
+      overflow-y: auto;
+      scrollbar-width: none;
+
+      > #hb_feedback,
+      > div:has(> .expanded) {
+        display: none;
+      }
+    }
+  }
+}
+
+/* 
+    Page-首页
+*/
+#hp_app {
+  height: initial;
+
+  > .hp_body {
+    // 中Area-搜索
+    .hp_cont {
+      > :not(.sbox_cn) {
+        display: none;
+      }
+      > .sbox_cn > #sb_form {
+        > :not(#sb_form_c, #sw_as),
+        // Panel-搜索
+        > #sw_as #sa_pn_block {
+          display: none;
+        }
+      }
+    }
+    // 下Area-资讯
+    .hpl:has(> .nomvs) {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-搜索
+*/
+// Fix右上Bar
+.id_tooltip_container > :not(#id_l, #id_d) {
+  display: none;
+}
+
+// Area-布局
+#b_content {
+  padding: 40px var(--lgutter) 0;
+
+  // 右Area
+  > aside {
+    display: none;
+  }
+  // 左Area
+  > main > #b_results {
+    width: 100%;
+
+    > :not(.b_algo, .b_imgansacf, .b_pag) {
+      display: none;
+    }
+  }
+}
+
+// 底Bar-Footer
+footer {
+  display: none;
+}

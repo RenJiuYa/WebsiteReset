@@ -1,0 +1,215 @@
+/* 
+    通用
+*/
+
+// 全屏Box-登录
+.passport-main {
+  height: initial;
+  padding: 0;
+
+  > .welcome_tips {
+    display: none;
+  }
+  > .login-box {
+    > .login-box-title {
+      display: none;
+    }
+    > .login-box-top {
+      > :not(.login-box-tabs) {
+        display: none;
+      }
+      > .login-box-tabs > .login-box-tabs-items {
+        > :first-child,
+        > :last-child {
+          display: none;
+        }
+      }
+    }
+    > .login-box-bottom {
+      #thirdLogin > :not(.login-third-passwd) {
+        display: none;
+      }
+    }
+  }
+}
+
+// 全屏Box-身份
+.csdn-cert-container {
+  display: none;
+}
+
+// Fix右下Bar-功能
+.csdn-side-toolbar {
+  > :not([data-type="gotop"]) {
+    display: none;
+  }
+}
+
+// 顶Bar-导航
+#csdn-toolbar .toolbar-container {
+  > :not(.toolbar-container-right) {
+    display: none;
+  }
+  > .toolbar-container-right {
+    margin: 0 auto;
+
+    > .toolbar-btns {
+      > :not(.toolbar-btn-login, .toolbar-btn-msg, .toolbar-btn-write),
+      // Comp-红点
+      .toolbar-msg-count {
+        display: none;
+      }
+      // Item-登录
+      > .toolbar-btn-login {
+        // Panel-未登录
+        > #csdn-toolbar-profile-nologin {
+          display: none;
+        }
+        // Panel-已登录
+        > #csdn-toolbar-profile-new {
+          // Comp-AD
+          #vip-end-time-box,
+          > .profile-imag-box {
+            display: none;
+          }
+          // Item
+          .csdn-border-bottom-new
+            > li:not(
+              :has(
+                > :is(
+                  [href^="https://blog.csdn.net/"],
+                  [href$="/profile"],
+                  [href^="https://mp.csdn.net?"],
+                  [href$="/history"]
+                )
+              ),
+              .csdn-profile-logout
+            ) {
+            display: none;
+          }
+        }
+      }
+      // Item-信息
+      > .toolbar-btn-msg {
+        // Panel
+        .toolbar-subMenu
+          > :not(
+            [data-type="chat"],
+            [data-type="comment"],
+            [data-type="attention"],
+            [data-type="like"],
+            [href$="/setting"]
+          ) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// 底Area-Footer
+#copyright-box:has(> #csdn-copyright-footer) {
+  display: none;
+}
+
+/* 
+    Page-用户
+*/
+// 左Area
+.user-profile-body .user-profile-aside {
+  // Card-AD
+  > .user-spm-list {
+    display: none;
+  }
+}
+
+/* 
+    Page-文章
+*/
+// 全屏Box-光标选定框
+#articleSearchTip {
+  display: none;
+}
+
+// 左Bar-导航
+#csdn-blog-sidebar {
+  display: none;
+}
+
+// Area
+@layer mainBox {
+  #mainBox {
+    > :not(main, .article-aside-container) {
+      display: none;
+    }
+    > main {
+      flex: 1 1 auto;
+      width: 100%;
+      max-width: 90vw;
+    }
+  }
+}
+
+// Fix下Bar
+#simple-sticky-userbar {
+  .simple-sticky-userbar__actions {
+    display: none;
+  }
+}
+
+// Fix右下Bar-功能
+.article-aside-container > .sidebar {
+  > #sidebar-like {
+    pointer-events: none;
+  }
+  > #tool-share,
+  > #sidebar-more {
+    display: none;
+  }
+}
+
+// Area
+.blog-content-box {
+  // 上Area-标题
+  > #article-header-box {
+    .simple-meta-row > #metaSlot {
+      display: none;
+    }
+    .simple-author-row {
+      > #simple-article-follow-btn,
+      > .simple-author-main > .simple-moyan-member-wrap {
+        display: none;
+      }
+    }
+  }
+  // 上Bar-推荐
+  > #simple-blue-card-top {
+    display: none;
+  }
+}
+
+// 中Area-文章
+@layer article {
+  article {
+    // Comp-关键词
+    .words-blog,
+    .new-words-blog {
+      cursor: text;
+      color: initial;
+      margin: 0;
+      padding: 0;
+      background: initial;
+
+      > i {
+        display: none;
+      }
+    }
+  }
+}
+
+// 下Area-推荐
+.simple-article-bottom {
+  > :not(.simple-article-meta) {
+    display: none;
+  }
+}

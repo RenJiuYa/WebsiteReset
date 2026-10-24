@@ -1,0 +1,126 @@
+/* 
+    通用
+*/
+
+// 顶Bar-功能
+.topper .fl {
+  > [href="javascript:;"] {
+    display: none;
+  }
+}
+
+// 上Area-搜索
+.header > .shortcuts {
+  display: none;
+}
+
+// 上Bar-导航
+.nav-bar {
+  display: flex;
+
+  // 左Item
+  > .nav-sub {
+    display: none;
+  }
+  // 中Item
+  > .nav-main {
+    flex-grow: 1;
+
+    > ul {
+      display: flex;
+
+      .first {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+// 底Area-Footer
+.footer {
+  display: none;
+}
+
+/* 
+    Page-漫画
+*/
+.bc {
+  // 右Area
+  > .fr {
+    > :not(.score),
+    > .score > .score-vote {
+      display: none;
+    }
+  }
+  // 左Area
+  > .fl {
+    // 上Areaa-漫画信息
+    > .book-cont > .book-detail {
+      > #bdShare,
+      .book-btn {
+        display: none;
+      }
+    }
+    // Area-推荐
+    > .book-similar,
+    > #Comment {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-阅读
+*/
+body:has(> .tc) {
+  // 顶Bar-导航
+  > .header,
+  // 上Bar-标题
+  > .title > .fr {
+    display: none;
+  }
+  // Bar-分页
+  > .tc {
+    margin: 10px auto;
+  }
+  // Bar-功能
+  .sub-btn {
+    display: flex;
+    width: fit-content;
+
+    > :not(#servList, .support) {
+      display: none;
+    }
+    > .support {
+      flex-grow: 1;
+
+      > ul {
+        > :not(
+          #shortcuts,
+          :has(> :is(#tool-speed, #tool-rotate, .shareto)),
+          .pfunc
+        ) {
+          display: none;
+        }
+      }
+    }
+  }
+  // Area-图片
+  .tbCenter {
+    width: fit-content;
+
+    #mangaFile {
+      max-height: 120vh;
+    }
+  }
+}
+
+/* 
+    Page-搜索
+*/
+// 顶Bar-导航
+.header .pr > .sider,
+// 上Area-搜索
+.searchBox + .hotkey {
+  display: none;
+}

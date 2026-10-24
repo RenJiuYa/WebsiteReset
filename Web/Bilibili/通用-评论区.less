@@ -1,0 +1,305 @@
+// main: _Entry.less
+// out: false
+
+
+/* 
+    组件：评论区
+*/
+/* @shadow(bili-comments) */
+
+/* @shadow(bili-comments-header-renderer >> bili-comments-vote-card) */
+// Card-投票
+#card > #duel {
+  pointer-events: none;
+}
+/* @shadow-end */
+
+/* @shadow(bili-comment-thread-renderer) */
+/* @shadow(bili-comment-renderer) */
+// 右上Comp-狗牌
+#ornament {
+  pointer-events: none;
+}
+
+/* @shadow(bili-avatar) */
+// Area-头像
+#canvas {
+  @avatar-size: 50px;
+  // Comp-头像框2
+  &:has(> :nth-child(2):last-child) > :nth-child(2) {
+    > .layer:nth-of-type(1) {
+      width: @avatar-size;
+      height: @avatar-size;
+    }
+    > .layer:nth-of-type(2) {
+      display: none;
+    }
+  }
+  // Comp-头像框3
+  &:has(> :nth-child(3):last-child) {
+    > :nth-child(2) > .layer {
+      width: @avatar-size;
+      height: @avatar-size;
+    }
+    > :nth-child(3) {
+      display: none;
+    }
+  }
+  // Comp-头像框4
+  &:has(> :nth-child(4):last-child) {
+    > :nth-child(2) > .layer {
+      width: @avatar-size;
+      height: @avatar-size;
+    }
+    > :nth-child(3) {
+      display: none;
+    }
+  }
+
+  // Comp-角标
+  > .layers > .layer:not(.center) {
+    display: none;
+  }
+}
+/* @shadow-end */
+
+/* @shadow(bili-comment-user-info) */
+#user-level {
+  pointer-events: none;
+}
+/* @shadow-end */
+
+/* @shadow(bili-comment-action-buttons-renderer) */
+// Area-主楼| Bar-功能
+#like {
+  margin-left: auto;
+}
+#more {
+  margin-left: 20px;
+}
+/* @shadow-end */
+
+/* @shadow(bili-rich-text) */
+// Area-文本（架构一致）
+#contents {
+  // Comp-关键词
+  > a[data-type="search"] {
+    display: inline;
+    color: black;
+    pointer-events: none;
+
+    > img[src*="/bfs/reply/"] {
+      display: none;
+    }
+  }
+
+  // Area-AD
+  &:has([data-type="goods"]) {
+    > a {
+      font-size: 0;
+    }
+    > [data-type="goods"] > img {
+      width: 1rem;
+      height: 1rem;
+    }
+    > :not([data-type="goods"]:has(img)) {
+      display: none;
+    }
+  }
+}
+/* @shadow-end */
+
+/* @shadow(bili-comment-vote-renderer) */
+// Area-投票
+#card {
+  width: 90%;
+}
+/* @shadow-end */
+/* @shadow-end */
+
+/* @shadow(bili-comment-replies-renderer) */
+// 下Bar-分页
+#pagination > #pagination-body {
+  margin-right: auto;
+}
+
+/* @shadow(bili-comment-reply-renderer) */
+
+/* @shadow(bili-comment-action-buttons-renderer) */
+// Area-回复| Bar-功能
+#like {
+  margin-left: auto;
+}
+#more {
+  margin-left: 20px;
+}
+/* @shadow-end */
+
+/* @shadow(bili-rich-text) */
+// Area-文本（架构一致）
+#contents {
+  // Comp-关键词
+  > a[data-type="search"] {
+    display: inline;
+    color: black;
+    pointer-events: none;
+
+    > img[src*="/bfs/reply/"] {
+      display: none;
+    }
+  }
+
+  // Area-AD
+  &:has([data-type="goods"]) {
+    > a {
+      font-size: 0;
+    }
+    > [data-type="goods"] > img {
+      width: 1rem;
+      height: 1rem;
+    }
+    > :not([data-type="goods"]:has(img)) {
+      display: none;
+    }
+  }
+}
+/* @shadow-end */
+/* @shadow-end */
+/* @shadow-end */
+
+/* @shadow-end */
+/* @shadow-end */
+
+/* @shadow(bili-user-profile) */
+// Box-用户简介：评论（架构一致）
+#view {
+  display: grid;
+  grid-template-areas: "bg bg" "avatar body";
+  grid-template-columns: 100px 1fr;
+
+  > #bg {
+    grid-area: bg;
+    position: initial;
+    display: none;
+  }
+  > #avatar {
+    grid-area: avatar;
+    justify-self: center;
+    position: initial;
+    width: 80%;
+    height: initial;
+    aspect-ratio: 1 / 1;
+    margin: 10px 0;
+
+    > :not(img) {
+      display: none;
+    }
+  }
+  > #body {
+    grid-area: body;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 5px;
+
+    > * {
+      margin: 0;
+      padding: 0;
+    }
+    > #title > #vip {
+      display: none;
+    }
+    // Comp-关注
+    > #action {
+      &:not(:has(.active)),
+      > #chat {
+        display: none;
+      }
+      > .active {
+        pointer-events: none;
+      }
+    }
+  }
+}
+/* @shadow-end */
+// Box-用户简介：普通（架构一致）
+.bili-user-profile .bili-user-profile-view {
+  display: grid;
+  grid-template-areas: "bg bg" "avatar body";
+  grid-template-columns: 100px 1fr;
+
+  > .bili-user-profile-view__background {
+    grid-area: bg;
+    position: initial;
+    display: none;
+  }
+  > .bili-user-profile-view__avatar {
+    grid-area: avatar;
+    justify-self: center;
+    position: initial;
+    width: 80%;
+    height: initial;
+    aspect-ratio: 1 / 1;
+    margin: 10px 0;
+
+    > :not(.b-img) {
+      display: none;
+    }
+  }
+  > .bili-user-profile-view__info {
+    grid-area: body;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 5px;
+
+    > * {
+      margin: 0;
+      padding: 0;
+    }
+    .bili-user-profile-view__info__viplabel {
+      display: none;
+    }
+    // Comp-关注
+    > .bili-user-profile-view__info__footer {
+      &:not(:has(.checked)),
+      > .chat {
+        display: none;
+      }
+      > .checked {
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+/* @shadow(bili-emoji-popover) */
+// Box-评论表情：评论（架构一致）
+#emoji-popover {
+  translate: 0 30px;
+
+  > [title] {
+    border-bottom: 2px var(--graph_bg_regular) solid;
+  }
+  > img {
+    margin: 10px 0;
+  }
+  > a {
+    display: none;
+  }
+}
+/* @shadow-end */
+// Box-评论表情：普通（架构一致）
+.bili-emoji-popover {
+  translate: 0 30px;
+
+  > [title] {
+    border-bottom: 2px var(--graph_bg_regular) solid;
+  }
+  > img {
+    margin: 10px 0;
+  }
+  > a {
+    display: none;
+  }
+}

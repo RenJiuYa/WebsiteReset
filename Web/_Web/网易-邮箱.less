@@ -1,0 +1,115 @@
+/* 
+    通用
+*/
+// Item-邮件
+[sign="letter"] {
+  // 右Bar-功能
+  .hV0 > [sign="aimanage"] {
+    display: none;
+  }
+}
+
+// 顶Bar-功能
+header {
+  // 上Bar
+  > div {
+    // 左Item
+    > ul[role="navigation"] {
+      > :not([name="account"], [name="download2"]) {
+        display: none;
+      }
+    }
+    // 右Item-搜索
+    > [role="search"] {
+      > :has(> .top-search-ai-ico) {
+        display: none;
+      }
+    }
+  }
+  // 下Bar
+  > nav {
+    // 右Item-AI
+    > #APP-smartAssistant {
+      display: none;
+    }
+    // 左Item-AI
+    .nui-tabs {
+      > [title^="AI"],
+      > [title="企业邮箱"] {
+        display: none;
+      }
+    }
+  }
+}
+// 顶Bar | 左Item-用户-Panel
+.zH0 {
+  > .qw2 > :not(.nB2, .fW4) {
+    display: none;
+  }
+  > .nui-scroll {
+    width: 100%;
+
+    // Comp-扩容
+    .dJ1,
+    .ev2 {
+      display: none;
+    }
+  }
+}
+
+// 左Area
+#dvNavContainer {
+  .nui-tree-item:has(.nui-ico-view) {
+    // Item-最近查看
+    display: none;
+  }
+  // 下Area-其他工具
+  #dvNavFoot .nui-tree-item-label {
+    &:not(.link-track-setting),
+    // Comp-红点
+    #navInvoiceAssistantNew {
+      display: none;
+    }
+  }
+}
+
+/* 
+    Page-登录
+*/
+// 顶Bar-导航
+.header > .headerNav {
+  display: none;
+}
+// 左Area
+#mainBg > #mainCnt > .main-inner-wrap {
+  pointer-events: none;
+}
+// 底Bar-Footer
+#footer {
+  display: none;
+}
+
+/* 
+    Page-首页
+*/
+#dvContainer > [aria-label="欢迎页"] {
+  .frame-main-cont-body {
+    > :not([id$="_dvInner"]) {
+      display: none;
+    }
+    > [id$="_dvInner"] {
+      > :not(.Tn0) {
+        display: none;
+      }
+    }
+  }
+}
+
+/* 
+    Page-读信
+*/
+#dvContainer > [aria-label="读信"] {
+  [role="list"] > :not([id$="_dvReadHeadInfo"], .nu0) {
+    display: none;
+  }
+}

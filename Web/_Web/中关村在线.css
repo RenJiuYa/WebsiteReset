@@ -1,0 +1,165 @@
+/* 
+    通用
+*/
+.global-sitenav {
+  display: none;
+}
+#zolGlobalFooter {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+#questionnaire {
+  display: none;
+}
+#top_nav > #search-form-wrapper {
+  padding: 20px 15%;
+}
+#top_nav > #search-form-wrapper > .search-box > .search-tab-box > .search-tab {
+  display: none;
+}
+#top_nav > #search-form-wrapper > .search-link {
+  display: none;
+}
+#top_nav > .search-sub-nav {
+  display: none;
+}
+.list-box > .list-item {
+  box-sizing: content-box;
+  margin: 0;
+  padding: 15px 5px;
+}
+.list-box > .list-item > .pic-box > .follow-compare > span {
+  display: none;
+}
+.list-box > .list-item > .pro-intro > .special > .grade {
+  pointer-events: none;
+}
+.list-box > .list-item > .pro-intro > .special > .links {
+  display: none;
+}
+.list-box > .list-item > .price-box > :not(.price, .date) {
+  display: none;
+}
+#serHunt,
+.hot-section,
+.related-search,
+#bomSerForm {
+  display: none;
+}
+/* 
+    Page-商品
+*/
+#feedBackWidget > :not(#backTop) {
+  display: none;
+}
+.header > .header__links,
+.common-nav {
+  display: none;
+}
+#_j_tag_nav > .nav__list > li:not(:nth-of-type(-n + 5)) {
+  display: none;
+}
+#_j_FixedBox,
+.recent-news {
+  display: none;
+}
+.product-section > .product-pics > .big-pic > :not(a),
+.product-section > .product-pics > .small-pic li:has(.video-play) {
+  display: none;
+}
+.product-section > .product-price-box > :not(.price__reference, .versions-model, .product__parameters) {
+  display: none;
+}
+.product-section > .product-price-box > .price__reference > .price_lab {
+  pointer-events: none;
+}
+.product-section > .product-price-box > .price__reference > .price_lab > .price_lab_btn {
+  display: none;
+}
+.wrapper {
+  /* Page-综述 */
+  /* Page-配置 */
+  /* Page-参数 */
+}
+.wrapper > .side {
+  display: none;
+}
+.wrapper > .content {
+  width: 100%;
+}
+.wrapper .back_home {
+  display: none;
+}
+.wrapper > .content:has(> .comments-section) > :not(.clearfix, .comments-section) {
+  display: none;
+}
+.wrapper > .content:has(> .comments-section) > .clearfix > .product-pics > .big-pic > .video-btn,
+.wrapper > .content:has(> .comments-section) > .clearfix > .product-pics > .small-pic li:has(.video-play) {
+  display: none;
+}
+.wrapper > .content:has(> .comments-section) > .clearfix > .product-detail > :not(.price__reference, .product__buttons) {
+  display: none;
+}
+.wrapper > .content:has(> .comments-section) > .comments-section > .section-header > .section-header-button {
+  display: none;
+}
+.wrapper > .section:has(> .mod_series_param) > .mod_series_param > .tools .hico {
+  display: none;
+}
+.wrapper > .content:has(> .section > .detailed-parameters) > :not(.section:has(> .detailed-parameters)) {
+  display: none;
+}
+.wrapper > .content:has(> .section > .detailed-parameters) > .section > .detailed-parameters th > :not(:first-child) {
+  display: none;
+}
+.wrapper > .content:has(> .section > .detailed-parameters) > .section > .detailed-parameters td {
+  cursor: initial;
+}
+.wrapper > .content:has(> .section > .detailed-parameters) > .section > .detailed-parameters td > :not(span) {
+  display: none;
+}
+.wrapper > .content:has(> .section > .detailed-parameters) > .section > .detailed-parameters td > span > .text-hui ~ *,
+.wrapper > .content:has(> .section > .detailed-parameters) > .section > .detailed-parameters td > span > [rel="nofollow"] {
+  display: none;
+}
+.wrapper > .content:has(> .section > .detailed-parameters) > .section > .detailed-parameters th a,
+.wrapper > .content:has(> .section > .detailed-parameters) > .section > .detailed-parameters td a {
+  color: initial;
+  pointer-events: none;
+}
+.wrapper > .content:has(> .comments-list) .comments-item {
+  display: flex;
+}
+.wrapper > .content:has(> .comments-list) .comments-item > .comment-list-content {
+  width: 100%;
+}
+/* 
+    Page-对比
+*/
+#navigation,
+.breadcrumb + .feedback {
+  display: none;
+}
+.wrapper:has(> .commpare-box) > .title > a {
+  display: none;
+}
+.wrapper:has(> .commpare-box) > .commpare-box {
+  margin: 10px auto;
+}
+.wrapper:has(> .commpare-box) > .commpare-box tbody > tr:has(> [colspan="5"]) {
+  display: none;
+}
+.wrapper:has(> .commpare-box) > .commpare-box tbody > tr > th a,
+.wrapper:has(> .commpare-box) > .commpare-box tbody > tr > td a {
+  color: initial;
+  text-decoration: initial;
+  pointer-events: none;
+}
+.wrapper:has(> .commpare-box) > .commpare-box tbody > tr > td > .param-content > span ~ *,
+.wrapper:has(> .commpare-box) > .commpare-box tbody > tr > td > .param-content > .icon,
+.wrapper:has(> .commpare-box) > .commpare-box tbody > tr > td > .param-content > .description,
+.wrapper:has(> .commpare-box) > .commpare-box tbody > tr > td > .param-content > div {
+  display: none;
+}

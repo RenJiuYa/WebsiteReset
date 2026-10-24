@@ -1,0 +1,189 @@
+/* 
+    通用
+*/
+#nb.nosel > :has([href="https://upld.e-hentai.org/manage"]) {
+  display: none;
+}
+body iframe[src^="//adserver.juicyads.com"] {
+  display: none;
+}
+.gl1t {
+  display: grid;
+  grid-template-areas: "title title" "img info" "img tag";
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 1fr minmax(0, max-content);
+  min-height: initial;
+  max-height: 80vh;
+  gap: 10px;
+  padding: 5px 10px;
+}
+.gl1t > a:has(> .gl4t),
+.gl1t .gl4t {
+  grid-area: title;
+  display: flex;
+  width: 100%;
+  min-height: 3em;
+  max-height: 4.5em;
+  margin: 0;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  line-height: 1.5em;
+  text-align: left;
+}
+.gl1t > a:has(> .gl4t) > :has(.glink),
+.gl1t .gl4t > :has(.glink) {
+  min-width: initial;
+  max-width: initial;
+}
+.gl1t > a:has(> .gl4t) > :has(label),
+.gl1t .gl4t > :has(label) {
+  margin: 0;
+}
+.gl1t > .gl3t {
+  grid-area: img;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: initial;
+  margin: 0 auto;
+  border: initial;
+  border-radius: initial;
+}
+.gl1t > .gl3t > a > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  object-fit: contain;
+  object-position: center top;
+}
+.gl1t > .gl6t {
+  grid-area: tag;
+  flex-direction: column;
+  justify-content: start;
+  align-items: initial;
+  padding: 0;
+  gap: 2px;
+}
+.gl1t > .gl6t > .gt {
+  margin: initial;
+  border: initial;
+}
+.gl1t > .gl6t > .gt::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.gl1t > .gl5t {
+  grid-area: info;
+  height: initial;
+  margin: initial;
+  flex-direction: column;
+  gap: 5px;
+}
+.gl1t > .gl5t > div {
+  min-width: initial;
+  max-width: initial;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+}
+.gl1t > .gl5t > div > div {
+  position: initial;
+}
+/* 
+    Page-漫画详情
+*/
+/* 
+    Page-MyHome：Page-MyTags
+*/
+#usertag_form #usertag_0 {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #5c0d12;
+}
+/* 
+    Page-漫画详情
+*/
+.gm:has(> #gleft) {
+  display: grid;
+  grid-template-areas: "pic title" "pic info";
+  grid-template-columns: auto 1fr;
+  max-width: 80vw;
+  overflow: hidden;
+}
+.gm:has(> #gleft) > :not(#gleft, #gd2, #gmid) {
+  display: none;
+}
+.gm:has(> #gleft) > #gleft {
+  grid-area: pic;
+  width: initial;
+  position: initial;
+}
+.gm:has(> #gleft) > #gd2 {
+  grid-area: title;
+  width: initial;
+}
+.gm:has(> #gleft) > #gmid {
+  grid-area: info;
+  display: flex;
+  width: initial;
+}
+.gm:has(> #gleft) > #gmid > :not([id^="gd"]) {
+  display: none;
+}
+.gm:has(> #gleft) > #gmid > * {
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+}
+.gm:has(> #gleft) > #gmid > #gd4 {
+  flex: 1 1 auto;
+}
+.gm:has(> #gleft) > #gmid > #gd4 > #taglist table {
+  box-sizing: border-box;
+  width: 100%;
+}
+.gm:has(> #gleft) > #gmid > #gd4 > #taglist table .tc + td {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  width: 100%;
+}
+.gm:has(> #gleft) > #gmid > #gd4 > #taglist table .tc + td a {
+  display: inline-block;
+  text-align: left;
+}
+#gdt {
+  box-sizing: border-box;
+  max-width: 80vw;
+}
+#gdt [title]:hover {
+  transform: scale(2.25);
+  transition: transform 0.1s ease;
+  position: relative;
+  z-index: 99;
+}
+#cdiv > .c1 {
+  display: flex;
+  flex-direction: column;
+}
+#cdiv > .c1 > :not(.c2, .c6) {
+  display: none;
+}
+#cdiv > .c1 > .c2 > :not(.c3),
+#cdiv > .c1 > .c2 > .c3 > [href*="forums.e-hentai.org"] {
+  display: none;
+}
+/* 
+    Page-漫画阅读
+*/
+#i3 img {
+  max-height: 120vh;
+  width: auto;
+}

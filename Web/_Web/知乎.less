@@ -1,0 +1,343 @@
+/* 
+    通用
+*/
+
+// Box-光标选定框
+div:has(> .ZDI--AgreeFill24) {
+  display: none;
+}
+
+// Box-用户简介
+.css-1rd6ukm .HoverCard-item > :not(.NumberBoard) {
+  display: none;
+}
+
+// Fix右下Box-AI
+.CornerButtonsGroup {
+  display: none;
+}
+
+// Card-帖子
+.ContentItem {
+  // 上Area-帖子信息
+  > .ContentItem-meta {
+    > :not(.AuthorInfo),
+    > .AuthorInfo > :not(.AuthorInfo),
+    // Comp-昵称
+    .AuthorInfo-name > :not(div) {
+      display: none;
+    }
+  }
+  // 中Area-内容
+  > .RichContent {
+    > :not(
+      :has(> .RichContent-inner, > .ContentItem-time, .ContentItem-action)
+    ) {
+      display: none;
+    }
+    // 中Area-文字
+    .RichContent-inner .RichText {
+      p {
+        margin: 0;
+
+        // Comp-关键
+        .highlight-wrap {
+          margin: 0;
+          border-bottom: initial;
+          background: initial;
+
+          &::after {
+            display: none;
+          }
+        }
+        // Comp-关键词
+        .RichContent-EntityWord {
+          pointer-events: none;
+          color: initial;
+
+          > svg {
+            display: none;
+          }
+        }
+      }
+    }
+    // 下Area-编辑信息
+    > :has(> .ContentItem-time) {
+      > :not(.ContentItem-time) {
+        display: none;
+      }
+    }
+    // 下Bar-功能
+    .ContentItem-actions:has(> .ShareMenu) {
+      cursor: initial;
+
+      > :has(.VoteButton),
+      > :has(.Zi--Heart) {
+        pointer-events: none;
+      }
+      > [data-tooltip] {
+        display: none;
+      }
+    }
+  }
+  // 下Area-评论
+  .Comments-container > div {
+    > :not(.css-u76jt1) {
+      display: none;
+    }
+  }
+}
+
+// Item-评论
+[data-id] > div {
+  // 左Comp-头像
+  > .css-1jll2aj img {
+    @avatar-size: 40px;
+    width: @avatar-size;
+    height: @avatar-size;
+  }
+  // 右Area
+  > .css-1bklfe6 {
+    // Comp-昵称
+    .css-1qe0v6x > :not(.css-8v0dsd) {
+      display: none;
+    }
+    // 右下Comp-功能
+    .css-18opwoy {
+      pointer-events: none;
+    }
+  }
+}
+
+// Panel-评论
+.css-zbtg51 {
+  // 底Area-回复
+  .css-a3pqj1 {
+    display: none;
+  }
+}
+
+// 顶Bar
+header {
+  // 左Item
+  nav
+    > :not([href$="/follow"], [href="https://www.zhihu.com/"], [href$="/hot"]) {
+    display: none;
+  }
+  // 右Item
+  .SearchBar {
+    > :not(form) {
+      display: none;
+    }
+    > form input::placeholder {
+      font-size: 0;
+    }
+  }
+}
+// 顶Bar | 右Item-用户-Panel
+.AppHeaderProfileMenu {
+  > :not(
+    [href$="/rezhu-wen"],
+    [href$="/recent-viewed"],
+    [href$="/profile"],
+    [href$="/logout"]
+  ) {
+    display: none;
+  }
+}
+
+// 右Area
+.css-18888ld {
+  // Page-首页 | Card-创作中心
+  > .css-19idom,
+  // Page-首页 | Card-盐选
+  > .Card:has(> .KfeCollection-CreateSaltCard),
+  // Page-首页 | Card-课堂
+  > .Card:has(> .css-1dyj6jm),
+  // Card-用户
+  > [aria-label="关于作者"] .MemberButtonGroup,
+  // Card-热搜
+  > [data-smart-sticky-anchor],
+  // Card-footer
+  footer {
+    display: none;
+  }
+}
+
+/* 
+    Page-登录
+*/
+.SignFlowHomepage {
+  > .SignFlowHomepage-content .signQr-rightContainer {
+    .SignContainer-content ~ * {
+      display: none;
+    }
+  }
+  > footer {
+    display: none;
+  }
+}
+
+/* 
+    Page-首页
+*/
+// Area-布局
+@zhihu-width: 80vw;
+.Topstory-container {
+  width: @zhihu-width;
+
+  // 左Area
+  > .Topstory-mainColumn {
+    flex-grow: 1;
+
+    > .WriteArea {
+      display: none;
+    }
+  }
+  // 右Area
+  [data-za-detail-view-path-module="RightSideBar"] {
+    display: none;
+  }
+}
+
+/* 
+    Page-回答
+*/
+// 上Area-问题
+.QuestionHeader {
+  > .QuestionHeader-content {
+    // 上Bar-标签
+    .QuestionHeader-tags,
+    // Card-评分
+    [aria-label] > .css-1mrurzj {
+      display: none;
+    }
+  }
+  // 下Bar-功能
+  .QuestionHeader-footer-main {
+    .QuestionButtonGroup > :not(.FollowButton) {
+      display: none;
+    }
+    .QuestionHeaderActions {
+      > button,
+      > .ShareMenu {
+        display: none;
+      }
+      > .GoodQuestionAction {
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+// Area-布局
+div:has(> .Question-sideColumn) {
+  width: @zhihu-width;
+  // 左Area
+  > div:has(+ .Question-sideColumn) {
+    flex-grow: 1;
+
+    .Question-mainColumn {
+      width: 100%;
+    }
+  }
+  // 右Area
+  > .Question-sideColumn {
+    display: none;
+  }
+}
+
+/* 
+    Page-搜索
+*/
+// 上Bar-搜索
+.SearchTabs .Tabs {
+  > :not(
+    :has(
+      [aria-controls="Search-content"],
+      [aria-controls="Search-people"],
+      [aria-controls="Search-column"],
+      [aria-controls="Search-topic"]
+    )
+  ) {
+    display: none;
+  }
+}
+.Search-container {
+  width: @zhihu-width;
+  // 左Area
+  > #SearchMain {
+    flex-grow: 1;
+
+    [data-za-detail-view-path-module="SearchResultList"] {
+      > .SearchResult-Card {
+        // Card-话题
+        .SearchTopicBox .SearchTopicReview-MyStatus,
+        // Card-推荐搜索
+        &:has(.RelevantQuery) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+/* 
+    Page-专栏
+*/
+// 顶Bar | Status-下划 | 右Comp-关注
+.PageHeader .ColumnPageHeader-Button {
+  display: none;
+}
+.Post-content {
+  > .css-kjzwqj {
+    width: @zhihu-width;
+    // 左Area
+    > .css-c0fani {
+      flex-grow: 1;
+
+      // Area-文章
+      article {
+        // 上Area-信息
+        > header > .Post-Author > :not(.AuthorInfo),
+        // 下Bar-标签
+        > .Post-topicsAndReviewer {
+          display: none;
+        }
+        // 中Area-文字
+        > .Post-RichTextContainer .RichContent-EntityWord {
+          color: initial;
+          cursor: initial;
+
+          > svg {
+            display: none;
+          }
+        }
+        // 下Bar-功能
+        [data-za-detail-view-path-module="BottomBar"] {
+          cursor: initial;
+
+          > :has(.VoteButton),
+          > :has(.ZDI--HeartFill24) {
+            pointer-events: none;
+          }
+          > :has(.Zi--Deliver),
+          > [data-tooltip] {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  // 底Area-Footer
+  > .Post-Sub {
+    display: none;
+  }
+}
+
+/* 
+    Page-文章
+*/
+.RelatedReadings {
+  display: none;
+}

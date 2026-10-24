@@ -1,0 +1,63 @@
+/* 
+    通用
+*/
+[sign="letter"] .hV0 > [sign="aimanage"] {
+  display: none;
+}
+header > div > ul[role="navigation"] > :not([name="account"], [name="download2"]) {
+  display: none;
+}
+header > div > [role="search"] > :has(> .top-search-ai-ico) {
+  display: none;
+}
+header > nav > #APP-smartAssistant {
+  display: none;
+}
+header > nav .nui-tabs > [title^="AI"],
+header > nav .nui-tabs > [title="企业邮箱"] {
+  display: none;
+}
+.zH0 > .qw2 > :not(.nB2, .fW4) {
+  display: none;
+}
+.zH0 > .nui-scroll {
+  width: 100%;
+}
+.zH0 > .nui-scroll .dJ1,
+.zH0 > .nui-scroll .ev2 {
+  display: none;
+}
+#dvNavContainer .nui-tree-item:has(.nui-ico-view) {
+  display: none;
+}
+#dvNavContainer #dvNavFoot .nui-tree-item-label:not(.link-track-setting),
+#dvNavContainer #dvNavFoot .nui-tree-item-label #navInvoiceAssistantNew {
+  display: none;
+}
+/* 
+    Page-登录
+*/
+.header > .headerNav {
+  display: none;
+}
+#mainBg > #mainCnt > .main-inner-wrap {
+  pointer-events: none;
+}
+#footer {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+#dvContainer > [aria-label="欢迎页"] .frame-main-cont-body > :not([id$="_dvInner"]) {
+  display: none;
+}
+#dvContainer > [aria-label="欢迎页"] .frame-main-cont-body > [id$="_dvInner"] > :not(.Tn0) {
+  display: none;
+}
+/* 
+    Page-读信
+*/
+#dvContainer > [aria-label="读信"] [role="list"] > :not([id$="_dvReadHeadInfo"], .nu0) {
+  display: none;
+}

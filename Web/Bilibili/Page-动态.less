@@ -2,10 +2,7 @@
 // out: false
 // 上面两行是 Easy LESS 的文件级设置（保存本文件时改为编译入口文件；本文件不单独产出 .css，全站只有 _入口.css 一个产物）
 
-/* 
-    Area-动态
-*/
-
+// Card-动态
 .bili-dyn-list .bili-dyn-item__main {
   // Area-头像
   > .bili-dyn-item__avatar {
@@ -42,9 +39,14 @@
       .bili-dyn-topic {
         display: inline-flex;
       }
-      // Area-转发 | Comp-关注
-      > .bili-dyn-content__orig .dyn-orig-author__right {
-        display: none;
+      // Area-转发
+      > .bili-dyn-content__orig {
+        // Comp-关注
+        .dyn-orig-author__right,
+        // Card-相关游戏 | 右Comp-关注
+        .bili-dyn-card-link-common__action {
+          display: none;
+        }
       }
       // Card-预约
       [data-module="additional"] {
@@ -65,6 +67,10 @@
       pointer-events: none;
     }
   }
+}
+// Card-动态：AD
+.bili-dyn-list__item:has(.bili-dyn-card-goods) {
+  display: none;
 }
 
 /* 

@@ -5,12 +5,12 @@
 // 顶Area-搜索
 [data-st-cnt="fb"] {
   // 下Bar-导航
-  [role="list"] > [data-hveid]:nth-last-of-type(-n + 5) {
+  [role="list"] > [data-hveid]:not(:nth-of-type(-n + 3)) {
     display: none;
   }
 }
 
-// Aree-内容
+// Aree-布局
 #rcnt {
   @Google-padding: 5%;
   grid-template-columns: minmax(@Google-padding, 1fr) repeat(20, 1fr) minmax(
@@ -19,11 +19,11 @@
     );
   column-gap: 0;
 
-  // 无：左Area
+  // 左Area：无
   > #center_col {
     grid-column: 2 / -2;
   }
-  // 有：左Area
+  // 左Area：有
   &:has(> #rhs) {
     > #center_col {
       grid-column: 2 / span 14;
@@ -36,10 +36,10 @@
 
 // 右Area
 #rhs > #jOAHU {
+  // Card-推荐搜索
+  > :has(> .pCnXsf),
   // 下Comp-反馈
-  .C7GK8b,
-  // Area-推荐搜索
-  > :has(.pCnXsf) {
+  .C7GK8b {
     display: none;
   }
 }
@@ -47,18 +47,12 @@
 // 左Area
 #center_col {
   #rso {
-    > .ULSxyf {
-      // 上Area-大字  信息（搜农历新年）
-      &:has(.fm06If) {
-        // Area-推荐搜索
-        .yp1CPe,
-        // Comp-反馈
-        .YfftMc {
-          display: none;
-        }
-      }
-      // Card-相关问题
-      &:has(.cUnQKe) {
+    // 上Area-大字：信息（搜农历新年）
+    > .ULSxyf:has(block-component) {
+      // 下Area-推荐
+      .kp-header ~ *,
+      // 下Comp-反馈
+      .YfftMc {
         display: none;
       }
     }
@@ -68,14 +62,6 @@
     > :not([role="navigation"]) {
       display: none;
     }
-  }
-}
-
-// 底Area-Footer
-#sfooter .SLPe5b {
-  // Bar-反馈
-  > .kEjm2c {
-    display: none;
   }
 }
 

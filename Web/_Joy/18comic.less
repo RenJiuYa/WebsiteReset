@@ -1,0 +1,382 @@
+// /*
+//     通用
+// */
+
+body {
+  padding: 0;
+}
+
+// 全屏Box-遮罩
+.modal-backdrop {
+  display: none;
+}
+
+// 全屏Box-认证
+#billboard-modal > .modal-dialog {
+  > :not(.modal-content) {
+    display: none;
+  }
+  > .modal-content {
+    > :not(.modal-footer) {
+      display: none;
+    }
+    > .modal-footer {
+      > :not(.btn-group),
+      > .btn-group > :not(#chk_cover) {
+        display: none;
+      }
+    }
+  }
+}
+
+// 全屏Box-欢迎
+#guide-modal {
+  display: none;
+}
+
+// 全屏Box-登录
+#login-modal .modal-content {
+  padding: 10px;
+}
+
+// 全屏Box-AD
+#sponsorsImg {
+  display: none;
+}
+
+// Fix右Box
+[class^="float-right-"],
+.web-right-float-button {
+  display: none;
+}
+
+// Card-AD
+[data-group]:has(> :is(.group-notice, [onclick="closeAd(this)"])),
+.col-md-3:has(iframe) {
+  display: none;
+}
+
+// Card-漫画
+.list-col {
+  margin: 5px 0;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px 5px 10px;
+
+    // Comp-标题
+    > .video-title {
+      height: 3em;
+      margin: 0;
+      line-height: 1.5em;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2; /* 两行 */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+    }
+    // Comp-作者
+    > .title-truncate.hidden-xs {
+      height: 1em;
+      line-height: 1em;
+    }
+    // Area-标签
+    > .tags {
+      margin: 0;
+      padding: 0;
+      overflow-x: initial;
+      white-space: initial;
+
+      > a {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+// 顶Bar-AD
+.top-nav {
+  display: none;
+}
+
+// 顶Bar-导航
+#Comic_Top_Nav {
+  height: initial;
+  min-height: initial;
+  margin: 0;
+  padding: 0;
+  position: sticky;
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  .d-flex {
+    display: grid;
+    grid-template-areas: "left top" "left right";
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr auto;
+
+    // 左Item
+    > .navbar-left {
+      grid-area: left;
+
+      > :not(
+        #adulta,
+        #hmovies,
+        :has([href="/theme/"], [href="/#"], [href="/forum/"])
+      ) {
+        display: none;
+      }
+    }
+
+    // 右Item
+    > .navbar-right {
+      grid-area: right;
+      display: flex;
+      margin: 0;
+
+      // Comp-抽奖
+      > :has(> [href="/bonus"]) {
+        display: none;
+      }
+    }
+
+    // 右上Item
+    > .visible-lg {
+      grid-area: top;
+      margin-top: 5px;
+      position: initial;
+    }
+
+    // Comp-红点
+    .menu-circle {
+      display: none;
+    }
+  }
+}
+
+// 底Area-Footer
+.footer-pad,
+.footer-container {
+  display: none;
+}
+
+/* 
+    Page-首页
+*/
+// 上Area-AD
+.div-bf-pv {
+  display: none;
+}
+
+/* 
+    Page-搜索
+*/
+// 上Area
+.row:has(.list-group) {
+  display: flex;
+  flex-direction: column-reverse;
+
+  // 上Bar-分类
+  > .col-md-3 {
+    width: 100%;
+    padding: 0;
+
+    > .list-group {
+      display: flex;
+
+      > a {
+        flex-grow: 1;
+        border-radius: 0;
+        text-align: center;
+      }
+    }
+  }
+  // Area-漫画
+  > .col-xs-12 {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* 
+    Page-漫画详情
+*/
+// 上Area
+.row:has(> #album_id) {
+  margin: 10px 0 0;
+  padding: 0;
+
+  > .col-md-12 {
+    padding: 0;
+
+    // 上Bar-标题
+    #book-name ~ * {
+      display: none;
+    }
+  }
+}
+// 上Area | 右Area-漫画信息
+[itemscope].panel {
+  // Status-放大网页 | 上Area-图片
+  #album_photo_cover {
+    .owl-item {
+      height: auto;
+    }
+  }
+  // Status-放大网页 | 上Bar-功能
+  .intro-toolbar {
+    justify-content: flex-start;
+
+    > :has(#jmComicVideo) {
+      display: none;
+    }
+  }
+  // Item-条目
+  .tag-block {
+    // Comp-标签名
+    > h2 {
+      margin: 0;
+    }
+    // Comp-添加
+    > label {
+      display: none;
+    }
+  }
+  // Item-条目：标签操作
+  .tag-block > .btn-team {
+    > [href] {
+      display: none;
+    }
+  }
+  // Bar-功能
+  .read-block {
+    > [id^="love_likes_"],
+    > [data-target="#jmComicMbVideo"] {
+      display: none;
+    }
+  }
+  // Comp-AD
+  [data-group] {
+    display: none;
+  }
+}
+
+// 下Bar-导航
+.nav-tabs > li:has(#related_comics_a) {
+  display: none;
+}
+// 下Area-评论
+#related_comics {
+  display: none;
+}
+
+/* 
+    Page-漫画阅读
+*/
+// Fix右Bar-功能
+.menu-bolock > .menu-bolock-ul {
+  > :not(
+    :has(
+      > [href^="/album_download"],
+      > [href="#login-modal"],
+      > [href="?read_mode=read-by-page"],
+      > [href^="/album/"],
+      > #gotop,
+      > #pageselect
+    )
+  ) {
+    display: none;
+  }
+}
+
+// Area-图片
+#is_hanman + .row .panel {
+  > :not(.panel-heading, .panel-body) {
+    display: none;
+  }
+  > .panel-body > .thumb-overlay-albums {
+    > :not([id]) {
+      display: none;
+    }
+    // Comp-图片
+    canvas {
+      max-height: 120vw;
+    }
+  }
+}
+
+/* 
+    Page-用户
+*/
+// 上Area-信息
+.panel:has(.header-info-personal) {
+  margin: 10px 0;
+
+  > .panel-body {
+    display: grid;
+    grid-template-areas: "user info" "user like";
+    grid-template-columns: auto 1fr;
+
+    // Card-用户
+    > .header-info-personal {
+      grid-area: user;
+      margin: 0 50px 0 0;
+    }
+    // Card-信息
+    > .header-info-profile {
+      grid-area: info;
+      display: flex;
+      gap: 30px;
+
+      > :not(.header-info-title, .header-profile-rows) {
+        display: none;
+      }
+      // Comp-条目
+      > .header-profile-rows {
+        flex-grow: 1;
+        justify-content: flex-start;
+        gap: 50px;
+        margin: 0;
+
+        > .header-profile-row {
+          flex: 0 1 auto;
+          display: flex;
+          flex-direction: row-reverse;
+          gap: 5px;
+          margin: 0;
+
+          &:empty {
+            display: none;
+          }
+          > .header-profile-row-value {
+            color: aqua;
+          }
+        }
+      }
+    }
+    // Card-喜欢
+    > :last-child {
+      grid-area: like;
+    }
+    // Card
+    > .visible-lg-block {
+      display: none;
+    }
+  }
+}
+
+// 中Bar-导航
+.header-menu-block > .header-menu {
+  scrollbar-width: none;
+
+  > [href$="/bonus"],
+  > [href="/logout"] {
+    display: none;
+  }
+}

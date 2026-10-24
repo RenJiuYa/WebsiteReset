@@ -1,0 +1,65 @@
+.app-loaded {
+  overflow: initial;
+}
+header .nav-list > :not(:has(> [href="/categories"])) {
+  display: none;
+}
+footer {
+  display: none;
+}
+/* 
+  Page-首页
+*/
+.logged-in-home-container > :not(.content-area, .home-rec-wrap) {
+  display: none;
+}
+.logged-in-home-container .hero-row > :not(.announcements-section) {
+  display: none;
+}
+.logged-in-home-container .hero-row .ann-home > :not(.ann-home__header) {
+  display: none;
+}
+/* 
+  Page-漫画详情
+*/
+.comic-detail-container > .comic-hero-section {
+  box-shadow: initial;
+}
+.comic-detail-container > .comic-hero-section .tags-row {
+  display: none;
+}
+.comic-detail-container > .comic-hero-section .actions-row {
+  margin: 0;
+  padding: 0;
+}
+.comic-detail-container > .comic-details-container > :not(.comic-detail-tabs, .tab-content) {
+  display: none;
+}
+.comic-detail-container > .comic-details-container > .tab-content > .unified-info-card {
+  display: flex;
+  flex-direction: column-reverse;
+  box-shadow: initial;
+}
+.comic-detail-container > .comic-details-container > .tab-content > .unified-info-card > .section-divider {
+  display: none;
+}
+.comic-detail-container > .comic-details-container > .tab-content > .unified-info-card > .info-tab-stats-area {
+  order: 1;
+  padding: 10px 0;
+}
+.comic-detail-container > .comic-details-container > .tab-content > .unified-info-card > .description-section {
+  padding: 0;
+}
+/* 
+  Page-漫画阅读
+*/
+.vw-reader [data-testid="virtuoso-item-list"] > :not(:has(> .vw-image-item)),
+.vw-reader .chapter-navigation > .chapter-navigation__ad {
+  display: none;
+}
+/* 
+  Page-搜索结果
+*/
+.search-page .comic-grid > :not(.comic-card) {
+  display: none;
+}

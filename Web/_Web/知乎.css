@@ -1,0 +1,209 @@
+/* 
+    通用
+*/
+div:has(> .ZDI--AgreeFill24) {
+  display: none;
+}
+.css-1rd6ukm .HoverCard-item > :not(.NumberBoard) {
+  display: none;
+}
+.CornerButtonsGroup {
+  display: none;
+}
+.ContentItem > .ContentItem-meta > :not(.AuthorInfo),
+.ContentItem > .ContentItem-meta > .AuthorInfo > :not(.AuthorInfo),
+.ContentItem > .ContentItem-meta .AuthorInfo-name > :not(div) {
+  display: none;
+}
+.ContentItem > .RichContent > :not( :has(> .RichContent-inner, > .ContentItem-time, .ContentItem-action)) {
+  display: none;
+}
+.ContentItem > .RichContent .RichContent-inner .RichText p {
+  margin: 0;
+}
+.ContentItem > .RichContent .RichContent-inner .RichText p .highlight-wrap {
+  margin: 0;
+  border-bottom: initial;
+  background: initial;
+}
+.ContentItem > .RichContent .RichContent-inner .RichText p .highlight-wrap::after {
+  display: none;
+}
+.ContentItem > .RichContent .RichContent-inner .RichText p .RichContent-EntityWord {
+  pointer-events: none;
+  color: initial;
+}
+.ContentItem > .RichContent .RichContent-inner .RichText p .RichContent-EntityWord > svg {
+  display: none;
+}
+.ContentItem > .RichContent > :has(> .ContentItem-time) > :not(.ContentItem-time) {
+  display: none;
+}
+.ContentItem > .RichContent .ContentItem-actions:has(> .ShareMenu) {
+  cursor: initial;
+}
+.ContentItem > .RichContent .ContentItem-actions:has(> .ShareMenu) > :has(.VoteButton),
+.ContentItem > .RichContent .ContentItem-actions:has(> .ShareMenu) > :has(.Zi--Heart) {
+  pointer-events: none;
+}
+.ContentItem > .RichContent .ContentItem-actions:has(> .ShareMenu) > [data-tooltip] {
+  display: none;
+}
+.ContentItem .Comments-container > div > :not(.css-u76jt1) {
+  display: none;
+}
+[data-id] > div > .css-1jll2aj img {
+  width: 40px;
+  height: 40px;
+}
+[data-id] > div > .css-1bklfe6 .css-1qe0v6x > :not(.css-8v0dsd) {
+  display: none;
+}
+[data-id] > div > .css-1bklfe6 .css-18opwoy {
+  pointer-events: none;
+}
+.css-zbtg51 .css-a3pqj1 {
+  display: none;
+}
+header nav > :not([href$="/follow"], [href="https://www.zhihu.com/"], [href$="/hot"]) {
+  display: none;
+}
+header .SearchBar > :not(form) {
+  display: none;
+}
+header .SearchBar > form input::placeholder {
+  font-size: 0;
+}
+.AppHeaderProfileMenu > :not(
+    [href$="/rezhu-wen"],
+    [href$="/recent-viewed"],
+    [href$="/profile"],
+    [href$="/logout"]
+  ) {
+  display: none;
+}
+.css-18888ld > .css-19idom,
+.css-18888ld > .Card:has(> .KfeCollection-CreateSaltCard),
+.css-18888ld > .Card:has(> .css-1dyj6jm),
+.css-18888ld > [aria-label="关于作者"] .MemberButtonGroup,
+.css-18888ld > [data-smart-sticky-anchor],
+.css-18888ld footer {
+  display: none;
+}
+/* 
+    Page-登录
+*/
+.SignFlowHomepage > .SignFlowHomepage-content .signQr-rightContainer .SignContainer-content ~ * {
+  display: none;
+}
+.SignFlowHomepage > footer {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+.Topstory-container {
+  width: 80vw;
+}
+.Topstory-container > .Topstory-mainColumn {
+  flex-grow: 1;
+}
+.Topstory-container > .Topstory-mainColumn > .WriteArea {
+  display: none;
+}
+.Topstory-container [data-za-detail-view-path-module="RightSideBar"] {
+  display: none;
+}
+/* 
+    Page-回答
+*/
+.QuestionHeader > .QuestionHeader-content .QuestionHeader-tags,
+.QuestionHeader > .QuestionHeader-content [aria-label] > .css-1mrurzj {
+  display: none;
+}
+.QuestionHeader .QuestionHeader-footer-main .QuestionButtonGroup > :not(.FollowButton) {
+  display: none;
+}
+.QuestionHeader .QuestionHeader-footer-main .QuestionHeaderActions > button,
+.QuestionHeader .QuestionHeader-footer-main .QuestionHeaderActions > .ShareMenu {
+  display: none;
+}
+.QuestionHeader .QuestionHeader-footer-main .QuestionHeaderActions > .GoodQuestionAction {
+  pointer-events: none;
+}
+div:has(> .Question-sideColumn) {
+  width: 80vw;
+}
+div:has(> .Question-sideColumn) > div:has(+ .Question-sideColumn) {
+  flex-grow: 1;
+}
+div:has(> .Question-sideColumn) > div:has(+ .Question-sideColumn) .Question-mainColumn {
+  width: 100%;
+}
+div:has(> .Question-sideColumn) > .Question-sideColumn {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+.SearchTabs .Tabs > :not( :has(
+      [aria-controls="Search-content"],
+      [aria-controls="Search-people"],
+      [aria-controls="Search-column"],
+      [aria-controls="Search-topic"]
+    )) {
+  display: none;
+}
+.Search-container {
+  width: 80vw;
+}
+.Search-container > #SearchMain {
+  flex-grow: 1;
+}
+.Search-container > #SearchMain [data-za-detail-view-path-module="SearchResultList"] > .SearchResult-Card .SearchTopicBox .SearchTopicReview-MyStatus,
+.Search-container > #SearchMain [data-za-detail-view-path-module="SearchResultList"] > .SearchResult-Card:has(.RelevantQuery) {
+  display: none;
+}
+/* 
+    Page-专栏
+*/
+.PageHeader .ColumnPageHeader-Button {
+  display: none;
+}
+.Post-content > .css-kjzwqj {
+  width: 80vw;
+}
+.Post-content > .css-kjzwqj > .css-c0fani {
+  flex-grow: 1;
+}
+.Post-content > .css-kjzwqj > .css-c0fani article > header > .Post-Author > :not(.AuthorInfo),
+.Post-content > .css-kjzwqj > .css-c0fani article > .Post-topicsAndReviewer {
+  display: none;
+}
+.Post-content > .css-kjzwqj > .css-c0fani article > .Post-RichTextContainer .RichContent-EntityWord {
+  color: initial;
+  cursor: initial;
+}
+.Post-content > .css-kjzwqj > .css-c0fani article > .Post-RichTextContainer .RichContent-EntityWord > svg {
+  display: none;
+}
+.Post-content > .css-kjzwqj > .css-c0fani article [data-za-detail-view-path-module="BottomBar"] {
+  cursor: initial;
+}
+.Post-content > .css-kjzwqj > .css-c0fani article [data-za-detail-view-path-module="BottomBar"] > :has(.VoteButton),
+.Post-content > .css-kjzwqj > .css-c0fani article [data-za-detail-view-path-module="BottomBar"] > :has(.ZDI--HeartFill24) {
+  pointer-events: none;
+}
+.Post-content > .css-kjzwqj > .css-c0fani article [data-za-detail-view-path-module="BottomBar"] > :has(.Zi--Deliver),
+.Post-content > .css-kjzwqj > .css-c0fani article [data-za-detail-view-path-module="BottomBar"] > [data-tooltip] {
+  display: none;
+}
+.Post-content > .Post-Sub {
+  display: none;
+}
+/* 
+    Page-文章
+*/
+.RelatedReadings {
+  display: none;
+}

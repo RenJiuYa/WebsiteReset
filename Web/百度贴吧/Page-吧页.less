@@ -4,20 +4,33 @@
 /* 
     组件：上Area-贴吧信息
 */
-
 // Page-吧页
 .head_main > .head_content,
 // Page-帖子
 .l_container > .content {
   width: var(--tieba_width);
 
-  // Area-广告
+  // Area-AD
   > #plat_recom_carousel {
     width: 100%;
     pointer-events: none;
 
     > .tbui_slideshow_list {
       width: 100%;
+    }
+  }
+  // Area-AD
+  > div:has(> .head_ad_pop) {
+    > .head_ad_pop {
+      display: none;
+    }
+    > .official_head {
+      > .head_banner {
+        display: none;
+      }
+      > .head_card {
+        margin-top: 70px;
+      }
     }
   }
   // Area-海报 | Comp-礼物
@@ -56,7 +69,6 @@
 /* 
     组件：Area-发帖
 */
-
 #tb_rich_poster_container {
   box-sizing: border-box;
   width: var(--tieba_width);
@@ -177,7 +189,7 @@
         > .media_box {
           box-sizing: border-box;
           width: initial;
-          margin: 10px;
+          margin: 20px;
 
           > .media_disp {
             width: initial;

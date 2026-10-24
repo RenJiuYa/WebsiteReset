@@ -41,28 +41,74 @@ const SITES = {
     ],
   },
   /* ———————————————— AI ———————————————— */
-  'DeepSeek': {
+  'AI': {
     enabled: true,
     dir: 'Web/_Web',
     rules: [
       { match: ['deepseek.com'], css: 'DeepSeek' },
+      { match: ['chatgpt.com'], css: 'ChatGPT' },
+      { match: ['doubao.com'], css: '豆包' },
+    ],
+  },
+  /* ———————————————— Code 代码 ———————————————— */
+  '代码': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['csdn.net'], css: 'CSDN' },
+    ],
+  },
+  /* ———————————————— Game 游戏 ———————————————— */
+  'Game': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['store.epicgames.com'], css: 'Epic Games' },
+      { match: ['nexusmods.com'], css: 'Nexus' },
+      { match: ['op.gg'], css: 'OPGG' },
+    ],
+  },
+  /* ———————————————— Joy ———————————————— */
+  'Joy': {
+    enabled: true,
+    dir: 'Web/_Joy',
+    rules: [
+      { match: ['pixiv.net'], css: 'pixiv' },
+      { match: ['18comic.vip'], css: '18comic', js: ['18comic'] },
+      { match: ['ahri8.*'], css: 'ahri8' },
+      { match: ['manhuabika.com'], css: 'bika' },
+      { match: ['e-hentai.org'], css: 'e-hentai' },
+      { match: ['nhentai.net'], css: 'nhentai' },
+      { match: ['wnacg.com'], css: 'wnacg' },
+      { match: ['pornhub.com'], css: 'pornhub' },
     ],
   },
   /* ———————————————— Media 媒体 ———————————————— */
-  'Google': {
+  '媒体': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['x.com'], css: 'X推特' },
+      { match: ['zhihu.com'], css: '知乎' },
+      { match: ['zhipin.com'], css: 'BOSS直聘' },
+    ],
+  },
+  /* ———————————————— Official ———————————————— */
+  'Google 谷歌': {
     enabled: true,
     dir: 'Web/Google',
     rules: [
       { match: ['www.google.com'], css: 'Google 搜索' },
       { match: ['www.google.com.*'], css: 'Google 搜索' },
       { match: ['translate.google.com'], css: 'Google 翻译' },
+      { match: ['youtube.com'], css: 'Youtube' },
     ],
   },
-  'X推特': {
+  'Microsoft 微软': {
     enabled: true,
     dir: 'Web/_Web',
     rules: [
-      { match: ['x.com'], css: 'X推特' },
+      { match: ['bing.com'], css: '微软-搜索' },
     ],
   },
   '百度': {
@@ -75,11 +121,72 @@ const SITES = {
       { match: ['baike.baidu.com'], css: '百度百科' },
     ],
   },
-  '新浪微博': {
+  '网易': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['yeah.net'], css: '网易-邮箱' },
+      { match: ['mail.163.com'], css: '网易-邮箱' },
+      { match: ['mail.126.com'], css: '网易-邮箱' },
+      { match: ['music.163.com'], css: '网易-云音乐' },
+    ],
+  },
+  '腾讯': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['wx.mail.qq.com'], css: '腾讯-邮箱' },
+      { match: ['map.qq.com'], css: '腾讯-地图' },
+    ],
+  },
+  '新浪': {
     enabled: true,
     dir: 'Web/_Web',
     rules: [
       { match: ['weibo.com'], css: '新浪微博' },
+    ],
+  },
+  /* ———————————————— Shop 商店 ———————————————— */
+  '购物': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['detail.zol.com.cn'], css: '中关村在线' },
+      { match: ['58.com'], css: '58同城' },
+    ],
+  },
+  '阿里': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['taobao.com'], css: '阿里' },
+      { match: ['tmall.com'], css: '阿里' },
+      { match: ['goofish.com'], css: '阿里-咸鱼' },
+    ],
+  },
+  '京东': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['jd.com'], css: '京东' },
+    ],
+  },
+  /* ———————————————— Software 软件 ———————————————— */
+  '软件': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['423down.com'], css: '423Down' },
+      { match: ['52pojie.cn'], css: '吾爱破解' },
+    ],
+  },
+  /* ———————————————— 娱乐 ———————————————— */
+  '娱乐': {
+    enabled: true,
+    dir: 'Web/_Web',
+    rules: [
+      { match: ['manhuagui.com'], css: '漫画柜' },
+      { match: ['moegirl.org.cn'], css: '萌娘百科' },
     ],
   },
 };

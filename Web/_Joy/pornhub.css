@@ -1,0 +1,9 @@
+/* 
+    通用
+*/
+div:has(> iframe) {
+  display: none;
+}
+.footerContentWrapper {
+  display: none;
+}

@@ -1,0 +1,32 @@
+/* 
+    通用
+*/
+body {
+  width: 100%;
+  overflow-y: initial;
+}
+#ice-container {
+  > :not(#header, #content) {
+    display: none;
+  }
+
+  // 顶Area-搜索
+  #header form {
+    > :not(input, button) {
+      display: none;
+    }
+  }
+
+  > #content {
+    // Fix右Bar-功能
+    [data-spm="sidebar"] > div > div {
+      > :not(
+        [href^="https://www.goofish.com/publish?"],
+        [href^="https://www.goofish.com/im?"],
+        [href="javascript:void(0);"]
+      ) {
+        display: none;
+      }
+    }
+  }
+}

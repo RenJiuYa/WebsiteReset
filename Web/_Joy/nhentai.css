@@ -1,0 +1,21 @@
+/* 
+    通用
+*/
+.ts-im-container {
+  display: none;
+}
+nav .left > .community-menu + li {
+  display: none;
+}
+#content .ad-wrapper {
+  display: none;
+}
+/* 
+    Page-漫画详情
+*/
+#bigcontainer > #info-block > #info > #gallery_id {
+  display: inline-block;
+}
+#comment-post-container {
+  display: none;
+}

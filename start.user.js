@@ -603,11 +603,16 @@
         : null;
   const hasSheetCtor = typeof PageSheet === 'function'; // 能不能用"共享构造样式表"
 
+  const SHADOW_SCAN_MS = 400; // 两次扫描的最小间隔（节流）：滚动/懒加载再频繁也最多这么多次
+
   const shadowBlocks = []; // [{ key, path, sheet|null, css, roots:Set, styleEls:Map(root → <style>) }]
-  const shadowRootObservers = new Set(); // 中间层 root 的观察器（嵌套路径才会用到）
-  const shadowWarned = new Set();
-  let shadowObserver = null; // document 层观察器
-  let shadowTimer = null; // 去抖定时器
+  const shadowWarned = new Set(); // 只提示一次（同一个问题不重复刷控制台）
+  let shadowObserver = null;  // 全站只挂 1 个 document 观察器
+  let shadowTree = [];        // 所有 block 的路径合并成的树（公共前缀只查一次）
+  let shadowDirty = false;    // 有变动待扫描
+  let shadowTimer = null;     // 节流定时器
+  let shadowThrottle = 0;     // 上次扫描的时间
+  let shadowScrollEnd = 0;    // 滚动停止后的补扫定时器
 
   // 从 CSS 全文里切出「普通部分」和「shadow 块」（栈式配对，支持嵌套）
   function splitShadowBlocks(css) {
@@ -649,55 +654,95 @@
     return { plain: plain.join(''), blocks: blocks }; // 不做 trim：没有标记时保证与源文件逐字一致
   }
 
+  // 宿主选择器写错时只报一次（以前每次扫描都刷一条，能把控制台拖垮）
   function resolveHosts(scope, sel) {
     try {
       return Array.prototype.slice.call(scope.querySelectorAll(sel));
     } catch (err) {
-      console.error('[shadow] 宿主选择器写法有问题：' + sel);
+      if (!shadowWarned.has('__sel:' + sel)) {
+        shadowWarned.add('__sel:' + sel);
+        console.error('[shadow] 宿主选择器写法有问题：' + sel);
+      }
       return [];
     }
   }
 
-  // 沿路径逐层下钻，返回最后一段选择器命中的宿主元素
-  function findShadowTargets(path) {
-    let scopes = [document];
-    for (let i = 0; i < path.length; i++) {
-      const hosts = [];
-      for (const scope of scopes) {
-        for (const el of resolveHosts(scope, path[i])) hosts.push(el);
+  // 把所有 block 的 path 合并成一棵树：共同前缀（如 bili-comments）只查一次，
+  // 而不是每个块、每次扫描都从 document 重新下钻一遍（这是之前卡死的根因之一）
+  function buildShadowTree() {
+    const root = [];
+    for (const block of shadowBlocks) {
+      let nodes = root;
+      let leaf = null;
+      for (const sel of block.path) {
+        leaf = null;
+        for (const n of nodes) {
+          if (n.sel === sel) {
+            leaf = n;
+            break;
+          }
+        }
+        if (!leaf) {
+          leaf = { sel: sel, children: [], blocks: [] };
+          nodes.push(leaf);
+        }
+        nodes = leaf.children;
       }
-      if (i === path.length - 1) return hosts;
-      scopes = [];
-      for (const host of hosts) {
-        if (!host.shadowRoot) continue;
-        watchShadowRoot(host.shadowRoot); // 中间层：它内部新出现的宿主也要能被扫到
-        scopes.push(host.shadowRoot);
-      }
-      if (!scopes.length) return [];
+      if (leaf && leaf.blocks.indexOf(block) === -1) leaf.blocks.push(block);
     }
-    return [];
+    return root;
   }
 
-  // 中间层 root 的观察器（shadow 内部的变动不会冒泡到 document，所以要单独挂）
-  function watchShadowRoot(root) {
-    if (shadowRootObservers.has(root)) return;
-    const mo = new MutationObserver(scheduleShadowScan);
-    mo.observe(root, { childList: true, subtree: true });
-    shadowRootObservers.add(mo);
+  // 沿树扫描一次：同一层、同一 scope 上的选择器只查询一次
+  function collectShadowTargets(nodes, scope, out) {
+    for (const node of nodes) {
+      const hosts = resolveHosts(scope, node.sel);
+      if (!hosts.length) continue;
+      for (const block of node.blocks) {
+        const list = out.get(block);
+        if (list) for (const h of hosts) list.push(h);
+        else out.set(block, hosts.slice());
+      }
+      if (!node.children.length) continue;
+      for (const host of hosts) {
+        const sr = host.shadowRoot;
+        if (sr) collectShadowTargets(node.children, sr, out);
+      }
+    }
   }
 
+  // 变动 → 标脏并节流合并成一次扫描。
+  // 只挂 1 个 document 观察器：以前是"每个中间层 shadow root 各挂一个"，
+  // 评论一多就是几十上百个 observer 且从不释放 → 越滚越卡，最后页面无响应。
   function scheduleShadowScan() {
+    shadowDirty = true;
     if (shadowTimer) return;
+    const wait = Math.max(0, SHADOW_SCAN_MS - (Date.now() - shadowThrottle));
     shadowTimer = setTimeout(function () {
       shadowTimer = null;
+      if (!shadowDirty) return;
+      shadowDirty = false;
+      shadowThrottle = Date.now();
       injectShadowBlocks();
-    }, 250);
+    }, wait);
+  }
+
+  // 滚动是懒加载的触发点：滚动中按节流扫；停下后再补扫一次（接住最后一批评论）
+  function onShadowScroll() {
+    scheduleShadowScan();
+    if (shadowScrollEnd) clearTimeout(shadowScrollEnd);
+    shadowScrollEnd = setTimeout(function () {
+      shadowScrollEnd = 0;
+      scheduleShadowScan();
+    }, 200);
   }
 
   function startShadowObserver() {
-    if (shadowObserver || !shadowBlocks.length) return;
-    shadowObserver = new MutationObserver(scheduleShadowScan);
+    if (!shadowBlocks.length) return;
+    if (shadowObserver) return; // 已经挂过（含滚动监听），别重复挂
+    shadowObserver = new MutationObserver(scheduleShadowScan); // 回调只标脏，不做任何遍历
     shadowObserver.observe(document.documentElement || document, { childList: true, subtree: true });
+    window.addEventListener('scroll', onShadowScroll, true);
   }
 
   // 把一块 CSS 应用到某个 shadow root：
@@ -736,14 +781,34 @@
   }
 
   function injectShadowBlocks() {
+    if (!shadowBlocks.length) return;
+    const targets = new Map(); // block → 命中的宿主
+    collectShadowTargets(shadowTree, document, targets);
+
     for (const block of shadowBlocks) {
-      const hosts = findShadowTargets(block.path);
+      const hosts = targets.get(block) || [];
       let sawRoot = false;
       for (const host of hosts) {
-        const root = host.shadowRoot;
-        if (!root) continue;
+        const sr = host.shadowRoot;
+        if (!sr) continue;
         sawRoot = true;
-        applyStyleToRoot(block, root);
+        applyStyleToRoot(block, sr);
+      }
+      // 虚拟列表会不停销毁评论：把已经脱离文档的 root / <style> 清掉，避免无限增长
+      if (block.roots.size) {
+        block.roots.forEach(function (root) {
+          const h = root && root.host;
+          if (h && typeof h.isConnected === 'boolean' && !h.isConnected) block.roots.delete(root);
+        });
+      }
+      if (block.styleEls.size) {
+        block.styleEls.forEach(function (el, root) {
+          const h = root && root.host;
+          if (h && typeof h.isConnected === 'boolean' && !h.isConnected) {
+            if (el.remove) el.remove();
+            block.styleEls.delete(root);
+          }
+        });
       }
       if (!shadowWarned.has(block.key)) {
         if (!hosts.length) {
@@ -807,6 +872,7 @@
       }
     }
 
+    shadowTree = buildShadowTree(); // 路径合并成树（块有增删时才重建）
     injectShadowBlocks();
     startShadowObserver();
   }
@@ -814,9 +880,10 @@
   // 临时退出脚本时：把注入的样式从各 shadow root 上摘掉，并停掉观察器
   function removeShadowStyles() {
     if (shadowTimer) { clearTimeout(shadowTimer); shadowTimer = null; }
+    if (shadowScrollEnd) { clearTimeout(shadowScrollEnd); shadowScrollEnd = 0; }
     if (shadowObserver) { shadowObserver.disconnect(); shadowObserver = null; }
-    for (const mo of shadowRootObservers) mo.disconnect();
-    shadowRootObservers.clear();
+    window.removeEventListener('scroll', onShadowScroll, true);
+    shadowDirty = false;
     for (const block of shadowBlocks) {
       if (block.sheet) {
         for (const root of block.roots) {

@@ -1,0 +1,35 @@
+/* 
+    通用
+*/
+.contents:has(.pointer-events-none > [role="presentation"]) {
+  display: none;
+}
+form[data-chatgpt-composer] {
+  min-width: 50vw;
+}
+form[data-chatgpt-composer] [data-composer-layout="single-line"] div:has(> [aria-label="开始语音"]) {
+  display: none;
+}
+aside nav + div .contents {
+  display: none;
+}
+header > [data-testid="app-shell-header-context-menu-surface"] > [data-app-shell-header-obstacle] > :not(:last-child) {
+  display: none;
+}
+/* 
+    Page-会话
+*/
+[data-thread-user-message-navigation-content] {
+  width: 100%;
+  max-width: initial;
+  padding: 0 5%;
+}
+[data-pip-obstacle="thread-footer"] {
+  width: 100%;
+  max-width: initial;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+[data-mcp-app-portal-target] + div:not(.pointer-events-none) {
+  display: none;
+}

@@ -1,0 +1,81 @@
+/* 
+    通用
+*/
+#header #album_tabs > li:has([href^="https://www.luluai.site/"]) {
+  display: none;
+}
+#bodywrap.cc {
+  max-width: 80vw;
+}
+#bodywrap.cc ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+#bodywrap.cc ul > li {
+  width: initial;
+  height: initial;
+}
+#bodywrap.cc ul > li > .pic_box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: initial;
+  margin: 0 auto;
+}
+#bodywrap.cc ul > li > .pic_box > a > img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: initial;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center top;
+}
+#bodywrap.cc ul > li > .info > :not(.title, .info_col) {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+.title_sort > :not(.title_h2, .r) {
+  display: none;
+}
+/* 
+    Page-漫画详情
+*/
+#bread > :not(.png) {
+  display: none;
+}
+#bodywrap.userwrap .uwconn > .addtags {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+}
+#bodywrap.userwrap .uwconn > .addtags > [class="btnNarrow"] {
+  display: none;
+}
+#bodywrap.userwrap .uwuinfo > a[class] {
+  display: none;
+}
+/* 
+    Page-漫画阅读
+*/
+#photo_body > :not(#imgarea) {
+  display: none;
+}
+#photo_body > #imgarea > a {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+#photo_body > #imgarea > a > img {
+  max-height: 120vh;
+}
+#bodywrap:has(> [rel="prerender"]),
+.tocaowrap {
+  display: none;
+}
+.newpagewrap {
+  width: 70%;
+  margin: 0 auto;
+}

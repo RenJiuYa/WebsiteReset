@@ -1,0 +1,111 @@
+/* 
+    通用
+*/
+
+// Fix左下Box-AD
+#home_open_fl_wrap {
+  display: none;
+}
+
+// Fix底Area-AD
+#rightSideBar > :not(.toTop) {
+  display: none;
+}
+
+// Fix底Area-AD
+body > :not([id], [class]) {
+  display: none;
+}
+
+// 顶Bar-功能
+#commonTopbar {
+  // 右Item
+  .bar_right > :not(#commonTopbar_login, #commonTopbar_my58menu) {
+    display: none;
+  }
+}
+
+// 底Area-Footer
+.footer {
+  display: none;
+}
+
+/* 
+    Page-首页
+*/
+// 顶Area-搜索
+#headerWrap > #homeWrap {
+  > :not(#header) {
+    display: none;
+  }
+
+  // 下Bar-热搜
+  form > #searchbar > #hotwords {
+    display: none;
+  }
+}
+
+/* 
+    Page-搜索租房
+*/
+// Fix右Box-二维码
+.wx-xcx-qrcode {
+  display: none;
+}
+
+// 顶Area-搜索
+#header-wrap {
+  // 下Bar-热搜
+  .search-section > .hotKey {
+    display: none;
+  }
+}
+
+// 上Bar-导航
+#nav-container > .tab-wrap > :not(:nth-of-type(-n + 2)) {
+  display: none;
+}
+
+// 上Area-分类
+.main-wrap > .filter-wrap {
+  // 右上Comp
+  .map_fang {
+    display: none;
+  }
+}
+
+/* 
+    Page-房子
+*/
+// 上Area-面包屑
+#header-wrap {
+  // 右Comp-发布
+  .top-publish-news {
+    display: none;
+  }
+}
+
+// 上Area-房子信息
+.house-basic-info {
+  // Comp-按钮
+  .house-fraud-tip {
+    display: none;
+  }
+}
+
+// 下Area
+.main-detail-info {
+  // Comp-提示
+  .report-text,
+  // Card-服务
+  .guess-your-service,
+  #see-again-house ~ * {
+    display: none;
+  }
+}
+
+// 底Area
+.other-series-recommend,
+#commonFooter {
+  display: none;
+}

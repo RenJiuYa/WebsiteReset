@@ -1,0 +1,48 @@
+/* 
+    通用
+*/
+#jz52top > :not(:has(> #goTopBtn)) {
+  display: none;
+}
+#hd > .wp > #nv_ph #nv {
+  position: initial;
+}
+#hd > .wp > #scbar .scbar_hot_td {
+  display: none;
+}
+.res-footer-note {
+  display: none;
+}
+/* 
+    Page-帖子
+*/
+#postlist > [cellspacing] {
+  border-bottom: 5px solid #2d78c8;
+}
+#postlist > [cellspacing].ad {
+  display: none;
+}
+#postlist > [id] {
+  border-top: 1px solid #2d78c8;
+  border-bottom: 1px solid #2d78c8;
+}
+#postlist > [id] > table > tbody > :not(:first-child, :nth-child(4)) {
+  display: none;
+}
+#postlist > [id] > table > tbody > tr:first-child > .pls > .pls > .md_ctrl,
+#postlist > [id] > table > tbody > tr:first-child > .pls > .pls > ul:has(.addflw) {
+  display: none;
+}
+#postlist > [id] > table > tbody > tr:first-child > .plc > .pi > #fj > label {
+  pointer-events: none;
+}
+#postlist > [id] > table > tbody > tr:first-child > .plc > .pi > strong {
+  display: none;
+}
+#postlist > [id] > table > tbody > tr:first-child > .plc > .pct > .vw50_kfc_pt,
+#postlist > [id] > table > tbody > tr:first-child > .plc > .pct > .pcb > .rate .ratl_l {
+  display: none;
+}
+#postlist > [id] > table > tbody > tr:has(.hin) > .pls {
+  display: none;
+}

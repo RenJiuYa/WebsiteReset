@@ -1,0 +1,24 @@
+/* 
+    通用
+*/
+.n-message-container {
+  display: none;
+}
+#moe-global-toolbar {
+  display: none;
+}
+header .links-area > :not(.site-logo-area, .nav-links-group) {
+  display: none;
+}
+header .user-area > :not(#moe-user-dropdown) {
+  display: none;
+}
+footer {
+  display: none;
+}
+/* 
+    Page-词条
+*/
+article #moe-article-header-container > #moe-article-header-top .left-block .open-in-app-chat {
+  display: none;
+}

@@ -1,0 +1,22 @@
+/* 
+    通用
+*/
+.frame-header > .xmail-cmp-vip-float-bubble {
+  display: none;
+}
+.xmail-ui-popup-wrap .cmp-account-panel > .cmp-account-panel-user .cmp-vip-icon-click,
+.xmail-ui-popup-wrap .cmp-account-panel > .xmail-cmp-vip-embed-bubble,
+.xmail-ui-popup-wrap .cmp-account-panel > .cmp-account-panel-footer > :first-child {
+  display: none;
+}
+/* 
+    Page-设置
+*/
+.frame-sidebar-setting-menus .frame-sidebar-menu:has(.cmp-vip-icon) {
+  display: none;
+}
+.mail-setting-page > .xmail-cmp-vip-streamer,
+.mail-setting-page .mail-setting-storage .mail-setting-vip-bar,
+.mail-setting-page .mail-setting-themes > :nth-child(-n+3) {
+  display: none;
+}

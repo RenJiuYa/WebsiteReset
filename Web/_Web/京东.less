@@ -1,0 +1,173 @@
+/* 
+    通用
+*/
+
+// 全屏Box-登录
+#login-sdk-root div:has(> #content-wrap) {
+  > :not(#content-wrap) {
+    display: none;
+  }
+}
+
+// 全屏Box-AD
+.umc-equity,
+.pc-component-pcc-promotional-popup {
+  display: none;
+}
+
+// Fix右Bar-功能
+.jdmcc_elevator .elevator_list {
+  > :not(#Cart, #Me),
+  // Comp-红点
+  .cart-count {
+    display: none;
+  }
+}
+
+// Fix下Box-登录
+#guide-login-bar-2025 {
+  display: none;
+}
+
+// 顶Bar-导航
+.jdmcc-topbar > .jdmcc-topbar-wrapper {
+  > .fl > :not(.login, #ttbar-login-2024) {
+    display: none;
+  }
+  > .fr > :not(:has(> #my-cart, [href^="//order.jd.com"]), #ttbar-myjd-2024) {
+    display: none;
+  }
+}
+
+// Comp-搜索
+.jd_pc_search_bar_react_search_main {
+  > .jd_pc_search_bar_react_search_box {
+    > :not(
+      span,
+      input,
+      .jd_pc_search_bar_react_image_search_wrap,
+      .jd_pc_search_bar_react_search_btn_wrap
+    ) {
+      display: none;
+    }
+  }
+  // 下Bar-关键词
+  > #hotword {
+    display: none;
+  }
+}
+
+// 底Area-Footer
+#J_footer,
+#footer-2024 {
+  display: none;
+}
+
+/* 
+    Page-首页
+*/
+// 上Area-搜索
+.header-enjoyTop > .w {
+  > :not(#logo, #search) {
+    display: none;
+  }
+  > #search {
+    > :not(.search-m) {
+      display: none;
+    }
+  }
+}
+// 上Area-推荐
+.fs {
+  > :not(.jd_container, .middle-floor-wrapper) {
+    display: none;
+  }
+}
+// 下Area-瀑布流
+#J_app:has(> #J_feeds) {
+  display: none;
+}
+
+/* 
+    Page-搜索
+*/
+// 中Area-结果
+#main_search_conter {
+  // 上Bar-导航
+  #search-condition [class^="_top-bar-left-tab_"] > :not(:nth-child(-n + 3)),
+  // 中Area-结果
+  .plugin_goodsContainer > :not([data-point-id]) {
+    display: none;
+  }
+}
+// 下Area-推荐
+[class^="_infiniteScroll_center_"]:has(
+  > div > :is(#advertisingCenter, #youlikeCenter)
+) {
+  display: none;
+}
+
+/* 
+    Page-商品
+*/
+// 右Area
+.page-content-right .page-right-content {
+  // Item-企业
+  .page-right-lachine {
+    display: none;
+  }
+}
+// 左Area
+.page-content-left {
+  // 中Bar-导航
+  .left-tabs-nav {
+    > :not([class^="_scoped_"]) {
+      display: none;
+    }
+    > [class^="_scoped_"] {
+      > #SHBZ-tab-column,
+      > #TJ-tab-column {
+        display: none;
+      }
+    }
+  }
+  // Card
+  .left-tabs-content {
+    > :not(:nth-child(-n + 4)),
+    > .everyone-reviews > :not(.evaluation-qq) {
+      display: none;
+    }
+  }
+}
+// 下Area-推荐
+.page-end {
+  display: none;
+}
+
+/* 
+    Page-购物车
+*/
+[class^="_cart_center_"] {
+  // 中Area-商品
+  > [class^="_infiniteScroll_center_"] > div {
+    // Item-AI
+    > [data-vendorid] {
+      [class^="_good-match-detail_"],
+      [class^="_matchAIGoods_"] {
+        display: none;
+      }
+    }
+  }
+  // 下Area-推荐
+  > [class^="_cart-recommend_"] {
+    display: none;
+  }
+}
+
+/* 
+    Page-店铺
+*/
+// Fix左下Box-QR
+.jTdCode {
+  display: none;
+}

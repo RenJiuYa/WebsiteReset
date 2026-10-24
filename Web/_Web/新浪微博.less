@@ -21,6 +21,10 @@
 
 // Card-帖子
 article {
+  // Card-推荐
+  &:has(i[title="负反馈"]) {
+    display: none;
+  }
   // 上Area
   header {
     // Comp-头像
@@ -58,6 +62,7 @@ article {
       display: none;
     }
   }
+  // Area-文字
   .wbpro-feed-content {
     // Area-文字
     > .wbpro-feed-ogText {
@@ -72,6 +77,18 @@ article {
     }
     // Area-投票 | Item
     > [class*="_row_"] [class*="_itemHover_"] {
+      pointer-events: none;
+    }
+  }
+  // Area-转发
+  .retweet {
+    // Area-昵称
+    > .wbpro-feed-reText [usercard] ~ * {
+      display: none;
+    }
+    // 下Bar-功能
+    > [class*="_retweetBar_"]
+      .woo-box-item-inlineBlock:not(:has(.woo-font--comment)) {
       pointer-events: none;
     }
   }
@@ -304,6 +321,7 @@ article {
 [action-type="feed_list_item"] > .card {
   // 上Area
   > .card-feed > .content {
+    // Bar-时间
     > .from {
       display: flex;
 
@@ -313,6 +331,13 @@ article {
       }
       > a:last-of-type {
         pointer-events: none;
+      }
+    }
+
+    // Area-图片
+    > [node-type="feed_list_media_disp"] > .media {
+      > .more-pic {
+        display: none;
       }
     }
   }
