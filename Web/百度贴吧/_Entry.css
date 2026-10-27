@@ -201,7 +201,7 @@
     Page-热搜
 */
 /* 
-    组件：上Area-贴吧信息
+    通用
 */
 .head_main > .head_content,
 .l_container > .content {
@@ -254,9 +254,6 @@
 .l_container > .content #tb_nav > .nav_list > li:not( :has([stats-data$="st_value=tabmain"], [stats-data$="st_value=tabgood"])) {
   display: none;
 }
-/* 
-    组件：Area-发帖
-*/
 #tb_rich_poster_container {
   box-sizing: border-box;
   width: var(--tieba_width);
@@ -297,6 +294,9 @@
   margin: 0;
   padding: 0;
 }
+/* 
+    Page-吧页
+*/
 #content {
   width: var(--tieba_width);
 }
@@ -322,12 +322,12 @@
 }
 #content .forum_content > #content_wrap .j_thread_list .threadlist_detail {
   display: flex;
-  font-size: 1.2em;
 }
 #content .forum_content > #content_wrap .j_thread_list .threadlist_detail > .threadlist_text {
   flex: 1 1 auto;
   width: initial;
   padding-right: 50px;
+  font-size: 1.2em;
 }
 #content .forum_content > #content_wrap .j_thread_list .threadlist_detail > .threadlist_text > .threadlist_abs {
   width: initial;
@@ -460,12 +460,21 @@
 .l_post > .d_post_content_main > .p_content > cc .d_post_content {
   font-size: 1.75rem;
 }
-.l_post > .d_post_content_main > .p_content > cc .d_post_content > .BDE_Image {
+.l_post > .d_post_content_main > .p_content > cc .d_post_content > .post_bubble_top,
+.l_post > .d_post_content_main > .p_content > cc .d_post_content > .post_bubble_bottom {
+  display: none;
+}
+.l_post > .d_post_content_main > .p_content > cc .d_post_content > .post_bubble_middle {
+  padding: 0;
+  background: initial;
+}
+.l_post > .d_post_content_main > .p_content > cc .d_post_content .BDE_Image {
   width: auto;
   max-height: 80vh;
+  margin: 0;
   vertical-align: top;
 }
-.l_post > .d_post_content_main > .p_content > cc .d_post_content > .BDE_Smiley {
+.l_post > .d_post_content_main > .p_content > cc .d_post_content .BDE_Smiley {
   width: 1.25em;
   height: auto;
   vertical-align: top;

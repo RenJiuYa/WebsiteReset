@@ -1,0 +1,45 @@
+/* 
+    Page-分享：通用
+*/
+
+// FIx右下Box-AD
+.content-center-body {
+  > :not(.content) {
+    display: none;
+  }
+}
+
+// 顶Bar | 左Item
+header {
+  [alt="slogan"] {
+    display: none;
+  }
+}
+
+// 底Area
+.footer-area {
+  display: none;
+}
+
+// 中Area-内容
+.content-layout-page {
+  // 上Area-用户
+  > .content-header-container {
+    // 左Comp-昵称
+    .leftInfo {
+      .user-info-wrap > :not(:first-child) {
+        display: none;
+      }
+    }
+    // 右Item
+    .rightInfo {
+      > :not(:nth-child(-n + 2)) {
+        display: none;
+      }
+      // Comp-红点
+      .hot-badge {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+/* 
+    通用
+*/
+#pageBottmOprate > :not(:has(> #bookShelf), #pageBottomGoTop) {
+  display: none;
+}
+#login-guide-pop {
+  display: none;
+}
+.footer {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+.main-nav-wrap #allDownloadPanel {
+  width: initial;
+  left: -25%;
+}
+.main-nav-wrap #allDownloadPanel > .all-download-con > :first-child {
+  display: none;
+}
+.main-nav-wrap #allDownloadPanel > .download-website {
+  display: none;
+}
+.main-nav-wrap li#game-web {
+  display: none;
+}
+.focus-wrap > .focus-box {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+.search-hot-keyword-container {
+  display: none;
+}
+/* 
+    Page-书籍
+*/
+.book-author .normal-btn > #downloadAppBtn {
+  display: none;
+}
+.right-items-detail > .j_my_fans > :not(#bdNoLogin) {
+  display: none;
+}
+.left-items-detail .j_game_detail,
+.left-items-detail .booklist_container,
+.left-items-detail #j-book-album-ddl {
+  display: none;
+}
+.footer-type-1 {
+  display: none;
+}
+/* 
+    Page-阅读
+*/
+#reader > #left-container > .feedback {
+  display: none;
+}
+#reader > #right-container > #r-menu > :has(.icon-add-shelf) [class^="_loginGuideShelf_"] {
+  display: none;
+}
+#reader > #right-container > #r-menu > :has(> .app-guide-wrapper) {
+  display: none;
+}
+#reader > #reader-content > #navbar {
+  display: none;
+}
+#reader > #reader-content .chapter-wrapper > #r-authorSay [href=""] {
+  display: none;
+}
+#reader > #reader-content .chapter-wrapper > [class^="_wrapper_jisem_"] {
+  display: none;
+}
+#reader > #reader-content .chapter-wrapper > .chapter-end-qrcode {
+  display: none;
+}
+/* 
+    Page-个人中心
+*/
+.personal-header .header-nav-li:has([href^="https://game.qidian.com?"]) {
+  display: none;
+}
+.qdp-wrapper > .personal-sideBar > :has(> .adImg) {
+  display: none;
+}
+.personal-footer {
+  display: none;
+}

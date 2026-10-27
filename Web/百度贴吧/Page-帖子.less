@@ -98,17 +98,28 @@
       > :not(cc) {
         display: none;
       }
+      // Area-文字
       > cc .d_post_content {
         font-size: 1.75rem;
 
+        // Comp-背景皮肤
+        > .post_bubble_top,
+        > .post_bubble_bottom {
+          display: none;
+        }
+        > .post_bubble_middle {
+          padding: 0;
+          background: initial;
+        }
         // Comp-图片
-        > .BDE_Image {
+        .BDE_Image {
           width: auto;
           max-height: 80vh;
+          margin: 0;
           vertical-align: top;
         }
         // Comp-表情
-        > .BDE_Smiley {
+        .BDE_Smiley {
           width: 1.25em;
           height: auto;
           vertical-align: top;

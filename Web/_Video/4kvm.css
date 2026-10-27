@@ -1,0 +1,34 @@
+/* 
+    通用
+*/
+#site-announcement {
+  display: none;
+}
+#navbar .nav-item:not([href="/"], [href="/movie"], [href="/tv"], [href="/anime"]) {
+  display: none;
+}
+#navbar div:has(> form[action="/search"]) > [href="/app-download"] {
+  display: none;
+}
+footer {
+  display: none;
+}
+/* 
+    Page-影片
+*/
+.space-y-4:has(> .bg-gradient-to-r) > .bg-gradient-to-r,
+.space-y-4:has(> .bg-gradient-to-r) > :last-child {
+  display: none;
+}
+.space-y-4:has(> .bg-gradient-to-r) > :first-child > .grid {
+  display: none;
+}
+div:has(> .aspect-video) .play-description {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+div:has(> div > [href^="/search?q="]) {
+  display: none;
+}

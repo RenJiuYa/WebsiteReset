@@ -1,0 +1,177 @@
+/* 
+    通用
+*/
+
+// 左Area-导航
+#douyin-navigation {
+  // 上Item
+  .undefined:not(.tab-discover,.tab-follow,.tab-friend,.tab-user_self,.tab-live),
+  // 下Comp-AD
+  div:has(> pace-island) > :not(:first-child, pace-island) {
+    display: none;
+  }
+  // 底Area-功能
+  pace-island > #panel-menu {
+    height: initial;
+
+    // 上Area-网站信息
+    > [data-e2e="nav-compliance-summary"],
+    // 下Bar-功能
+    > [data-e2e="nav-compliance-summary"] + div > :not(:first-child) {
+      display: none;
+    }
+  }
+}
+
+// 顶Bar-功能
+#douyin-header {
+  // 中Comp-搜索-Panel
+  [data-e2e="search-history-container"] ~ * {
+    display: none;
+  }
+  // 右Item
+  pace-island > div {
+    > :not(:nth-last-child(-n + 4)),
+    // Comp-红点
+    .semi-badge {
+      display: none;
+    }
+  }
+}
+// 顶Bar-功能 | Item-Panel | Comp-下载
+div:has(> [download]) {
+  display: none;
+}
+// 顶Bar-功能 | Item-投稿-Panel
+.semi-portal {
+  // Item | Comp-红点
+  .semi-dropdown-item svg {
+    display: none;
+  }
+}
+
+// 底Area-Footer
+.user-page-footer {
+  display: none;
+}
+
+// Player | 左上Comp-搜索
+div:has(> .modal-video-container) {
+  > [class=""] > :not(:first-child) {
+    display: none;
+  }
+}
+// Player
+.basePlayerContainer {
+  // 左下Area-信息
+  > .player-position-box-bottom > #video-info-wrap {
+    > .video-info-detail {
+      padding: 10px;
+
+      // Area-描述
+      > div > .title {
+        // Item-标签
+        .m53pwJvW > span:has(a) {
+          display: none;
+        }
+      }
+      > div > .title ~ * {
+        display: none;
+      }
+    }
+  }
+  // 左下Comp-AD
+  > .bd7fBLfk,
+  // 右上Comp-私信
+  > .pjGLDod0 {
+    display: none;
+  }
+  // 右Bar
+  > .immersive-player-switch-on-hide-interaction-area {
+    padding: 0 10px 0 0;
+
+    // 上Item-AI
+    .ai-douyin-entry {
+      display: none;
+    }
+    // Item
+    .D0ZulesG {
+      // Item-用户
+      [data-e2e="video-avatar"] ~ *,
+      // Item-分享-Panel
+      [data-e2e="video-share-container"] .I2cladc1 > :not(:nth-child(-n+2)),
+      // Item-相关
+      > div:has(> .hiC9pfmF) {
+        display: none;
+      }
+      // Item-更多-Panel
+      > [data-e2e="video-play-more"] {
+        // 上Bar-功能
+        .ovKeXnCn > [data-e2e=""] {
+          display: none;
+        }
+        // 下Bar-音乐|Item-AI
+        [data-e2e="more-music-studio-entry"] {
+          display: none;
+        }
+      }
+    }
+  }
+  // 底Bar-功能
+  > .xgplayer-controls {
+    // 右Item
+    .xg-right-grid {
+      // Item-音量 | Box-提示
+      > .xgplayer-sound-guide {
+        display: none;
+      }
+    }
+  }
+}
+// Player | 右Panel
+#videoSideCard {
+  // 上Bar-导航
+  .semi-tabs-bar
+    > :not(#semiTabdetail_tab, #semiTabauthor_card, #semiTabcomment) {
+    display: none;
+  }
+  // Page：评论 | 上Bar-推荐
+  #merge-all-comment-container .comment-header-with-search {
+    display: none;
+  }
+}
+
+/* 
+    Page-我的
+*/
+#user_detail_element {
+  // 下Area | Status-空白 | Comp-首页
+  .ifZIW9ob {
+    display: none;
+  }
+}
+
+/* 
+    Page-朋友
+*/
+// 中Area | Status-无朋友
+[data-e2e="no-friend-tip"] ~ * {
+  display: none;
+}
+
+/* 
+    Page-搜索
+*/
+#search-content-area {
+  // 上Area-导航
+  #search-toolbar-container > :not(:first-child) {
+    display: none;
+  }
+  // 下Area-瀑布流
+  #waterFallScrollContainer {
+    // Card-相关
+    > :has(> .search-result-card > .MCzHcltF) {
+      display: none;
+    }
+  }
+}

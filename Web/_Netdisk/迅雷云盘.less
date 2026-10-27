@@ -1,0 +1,31 @@
+/* 
+    Page-分享链接：通用
+*/
+
+// 顶Bar
+.web-header {
+  // 右Item
+  .user-info > .to-vip-center-btn {
+    display: none;
+  }
+}
+
+// 右Area-用户
+[class^="Share__sharedUserScroll--"] {
+  > :not([class^="Share__sharedUser--"]) {
+    display: none;
+  }
+}
+
+// 左Area
+[class^="Share__fileSection--"] {
+  // 上Area-功能
+  > [class^="Share__fileIntroBox--"] {
+    // 右Bar-功能
+    > [class^="Share__batchActionsBox--"] {
+      > .td-tooltip-wrapper {
+        display: none;
+      }
+    }
+  }
+}

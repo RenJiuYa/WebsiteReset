@@ -119,43 +119,43 @@ wora-pc-dialog {
   display: none;
 }
 /* 
-    Page-分享链接
+    Page-分享链接：多文件
 */
-.yun-header {
-  padding: 0 10%;
+#layoutHeader .module-header-wrapper > dl {
+  min-width: initial;
 }
-.yun-header > .header-info > :not(.app-user-info) {
+#layoutHeader .module-header-wrapper > dl > [node-type="header-link"] {
   display: none;
 }
-.app-user-desc > .JS-desc-info [node-type="app-user-level"] {
+#layoutHeader .module-header-wrapper > dl > [node-type="header-apps"] > .app-download,
+#layoutHeader .module-header-wrapper > dl > [node-type="header-apps"] > .app-user-vip-center {
   display: none;
 }
-.app-user-desc > .desc-box > :not(.desc-link),
-.app-user-desc > .desc-box > .desc-link > :has([href^="/disk/main#/certification"]) {
+#layoutHeader .module-header-wrapper > dl > [node-type="header-apps"] [node-type="app-user-box"] .user-info > :not(.username) {
   display: none;
 }
-#bd-main > :not(.bd-left) {
+#layoutHeader .module-header-wrapper > dl > [node-type="header-apps"] [node-type="app-user-box"] > .desc-box > :not(ul) {
   display: none;
 }
-#bd-main > .bd-left {
+#layoutHeader .module-header-wrapper > dl > [node-type="header-apps"] [node-type="app-user-box"] > .desc-box > ul > .cert {
+  display: none;
+}
+#bd > :not(#bd-main) {
+  display: none;
+}
+#bd > #bd-main > .bd-left {
   margin: 0;
 }
-#bd-main > .bd-left > .module-share-header .share-header-info .wp-vip-badge {
-  pointer-events: none;
-}
-#bd-main > .bd-left > .module-share-header .share-header-info .wp-base-button,
-#bd-main > .bd-left > .module-share-header .share-header-actions > .client-popover-anchor {
+#bd > #bd-main > .bd-left > .module-share-header .vipicon,
+#bd > #bd-main > .bd-left > .module-share-header .verify-friend {
   display: none;
 }
-#bd-main > .bd-left > .share-list .JS-list-view-item .share-list-item-actions > :not(:has([href="#wp-icon-download"], [href="#wp-icon-save-disk"])) {
+#bd > #bd-main > .bd-left > .module-share-header .slide-show-right {
   display: none;
 }
-#bd-main > .bd-left > .module-share-bottom-bar .btn-img-tips {
+#bd > #bd-main > .bd-left > .share-bottom-btns .btn-img-tips {
   display: none;
 }
-.subscribe-guide-bubble {
-  display: none;
-}
-.module-share-footer {
+#ft {
   display: none;
 }

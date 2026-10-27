@@ -1,0 +1,57 @@
+/* 
+    Page-分享链接：通用
+*/
+
+// 顶Bar
+.p-micro-nav {
+  > :not(.nav-logo, .nav-opea) {
+    display: none;
+  }
+  > .nav-opea {
+    // Item-会员
+    > .member-center {
+      display: none;
+    }
+  }
+}
+
+// 中Area
+.outlink-box-b {
+  // 上Area
+  > .file-info {
+    // 左Comp-昵称
+    > .info-detail > .info {
+      > [href="/web/vip"] {
+        display: none;
+      }
+    }
+    // 右Bar-功能
+    > .file-operate {
+      // Item-转存
+      > .save-box {
+        // Box-提示
+        > .tips-save-box {
+          display: none;
+        }
+      }
+      // Item-二维码
+      > .outlink-icons-code {
+        display: none;
+      }
+    }
+  }
+}
+
+/* 
+    Page-分享链接：Page-密码
+*/
+
+// 中Area-输入
+.get-file-box {
+  > .box-title > .file-information {
+    // Item-会员
+    > [href="/web/vip"] {
+      display: none;
+    }
+  }
+}

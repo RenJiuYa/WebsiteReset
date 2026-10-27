@@ -1,0 +1,36 @@
+/* 
+    通用
+*/
+.login-container > .left > .header {
+  display: none;
+}
+.search-position {
+  display: none;
+}
+#noteContainer > .interaction-container > .author-container .note-detail-follow-btn {
+  display: none;
+}
+#noteContainer > .interaction-container > .note-scroller .comments-container > .comments-login {
+  display: none;
+}
+#noteContainer > .interaction-container > .interactions .buttons > .left {
+  pointer-events: none;
+}
+.share-popup-container {
+  display: none;
+}
+.user-content .header-area > .basic-info > :not(.avatar-click-wrapper) {
+  pointer-events: none;
+}
+header .right .dropdown-nav > :not(:first-child) {
+  display: none;
+}
+.side-bar > .channel-list > :not(.channel-list-content) {
+  display: none;
+}
+.side-bar > #explore-guide-menu > :not(.information-wrapper, .information-pad) {
+  display: none;
+}
+.side-bar > #explore-guide-menu > .information-pad div:has(> .group-wrapper):not(:last-child) {
+  display: none;
+}

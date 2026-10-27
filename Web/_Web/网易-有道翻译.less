@@ -1,0 +1,50 @@
+/* 
+    通用
+*/
+
+// 顶Bar
+.header-outer-container {
+  display: none;
+}
+
+// 左Area
+.sidebar-container {
+  display: none;
+}
+
+// 右Area
+.web-frame-content > .web-frame-content-scroll-container {
+  // 上Area
+  > .web-frame-inner-content {
+    // 上Bar-导航
+    > .tab-header {
+      display: none;
+    }
+    // 下Area-内容
+    > .translate-tab-container {
+      // 左Area
+      .source {
+        // 右上Comp-模式
+        > .text-translate-top-right,
+        // Area-文档
+        > .drag-area {
+          display: none;
+        }
+      }
+      // 右Area
+      .target {
+        // 左Item
+        .opt-left {
+          > .ai-btn-wrap,
+          > .button_feedback {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  // 底Area-Footer
+  > .dict-website-footer {
+    display: none;
+  }
+}

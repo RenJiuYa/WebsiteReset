@@ -1,0 +1,77 @@
+/* 
+    通用
+*/
+
+// 全屏Box-登录
+.login-container {
+  > .left > .header {
+    display: none;
+  }
+}
+
+// 全屏Box-光标选定框
+.search-position {
+  display: none;
+}
+
+// 全屏Card-帖子
+#noteContainer {
+  > .interaction-container {
+    // 上Bar-用户 | 右Comp-关注
+    > .author-container .note-detail-follow-btn {
+      display: none;
+    }
+    // 中Area-评论
+    > .note-scroller .comments-container {
+      // Card-登录
+      > .comments-login {
+        display: none;
+      }
+    }
+    // 下Bar-功能
+    > .interactions .buttons {
+      > .left {
+        pointer-events: none;
+      }
+    }
+  }
+}
+// 全屏Card-帖子 | 下Bar-功能 | Comp-分享-Panel
+.share-popup-container {
+  display: none;
+}
+
+// Box-用户简介
+.user-content {
+  // 上Area
+  .header-area > .basic-info > :not(.avatar-click-wrapper) {
+    pointer-events: none;
+  }
+}
+
+// 顶Bar
+header {
+  // 右Item
+  .right .dropdown-nav > :not(:first-child) {
+    display: none;
+  }
+}
+
+// 左Area
+.side-bar {
+  // 上Area-导航
+  > .channel-list > :not(.channel-list-content) {
+    display: none;
+  }
+  // 底Area-功能
+  > #explore-guide-menu {
+    > :not(.information-wrapper, .information-pad) {
+      display: none;
+    }
+    > .information-pad {
+      div:has(> .group-wrapper):not(:last-child) {
+        display: none;
+      }
+    }
+  }
+}

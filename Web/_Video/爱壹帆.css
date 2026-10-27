@@ -1,0 +1,40 @@
+/* 
+    通用
+*/
+#login-required-dialog {
+  display: none;
+}
+#sticky-block > .inner > :not(#switchLanguage, #openOrCloseLight) {
+  display: none;
+}
+.navbar .search-box > .inner > .search-agent .search-history-item ~ * {
+  display: none;
+}
+.navbar div:has(> app-dn-user-menu) > :not(app-dn-user-menu) {
+  display: none;
+}
+app-footer {
+  display: none;
+}
+/* 
+    Page-播放
+*/
+.playPageTop .video-player ~ * {
+  display: none;
+}
+.playPageTop vg-controls vg-quality-selector > .box .vip-label {
+  display: none;
+}
+.playPageTop vg-controls vg-quality-selector > .box > #quanlityDiv > :not(.bitrates-available) {
+  display: none;
+}
+.playPageTop vg-controls vg-quality-selector > .box > #quanlityDiv > .bitrates-available > :has(.vip-label) {
+  display: none;
+}
+#playPageBottom > .container > .page-right {
+  display: none;
+}
+#playPageBottom > .container > .left {
+  width: initial;
+  margin: 0;
+}

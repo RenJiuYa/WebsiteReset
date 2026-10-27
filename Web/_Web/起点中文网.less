@@ -1,0 +1,177 @@
+/* 
+    通用
+*/
+
+// Fix右下Bar-功能
+#pageBottmOprate {
+  > :not(:has(> #bookShelf), #pageBottomGoTop) {
+    display: none;
+  }
+}
+
+// 顶Bar-导航 | Item-登录-Panel
+#login-guide-pop {
+  display: none;
+}
+
+// 底Area-Footer
+.footer {
+  display: none;
+}
+
+/* 
+    Page-首页
+*/
+
+// 上Bar-导航
+.main-nav-wrap {
+  // Item-客户端-Panel
+  #allDownloadPanel {
+    width: initial;
+    left: -25%;
+
+    > .all-download-con {
+      // 左Card
+      > :first-child {
+        display: none;
+      }
+    }
+    // 下Comp
+    > .download-website {
+      display: none;
+    }
+  }
+  // Item-页游
+  li#game-web {
+    display: none;
+  }
+}
+
+// Area
+.focus-wrap {
+  // 上Area-横幅
+  > .focus-box {
+    display: none;
+  }
+}
+
+/* 
+    Page-搜索
+*/
+// 底Bar-热搜
+.search-hot-keyword-container {
+  display: none;
+}
+
+/* 
+    Page-书籍
+*/
+// 上Area-书籍信息
+.book-author {
+  // 下Bar-功能
+  .normal-btn > #downloadAppBtn {
+    display: none;
+  }
+}
+
+// 右Area
+.right-items-detail {
+  // Card-我的等级
+  > .j_my_fans > :not(#bdNoLogin) {
+    display: none;
+  }
+}
+
+// 左Area
+.left-items-detail {
+  // Card-游戏
+  .j_game_detail,
+  // Card-书单
+  .booklist_container,
+  // Card-AD
+  #j-book-album-ddl {
+    display: none;
+  }
+}
+
+// 底Area-Footer
+.footer-type-1 {
+  display: none;
+}
+
+/* 
+    Page-阅读
+*/
+#reader {
+  // Fix左Bar-功能
+  > #left-container {
+    // Item-反馈
+    > .feedback {
+      display: none;
+    }
+  }
+  // Fix右Bar-功能
+  > #right-container > #r-menu {
+    // Item-书架
+    > :has(.icon-add-shelf) {
+      // Panel-提示登录
+      [class^="_loginGuideShelf_"] {
+        display: none;
+      }
+    }
+    // Item-书架
+    > :has(> .app-guide-wrapper) {
+      display: none;
+    }
+  }
+
+  // Area
+  > #reader-content {
+    // 上Bar
+    > #navbar {
+      display: none;
+    }
+    // Area
+    .chapter-wrapper {
+      // Card-作家说
+      > #r-authorSay {
+        // Comp-下载
+        [href=""] {
+          display: none;
+        }
+      }
+      // Card-打赏
+      > [class^="_wrapper_jisem_"] {
+        display: none;
+      }
+      // Card-手机
+      > .chapter-end-qrcode {
+        display: none;
+      }
+    }
+  }
+}
+
+/* 
+    Page-个人中心
+*/
+// 顶Bar
+.personal-header {
+  // Item-游戏
+  .header-nav-li:has([href^="https://game.qidian.com?"]) {
+    display: none;
+  }
+}
+
+// Area
+.qdp-wrapper {
+  // 左Area
+  > .personal-sideBar > :has(> .adImg) {
+    display: none;
+  }
+}
+
+// 底Area-Footer
+.personal-footer {
+  display: none;
+}

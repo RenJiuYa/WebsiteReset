@@ -1,0 +1,43 @@
+/* 
+    Page-分享：通用
+*/
+
+// 全屏Box-登录
+.login-modal {
+  // 左Area
+  [class^="LoginComponent--left-login-card--"] {
+    // 左Area
+    .qr-code-download-app-text,
+    .qr-code-download-button {
+      display: none;
+    }
+  }
+}
+
+// 顶Bar
+[class^="DetailLayout--header-wrap--"] {
+  [class^="CommonHeader--right-wrap--"] {
+    > :not(.header-btn-group) {
+      display: none;
+    }
+    .header-btn-group {
+      > :not(.login) {
+        display: none;
+      }
+    }
+  }
+}
+// 顶Bar | Item-登录-Panel
+.ant-popover:has([class^="DownloadGuidePopover--download-guide--"]) {
+  display: none;
+}
+
+// 右Area-AD
+.share-right-side-content {
+  display: none;
+}
+
+// 底Area-Footer
+[class^="CommonFooter--footer--"] {
+  display: none;
+}

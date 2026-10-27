@@ -142,66 +142,139 @@ wora-pc-dialog {
 }
 
 /* 
-    Page-分享链接
+    Page-分享链接：多文件
 */
-// 顶Bar
-.yun-header {
-  padding: 0 10%;
+// // 顶Bar
+// .yun-header {
+//   padding: 0 10%;
 
-  > .header-info {
-    > :not(.app-user-info) {
+//   > .header-info {
+//     > :not(.app-user-info) {
+//       display: none;
+//     }
+//   }
+// }
+// // 顶Bar | Item-用户-Panel
+// .app-user-desc {
+//   > .JS-desc-info [node-type="app-user-level"] {
+//     display: none;
+//   }
+//   > .desc-box {
+//     > :not(.desc-link),
+//     > .desc-link > :has([href^="/disk/main#/certification"]) {
+//       display: none;
+//     }
+//   }
+// }
+// //左Area
+// #bd-main {
+//   > :not(.bd-left) {
+//     display: none;
+//   }
+//   > .bd-left {
+//     margin: 0;
+
+//     > .module-share-header {
+//       // 左上Bar
+//       .share-header-info .wp-vip-badge {
+//         pointer-events: none;
+//       }
+//       .share-header-info .wp-base-button,
+//       // 右上Bar
+//       .share-header-actions > .client-popover-anchor {
+//         display: none;
+//       }
+//     }
+//     // Item-文件
+//     > .share-list .JS-list-view-item {
+//       .share-list-item-actions
+//         > :not(:has([href="#wp-icon-download"], [href="#wp-icon-save-disk"])) {
+//         display: none;
+//       }
+//     }
+//     > .module-share-bottom-bar .btn-img-tips {
+//       display: none;
+//     }
+//   }
+// }
+// // 右上Bar | Item-冬月-Panel
+// .subscribe-guide-bubble {
+//   display: none;
+// }
+// // 底Bar-Footer
+// .module-share-footer {
+//   display: none;
+// }
+
+// 顶Bar
+#layoutHeader {
+  .module-header-wrapper > dl {
+    min-width: initial;
+
+    // 左Item
+    > [node-type="header-link"] {
       display: none;
+    }
+    // 右Item
+    > [node-type="header-apps"] {
+      > .app-download,
+      > .app-user-vip-center {
+        display: none;
+      }
+      // Comp-用户-Panel
+      [node-type="app-user-box"] {
+        // 上Area-昵称
+        .user-info > :not(.username) {
+          display: none;
+        }
+        // 下Item
+        > .desc-box {
+          > :not(ul) {
+            display: none;
+          }
+          > ul {
+            // Item-企业认证
+            > .cert {
+              display: none;
+            }
+          }
+        }
+      }
     }
   }
 }
-// 顶Bar | Item-用户-Panel
-.app-user-desc {
-  > .JS-desc-info [node-type="app-user-level"] {
+
+// Area
+#bd {
+  > :not(#bd-main) {
     display: none;
   }
-  > .desc-box {
-    > :not(.desc-link),
-    > .desc-link > :has([href^="/disk/main#/certification"]) {
-      display: none;
-    }
-  }
-}
-//左Area
-#bd-main {
-  > :not(.bd-left) {
-    display: none;
-  }
-  > .bd-left {
+  > #bd-main > .bd-left {
     margin: 0;
 
+    // 上Area
     > .module-share-header {
-      // 左上Bar
-      .share-header-info .wp-vip-badge {
-        pointer-events: none;
+      // 左上Comp-昵称
+      .vipicon,
+      .verify-friend {
+        display: none;
       }
-      .share-header-info .wp-base-button,
-      // 右上Bar
-      .share-header-actions > .client-popover-anchor {
+      // 右Bar-功能
+      .slide-show-right {
         display: none;
       }
     }
-    // Item-文件
-    > .share-list .JS-list-view-item {
-      .share-list-item-actions
-        > :not(:has([href="#wp-icon-download"], [href="#wp-icon-save-disk"])) {
+    // 下Bar-功能
+    > .share-bottom-btns {
+      // Comp-红点
+      .btn-img-tips {
         display: none;
       }
-    }
-    > .module-share-bottom-bar .btn-img-tips {
-      display: none;
     }
   }
 }
-// 右上Bar | Item-冬月-Panel
-.subscribe-guide-bubble {
-  display: none;
-}
+
 // 底Bar-Footer
-.module-share-footer {
+#ft {
   display: none;
 }

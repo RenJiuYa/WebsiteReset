@@ -1,0 +1,21 @@
+/* 
+    Page-分享：通用
+*/
+.content-center-body > :not(.content) {
+  display: none;
+}
+header [alt="slogan"] {
+  display: none;
+}
+.footer-area {
+  display: none;
+}
+.content-layout-page > .content-header-container .leftInfo .user-info-wrap > :not(:first-child) {
+  display: none;
+}
+.content-layout-page > .content-header-container .rightInfo > :not(:nth-child(-n + 2)) {
+  display: none;
+}
+.content-layout-page > .content-header-container .rightInfo .hot-badge {
+  display: none;
+}

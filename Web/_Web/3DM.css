@@ -1,0 +1,39 @@
+/* 
+    通用
+*/
+.hd_table {
+  display: none;
+}
+#hd > .wp > :not(.h_menu, #scbar) {
+  display: none;
+}
+#hd > .wp > .h_menu .hm {
+  display: none;
+}
+#hd > .wp > #scbar {
+  display: flex;
+}
+#hd > .wp > #scbar form {
+  height: 100%;
+}
+#hd > .wp > #scbar form > table {
+  height: 100%;
+}
+#hd > .wp > #scbar form > table .scbar_hot_td {
+  display: none;
+}
+#ft {
+  display: none;
+}
+/* 
+    Page-帖子
+*/
+#scrolltop > :not(:has(> .scrolltopa)) {
+  display: none;
+}
+#postlist > .ad {
+  display: none;
+}
+#postlist > [id] .favatar > ul {
+  display: none;
+}

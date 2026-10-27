@@ -1,0 +1,22 @@
+/* 
+    Page-分享：通用
+*/
+.login-modal [class^="LoginComponent--left-login-card--"] .qr-code-download-app-text,
+.login-modal [class^="LoginComponent--left-login-card--"] .qr-code-download-button {
+  display: none;
+}
+[class^="DetailLayout--header-wrap--"] [class^="CommonHeader--right-wrap--"] > :not(.header-btn-group) {
+  display: none;
+}
+[class^="DetailLayout--header-wrap--"] [class^="CommonHeader--right-wrap--"] .header-btn-group > :not(.login) {
+  display: none;
+}
+.ant-popover:has([class^="DownloadGuidePopover--download-guide--"]) {
+  display: none;
+}
+.share-right-side-content {
+  display: none;
+}
+[class^="CommonFooter--footer--"] {
+  display: none;
+}

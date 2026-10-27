@@ -1,0 +1,12 @@
+/* 
+    通用
+*/
+#mw-data-after-content {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+.main-page-tag-rcs > .fp-section:has(.embedvideo) {
+  display: none;
+}

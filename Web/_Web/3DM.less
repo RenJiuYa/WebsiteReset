@@ -1,0 +1,69 @@
+/* 
+    通用
+*/
+
+// 顶Bar-导航
+.hd_table {
+  display: none;
+}
+
+// 上Area-搜索
+#hd > .wp {
+  > :not(.h_menu, #scbar) {
+    display: none;
+  }
+  // 上Bar-登录
+  > .h_menu {
+    // Comp-提示
+    .hm {
+      display: none;
+    }
+  }
+  // 下Bar-搜索
+  > #scbar {
+    display: flex;
+
+    form {
+      height: 100%;
+
+      > table {
+        height: 100%;
+
+        // Bar-热搜
+        .scbar_hot_td {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// 底Area-Footer
+#ft {
+  display: none;
+}
+
+/* 
+    Page-帖子
+*/
+// Fix右Bar
+#scrolltop {
+  > :not(:has(> .scrolltopa)) {
+    display: none;
+  }
+}
+
+// Area-楼层
+#postlist {
+  // Card-AD
+  > .ad {
+    display: none;
+  }
+  // Card-楼层
+  > [id] {
+    // 左Area | Item-私信
+    .favatar > ul {
+      display: none;
+    }
+  }
+}

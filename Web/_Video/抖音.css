@@ -1,0 +1,93 @@
+/* 
+    通用
+*/
+#douyin-navigation .undefined:not(.tab-discover,.tab-follow,.tab-friend,.tab-user_self,.tab-live),
+#douyin-navigation div:has(> pace-island) > :not(:first-child, pace-island) {
+  display: none;
+}
+#douyin-navigation pace-island > #panel-menu {
+  height: initial;
+}
+#douyin-navigation pace-island > #panel-menu > [data-e2e="nav-compliance-summary"],
+#douyin-navigation pace-island > #panel-menu > [data-e2e="nav-compliance-summary"] + div > :not(:first-child) {
+  display: none;
+}
+#douyin-header [data-e2e="search-history-container"] ~ * {
+  display: none;
+}
+#douyin-header pace-island > div > :not(:nth-last-child(-n + 4)),
+#douyin-header pace-island > div .semi-badge {
+  display: none;
+}
+div:has(> [download]) {
+  display: none;
+}
+.semi-portal .semi-dropdown-item svg {
+  display: none;
+}
+.user-page-footer {
+  display: none;
+}
+div:has(> .modal-video-container) > [class=""] > :not(:first-child) {
+  display: none;
+}
+.basePlayerContainer > .player-position-box-bottom > #video-info-wrap > .video-info-detail {
+  padding: 10px;
+}
+.basePlayerContainer > .player-position-box-bottom > #video-info-wrap > .video-info-detail > div > .title .m53pwJvW > span:has(a) {
+  display: none;
+}
+.basePlayerContainer > .player-position-box-bottom > #video-info-wrap > .video-info-detail > div > .title ~ * {
+  display: none;
+}
+.basePlayerContainer > .bd7fBLfk,
+.basePlayerContainer > .pjGLDod0 {
+  display: none;
+}
+.basePlayerContainer > .immersive-player-switch-on-hide-interaction-area {
+  padding: 0 10px 0 0;
+}
+.basePlayerContainer > .immersive-player-switch-on-hide-interaction-area .ai-douyin-entry {
+  display: none;
+}
+.basePlayerContainer > .immersive-player-switch-on-hide-interaction-area .D0ZulesG [data-e2e="video-avatar"] ~ *,
+.basePlayerContainer > .immersive-player-switch-on-hide-interaction-area .D0ZulesG [data-e2e="video-share-container"] .I2cladc1 > :not(:nth-child(-n+2)),
+.basePlayerContainer > .immersive-player-switch-on-hide-interaction-area .D0ZulesG > div:has(> .hiC9pfmF) {
+  display: none;
+}
+.basePlayerContainer > .immersive-player-switch-on-hide-interaction-area .D0ZulesG > [data-e2e="video-play-more"] .ovKeXnCn > [data-e2e=""] {
+  display: none;
+}
+.basePlayerContainer > .immersive-player-switch-on-hide-interaction-area .D0ZulesG > [data-e2e="video-play-more"] [data-e2e="more-music-studio-entry"] {
+  display: none;
+}
+.basePlayerContainer > .xgplayer-controls .xg-right-grid > .xgplayer-sound-guide {
+  display: none;
+}
+#videoSideCard .semi-tabs-bar > :not(#semiTabdetail_tab, #semiTabauthor_card, #semiTabcomment) {
+  display: none;
+}
+#videoSideCard #merge-all-comment-container .comment-header-with-search {
+  display: none;
+}
+/* 
+    Page-我的
+*/
+#user_detail_element .ifZIW9ob {
+  display: none;
+}
+/* 
+    Page-朋友
+*/
+[data-e2e="no-friend-tip"] ~ * {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+#search-content-area #search-toolbar-container > :not(:first-child) {
+  display: none;
+}
+#search-content-area #waterFallScrollContainer > :has(> .search-result-card > .MCzHcltF) {
+  display: none;
+}

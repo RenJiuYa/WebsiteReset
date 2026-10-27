@@ -1,0 +1,18 @@
+/* 
+    通用
+*/
+.right-float-wrap.qrCode {
+  display: none;
+}
+#j-siteHeader .logo li.jTopicEntry {
+  display: none;
+}
+#j-siteHeader .logo li.download-author .get-gifts {
+  display: none;
+}
+.right-wrap > .author-pc-official {
+  display: none;
+}
+#j-siteFooter > .footer-ft {
+  display: none;
+}

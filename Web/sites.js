@@ -51,11 +51,13 @@ const SITES = {
     ],
   },
   /* ———————————————— Code 代码 ———————————————— */
-  '代码': {
+  'Code': {
     enabled: true,
     dir: 'Web/_Web',
     rules: [
       { match: ['csdn.net'], css: 'CSDN' },
+      { match: ['juejin.cn'], css: '稀土掘金' },
+      { match: ['cnki.net'], css: '中国知网' },
     ],
   },
   /* ———————————————— Game 游戏 ———————————————— */
@@ -65,7 +67,9 @@ const SITES = {
     rules: [
       { match: ['store.epicgames.com'], css: 'Epic Games' },
       { match: ['nexusmods.com'], css: 'Nexus' },
+      { match: ['bbs.3dmgame.com'], css: '3DM' },
       { match: ['op.gg'], css: 'OPGG' },
+      { match: ['oxygennotincluded.wiki.gg'], css: '缺氧Wiki' },
     ],
   },
   /* ———————————————— Joy ———————————————— */
@@ -89,8 +93,22 @@ const SITES = {
     dir: 'Web/_Web',
     rules: [
       { match: ['x.com'], css: 'X推特' },
+      { match: ['xiaohongshu.com'], css: '小红书' },
       { match: ['zhihu.com'], css: '知乎' },
       { match: ['zhipin.com'], css: 'BOSS直聘' },
+    ],
+  },
+  /* ———————————————— Netdisk 网盘 ———————————————— */
+  'Netdisk': {
+    enabled: true,
+    dir: 'Web/_Netdisk',
+    rules: [
+      { match: ['lanzouw.com'], css: '蓝奏云' },
+      { match: ['*.lanzou*.com'], css: '蓝奏云' },
+      { match: ['pan.quark.cn'], css: '夸克网盘' },
+      { match: ['pan.xunlei.com'], css: '迅雷云盘' },
+      { match: ['cloud.189.cn'], css: '天翼云盘' },
+      { match: ['share.123pan.cn'], css: '123云盘' },
     ],
   },
   /* ———————————————— Official ———————————————— */
@@ -98,8 +116,7 @@ const SITES = {
     enabled: true,
     dir: 'Web/Google',
     rules: [
-      { match: ['www.google.com'], css: 'Google 搜索' },
-      { match: ['www.google.com.*'], css: 'Google 搜索' },
+      { match: ['www.google.com', 'www.google.com.*'], css: 'Google 搜索' },
       { match: ['translate.google.com'], css: 'Google 翻译' },
       { match: ['youtube.com'], css: 'Youtube' },
     ],
@@ -109,6 +126,13 @@ const SITES = {
     dir: 'Web/_Web',
     rules: [
       { match: ['bing.com'], css: '微软-搜索' },
+    ],
+  },
+  '抖音': {
+    enabled: true,
+    dir: 'Web/_Video',
+    rules: [
+      { match: ['douyin.com'], css: '抖音' },
     ],
   },
   '百度': {
@@ -125,10 +149,9 @@ const SITES = {
     enabled: true,
     dir: 'Web/_Web',
     rules: [
-      { match: ['yeah.net'], css: '网易-邮箱' },
-      { match: ['mail.163.com'], css: '网易-邮箱' },
-      { match: ['mail.126.com'], css: '网易-邮箱' },
+      { match: ['yeah.net', 'mail.163.com', 'mail.126.com'], css: '网易-邮箱' },
       { match: ['music.163.com'], css: '网易-云音乐' },
+      { match: ['fanyi.youdao.com'], css: '网易-有道翻译' },
     ],
   },
   '腾讯': {
@@ -147,7 +170,7 @@ const SITES = {
     ],
   },
   /* ———————————————— Shop 商店 ———————————————— */
-  '购物': {
+  'Shop': {
     enabled: true,
     dir: 'Web/_Web',
     rules: [
@@ -172,12 +195,21 @@ const SITES = {
     ],
   },
   /* ———————————————— Software 软件 ———————————————— */
-  '软件': {
+  'Software': {
     enabled: true,
     dir: 'Web/_Web',
     rules: [
       { match: ['423down.com'], css: '423Down' },
       { match: ['52pojie.cn'], css: '吾爱破解' },
+    ],
+  },
+  /* ———————————————— Video 视频 ———————————————— */
+  'Video': {
+    enabled: true,
+    dir: 'Web/_Video',
+    rules: [
+      { match: ['4kvm.net'], css: '4kvm' },
+      { match: ['iyf.tv'], css: '爱壹帆' },
     ],
   },
   /* ———————————————— 娱乐 ———————————————— */
@@ -186,6 +218,8 @@ const SITES = {
     dir: 'Web/_Web',
     rules: [
       { match: ['manhuagui.com'], css: '漫画柜' },
+      { match: ['qidian.com'], css: '起点中文网' },
+      { match: ['write.qq.com'], css: '阅文作家' },
       { match: ['moegirl.org.cn'], css: '萌娘百科' },
     ],
   },

@@ -1,0 +1,137 @@
+/* 
+    通用
+*/
+
+// 顶Bar-导航
+#ModuleHeader {
+  // 左右Item
+  .personal-area > :nth-last-child(-n + 2) {
+    display: none;
+  }
+}
+
+// 上Area-搜索
+#ModuleSearch .input-box {
+  > [href="#"] {
+    display: none;
+  }
+}
+
+// 底Area-Footer
+#ModuleFooter {
+  display: none;
+}
+
+/* 
+    Page-搜索
+*/
+// Fix右下Bar
+.module-fixed-right {
+  .fixedbar > :not(#backtop) {
+    display: none;
+  }
+}
+
+// 左Area-分类
+#ModuleGroupFilter > .sidebar-filter {
+  // 下Card-AD
+  > #recommendContent {
+    display: none;
+  }
+}
+
+// 右Area-列表
+#ModuleSearchResult {
+  tr {
+    // 右Bar-功能 | Item-AI
+    > .operat > .icon-airead {
+      display: none;
+    }
+  }
+}
+
+// 下Area-热搜
+#ModuleRelatedWord {
+  display: none;
+}
+
+/* 
+    Page-文章
+*/
+// Fix右下Comp-AI
+.cnki-zxl-wrap,
+// Fix底Bar-功能
+.operate-fixed,
+// 右Area
+#right_part_ai {
+  display: none;
+}
+
+// 左Area
+.doc {
+  // 上Bar-功能
+  > .top-second .other-btns {
+    > :not(:nth-child(-n + 5)) {
+      display: none;
+    }
+  }
+  // 中Bar-阅读
+  #DownLoadParts {
+    > .operate-left {
+      // Item-AI
+      .btn-cnki-ai {
+        display: none;
+      }
+    }
+    // Comp-二维码
+    > .operate-right {
+      display: none;
+    }
+  }
+  // 下Card-相关文献
+  #literature-recommend,
+  // 下Card-相关图书
+  #relBooks {
+    display: none;
+  }
+}
+
+/* 
+    Page-首页
+*/
+// Fix右下Bar
+.sidefixedbar {
+  > :not(.back-top) {
+    display: none;
+  }
+}
+
+// 顶Bar-AD
+#slideBanner {
+  display: none;
+}
+
+// 顶Bar-导航
+#Recommendation {
+  // 左右Item
+  .link-list > :nth-last-child(-n + 2) {
+    display: none;
+  }
+}
+
+// 上Area-搜索
+.searchmain {
+  .input-box {
+    // 下Bar-功能
+    .search-aux-btn-group > .ai-btn {
+      display: none;
+    }
+  }
+}
+
+// 下Card-动态
+.trends,
+// 下Card-新品
+.new-products {
+  display: none;
+}

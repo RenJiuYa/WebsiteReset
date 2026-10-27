@@ -2,8 +2,10 @@
 // out: false
 
 /* 
-    组件：上Area-贴吧信息
+    通用
 */
+
+// 上Area-贴吧信息
 // Page-吧页
 .head_main > .head_content,
 // Page-帖子
@@ -66,9 +68,7 @@
   }
 }
 
-/* 
-    组件：Area-发帖
-*/
+// Area-发帖
 #tb_rich_poster_container {
   box-sizing: border-box;
   width: var(--tieba_width);
@@ -121,6 +121,10 @@
   }
 }
 
+/* 
+    Page-吧页
+*/
+
 // 中Area
 #content {
   width: var(--tieba_width);
@@ -162,12 +166,12 @@
         // Area-内容
         .threadlist_detail {
           display: flex;
-          font-size: 1.2em;
 
           > .threadlist_text {
             flex: 1 1 auto;
             width: initial;
             padding-right: 50px;
+            font-size: 1.2em;
 
             // Area-文字
             > .threadlist_abs {

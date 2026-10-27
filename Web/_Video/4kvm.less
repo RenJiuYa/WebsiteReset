@@ -1,0 +1,58 @@
+/* 
+    通用
+*/
+
+// 全屏Box-公告
+#site-announcement {
+  display: none;
+}
+
+// 顶Bar-导航
+#navbar {
+  // 左Item
+  .nav-item:not([href="/"], [href="/movie"], [href="/tv"], [href="/anime"]) {
+    display: none;
+  }
+  // 右Item
+  div:has(> form[action="/search"]) {
+    > [href="/app-download"] {
+      display: none;
+    }
+  }
+}
+
+// 底Area-Footer
+footer {
+  display: none;
+}
+
+/* 
+    Page-影片
+*/
+// 右Area
+.space-y-4:has(> .bg-gradient-to-r) {
+  > .bg-gradient-to-r,
+  > :last-child {
+    display: none;
+  }
+  // 上Area-视频简介 | 下Bar-功能
+  > :first-child > .grid {
+    display: none;
+  }
+}
+
+// Player
+div:has(> .aspect-video) {
+  // 下Area-视频功能 | 右下Comp-教程
+  .play-description {
+    display: none;
+  }
+}
+
+/* 
+    Page-搜索
+*/
+// Area-推荐
+div:has(> div > [href^="/search?q="]) {
+  display: none;
+}

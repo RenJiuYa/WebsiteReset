@@ -1,0 +1,65 @@
+/* 
+    通用
+*/
+
+// FIx右下Bar-功能
+.global-component-box > .suspension-panel {
+  > :not(.to-top-btn) {
+    display: none;
+  }
+}
+
+// FIx右下Box-登录
+.bottom-login-guide {
+  display: none;
+}
+
+// 顶Bar-导航
+.main-header {
+  // 左Item
+  .main-nav-list {
+    display: none;
+  }
+  // 右Item
+  .right-side-nav .creator-item {
+    display: none;
+  }
+}
+
+/* 
+    Page-文章
+*/
+
+// Box-光标选定框
+.context-menu {
+  display: none;
+}
+
+// Fix左Bar-功能
+.article-suspended-panel {
+  > :not(.with-badge) {
+    display: none;
+  }
+  > .with-badge {
+    pointer-events: none;
+  }
+}
+
+// 右Area
+#sidebar-container {
+  > :not(.author-block) {
+    display: none;
+  }
+}
+
+// 左Area
+.article-area {
+  > :not(.article, #comment-box) {
+    display: none;
+  }
+}
+
+// 下Area-推荐
+.recommended-area {
+  display: none;
+}

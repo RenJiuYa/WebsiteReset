@@ -1,0 +1,23 @@
+/* 
+    通用
+*/
+.header-outer-container {
+  display: none;
+}
+.sidebar-container {
+  display: none;
+}
+.web-frame-content > .web-frame-content-scroll-container > .web-frame-inner-content > .tab-header {
+  display: none;
+}
+.web-frame-content > .web-frame-content-scroll-container > .web-frame-inner-content > .translate-tab-container .source > .text-translate-top-right,
+.web-frame-content > .web-frame-content-scroll-container > .web-frame-inner-content > .translate-tab-container .source > .drag-area {
+  display: none;
+}
+.web-frame-content > .web-frame-content-scroll-container > .web-frame-inner-content > .translate-tab-container .target .opt-left > .ai-btn-wrap,
+.web-frame-content > .web-frame-content-scroll-container > .web-frame-inner-content > .translate-tab-container .target .opt-left > .button_feedback {
+  display: none;
+}
+.web-frame-content > .web-frame-content-scroll-container > .dict-website-footer {
+  display: none;
+}

@@ -1,0 +1,12 @@
+/* 
+    Page-分享链接：通用
+*/
+.web-header .user-info > .to-vip-center-btn {
+  display: none;
+}
+[class^="Share__sharedUserScroll--"] > :not([class^="Share__sharedUser--"]) {
+  display: none;
+}
+[class^="Share__fileSection--"] > [class^="Share__fileIntroBox--"] > [class^="Share__batchActionsBox--"] > .td-tooltip-wrapper {
+  display: none;
+}

@@ -1,0 +1,67 @@
+/* 
+    通用
+*/
+#ModuleHeader .personal-area > :nth-last-child(-n + 2) {
+  display: none;
+}
+#ModuleSearch .input-box > [href="#"] {
+  display: none;
+}
+#ModuleFooter {
+  display: none;
+}
+/* 
+    Page-搜索
+*/
+.module-fixed-right .fixedbar > :not(#backtop) {
+  display: none;
+}
+#ModuleGroupFilter > .sidebar-filter > #recommendContent {
+  display: none;
+}
+#ModuleSearchResult tr > .operat > .icon-airead {
+  display: none;
+}
+#ModuleRelatedWord {
+  display: none;
+}
+/* 
+    Page-文章
+*/
+.cnki-zxl-wrap,
+.operate-fixed,
+#right_part_ai {
+  display: none;
+}
+.doc > .top-second .other-btns > :not(:nth-child(-n + 5)) {
+  display: none;
+}
+.doc #DownLoadParts > .operate-left .btn-cnki-ai {
+  display: none;
+}
+.doc #DownLoadParts > .operate-right {
+  display: none;
+}
+.doc #literature-recommend,
+.doc #relBooks {
+  display: none;
+}
+/* 
+    Page-首页
+*/
+.sidefixedbar > :not(.back-top) {
+  display: none;
+}
+#slideBanner {
+  display: none;
+}
+#Recommendation .link-list > :nth-last-child(-n + 2) {
+  display: none;
+}
+.searchmain .input-box .search-aux-btn-group > .ai-btn {
+  display: none;
+}
+.trends,
+.new-products {
+  display: none;
+}

@@ -1,0 +1,24 @@
+/* 
+    Page-分享链接：通用
+*/
+.p-micro-nav > :not(.nav-logo, .nav-opea) {
+  display: none;
+}
+.p-micro-nav > .nav-opea > .member-center {
+  display: none;
+}
+.outlink-box-b > .file-info > .info-detail > .info > [href="/web/vip"] {
+  display: none;
+}
+.outlink-box-b > .file-info > .file-operate > .save-box > .tips-save-box {
+  display: none;
+}
+.outlink-box-b > .file-info > .file-operate > .outlink-icons-code {
+  display: none;
+}
+/* 
+    Page-分享链接：Page-密码
+*/
+.get-file-box > .box-title > .file-information > [href="/web/vip"] {
+  display: none;
+}

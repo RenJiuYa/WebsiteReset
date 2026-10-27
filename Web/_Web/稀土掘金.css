@@ -1,0 +1,36 @@
+/* 
+    通用
+*/
+.global-component-box > .suspension-panel > :not(.to-top-btn) {
+  display: none;
+}
+.bottom-login-guide {
+  display: none;
+}
+.main-header .main-nav-list {
+  display: none;
+}
+.main-header .right-side-nav .creator-item {
+  display: none;
+}
+/* 
+    Page-文章
+*/
+.context-menu {
+  display: none;
+}
+.article-suspended-panel > :not(.with-badge) {
+  display: none;
+}
+.article-suspended-panel > .with-badge {
+  pointer-events: none;
+}
+#sidebar-container > :not(.author-block) {
+  display: none;
+}
+.article-area > :not(.article, #comment-box) {
+  display: none;
+}
+.recommended-area {
+  display: none;
+}

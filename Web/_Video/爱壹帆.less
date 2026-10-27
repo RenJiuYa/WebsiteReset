@@ -1,0 +1,78 @@
+/* 
+    通用
+*/
+
+// 全屏Box-未登录
+#login-required-dialog {
+  display: none;
+}
+
+// Fix右下Bar-功能
+#sticky-block > .inner {
+  > :not(#switchLanguage, #openOrCloseLight) {
+    display: none;
+  }
+}
+
+// 顶Bar
+.navbar {
+  // 中Comp-搜索-Panel
+  .search-box > .inner > .search-agent {
+    .search-history-item ~ * {
+      display: none;
+    }
+  }
+  // 右Item
+  div:has(> app-dn-user-menu) {
+    > :not(app-dn-user-menu) {
+      display: none;
+    }
+  }
+}
+
+// 底Area-Footer
+app-footer {
+  display: none;
+}
+
+/* 
+    Page-播放
+*/
+// 上Area-播放
+.playPageTop {
+  .video-player ~ * {
+    display: none;
+  }
+  // Area-画面 | 下Bar-功能
+  vg-controls {
+    // Comp-画质
+    vg-quality-selector > .box {
+      // Comp-会员
+      .vip-label {
+        display: none;
+      }
+      // Panel
+      > #quanlityDiv {
+        > :not(.bitrates-available) {
+          display: none;
+        }
+        > .bitrates-available > :has(.vip-label) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// 下Area
+#playPageBottom > .container {
+  // 右Area-推荐
+  > .page-right {
+    display: none;
+  }
+  // 左Area
+  > .left {
+    width: initial;
+    margin: 0;
+  }
+}
