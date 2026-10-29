@@ -29,10 +29,12 @@ utils/                   工具类（由 start.user.js 自动加载：click / di
 - 临时和原网站对比：菜单「临时退出脚本」。
 - 加网站：建 `Web/<网站>/` 文件夹（含入口 `_Entry.less`）→ 在 `Web/sites.js` 里加一条 → 刷新页面。
 - **开发/发布切换**：改 `start.user.js` 顶部的开关 `const IS_DEV = true;`
-  - `true` = 开发：CSS/JS 都从本地 live-server（`127.0.0.1:5500`）取，改完 CSS 刷新即生效
-  - `false` = 发布：都从 CDN 上的生产版本取
+  - `true` = 开发：全部从本地 live-server（`127.0.0.1:5500`）取，改完刷新即生效
+  - `false` = 发布：分两套源 —— `utils/**` 走 tag 快照；`Web/sites.js` 与各站点 `.css` / `.js` 走 `main` 实时源
   （`Web/sites.js` 只放站点信息：有哪些网站、各地址加载哪些入口）
-- **发布**：改 `start.user.js` 里 `REMOTE_BASE` 的 tag 版本号 → 提交 → 打新 tag，之后
+- **日常小修小补（不需要发版）**：只改 `Web/**` → 提交推 `main` → 页面刷新即生效
+  （实时源是 `raw.githubusercontent.com/.../main`，请求带 `?t=` 时间戳绕过 CDN 缓存；raw 不通时自动回退 jsDelivr `@main`）
+- **发版（只有改 `start.user.js` 或 `utils/**` 才需要）**：升 `@version` → 把 `REMOTE_BASE` 里的 tag 改成同一版本号 → 提交 → 打新 tag，之后
   `https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@<tag>/start.user.js`
   可直接安装。
 
@@ -242,12 +244,23 @@ restore();                                   // 解除拦截
 
 ## 四、发布流程
 
-1. 改内容：`Web/<网站>/*.less` 会被插件自动编译成入口 `.css`（两者都要提交）、`ublock.user.txt`、必要时 `start.user.js`
-2. 升版本：`start.user.js` 的 `@version`（小改动 +末位，结构/行为变化 +中间位），并把 `REMOTE_BASE` 里的 tag 改成同一个版本号
-3. 提交 → `git push origin main`
-4. 打 tag → `git push origin <tag>`（**注意别用 `git push --tags`**）
-5. 验证 CDN：
-   `https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@<tag>/start.user.js`
-   `https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@<tag>/Web/<网站>/<文件>.css`
+### 日常改动（不需要发版）
 
-> `ublock.user.txt` 走的是 `main` 分支的 raw 地址（随时最新），不跟 tag；CSS/JS 走 tag（内容不可变，稳定）。
+1. 只改 `Web/**`：`Web/<网站>/*.less` 会被插件自动编译成入口 `.css`（两者都要提交）、`Web/sites.js`、`Web/<网站>/*.js`
+2. 提交 → `git push origin main`
+3. 页面刷新即生效 —— 脚本对 `Web/**` 走 `main` 实时源（请求带 `?t=` 时间戳绕过 CDN 缓存）
+
+### 发版（只有改 `start.user.js` 或 `utils/**` 才需要）
+
+1. 升版本：`start.user.js` 的 `@version`（小改动 +末位，结构/行为变化 +中间位），并把 `REMOTE_BASE` 里的 tag 改成同一个版本号
+2. 提交 → `git push origin main`
+3. 打 tag → `git push origin <tag>`（**注意别用 `git push --tags`**）
+4. 验证 CDN：
+   `https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@<tag>/start.user.js`
+
+> **来源分层**（`start.user.js` 顶部常量）：
+> - `REMOTE_BASE`（tag 快照，内容不可变）→ 只给 `utils/**` 这类脚本基础设施用，因此长期缓存、不带时间戳
+> - `LIVE_BASE`（`raw.githubusercontent.com/.../main`）→ `Web/sites.js` 与各站点 `.css` / `.js`，push 即生效
+> - `LIVE_BASE_FALLBACK`（jsDelivr `@main`）→ 主实时源取不到时自动回退（有缓存，可能滞后）
+>
+> 所以"改样式 / 加站点 / 调参数"不用发版；只有"改脚本本体或工具类"才发版。`ublock.user.txt` 同样走 `main` 的 raw 地址，随时最新。

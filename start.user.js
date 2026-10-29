@@ -17,6 +17,7 @@
 // @inject-into   content
 //
 // @connect       127.0.0.1
+// @connect       raw.githubusercontent.com
 // @connect       cdn.jsdelivr.net
 // ==/UserScript==
 
@@ -33,8 +34,8 @@
 // 5. 「CSS 做不到的」规则（文本匹配、按计算样式匹配、向上隐藏等）写在根目录 ublock.user.txt，
 //    用 uBlock Origin 的自定义过滤列表语法，由 uBO 执行，本脚本不参与。
 //    工具类放在 utils/ 下，自动加载（写法见下面 UTILS，用法见第 9 条）。
-// 6. 改完 CSS 后：暴力猴菜单点「重新加载样式（手动刷新）」立即生效（不做定时轮询，避免组件闪烁）；
-//    发布模式下该操作受 CDN 缓存影响，需要等 jsDelivr 刷新。
+// 6. 改完 CSS 后：刷新页面即生效（发布模式下 Web/ 走 main 实时源，见第 11 条）；
+//    也可点暴力猴菜单「重新加载样式（手动刷新）」立即重取（不做定时轮询，避免组件闪烁）。
 // 7. 运行时临时退出：暴力猴菜单点「临时退出脚本」，样式立刻移除，方便和原网站对比；
 //    该选择会被记住（刷新页面依然生效），直到点「重新启用脚本」。
 //    注意：已执行过的 JS 模块无法撤销，需刷新页面才会失效。
@@ -53,8 +54,11 @@
 //    另外 sites.js 的解析已改成纯数据解析（不依赖 eval），属于双保险：
 //    即使某次仍落在页面世界，样式也照样能加载。
 // 11. 文件来源：手动切换，开关就在本文件里（下面 const IS_DEV 那一行）
-//     true  = 开发：CSS/JS 都从本地 live-server（127.0.0.1:5500）取，改完刷新即生效
-//     false = 发布：都从 CDN 上的生产版本取
+//     true  = 开发：全部从本地 live-server（127.0.0.1:5500）取，改完刷新即生效
+//     false = 发布：分两套源
+//               · 版本化源（tag 快照）：utils/ —— 只有改本文件或 utils/ 才需要升版本、打新 tag
+//               · 实时源（main 分支）：Web/sites.js + Web/<站点>/ 下的 .css / .js
+//                 → 小修小补 push 完刷新页面就是最新的，不必发版
 //     （Web/sites.js 只放站点信息：哪些网站、哪些入口，不掺别的）
 // ============================================================
 
@@ -66,13 +70,34 @@
   const FORCE_IMPORTANT = true;
 
   // ============ 开发/发布开关（来源手动切换） ============
-  // true  = 开发：CSS/JS 都从本地 live-server 取（改完刷新即生效）
-  // false = 发布：都从下面这个 CDN 地址取（生产版本）
+  // true  = 开发：全部从本地 live-server 取（改完刷新即生效）
+  // false = 发布：脚本基础设施走版本化快照，Web/ 下的配置与样式走实时源
   const IS_DEV = true;
 
-  const LOCAL_BASE = 'http://127.0.0.1:5500';                              // 本地 live-server 根目录（=仓库根目录）
-  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.2.1'; // 发布地址，版本号与 @version 同步（tag 内容不可变，改完要换新 tag）
-  const BASE = IS_DEV ? LOCAL_BASE : REMOTE_BASE;
+  const LOCAL_BASE = 'http://127.0.0.1:5500'; // 本地 live-server 根目录（=仓库根目录）
+
+  // ① 版本化源（tag 快照，内容永不变化）—— 只给 utils/ 这类"脚本基础设施"用。
+  //    改动本文件或 utils/ 时：升 @version → 把这里换成同名 tag → 打 tag 并推送。
+  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.2.1';
+
+  // ② 实时源（main 分支）—— Web/sites.js 与 Web/<站点>/ 下的 .css / .js 都从这里取。
+  //    push 到 main 之后刷新页面就是最新的，不需要升版本、不需要打 tag。
+  //    raw.githubusercontent 边缘缓存约 5 分钟，所以下面 FRESH_DATA 会给每次请求加时间戳，
+  //    确保拿到刚 push 的内容；万一 raw 取不到（网络/被墙），自动回退备用地址。
+  const LIVE_BASE = 'https://raw.githubusercontent.com/RenJiuYa/WebsiteReset/main';
+  const LIVE_BASE_FALLBACK = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@main';
+
+  // 代码源（版本化快照）：utils/** 这类基础设施，稳定优先
+  const CODE_BASE = IS_DEV ? LOCAL_BASE : REMOTE_BASE;
+  // 数据源（实时）：站点配置 + 站点样式 + 站点 JS，实时优先
+  const DATA_BASE = IS_DEV ? LOCAL_BASE : LIVE_BASE;
+  const DATA_BASE_FALLBACK = IS_DEV ? '' : LIVE_BASE_FALLBACK;
+
+  // 实时源是否强制绕过 CDN 缓存（请求 URL 上带 ?t= 时间戳）
+  //   true  = 改完 push 就能看到（推荐）
+  //   false = 吃 CDN 缓存（省流量，但可能滞后几分钟 ~ 12 小时）
+  const FRESH_DATA = true;
+
   const SITES_FILE = '/Web/sites.js'; // 站点管理表的位置（本地与 CDN 同一结构）
 
   // ============ 站点管理（外部文件 Web/sites.js，运行时读取） ============
@@ -85,29 +110,51 @@
   // 新增工具类：在 utils/ 下建文件 → 把路径加到下面这一行
   const UTILS = ['utils/click.js', 'utils/disableShortcut.js'];
 
-  // 当前命中的站点、该站点的样式根地址、本次要加载的模块（由 boot() 赋值）
+  // 当前命中的站点、该站点的文件根地址、本次要加载的模块（由 boot() 赋值）
   let SITE = null;
   let SITE_BASE = '';
+  // 本次会话实际使用的数据源：主实时源取不到时会换成备用源（CSS/JS 一起跟着切，避免两个源混搭）
+  let DATA_SOURCE = DATA_BASE;
   let SITE_CSS = []; // 命中规则里收集到的 CSS 入口名
   let SITE_JS = [];  // 命中规则里收集到的 JS 入口名
 
-  // 读取 sites.js 源码：失败时回退上次缓存
+  // 读取 sites.js 源码（失败时回退上次缓存）
   // 注意：缓存只在"解析成功"之后才写入（见 boot），所以写坏了配置不会把上一份好配置顶掉
+  //
+  // 数据源策略：优先实时主源（raw.githubusercontent，配合时间戳 = 最新）；
+  // 主源不可达（网络/被墙）时自动改用备用源（jsDelivr @main，有缓存、可能滞后），
+  // 并把 DATA_SOURCE 定下来，后面的 CSS / 站点 JS 也从同一个源取，不会两个源混搭。
   async function loadSitesSource() {
-    try {
-      return await gmFetch(BASE + SITES_FILE);
-    } catch (err) {
-      const cached = GM_getValue(SITES_CACHE, '');
-      if (cached) {
-        console.warn('[网页大修] 读取站点配置失败，已回退上次缓存: ' + err.message);
-        return cached;
+    const bases = [DATA_SOURCE];
+    if (DATA_BASE_FALLBACK && DATA_SOURCE !== DATA_BASE_FALLBACK) bases.push(DATA_BASE_FALLBACK);
+
+    const tried = [];
+    for (const base of bases) {
+      try {
+        const text = await gmFetch(base + SITES_FILE, true);
+        if (base !== DATA_SOURCE) {
+          DATA_SOURCE = base;
+          console.warn(
+            '[网页大修] 实时源 ' + DATA_BASE + ' 取不到，已切换到备用源 ' + base +
+              '（备用源有缓存，内容可能不是最新）'
+          );
+        }
+        return text;
+      } catch (err) {
+        tried.push(base + ' → ' + err.message);
       }
-      console.error(
-        '[网页大修] 读取站点配置失败，本次不加载样式: ' + err.message +
-          (IS_DEV ? '（IS_DEV=true 时配置来自本地 live-server，没开就把它改成 false）' : '')
-      );
-      return '';
     }
+
+    const cached = GM_getValue(SITES_CACHE, '');
+    if (cached) {
+      console.warn('[网页大修] 读取站点配置失败，已回退上次缓存: ' + tried.join(' ; '));
+      return cached;
+    }
+    console.error(
+      '[网页大修] 读取站点配置失败，本次不加载样式: ' + tried.join(' ; ') +
+        (IS_DEV ? '（IS_DEV=true 时配置来自本地 live-server，没开就把它改成 false）' : '')
+    );
+    return '';
   }
 
   // sites.js 的内容形如：const SITES = { '网站名': { ... } };
@@ -316,7 +363,7 @@
     SITE_CSS = matched.css;
     SITE_JS = matched.js;
 
-    SITE_BASE = BASE + '/' + SITE.dir;
+    SITE_BASE = DATA_SOURCE + '/' + SITE.dir;
     // CSS 与工具类并行加载（工具类必须先执行完，站点 JS 里才能直接调用）
     const [cssCount] = await Promise.all([loadAllCSS(), loadUtils()]);
     const jsCount = await loadAllJS();
@@ -331,18 +378,23 @@
   }
 
   // ============ 工具函数 ============
-  // 加时间戳绕过缓存（仅开发模式需要）
-  function withCacheBust(url) {
-    return IS_DEV ? url + '?t=' + Date.now() : url;
+  // 加时间戳绕过缓存
+  //   IS_DEV：本地 live-server 每次都要拿最新
+  //   fresh ：实时源（Web/ 下的配置、样式、站点 JS）也要绕，否则拿到的是 CDN 缓存
+  //   两个都不是（tag 上的 utils/）：tag 内容不可变，交给 CDN 长期缓存，省流量
+  function withCacheBust(url, fresh) {
+    if (!IS_DEV && !fresh) return url;
+    return url + (url.indexOf('?') === -1 ? '?' : '&') + 't=' + Date.now();
   }
 
   // 用 Promise 包装 GM_xmlhttpRequest，方便 async/await
+  // fresh=true 表示这份文件要求"实时"（会加时间戳绕过 CDN 缓存）
   // reject 出的 Error 上带 status（404 = 文件不存在，用于跳过没有该扩展名的模块）
-  function gmFetch(url) {
+  function gmFetch(url, fresh) {
     return new Promise((resolve, reject) => {
       GM_xmlhttpRequest({
         method: 'GET',
-        url: withCacheBust(url),
+        url: withCacheBust(url, fresh),
         onload: (res) => {
           if (res.status === 200) {
             resolve(res.responseText);
@@ -368,7 +420,7 @@
   async function loadAllCSS() {
     const files = SITE_CSS.map((name) => name + '.css');
     const results = await Promise.allSettled(
-      files.map((file) => gmFetch(SITE_BASE + '/' + file))
+      files.map((file) => gmFetch(SITE_BASE + '/' + file, true))
     );
 
     let loaded = 0;
@@ -423,7 +475,7 @@
   async function loadUtils() {
     for (const file of UTILS) {
       try {
-        const code = await gmFetch(BASE + '/' + file);
+        const code = await gmFetch(CODE_BASE + '/' + file);
         new Function(code)();
       } catch (err) {
         console.error('[工具类] 加载失败: ' + file + hintCSP(err), err);
@@ -438,7 +490,7 @@
     for (const name of SITE_JS) {
       const file = name + '.js';
       try {
-        const code = await gmFetch(SITE_BASE + '/' + file);
+        const code = await gmFetch(SITE_BASE + '/' + file, true);
         // 用 Function 构造器执行（在页面世界会被页面 CSP 拦下，所以脚本头部写了 @inject-into content）
         // 注意：模块内的代码在全局作用域执行，可直接操作页面
         new Function(code)();
