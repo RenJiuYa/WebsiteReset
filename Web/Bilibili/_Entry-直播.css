@@ -1,5 +1,5 @@
 /* 
-    组件：Bar-导航栏
+    通用
 */
 #prehold-nav-vm {
   display: none;
@@ -51,15 +51,9 @@
 .link-navbar > #right-part .download-panel-ctnr > .download-more {
   padding: 0;
 }
-/* 
-    组件：Footer
-*/
 footer.link-footer {
   display: none;
 }
-/* 
-    组件：直播Player
-*/
 .player-and-aside-area {
   /* 左Area */
   /* 右Area */
@@ -157,7 +151,7 @@ footer.link-footer {
   display: none;
 }
 /* 
-    Page-直播：主播
+    Page-主播
 */
 .live-room-app #sidebar-vm > .side-bar-cntr {
   height: initial;
@@ -169,10 +163,7 @@ footer.link-footer {
   display: none;
 }
 /* 
-    Page-直播：首页（待定）
-*/
-/* 
-    Page-直播：通用
+    Page-直播：活动
 */
 [data-cy="EvaPage"] > [data-cy="EvaRenderer_LayerWrapper"]:has(iframe) {
   order: -1 !important;
