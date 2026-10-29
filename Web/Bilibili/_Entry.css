@@ -21,6 +21,7 @@
   color: transparent;
 }
 .bili-header__bar .right-entry__item:not(
+      .header-avatar-unlogin-wrap,
       .header-avatar-wrap,
       .message-entry,
       .dynamic-entry,
@@ -97,17 +98,17 @@
 .search-panel {
   overflow-y: initial;
 }
-.search-panel > .history:not(:has(> .history-fold-wrap > .fold)) > .histories-wrap {
+.search-panel > .history > .histories-wrap:has( + .history-fold-wrap > .fold-icon:not(.fold)) {
   max-height: 372px;
 }
-.search-panel > .history .histories {
+.search-panel > .history > .histories-wrap > .histories {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-.search-panel > .history .histories > .history-item {
+.search-panel > .history > .histories-wrap > .histories > .history-item {
   min-width: 0;
 }
-.search-panel > .history .histories > .history-item > .history-text {
+.search-panel > .history > .histories-wrap > .histories > .history-item > .history-text {
   max-width: initial;
 }
 .search-panel > .trending,
@@ -197,23 +198,26 @@
   pointer-events: none;
 }
 /* @shadow(bili-avatar) */
+#canvas {
+  --rj-avatar-size: 50px;
+}
 #canvas:has( > :nth-child(2):last-child) > :nth-child(2) > .layer:nth-of-type(1) {
-  width: 50px;
-  height: 50px;
+  width: var(--rj-avatar-size);
+  height: var(--rj-avatar-size);
 }
 #canvas:has( > :nth-child(2):last-child) > :nth-child(2) > .layer:nth-of-type(2) {
   display: none;
 }
 #canvas:has( > :nth-child(3):last-child) > :nth-child(2) > .layer {
-  width: 50px;
-  height: 50px;
+  width: var(--rj-avatar-size);
+  height: var(--rj-avatar-size);
 }
 #canvas:has( > :nth-child(3):last-child) > :nth-child(3) {
   display: none;
 }
 #canvas:has( > :nth-child(4):last-child) > :nth-child(2) > .layer {
-  width: 50px;
-  height: 50px;
+  width: var(--rj-avatar-size);
+  height: var(--rj-avatar-size);
 }
 #canvas:has( > :nth-child(4):last-child) > :nth-child(3) {
   display: none;
@@ -464,7 +468,7 @@
   display: none;
 }
 /* 
-================通用
+    通用
 */
 .space-header .upinfo__main > .upinfo-avatar .avatar .b-avatar__layers > :not(.center),
 .space-header .upinfo__main > .upinfo-avatar .living-tips {
@@ -511,7 +515,7 @@
   display: none;
 }
 /* 
-================Page-投稿
+    Page-投稿
 */
 .route_uploadVideo .video .video-list {
   grid-template-columns: repeat(4, 1fr);
@@ -521,7 +525,7 @@
   display: none;
 }
 /* 
-================Page-收藏
+    Page-收藏
 */
 .route_favlist {
   /* 右Area-内容：Page-其他收藏：Page-图文 */
@@ -566,7 +570,7 @@
   margin-bottom: 5px;
 }
 /* 
-================Page-关注、粉丝
+    Page-关注、粉丝
 */
 .space-main .relation-aside {
   max-height: initial;
@@ -590,16 +594,23 @@
 .search-layout .search-content .bangumi-pgc-list .media-card-content-footer-btns {
   display: none;
 }
-.search-layout .search-content .video > .video-list {
+.search-layout .search-content .search-all-list > .video-list,
+.search-layout .search-content .search-page > .video-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-content: space-evenly;
   gap: 5px 0;
 }
-.search-layout .search-content .video > .video-list > div:has(> .bili-video-card) {
+.search-layout .search-content .search-all-list > .video-list > div:has(> .bili-video-card),
+.search-layout .search-content .search-page > .video-list > div:has(> .bili-video-card) {
   max-width: initial;
 }
-.search-layout .search-content .video > .video-list > div:has(
+.search-layout .search-content .search-all-list > .video-list > div:has(
+            [class^="bili-video-card__info--ad"],
+            [class^="bili-video-card__info--living"],
+            [class^="bili-video-card__info--cheese"]
+          ),
+.search-layout .search-content .search-page > .video-list > div:has(
             [class^="bili-video-card__info--ad"],
             [class^="bili-video-card__info--living"],
             [class^="bili-video-card__info--cheese"]
@@ -706,12 +717,14 @@
 #mirror-vdcon .playlist-container--left .video-resource-list {
   display: none;
 }
-#mirror-vdcon > .right-container > .right-container-inner {
+#mirror-vdcon > .right-container > .right-container-inner,
+#mirror-vdcon > .playlist-container--right {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container {
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container,
+#mirror-vdcon > .playlist-container--right > .up-panel-container {
   margin-bottom: 20px;
   padding: 0 10px;
   position: sticky;
@@ -720,85 +733,77 @@
   box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef);
   z-index: 10;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .members-info-container .add-follow-btn {
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .members-info-container .add-follow-btn,
+#mirror-vdcon > .playlist-container--right > .up-panel-container > .members-info-container .add-follow-btn {
   display: none;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .up-avatar {
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .up-avatar,
+#mirror-vdcon > .playlist-container--right > .up-panel-container > .up-info-container > .up-info--left .up-avatar {
   width: 100%;
   height: 100%;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar {
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar,
+#mirror-vdcon > .playlist-container--right > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar {
   width: 100%;
   height: 100%;
   transform: initial;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar > :not(img) {
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar > :not(img),
+#mirror-vdcon > .playlist-container--right > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar > :not(img) {
   display: none;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .live-mask {
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--left .live-mask,
+#mirror-vdcon > .playlist-container--right > .up-panel-container > .up-info-container > .up-info--left .live-mask {
   display: none;
 }
 #mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right .send-msg,
-#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right [class*="charge-btn"] {
+#mirror-vdcon > .playlist-container--right > .up-panel-container > .up-info-container > .up-info--right .send-msg,
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right [class*="charge-btn"],
+#mirror-vdcon > .playlist-container--right > .up-panel-container > .up-info-container > .up-info--right [class*="charge-btn"] {
   display: none;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right .follow-btn {
+#mirror-vdcon > .right-container > .right-container-inner > .up-panel-container > .up-info-container > .up-info--right .follow-btn,
+#mirror-vdcon > .playlist-container--right > .up-panel-container > .up-info-container > .up-info--right .follow-btn {
   pointer-events: none;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .video-pod-above-modules {
+#mirror-vdcon > .right-container > .right-container-inner > .video-pod-above-modules,
+#mirror-vdcon > .playlist-container--right > .video-pod-above-modules,
+#mirror-vdcon > .right-container > .right-container-inner > #danmukuBox,
+#mirror-vdcon > .playlist-container--right > #danmukuBox {
   order: -1;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .video-pod-above-modules > .video-pod-above-modules__inner > :not(#danmukuBox) {
+#mirror-vdcon > .right-container > .right-container-inner > .video-pod-above-modules > .video-pod-above-modules__inner > :not(#danmukuBox),
+#mirror-vdcon > .playlist-container--right > .video-pod-above-modules > .video-pod-above-modules__inner > :not(#danmukuBox),
+#mirror-vdcon > .right-container > .right-container-inner > #danmukuBox > .video-pod-above-modules__inner > :not(#danmukuBox),
+#mirror-vdcon > .playlist-container--right > #danmukuBox > .video-pod-above-modules__inner > :not(#danmukuBox) {
   display: none;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .ad-report {
+#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .ad-report,
+#mirror-vdcon > .playlist-container--right > .rcmd-tab > .ad-report {
   display: none;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 {
+#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1,
+#mirror-vdcon > .playlist-container--right > .rcmd-tab > .recommend-list-v1 {
   display: flex;
   flex-direction: column;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 > .rec-list > :not(.video-page-card-small) {
+#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 > .rec-list > :not(.video-page-card-small),
+#mirror-vdcon > .playlist-container--right > .rcmd-tab > .recommend-list-v1 > .rec-list > :not(.video-page-card-small) {
   display: none;
 }
-#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 > .rec-footer {
+#mirror-vdcon > .right-container > .right-container-inner > .rcmd-tab > .recommend-list-v1 > .rec-footer,
+#mirror-vdcon > .playlist-container--right > .rcmd-tab > .recommend-list-v1 > .rec-footer {
   order: -1;
   margin-bottom: 10px;
   display: block;
 }
-#mirror-vdcon .playlist-container--right {
-  display: flex;
-  flex-direction: column;
-}
-#mirror-vdcon .playlist-container--right > .up-panel-container > .members-info-container .add-follow-btn {
+#mirror-vdcon > .right-container > .right-container-inner > .recommend-list-container,
+#mirror-vdcon > .playlist-container--right > .recommend-list-container {
   display: none;
 }
-#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--left .up-avatar {
-  width: 100%;
-  height: 100%;
-}
-#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar {
-  width: 100%;
-  height: 100%;
-  transform: initial;
-}
-#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--left .up-avatar > .bili-avatar > :not(img) {
+#pc-cashier-wrapper-wide {
   display: none;
 }
-#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--right .send-msg,
-#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--right [class*="charge-btn"] {
-  display: none;
-}
-#mirror-vdcon .playlist-container--right > .up-panel-container > .up-info-container > .up-info--right .follow-btn {
-  pointer-events: none;
-}
-#mirror-vdcon .playlist-container--right > #danmukuBox {
-  order: -1;
-}
-#mirror-vdcon .playlist-container--right > .recommend-list-container {
-  display: none;
-}
-#pc-cashier-wrapper-wide,
 [class^="moreTool_popupWrap"] > :first-child {
   display: none;
 }
@@ -907,6 +912,9 @@
 .bili-dyn-home--member .bili-dyn-sidebar > .bili-dyn-sidebar__btn:not([style]) {
   display: none;
 }
+/* 
+    通用
+*/
 .opus-detail .bili-opus-view > .opus-module-topic:hover {
   box-shadow: 0 0 8px var(--bpx-box-shadow, #e5e9ef);
   background-color: var(--graph_bg_regular);
@@ -971,5 +979,38 @@
     Page-历史
 */
 .history-record .right-side > .feedback {
+  display: none;
+}
+/* 
+    Page-旧版网站
+*/
+.popover-channe,
+.popover-live {
+  display: none;
+}
+.mini-header {
+  padding: 0 10%;
+}
+.mini-header .nav-link-ul > :not( :has(
+        [href="//www.bilibili.com"],
+        [href="//www.bilibili.com/anime/"],
+        [href="//live.bilibili.com"],
+        [href="//www.bilibili.com/match/home/"]
+      )) {
+  display: none;
+}
+.mini-header .nav-link-ul [href="//www.bilibili.com"] {
+  font-size: 0;
+}
+.mini-header .nav-link-ul [href="//www.bilibili.com"] > :not(.navbar_logo) {
+  display: none;
+}
+.mini-header .nav-link-ul [href="//www.bilibili.com"] > .navbar_logo {
+  margin: 0;
+}
+.mini-header .nav-user-center > :not([class]) {
+  display: none;
+}
+.mini-header .nav-user-center > .signin :has(> span > .mini-vip, > [href="//member.bilibili.com/platform/home"]) {
   display: none;
 }

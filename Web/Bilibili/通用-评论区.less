@@ -24,12 +24,12 @@
 /* @shadow(bili-avatar) */
 // Area-头像
 #canvas {
-  @avatar-size: 50px;
+  --rj-avatar-size: 50px;
   // Comp-头像框2
   &:has(> :nth-child(2):last-child) > :nth-child(2) {
     > .layer:nth-of-type(1) {
-      width: @avatar-size;
-      height: @avatar-size;
+      width: var(--rj-avatar-size);
+      height: var(--rj-avatar-size);
     }
     > .layer:nth-of-type(2) {
       display: none;
@@ -38,8 +38,8 @@
   // Comp-头像框3
   &:has(> :nth-child(3):last-child) {
     > :nth-child(2) > .layer {
-      width: @avatar-size;
-      height: @avatar-size;
+      width: var(--rj-avatar-size);
+      height: var(--rj-avatar-size);
     }
     > :nth-child(3) {
       display: none;
@@ -48,8 +48,8 @@
   // Comp-头像框4
   &:has(> :nth-child(4):last-child) {
     > :nth-child(2) > .layer {
-      width: @avatar-size;
-      height: @avatar-size;
+      width: var(--rj-avatar-size);
+      height: var(--rj-avatar-size);
     }
     > :nth-child(3) {
       display: none;

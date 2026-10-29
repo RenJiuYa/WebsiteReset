@@ -3,7 +3,7 @@
 // 上面两行是 Easy LESS 的文件级设置（保存本文件时改为编译入口文件；本文件不单独产出 .css，全站只有 _入口.css 一个产物）
 
 /* 
-================通用
+    通用
 */
 
 // 上Area-用户信息
@@ -44,13 +44,6 @@
   // 左Bar-导航（该组件在Firefox没有适配）
   .side-nav {
     > .side-nav__item {
-      &.active {
-        background-color: var(--brand_blue);
-
-        > * {
-          color: var(--text_white);
-        }
-      }
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -60,6 +53,13 @@
       margin-top: 8px;
       border-radius: 6px;
       transition: background-color 0.3s;
+      &.active {
+        background-color: var(--brand_blue);
+
+        > * {
+          color: var(--text_white);
+        }
+      }
     }
   }
 
@@ -92,9 +92,8 @@
 }
 
 /* 
-================Page-投稿
+    Page-投稿
 */
-
 .route_uploadVideo {
   .video {
     // Card-视频
@@ -111,9 +110,8 @@
 }
 
 /* 
-================Page-收藏
+    Page-收藏
 */
-
 .route_favlist {
   // 左Bar-目录
   .favlist-aside {
@@ -175,9 +173,8 @@
 }
 
 /* 
-================Page-关注、粉丝
+    Page-关注、粉丝
 */
-
 .space-main {
   .relation-aside {
     max-height: initial;

@@ -70,3 +70,53 @@
     display: none;
   }
 }
+
+/* 
+    Page-旧版网站
+*/
+// 左Item-Panel：首页、直播
+.popover-channe,
+.popover-live {
+  display: none;
+}
+// 顶Bar-导航
+.mini-header {
+  padding: 0 10%;
+  
+  // 左Item-首页、番剧、直播、赛事
+  .nav-link-ul {
+    > :not(
+      :has(
+        [href="//www.bilibili.com"],
+        [href="//www.bilibili.com/anime/"],
+        [href="//live.bilibili.com"],
+        [href="//www.bilibili.com/match/home/"]
+      )
+    ) {
+      display: none;
+    }
+    // 左Item-首页
+    [href="//www.bilibili.com"] {
+      font-size: 0;
+
+      > :not(.navbar_logo) {
+        display: none;
+      }
+      > .navbar_logo {
+        margin: 0;
+      }
+    }
+  }
+
+  // 右Item
+  .nav-user-center {
+    // Item-投稿
+    > :not([class]) {
+      display: none;
+    }
+    > .signin
+      :has(> span > .mini-vip, > [href="//member.bilibili.com/platform/home"]) {
+      display: none;
+    }
+  }
+}

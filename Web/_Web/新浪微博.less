@@ -114,9 +114,12 @@ article {
   // Comp-头像
   .woo-avatar-main > :not(img),
   .text {
-    // Comp-昵称 | Comp-认证
-    > .woo-icon-wrap,
-    > [class^="IconFans_cursor_"]:has(.woo-icon-wrap) {
+    // Comp-昵称、认证
+    // > .woo-icon-wrap,
+    // > [class^="IconFans_cursor_"]:has(.woo-icon-wrap) {
+    //   display: none;
+    // }
+    > [class^="_none_"]:has(> .woo-icon-wrap) {
       display: none;
     }
   }
@@ -321,6 +324,10 @@ article {
 [action-type="feed_list_item"] > .card {
   // 上Area
   > .card-feed > .content {
+    // Bar-昵称
+    > .info .name ~ * {
+      display: none;
+    }
     // Bar-时间
     > .from {
       display: flex;

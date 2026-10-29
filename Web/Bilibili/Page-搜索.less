@@ -20,25 +20,26 @@
   }
 
   .search-content {
-    // 中Area-推荐
-    // Card-品牌广告？
+    // 中Card-品牌广告？
     .brand-ad-list .user-actions,
-    // Card-赛程
+    // 中Card-赛程
     .esport-list .esport-card-options > div.esport-card-options-item btn,
-    // Card-活动
+    // 中Card-活动
     .activity-game-list .activity-card-content-footer,
-    // Card-游戏
+    // 中Card-游戏
     .activity-game-list .main-btn,
-    // Card-用户
+    // 中Card-用户
     .user-list .user-actions,
-    // Card-ACG影视
+    // 中Card-ACG影视
     .bangumi-pgc-list .media-card-image-follow,
     .bangumi-pgc-list .media-card-content-footer-btns {
       display: none;
     }
 
-    // 下Area-结果
-    .video {
+    // 下Area-结果：第一页
+    .search-all-list,
+    // 下Area-结果：第Ｎ页
+    .search-page {
       > .video-list {
         display: grid;
         grid-template-columns: repeat(4, 1fr);

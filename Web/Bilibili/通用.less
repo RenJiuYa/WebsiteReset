@@ -9,6 +9,7 @@
 
   // 左Item
   .left-entry__item {
+    // Item-首页、番剧、直播、赛事
     &:not(
       :has(
         > a:is(
@@ -44,7 +45,9 @@
 
   // 右Item
   .right-entry__item {
+    // Item-登录、头像、消息、动态、收藏、历史
     &:not(
+      .header-avatar-unlogin-wrap,
       .header-avatar-wrap,
       .message-entry,
       .dynamic-entry,
@@ -147,18 +150,18 @@
   overflow-y: initial;
 
   // Area-历史
-  > .history {
+  > .history > .histories-wrap {
     // Status-收起
-    &:not(:has(> .history-fold-wrap > .fold)) > .histories-wrap {
+    &:has(+ .history-fold-wrap > .fold-icon:not(.fold)) {
       max-height: 372px;
     }
-    .histories {
+    > .histories {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
 
       > .history-item {
         min-width: 0;
-        
+
         > .history-text {
           max-width: initial;
         }
@@ -200,7 +203,7 @@
       > .bpx-player-render-dm-wrap {
         // Comp-投票
         > :not(.bpx-player-dm-mask-wrap),
-        // Comp-弹幕 | Comp-点赞
+        // Comp-弹幕 | 右Comp-点赞
         .bili-danmaku-x-high-icon {
           display: none;
         }
@@ -210,7 +213,7 @@
         display: none;
       }
 
-      // Fix顶上Comp
+      // Fix顶Comp
       > .bpx-player-top-wrap {
         > :not(.bpx-player-top-left),
         > .bpx-player-top-left > :not(.bpx-player-top-left-title) {
@@ -218,7 +221,7 @@
         }
       }
 
-      // Fix右下Box
+      // Fix左下Box
       > .bpx-player-toast-wrap {
         // Box-大会员
         [class^="PromptBar_subtitleWrap"],
@@ -230,7 +233,7 @@
         }
       }
 
-      // Fix底下Bar-功能
+      // Fix底Bar-功能
       > .bpx-player-control-wrap {
         // Item-音质
         .bpx-player-ctrl-flac,
@@ -259,7 +262,7 @@
 
       // Status-结束
       .bpx-player-ending-wrap > .bpx-player-ending-panel {
-        // 普通视频
+        // Area-普通视频
         > .bpx-player-ending {
           .bpx-player-ending-functions-buttons,
           .bpx-player-ending-functions-common,
@@ -267,7 +270,7 @@
             display: none;
           }
         }
-        // 资源
+        // Area-资源
         > [class^="endpage_wrap"] {
           [data-testid="end-page-header-follow-btn"],
           [data-testid="end-page-header-btn-group"],
@@ -275,7 +278,7 @@
             display: none;
           }
         }
-        // 大会员
+        // Area-大会员
         > [class^="paywallView_container"] {
           > [class^="paywallView_leftBox"]
             > :not([data-testid="paywall-title"]),

@@ -5,6 +5,23 @@
     通用
 */
 
+// Box-登录
+#tiebaCustomPassLogin > .tieba-login-wrapper {
+  // 下Bar
+  > .tang-pass-footerBar {
+    height: initial;
+    
+    // 左下Comp-注册
+    > .pass-reglink {
+      display: none;
+    }
+  }
+  // 右下Comp-下载
+  > .custom-pass-link {
+    display: none;
+  }
+}
+
 // Box-光标选定
 #selectsearch-icon {
   display: none;
@@ -49,7 +66,8 @@
 
 // 左上Bar-贴吧导航
 #com_userbar > ul {
-  > li:not(.u_username, .u_news, .u_setting, .u_new_pc),
+  // Item-登录、用户、消息、设置、新版
+  > li:not(.u_login, .u_username, .u_news, .u_setting, .u_new_pc),
   // Item-用户
   > .u_username li:not(.u_itieba, .u_favor, .u_pan),
   // Item-更多

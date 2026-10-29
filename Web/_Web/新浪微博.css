@@ -57,10 +57,8 @@ article > footer [class*="_cursor_"]:has(.woo-font--retweet, .woo-like-iconWrap)
 article > footer [class^="_share_"] > .woo-pop-wrap {
   display: none;
 }
-.wbpro-list .woo-avatar-main > :not(img) > .woo-icon-wrap,
-.wbpro-list .text > .woo-icon-wrap,
-.wbpro-list .woo-avatar-main > :not(img) > [class^="IconFans_cursor_"]:has(.woo-icon-wrap),
-.wbpro-list .text > [class^="IconFans_cursor_"]:has(.woo-icon-wrap) {
+.wbpro-list .woo-avatar-main > :not(img) > [class^="_none_"]:has(> .woo-icon-wrap),
+.wbpro-list .text > [class^="_none_"]:has(> .woo-icon-wrap) {
   display: none;
 }
 .wbpro-list .opt > :has(.woo-font--screen, .woo-font--retweet, .woo-like-main) {
@@ -172,6 +170,9 @@ article > footer [class^="_share_"] > .woo-pop-wrap {
 }
 .m-main #pl_feed_main .main-side > #pl_right_side .card-wrap .woo-button-main,
 .m-main #pl_feed_main .main-side > #pl_right_side > #pl_right_msg {
+  display: none;
+}
+[action-type="feed_list_item"] > .card > .card-feed > .content > .info .name ~ * {
   display: none;
 }
 [action-type="feed_list_item"] > .card > .card-feed > .content > .from {

@@ -35,6 +35,15 @@
 /* 
     通用
 */
+#tiebaCustomPassLogin > .tieba-login-wrapper > .tang-pass-footerBar {
+  height: initial;
+}
+#tiebaCustomPassLogin > .tieba-login-wrapper > .tang-pass-footerBar > .pass-reglink {
+  display: none;
+}
+#tiebaCustomPassLogin > .tieba-login-wrapper > .custom-pass-link {
+  display: none;
+}
 #selectsearch-icon {
   display: none;
 }
@@ -62,7 +71,7 @@
 .tbui_aside_float_bar > :not(.tbui_fbar_post, .tbui_fbar_refresh, .tbui_fbar_top) {
   display: none;
 }
-#com_userbar > ul > li:not(.u_username, .u_news, .u_setting, .u_new_pc),
+#com_userbar > ul > li:not(.u_login, .u_username, .u_news, .u_setting, .u_new_pc),
 #com_userbar > ul > .u_username li:not(.u_itieba, .u_favor, .u_pan),
 #com_userbar > ul > .u_setting li:not( :has(
         [href*="passport.baidu.com"],
@@ -198,9 +207,6 @@
   margin: 0;
 }
 /* 
-    Page-热搜
-*/
-/* 
     通用
 */
 .head_main > .head_content,
@@ -250,8 +256,14 @@
 .l_container > .content #tb_nav > .nav_list {
   width: initial;
 }
-.head_main > .head_content #tb_nav > .nav_list > li:not( :has([stats-data$="st_value=tabmain"], [stats-data$="st_value=tabgood"])),
-.l_container > .content #tb_nav > .nav_list > li:not( :has([stats-data$="st_value=tabmain"], [stats-data$="st_value=tabgood"])) {
+.head_main > .head_content #tb_nav > .nav_list > li:not( :has( > :is(
+            [stats-data$="st_value=tabmain"],
+            [stats-data$="st_value=tabgood"]
+          ))),
+.l_container > .content #tb_nav > .nav_list > li:not( :has( > :is(
+            [stats-data$="st_value=tabmain"],
+            [stats-data$="st_value=tabgood"]
+          ))) {
   display: none;
 }
 #tb_rich_poster_container {

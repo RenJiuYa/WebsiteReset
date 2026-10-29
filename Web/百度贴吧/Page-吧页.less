@@ -60,8 +60,14 @@
   #tb_nav > .nav_list {
     width: initial;
 
+    // Item-看帖、吧主推荐
     > li:not(
-        :has([stats-data$="st_value=tabmain"], [stats-data$="st_value=tabgood"])
+        :has(
+          > :is(
+            [stats-data$="st_value=tabmain"],
+            [stats-data$="st_value=tabgood"]
+          )
+        )
       ) {
       display: none;
     }

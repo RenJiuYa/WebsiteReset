@@ -3,13 +3,14 @@
 // 上面两行是 Easy LESS 的文件级设置（保存本文件时改为编译入口文件；本文件不单独产出 .css，全站只有 _入口.css 一个产物）
 
 /* 
-    组件：Bar-导航栏
+    通用
 */
 
-// 预加载
+// Bar-导航栏：预加载
 #prehold-nav-vm {
   display: none;
 }
+// Bar-导航栏：通用
 .link-navbar {
   box-sizing: border-box;
   width: 100vw;
@@ -78,18 +79,12 @@
   }
 }
 
-/* 
-    组件：Footer
-*/
-
+// 底Area-Footer
 footer.link-footer {
   display: none;
 }
 
-/* 
-    组件：直播Player
-*/
-
+// Player：直播
 .player-and-aside-area {
   /* 左Area */
   // 上Bar-直播信息
@@ -246,9 +241,8 @@ footer.link-footer {
 }
 
 /* 
-    Page-直播：主播
+    Page-主播
 */
-
 .live-room-app {
   // Fix右Bar-功能
   #sidebar-vm > .side-bar-cntr {
@@ -265,11 +259,7 @@ footer.link-footer {
 }
 
 /* 
-    Page-直播：首页（待定）
-*/
-
-/* 
-    Page-直播：通用
+    Page-直播：活动
 */
 
 // Area-播放

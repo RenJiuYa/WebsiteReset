@@ -4,7 +4,6 @@
 
 .main-sec {
   @width: var(--tieba_width);
-
   width: @width;
 
   > :not(.content-sec) {
@@ -28,8 +27,8 @@
         bottom: 0;
         position: initial;
 
-        // Area-爱逛的吧
-        > div:has(#addforum) > .onekey_sign_wrap,
+      // Area-爱逛的吧
+      > div:has(#addforum) > .onekey_sign_wrap,
       // Area-游戏
       > #spage_game_tab_wrapper,
       // Area-专题
@@ -46,7 +45,6 @@
       display: grid;
       grid-template-areas: "banner banner" "dynamic hot";
       grid-template-columns: 3fr 2fr;
-      // grid-template-rows: 1fr auto;
 
       > .r-left-sec .n_right {
         position: relative;
@@ -109,7 +107,3 @@
     }
   }
 }
-
-/* 
-    Page-热搜
-*/
