@@ -33,7 +33,8 @@ utils/                   工具类（由 start.user.js 自动加载：click / di
   - `false` = 发布：分两套源 —— `utils/**` 走 tag 快照；`Web/sites.js` 与各站点 `.css` / `.js` 走 `main` 实时源
   （`Web/sites.js` 只放站点信息：有哪些网站、各地址加载哪些入口）
 - **日常小修小补（不需要发版）**：只改 `Web/**` → 提交推 `main` → 页面刷新即生效
-  （实时源是 `raw.githubusercontent.com/.../main`，请求带 `?t=` 时间戳绕过 CDN 缓存；raw 不通时自动回退 jsDelivr `@main`）
+  （实时源是 `main` 的四个镜像并发竞速：`raw.githubusercontent` + `fastly/gcore/cdn.jsdelivr.net`，请求带 `?t=` 绕过 CDN 缓存；
+  单请求 2 秒超时 + 一次快速重试；某个源被墙也不会白屏）
 - **发版（只有改 `start.user.js` 或 `utils/**` 才需要）**：升 `@version` → 把 `REMOTE_BASE` 里的 tag 改成同一版本号 → 提交 → 打新 tag，之后
   `https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@<tag>/start.user.js`
   可直接安装。
@@ -263,7 +264,10 @@ restore();                                   // 解除拦截
 
 > **来源分层**（`start.user.js` 顶部常量）：
 > - `REMOTE_BASE`（tag 快照，内容不可变）→ 只给 `utils/**` 这类脚本基础设施用，因此长期缓存、不带时间戳
-> - `LIVE_BASE`（`raw.githubusercontent.com/.../main`）→ `Web/sites.js` 与各站点 `.css` / `.js`，push 即生效
-> - `LIVE_BASE_FALLBACK`（jsDelivr `@main`）→ 主实时源取不到时自动回退（有缓存，可能滞后）
+> - `LIVE_BASES`（`main` 的四个镜像：`raw.githubusercontent` + `fastly` / `gcore` / `cdn.jsdelivr.net`）→ `Web/sites.js` 与各站点 `.css` / `.js`
+>   - **并发竞速**：同一文件同时请求所有镜像，谁先回用谁；第一个成功的记进 `PREFERRED_BASE`，后续文件只走它（省流量），它失效才重新竞速
+>   - **2 秒超时 + 一次快速重试**（网络类错误才重试；4xx/5xx 不重试，404 视为"没有该文件"）
+>   - 缓存键是"仓库内相对路径"，换镜像仍命中同一份缓存
+> - 内容缓存（`GM` 存储）：页面一打开先用缓存注入（秒开、不闪），后台再更新；CSS 变了当次热替换，站点 JS / `sites.js` 变了下次刷新生效
 >
 > 所以"改样式 / 加站点 / 调参数"不用发版；只有"改脚本本体或工具类"才发版。`ublock.user.txt` 同样走 `main` 的 raw 地址，随时最新。
