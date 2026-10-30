@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          网页大修-总入口
 // @namespace     RenJiuYa
-// @version       1.2.1
+// @version       1.2.2
 // @description   统一管理各网站样式（CSS/JS）的启用与加载
 // @author        RenJiuYa
 //
@@ -34,8 +34,9 @@
 // 5. 「CSS 做不到的」规则（文本匹配、按计算样式匹配、向上隐藏等）写在根目录 ublock.user.txt，
 //    用 uBlock Origin 的自定义过滤列表语法，由 uBO 执行，本脚本不参与。
 //    工具类放在 utils/ 下，自动加载（写法见下面 UTILS，用法见第 9 条）。
-// 6. 改完 CSS 后：刷新页面即生效（发布模式下 Web/ 走 main 实时源，见第 11 条）；
-//    也可点暴力猴菜单「重新加载样式（手动刷新）」立即重取（不做定时轮询，避免组件闪烁）。
+// 6. 性能：CSS/JS/配置都"缓存优先，后台更新" —— 页面一打开先用上次下载的内容注入（秒开、不闪），
+//    同时后台去拉最新：CSS 变了就地热替换（当次就能看到），站点 JS 与 sites.js 变了只提示，
+//    下次刷新生效。请求带 3 秒超时，实时源不通时立刻回退备用源，不会卡住页面。
 // 7. 运行时临时退出：暴力猴菜单点「临时退出脚本」，样式立刻移除，方便和原网站对比；
 //    该选择会被记住（刷新页面依然生效），直到点「重新启用脚本」。
 //    注意：已执行过的 JS 模块无法撤销，需刷新页面才会失效。
@@ -78,7 +79,7 @@
 
   // ① 版本化源（tag 快照，内容永不变化）—— 只给 utils/ 这类"脚本基础设施"用。
   //    改动本文件或 utils/ 时：升 @version → 把这里换成同名 tag → 打 tag 并推送。
-  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.2.1';
+  const REMOTE_BASE = 'https://cdn.jsdelivr.net/gh/RenJiuYa/WebsiteReset@v1.2.2';
 
   // ② 实时源（main 分支）—— Web/sites.js 与 Web/<站点>/ 下的 .css / .js 都从这里取。
   //    push 到 main 之后刷新页面就是最新的，不需要升版本、不需要打 tag。
@@ -102,7 +103,17 @@
 
   // ============ 站点管理（外部文件 Web/sites.js，运行时读取） ============
   // 好处：改站点、改文件清单只需刷新页面，不必修改本文件、也不必在暴力猴里更新脚本
-  const SITES_CACHE = 'sitesCache'; // 读取失败时的兜底缓存
+  const SITES_CACHE = 'sitesCache'; // 站点配置缓存（页面一打开先用它，后台再检查更新）
+
+  // ============ 内容缓存（本地优先，后台更新） ============
+  // 页面一打开就先用上次下载的内容注入（≈0 延迟、不闪），同时后台去拉最新：
+  //   · CSS 有变化 → 就地热替换 <style> 的内容（同一次加载里就能看到新样式）
+  //   · 站点 JS 有变化 → 只更新缓存，下次刷新生效（同一个模块重复执行可能有副作用，不做热替换）
+  // 存储键 = 文件完整地址 → 本地 / 实时源 / tag 三套源各自独立，不会串味
+  const MOD_CACHE = 'modCache:';
+
+  // 单次请求超时（毫秒）：实时源不通时迅速失败 → 立刻走备用源，不会长时间卡住页面
+  const FETCH_TIMEOUT = 3000;
 
   // ============ 工具类（utils/ 下的文件，自动加载） ============
   // 这些文件在站点 JS 之前执行，执行完会把函数挂到全局，
@@ -118,13 +129,45 @@
   let SITE_CSS = []; // 命中规则里收集到的 CSS 入口名
   let SITE_JS = [];  // 命中规则里收集到的 JS 入口名
 
-  // 读取 sites.js 源码（失败时回退上次缓存）
+  // 读取 sites.js 源码：有缓存先用缓存（页面立刻起来），同时后台检查更新；
+  // 没有缓存时才阻塞等网络（首次运行）。
   // 注意：缓存只在"解析成功"之后才写入（见 boot），所以写坏了配置不会把上一份好配置顶掉
-  //
-  // 数据源策略：优先实时主源（raw.githubusercontent，配合时间戳 = 最新）；
-  // 主源不可达（网络/被墙）时自动改用备用源（jsDelivr @main，有缓存、可能滞后），
-  // 并把 DATA_SOURCE 定下来，后面的 CSS / 站点 JS 也从同一个源取，不会两个源混搭。
   async function loadSitesSource() {
+    const cached = GM_getValue(SITES_CACHE, '');
+    if (cached) {
+      refreshSitesInBackground(cached);
+      return cached;
+    }
+    try {
+      return await fetchSitesSource();
+    } catch (err) {
+      console.error(
+        '[网页大修] 读取站点配置失败，本次不加载样式: ' + err.message +
+          (IS_DEV ? '（IS_DEV=true 时配置来自本地 live-server，没开就把它改成 false）' : '')
+      );
+      return '';
+    }
+  }
+
+  // 后台检查配置更新：内容变了就写缓存并提示刷新
+  //（配置决定"加载哪些入口"，重新解析会重跑站点 JS，所以不做热替换）
+  function refreshSitesInBackground(cached) {
+    fetchSitesSource()
+      .then((text) => {
+        if (!text || text === cached) return;
+        GM_setValue(SITES_CACHE, text);
+        console.log('[网页大修] 站点配置已更新，刷新页面后生效');
+      })
+      .catch((err) => {
+        // 后台检查失败不影响本次加载（也可能只是离线）
+      });
+  }
+
+  // 去网络取配置：主实时源 → 备用源（全部失败时抛错，由调用方决定用缓存还是放弃）
+  // 数据源策略：优先实时主源（raw.githubusercontent，配合时间戳 = 最新）；
+  // 主源不可达（网络/被墙/超时）时自动改用备用源（jsDelivr @main，有缓存、可能滞后），
+  // 并把 DATA_SOURCE 定下来，后面的 CSS / 站点 JS 也从同一个源取，不会两个源混搭。
+  async function fetchSitesSource() {
     const bases = [DATA_SOURCE];
     if (DATA_BASE_FALLBACK && DATA_SOURCE !== DATA_BASE_FALLBACK) bases.push(DATA_BASE_FALLBACK);
 
@@ -144,17 +187,7 @@
         tried.push(base + ' → ' + err.message);
       }
     }
-
-    const cached = GM_getValue(SITES_CACHE, '');
-    if (cached) {
-      console.warn('[网页大修] 读取站点配置失败，已回退上次缓存: ' + tried.join(' ; '));
-      return cached;
-    }
-    console.error(
-      '[网页大修] 读取站点配置失败，本次不加载样式: ' + tried.join(' ; ') +
-        (IS_DEV ? '（IS_DEV=true 时配置来自本地 live-server，没开就把它改成 false）' : '')
-    );
-    return '';
+    throw new Error(tried.join(' ; '));
   }
 
   // sites.js 的内容形如：const SITES = { '网站名': { ... } };
@@ -389,12 +422,14 @@
 
   // 用 Promise 包装 GM_xmlhttpRequest，方便 async/await
   // fresh=true 表示这份文件要求"实时"（会加时间戳绕过 CDN 缓存）
+  // 带超时：实时源不通时 3 秒就失败，交给调用方回退备用源，不会长时间卡住
   // reject 出的 Error 上带 status（404 = 文件不存在，用于跳过没有该扩展名的模块）
   function gmFetch(url, fresh) {
     return new Promise((resolve, reject) => {
       GM_xmlhttpRequest({
         method: 'GET',
         url: withCacheBust(url, fresh),
+        timeout: FETCH_TIMEOUT,
         onload: (res) => {
           if (res.status === 200) {
             resolve(res.responseText);
@@ -405,8 +440,30 @@
           reject(err);
         },
         onerror: () => reject(new Error('网络错误: ' + url)),
+        ontimeout: () => {
+          const err = new Error('超时(' + FETCH_TIMEOUT + 'ms): ' + url);
+          err.timeout = true;
+          reject(err);
+        },
       });
     });
+  }
+
+  // 内容缓存读写（浏览器可能禁用存储，失败不影响主流程）
+  function cacheGet(url) {
+    try {
+      return GM_getValue(MOD_CACHE + url, '');
+    } catch (err) {
+      return '';
+    }
+  }
+
+  function cacheSet(url, text) {
+    try {
+      GM_setValue(MOD_CACHE + url, text);
+    } catch (err) {
+      /* 忽略 */
+    }
   }
 
   function head() {
@@ -414,32 +471,61 @@
   }
 
   // ============ 加载 CSS ============
-  // sites.js 里只写模块名，这里自动去找同名的 .css（不存在就跳过）；
-  // 先把 CSS 全部拉到内存，再就地更新 <style> 的 textContent；
-  // 全程不删除任何 style 元素、写入前也没有 await，因此不会出现"短暂无样式"的闪烁。
+  // sites.js 里只写模块名，这里自动去找同名的 .css（不存在就跳过）。
+  // 两阶段：
+  //   ① 先用本地缓存立即注入（同步读存储，没有网络等待 → 页面一打开就有样式）
+  //   ② 后台拉最新，内容变了就地热替换 <style> 的 textContent（不删元素 → 不闪烁）
   async function loadAllCSS() {
     const files = SITE_CSS.map((name) => name + '.css');
-    const results = await Promise.allSettled(
-      files.map((file) => gmFetch(SITE_BASE + '/' + file, true))
-    );
+    const urls = files.map((file) => SITE_BASE + '/' + file);
+    const texts = Object.create(null); // url → CSS 文本
 
-    let loaded = 0;
+    // ① 缓存阶段：能读到就用（不产生任何 await 间隙）
+    let hasCache = false;
+    files.forEach((file, i) => {
+      const cached = cacheGet(urls[i]);
+      if (cached) {
+        texts[urls[i]] = cached;
+        hasCache = true;
+      }
+    });
+    if (hasCache) applyCssTexts(files, urls, texts, false);
+
+    // ② 更新阶段：拉最新内容，成功就写缓存
+    const results = await Promise.allSettled(urls.map((url) => gmFetch(url, true)));
     let allOk = true;
-    const shadowDefs = [];
-
     results.forEach((r, i) => {
-      const file = files[i];
+      const url = urls[i];
       if (r.status === 'rejected') {
         // 404 = 这个模块没有 css，属于正常情况，跳过
         if (!r.reason || r.reason.status !== 404) {
-          console.error('[CSS] 加载失败: ' + file, r.reason);
+          console.error('[CSS] 加载失败: ' + files[i], r.reason);
           allOk = false;
         }
-        return;
+        return; // 拉不到就继续用缓存里的旧内容（不会变空）
       }
+      if (texts[url] !== r.value) {
+        texts[url] = r.value;
+        cacheSet(url, r.value);
+      }
+    });
+
+    // 有变化（或首次加载）→ 再应用一次：就地更新，元素不重建
+    return applyCssTexts(files, urls, texts, allOk);
+  }
+
+  // 把一批 CSS 文本应用到 <style data-module-css>（幂等：已存在的元素只更新 textContent）
+  // prune = 本次 CSS 全部加载成功时才清理"已经删掉的标记块"
+  function applyCssTexts(files, urls, texts, prune) {
+    let loaded = 0;
+    const shadowDefs = [];
+
+    files.forEach((file, i) => {
+      const raw = texts[urls[i]];
+      if (raw == null) return;
 
       // 自动补 !important → 摘出 /* @shadow(...) */ 块
-      let css = forceImportant(r.value);
+      let css = forceImportant(raw);
       try {
         const split = splitShadowBlocks(css);
         css = split.plain;
@@ -451,7 +537,6 @@
         }
       } catch (err) {
         console.error('[shadow] ' + file + ' 的标记解析失败，本次不处理 shadow 块：' + err.message);
-        allOk = false; // 标记可能有误 → 不做"清理已删除的标记块"
       }
 
       let style = document.querySelector('style[data-module-css="' + file + '"]');
@@ -460,13 +545,13 @@
         style.setAttribute('data-module-css', file);
         style.textContent = css; // 先填内容再插入 → 不会出现空白样式的瞬间
         head().appendChild(style);
-      } else {
-        style.textContent = css;
+      } else if (style.textContent !== css) {
+        style.textContent = css; // 热替换：只换内容，元素不动
       }
       loaded++;
     });
 
-    applyShadowBlocks(shadowDefs, allOk);
+    applyShadowBlocks(shadowDefs, !!prune);
     return loaded;
   }
 
@@ -484,16 +569,33 @@
   }
 
   // ============ 加载 JS 模块 ============
-  // 同样按模块名去找同名的 .js（不存在就跳过）；按顺序执行，保证模块之间的依赖顺序
+  // 同样按模块名去找同名的 .js（不存在就跳过）；按顺序执行，保证模块之间的依赖顺序。
+  // 缓存优先：有缓存先执行（立刻生效），后台检查更新；内容变了只写缓存，下次刷新生效
+  //（同一个模块重复执行可能有副作用，所以不热替换）
   async function loadAllJS() {
     let loaded = 0;
     for (const name of SITE_JS) {
       const file = name + '.js';
+      const url = SITE_BASE + '/' + file;
+      const cached = cacheGet(url);
+
+      if (cached) {
+        try {
+          new Function(cached)();
+          loaded++;
+        } catch (err) {
+          console.error('[JS] 缓存版本执行失败: ' + file + hintCSP(err), err);
+        }
+        checkJsUpdate(file, url, cached);
+        continue;
+      }
+
       try {
-        const code = await gmFetch(SITE_BASE + '/' + file, true);
+        const code = await gmFetch(url, true);
         // 用 Function 构造器执行（在页面世界会被页面 CSP 拦下，所以脚本头部写了 @inject-into content）
         // 注意：模块内的代码在全局作用域执行，可直接操作页面
         new Function(code)();
+        cacheSet(url, code);
         loaded++;
       } catch (err) {
         // 404 = 这个模块没有 js，属于正常情况，跳过
@@ -502,6 +604,20 @@
       }
     }
     return loaded;
+  }
+
+  // 后台检查模块更新：只更新缓存 + 提示，重新加载页面后才用新代码
+  function checkJsUpdate(file, url, cached) {
+    gmFetch(url, true)
+      .then((text) => {
+        if (!text || text === cached) return;
+        cacheSet(url, text);
+        console.log('[网页大修] ' + file + ' 有新版本，刷新页面后生效');
+      })
+      .catch((err) => {
+        if (err && err.status === 404) return;
+        console.warn('[网页大修] 检查 ' + file + ' 更新失败: ' + ((err && err.message) || err));
+      });
   }
 
   // ============ 自动 !important ============

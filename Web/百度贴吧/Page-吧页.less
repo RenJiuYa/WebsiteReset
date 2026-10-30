@@ -5,10 +5,9 @@
     通用
 */
 
-// 上Area-贴吧信息
-// Page-吧页
+// 上Area-贴吧信息：Page-吧页
 .head_main > .head_content,
-// Page-帖子
+// 上Area-贴吧信息：Page-帖子
 .l_container > .content {
   width: var(--tieba_width);
 
@@ -63,7 +62,7 @@
     // Item-看帖、吧主推荐
     > li:not(
         :has(
-          > :is(
+          .j_tbnav_tab_a:is(
             [stats-data$="st_value=tabmain"],
             [stats-data$="st_value=tabgood"]
           )

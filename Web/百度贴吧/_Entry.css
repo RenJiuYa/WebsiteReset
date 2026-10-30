@@ -256,11 +256,11 @@
 .l_container > .content #tb_nav > .nav_list {
   width: initial;
 }
-.head_main > .head_content #tb_nav > .nav_list > li:not( :has( > :is(
+.head_main > .head_content #tb_nav > .nav_list > li:not( :has( .j_tbnav_tab_a:is(
             [stats-data$="st_value=tabmain"],
             [stats-data$="st_value=tabgood"]
           ))),
-.l_container > .content #tb_nav > .nav_list > li:not( :has( > :is(
+.l_container > .content #tb_nav > .nav_list > li:not( :has( .j_tbnav_tab_a:is(
             [stats-data$="st_value=tabmain"],
             [stats-data$="st_value=tabgood"]
           ))) {
