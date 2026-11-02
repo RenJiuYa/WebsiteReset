@@ -1,6 +1,11 @@
 /* 
     通用
 */
+@layer cookie {
+  #cmpwrapper {
+    display: none;
+  }
+}
 header [data-e2eid="desktop-header"] [data-headlessui-state]:not(:nth-of-type(-n + 2)) {
   display: none;
 }

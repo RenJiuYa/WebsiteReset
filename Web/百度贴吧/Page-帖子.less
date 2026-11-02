@@ -78,8 +78,17 @@
       top: 70px;
 
       > :not(.icon, .d_name, .l_badge),
+      // Comp-昵称
       > .d_name > :not(.p_author_name) {
         display: none;
+      }
+      // Comp-等级
+      > .l_badge .user_badge:has(.d_badge_title_bawu) {
+        background-color: #3385ff;
+        
+        > .d_badge_title_bawu{
+          color: #fff;
+        }
       }
     }
   }

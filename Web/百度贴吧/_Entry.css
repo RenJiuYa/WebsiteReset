@@ -456,6 +456,12 @@
 .l_post > .d_author > .p_author > .d_name > :not(.p_author_name) {
   display: none;
 }
+.l_post > .d_author > .p_author > .l_badge .user_badge:has(.d_badge_title_bawu) {
+  background-color: #3385ff;
+}
+.l_post > .d_author > .p_author > .l_badge .user_badge:has(.d_badge_title_bawu) > .d_badge_title_bawu {
+  color: #fff;
+}
 .l_post > .d_post_content_main {
   flex: 1 1 auto;
   padding: 20px 20px 10px 20px;
