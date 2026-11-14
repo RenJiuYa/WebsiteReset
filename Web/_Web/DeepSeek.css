@@ -1,6 +1,6 @@
-/* 
-    组件：左Area
-*/
+.cookie_banner-wrap {
+  display: none;
+}
 .b8812f16 > :has(._5a8ac7a) {
   display: none;
 }
@@ -10,9 +10,6 @@
 .ds-dropdown-menu > .ds-dropdown-menu-option:has(path[d^="M12.3032"]) {
   display: none;
 }
-/* 
-    中Area-会话
-*/
 .ds-virtual-list-items {
   margin: 0;
   padding: 0 5%;
@@ -23,9 +20,6 @@
 .ds-virtual-list-items ._4f9bf79 .dbe8cf4a {
   display: none;
 }
-/* 
-    中Area-会话 | 下Area-输入
-*/
 ._871cbca {
   margin: 0;
   padding: 0 10% 10px;
