@@ -4,7 +4,7 @@
 
 // 顶Bar-导航
 #header #album_tabs {
-  > li:has([href^="https://www.luluai.site/"]) {
+  > li:not(:nth-child(-n+8)) {
     display: none;
   }
 }

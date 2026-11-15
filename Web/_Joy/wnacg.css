@@ -1,7 +1,7 @@
 /* 
     通用
 */
-#header #album_tabs > li:has([href^="https://www.luluai.site/"]) {
+#header #album_tabs > li:not(:nth-child(-n+8)) {
   display: none;
 }
 #bodywrap.cc {

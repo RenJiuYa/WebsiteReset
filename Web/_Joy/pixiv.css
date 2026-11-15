@@ -10,7 +10,7 @@ div:has(> .__top_side_menu_body) > .__top_side_menu_body > footer {
 .sc-cd4af666-0 div:has(> [data-click-label="follow"]) {
   pointer-events: none;
 }
-.sc-62a9fca4-0 div:has(> iframe) {
+.czWYKN div:has(> iframe) {
   display: none;
 }
 .__top_side_menu_root .list-none + div {
@@ -19,7 +19,8 @@ div:has(> .__top_side_menu_body) > .__top_side_menu_body > footer {
 /*
     Page-首页
 */
-[data-ga4-label="page_root"] > .bg-background1 > div:has([href^="https://premium.pixiv.net/"]) {
+[data-ga4-label="page_root"] > .bg-background1 > div:has([href^="https://premium.pixiv.net/"]),
+[data-ga4-label="page_root"] > .bg-background1 #__premium_banner {
   display: none;
 }
 [data-ga4-label="page_root"] > .bg-background1 section.sc-854bb586-0 ul {
